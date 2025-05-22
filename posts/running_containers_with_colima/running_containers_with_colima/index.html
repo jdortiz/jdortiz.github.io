@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Running containers with Colima - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Sharing things I learned mostly about software development"><meta property="og:url" content="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Running containers with Colima">
+  <meta property="og:description" content="There is no better way to learn than to dive right in. This applies to software too. If you have ever felt tempted to play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous Database, containers can be very helpful.
+Goals By the end of this article you will:
+Understand the pieces required to run containers in your ARM or Intel macOS system. Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS. Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container so you can use them locally to learn, develop or try their features. Concepts Containers A container is a way to run software under some constraints, that takes advantage of some operating system features to isolate and control its usage of resources, while still running on the same operating system. Containers can help you to:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-22T13:02:36+02:00">
+    <meta property="article:modified_time" content="2025-05-22T13:02:36+02:00">
+    <meta property="og:image" content="http://localhost:1313/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/logo.png">
+  <meta name="twitter:title" content="Running containers with Colima">
+  <meta name="twitter:description" content="There is no better way to learn than to dive right in. This applies to software too. If you have ever felt tempted to play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous Database, containers can be very helpful.
+Goals By the end of this article you will:
+Understand the pieces required to run containers in your ARM or Intel macOS system. Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS. Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container so you can use them locally to learn, develop or try their features. Concepts Containers A container is a way to run software under some constraints, that takes advantage of some operating system features to isolate and control its usage of resources, while still running on the same operating system. Containers can help you to:">
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Running containers with Colima",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/running_containers_with_colima\/running_containers_with_colima\/"
+        },"genre": "posts","wordcount":  1671 ,
+        "url": "http:\/\/localhost:1313\/posts\/running_containers_with_colima\/running_containers_with_colima\/","datePublished": "2025-05-22T13:02:36+02:00","dateModified": "2025-05-22T13:02:36+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Running containers with Colima</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-05-22">2025-05-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1671 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Goals</a>
+</li>
+<li><a href="#headline-2">Concepts</a>
+<ul>
+<li><a href="#headline-3">Containers</a>
+</li>
+<li><a href="#headline-4">Virtual machines</a>
+</li>
+<li><a href="#headline-5">Emulators</a>
+</li>
+<li><a href="#headline-6">Sharing data</a>
+</li>
+<li><a href="#headline-7">What to do</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-8">Set up Colima in your Mac</a>
+<ul>
+<li><a href="#headline-9">Install</a>
+</li>
+<li><a href="#headline-10">Start</a>
+</li>
+<li><a href="#headline-11">Status</a>
+</li>
+<li><a href="#headline-12">Stop</a>
+</li>
+<li><a href="#headline-13">Delete the virtual machine</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-14">Running amd64 and arm64 containers</a>
+<ul>
+<li><a href="#headline-15">ARM64 container</a>
+</li>
+<li><a href="#headline-16">AMD64 container</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-17">Summary</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to
+play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous
+Database, containers can be very helpful.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Goals
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>By the end of this article you will:</p>
+<ul>
+<li>Understand the pieces required to run containers in your ARM or Intel macOS system.</li>
+<li>Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS.</li>
+<li>Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container
+so you can use them locally to learn, develop or try their features.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Concepts
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Containers
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>A container is a way to run software under some constraints, that takes advantage of some operating system features to
+isolate and control its usage of resources, while still running on the same operating system.  Containers can help you
+to:</p>
+<ul>
+<li>Isolate what runs in the container from the outside world and sharing only what is needed</li>
+<li>Control the resources used by the processes that run in the container</li>
+<li>Avoid problems with dependencies required to run the software of the container</li>
+<li>Avoid littering the disk of your computer with code that you just want to try</li>
+<li>And, in general, address the situation where one could say: &#34;it runs on my machine&#34;</li>
+</ul>
+<p>In principle, containers could be run on any operating system, but the truth is that some features that have to be
+provided by the OS aren&#39;t available, either partially or completely, for every operating system.  Containers use Linux
+<a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a> in order to achieve isolation and control.  And, although, macOS offers a related feature called <a href="https://developer.apple.com/documentation/security/app-sandbox#:%7E:text=App%20Sandbox%20is%20an%20access,Store%20must%20adopt%20App%20Sandbox.">App Sandbox</a>,
+it aims mostly at restricting the application access to certain parts of the file system, some sensitive data and
+attached hardware and the network.  So, it wouldn&#39;t be trivial to implement an application that runs containers natively
+in macOS using just those features.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Virtual machines
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>What we can do instead is to use a virtual machine.  A virtual machine provides isolation too, but in a very different
+way.  It shares the hardware splitting its usage and each virtual machine requires running a full instance of the
+operating system within it.  This approach achieves better isolation and control, but requires more resources, at the
+very least those used to run the operating system for each virtual machine.  That includes dedicating a part of the RAM
+to run that virtual machine and that stops been available for the main system.  Virtual machines are a great option, but
+when you want to run several isolated applications, the overhead adds up very fast.</p>
+<p>
+However, we can combine virtual machines and containers.  We can create a virtual machine that runs an instance of Linux
+–with only the essential parts– and use the capabilities of that Linux instance to run containers.  We will need to
+choose the amount of memory dedicated to that virtual machine, and run in it the container engine run-time –the
+software that takes care of everything related to the containers.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Emulators
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>There are many things we can do with the containers running in a virtual machine.  Still, when you run a virtual
+machine, the hardware used by that virtual machine is the same one that your actual machine has.  I mean, if you run a
+virtual machine in an Intel Mac, the virtual machine will be able to run an operating system and other software produced
+for that architecture, but not for Apple Silicon.  The same happens the other way around: you cannot directly run
+containers created for the intel architecture –the most abundant ones– using a virtual machine running in your arm64
+system.  If you want to run software for a different architecture, then you need an emulator.  An emulator is an
+application that runs software created for a different architecture than the one you use.</p>
+<p>
+<a href="https://github.com/abiosoft/colima">Colima</a> –Containers on Lima– uses <a href="https://lima-vm.io/">Lima</a> –Linux Machines– to launch the virtual machine it needs.  Lima supports two
+different virtualization technologies: vz and qemu.  Since macOS 11, the <a href="https://developer.apple.com/documentation/virtualization">vz virtualization framework</a> is included in the
+system, but for Lima, we need to be running macOS 13.5+.  We can use vz when we want to have a virtual machine with same
+architecture of our system.  Alternatively, Qemu is a machine emulator, hence it can run amd64 binaries in an arm64
+Apple Silicon system.  There is another amd64 emulator available for Macs with Apple Silicon CPUs, this one provided by
+Apple; it is called Rosetta.  Both Qemu and Rosetta can run Intel binaries in an Apple Silicon CPU, but Qemu emulates
+the whole system, while Rosetta works at the process level translating the opcodes of the Intel binary to get it to run
+as any other arm64 process on that machine.  So Rosetta is more restrictive, but faster than Qemu.</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Sharing data
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>Finally, a word on sharing data between the virtual machine, the containers and your macOS.  You can use virtiofs, 9p or
+SSHFS.  virtiofs is the preferred option and the fastest for macOS.  If you use Qemu, then 9p is more stable, but
+slower, while SSHFS, that uses the SSH server of to provide SFTP and shows the contents as a mounted directory, is
+faster, but less reliable when there are many concurrent reads or writes.</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+What to do
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>So, if you are using an Intel mac, you should use Colima with vz virtualization and nothing else.  Almost all containers
+are released for amd64 –aka x86_64–, so you won&#39;t have any problems.  If you, like me, use an arm64 Mac instead, then,
+you can still use vz virtualization to run a light-weight Linux for arm64 and take advantage of Rosetta to run the
+amd64. You could use Qemu to run Linux for amd64 in the virtual machine, but that would be much slower.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Set up Colima in your Mac
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+Install
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>Before we start installing Colima, we should ensure that you have Rosetta available in your system:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  softwareupdate --install-rosetta</span></span></code></pre></div>
+</div>
+<p>Then, I am going to use <code class="verbatim">brew</code> to install the required software :</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install colima docker docker-compose</span></span></code></pre></div>
+</div>
+<p>Notice that we aren&#39;t installing <code class="verbatim">qemu</code>, because will be using vz for the virtual machine and Rosetta for the amd64
+containers.</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+Start
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>Now that everything is installed, we can start Colima.  We can do it by entering the following command, where we
+specify the virtualization type and the file system type, enable Rosetta, and customize the number of CPUs and the
+memory dedicated to the virtual machine:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start --vm-type vz --vz-rosetta --mount-type virtiofs --cpu <span style="color:#ae81ff">4</span> --memory <span style="color:#ae81ff">8</span></span></span></code></pre></div>
+</div>
+<p>Or, set the proper configuration in <code class="verbatim">$HOME/.colima/default/colima.yaml</code> and start the virtual machine, with:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start --edit</span></span></code></pre></div>
+</div>
+<p>If you use the latter, double check that you have all the options mentioned above.</p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+Status
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>At any moment you should be able to query the status of the virtual machine with:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima status</span></span></code></pre></div>
+</div>
+<p>For an arm64 Mac, the architecture should be <code class="verbatim">aarch64</code>.</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+Stop
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<p>When you don&#39;t need the virtual machine and the containers running, you can stop it with:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima stop</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+Delete the virtual machine
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<p>If you want to get rid of the current virtual machine and its configuration, you can use the following command:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima delete</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-2">
+<h2 id="headline-14">
+Running amd64 and arm64 containers
+</h2>
+<div id="outline-text-headline-14" class="outline-text-2">
+<p>Now that we have Colima up and running, we are going to run two different containers that are particularly useful if you
+are a developer: the Oracle Database 23ai Free Container Image, that is available for linux/arm64, and the Oracle
+Autonomous Database Free Container, that is only available for linux/amd64.</p>
+<div id="outline-container-headline-15" class="outline-3">
+<h3 id="headline-15">
+ARM64 container
+</h3>
+<div id="outline-text-headline-15" class="outline-text-3">
+<p>We are going to run the linux/arm64 version of the Oracle Database 23ai Free Container Image.  This should be trivial,
+since we are running a container that was built for the architecture that we have.</p>
+<p>
+The command is very simple:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 1521:1521 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e ORACLE_PWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0pen-S3sam3.&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name db-free <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --platform linux/arm64 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
+</div>
+<p>
+You can use container management commands to check that it is running (<code class="verbatim">docker ps</code>).  The container is ready to be used
+when <code class="verbatim">docker log -f db-free</code> shows the message: &#34;DATABASE IS READY TO USE!&#34;</p>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-3">
+<h3 id="headline-16">
+AMD64 container
+</h3>
+<div id="outline-text-headline-16" class="outline-text-3">
+<p>Oracle&#39;s Autonomous Database 23ai free container is currently only available for the amd64 architecture.  We can use
+this free container to develop software that talks to the database, learn how to use the different functionalities that
+it offers or connecting it other software among many other things.</p>
+<p>
+We are going to start by downloading the image for the Oracle&#39;s Autonomous Database 23ai container.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker pull container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+</div>
+<p>
+Notice that if we change this command to request the image for the arm64 architecture:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker pull --platform linux/aarch64 container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+</div>
+<p>it will show an error because it isn&#39;t available for that platform:</p>
+<blockquote>
+<p>image with reference container-registry.oracle.com/database/adb-free:latest-23ai was found but its platform
+(linux/amd64) does not match the specified platform (linux/arm64)</p>
+</blockquote>
+<p>
+Since we have Rosetta available, we can run the image of the intel container with:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 1521:1522 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 1522:1522 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 8443:8443 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 27017:27017 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e WORKLOAD_TYPE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ATP&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e WALLET_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Wa((3t_pass&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e ADMIN_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0pen-S3sam3.&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --cap-add SYS_ADMIN <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --device /dev/fuse <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name adb-free <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+</div>
+<p>It will give us a warning (&#34;WARNING: The requested image&#39;s platform (linux/amd64) does not match the detected host
+platform (linux/arm64/v8) and no specific platform was requested&#34;), but it will return the container ID.  If you add the
+option <code class="verbatim">--platform linux/amd64</code>, the error is not shown.</p>
+<p>
+The Oracle Autonomous Database Free Container is ready to use when <code class="verbatim">docker log -f adb-free</code> shows the status of the
+listener.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-2">
+<h2 id="headline-17">
+Summary
+</h2>
+<div id="outline-text-headline-17" class="outline-text-2">
+<p>In this article, we have learned the differences between containers, virtual machines and emulators and how we can
+combine them to be able to run what we need in our systems.  We have successfully run the Oracle Database 23ai Free
+Container Image for linux/arm64 and the Oracle&#39;s Autonomous Database 23ai Free Container for linux/amd64 in M3
+MacBookPro.  And we can now use either one to learn more about Oracle&#39;s databases, try their features or develop
+software that communicates uses them.</p>
+<p>
+Stay curious, Hack your code, See you next time!</p>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-05-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/" data-title="Running containers with Colima"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/" data-title="Running containers with Colima" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://localhost:1313/posts/running_containers_with_colima/running_containers_with_colima/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

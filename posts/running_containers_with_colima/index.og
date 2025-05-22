@@ -1,0 +1,196 @@
+#+STARTUP: showall
+#+TITLE: Running containers with Colima
+#+DATE: 2025-05-22T13:02:36+02:00
+#+DRAFT: true
+
+There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to
+play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous
+Database, containers can be very helpful.
+
+* Goals
+By the end of this article you will:
+- Understand the pieces required to run containers in your ARM or Intel macOS system.
+- Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS.
+- Launch and run the Oracle Database 23ai Free Container Image or the Oracle's Autonomous Database 23ai Free Container
+  so you can use them locally to learn, develop or try their features.
+
+* Concepts
+
+** Containers
+A container is a way to run software under some constraints, that takes advantage of some operating system features to
+isolate and control its usage of resources, while still running on the same operating system.  Containers can help you
+to:
+- Isolate what runs in the container from the outside world and sharing only what is needed
+- Control the resources used by the processes that run in the container
+- Avoid problems with dependencies required to run the software of the container
+- Avoid littering the disk of your computer with code that you just want to try
+- And, in general, address the situation where one could say: "it runs on my machine"
+
+In principle, containers could be run on any operating system, but the truth is that some features that have to be
+provided by the OS aren't available, either partially or completely, for every operating system.  Containers use Linux
+[[https://man7.org/linux/man-pages/man7/namespaces.7.html][namespaces]] in order to achieve isolation and control.  And, although, macOS offers a related feature called [[https://developer.apple.com/documentation/security/app-sandbox#:%7E:text=App%20Sandbox%20is%20an%20access,Store%20must%20adopt%20App%20Sandbox.][App Sandbox]],
+it aims mostly at restricting the application access to certain parts of the file system, some sensitive data and
+attached hardware and the network.  So, it wouldn't be trivial to implement an application that runs containers natively
+in macOS using just those features.
+
+** Virtual machines
+What we can do instead is to use a virtual machine.  A virtual machine provides isolation too, but in a very different
+way.  It shares the hardware splitting its usage and each virtual machine requires running a full instance of the
+operating system within it.  This approach achieves better isolation and control, but requires more resources, at the
+very least those used to run the operating system for each virtual machine.  That includes dedicating a part of the RAM
+to run that virtual machine and that stops been available for the main system.  Virtual machines are a great option, but
+when you want to run several isolated applications, the overhead adds up very fast.
+
+However, we can combine virtual machines and containers.  We can create a virtual machine that runs an instance of Linux
+--with only the essential parts-- and use the capabilities of that Linux instance to run containers.  We will need to
+choose the amount of memory dedicated to that virtual machine, and run in it the container engine run-time --the
+software that takes care of everything related to the containers.
+
+** Emulators
+There are many things we can do with the containers running in a virtual machine.  Still, when you run a virtual
+machine, the hardware used by that virtual machine is the same one that your actual machine has.  I mean, if you run a
+virtual machine in an Intel Mac, the virtual machine will be able to run an operating system and other software produced
+for that architecture, but not for Apple Silicon.  The same happens the other way around: you cannot directly run
+containers created for the intel architecture --the most abundant ones-- using a virtual machine running in your arm64
+system.  If you want to run software for a different architecture, then you need an emulator.  An emulator is an
+application that runs software created for a different architecture than the one you use.
+
+[[https://github.com/abiosoft/colima][Colima]] --Containers on Lima-- uses [[https://lima-vm.io/][Lima]] --Linux Machines-- to launch the virtual machine it needs.  Lima supports two
+different virtualization technologies: vz and qemu.  Since macOS 11, the [[https://developer.apple.com/documentation/virtualization][vz virtualization framework]] is included in the
+system, but for Lima, we need to be running macOS 13.5+.  We can use vz when we want to have a virtual machine with same
+architecture of our system.  Alternatively, Qemu is a machine emulator, hence it can run amd64 binaries in an arm64
+Apple Silicon system.  There is another amd64 emulator available for Macs with Apple Silicon CPUs, this one provided by
+Apple; it is called Rosetta.  Both Qemu and Rosetta can run Intel binaries in an Apple Silicon CPU, but Qemu emulates
+the whole system, while Rosetta works at the process level translating the opcodes of the Intel binary to get it to run
+as any other arm64 process on that machine.  So Rosetta is more restrictive, but faster than Qemu.
+
+** Sharing data
+Finally, a word on sharing data between the virtual machine, the containers and your macOS.  You can use virtiofs, 9p or
+SSHFS.  virtiofs is the preferred option and the fastest for macOS.  If you use Qemu, then 9p is more stable, but
+slower, while SSHFS, that uses the SSH server of to provide SFTP and shows the contents as a mounted directory, is
+faster, but less reliable when there are many concurrent reads or writes.
+
+** What to do
+So, if you are using an Intel mac, you should use Colima with vz virtualization and nothing else.  Almost all containers
+are released for amd64 --aka x86_64--, so you won't have any problems.  If you, like me, use an arm64 Mac instead, then,
+you can still use vz virtualization to run a light-weight Linux for arm64 and take advantage of Rosetta to run the
+amd64. You could use Qemu to run Linux for amd64 in the virtual machine, but that would be much slower.
+
+* Set up Colima in your Mac
+** Install
+Before we start installing Colima, we should ensure that you have Rosetta available in your system:
+#+begin_src sh
+  softwareupdate --install-rosetta
+#+end_src
+Then, I am going to use =brew= to install the required software :
+#+begin_src sh
+  brew install colima docker docker-compose
+#+end_src
+Notice that we aren't installing =qemu=, because will be using vz for the virtual machine and Rosetta for the amd64
+containers.
+
+** Start
+Now that everything is installed, we can start Colima.  We can do it by entering the following command, where we
+specify the virtualization type and the file system type, enable Rosetta, and customize the number of CPUs and the
+memory dedicated to the virtual machine:
+#+begin_src sh
+  colima start --vm-type vz --vz-rosetta --mount-type virtiofs --cpu 4 --memory 8
+#+end_src
+Or, set the proper configuration in =$HOME/.colima/default/colima.yaml= and start the virtual machine, with:
+#+begin_src sh
+  colima start --edit
+#+end_src
+If you use the latter, double check that you have all the options mentioned above.
+
+** Status
+At any moment you should be able to query the status of the virtual machine with:
+#+begin_src sh
+  colima status
+#+end_src
+For an arm64 Mac, the architecture should be =aarch64=.
+
+** Stop
+When you don't need the virtual machine and the containers running, you can stop it with:
+#+begin_src sh
+  colima stop
+#+end_src
+
+** Delete the virtual machine
+If you want to get rid of the current virtual machine and its configuration, you can use the following command:
+#+begin_src sh
+  colima delete
+#+end_src
+
+* Running amd64 and arm64 containers
+Now that we have Colima up and running, we are going to run two different containers that are particularly useful if you
+are a developer: the Oracle Database 23ai Free Container Image, that is available for linux/arm64, and the Oracle
+Autonomous Database Free Container, that is only available for linux/amd64.
+
+** ARM64 container
+We are going to run the linux/arm64 version of the Oracle Database 23ai Free Container Image.  This should be trivial,
+since we are running a container that was built for the architecture that we have.
+
+The command is very simple:
+#+begin_src sh
+  docker run -d \
+  -p 1521:1521 \
+  -e ORACLE_PWD='0pen-S3sam3.' \
+  --name db-free \
+  --platform linux/arm64 \
+  container-registry.oracle.com/database/free:latest
+#+end_src
+
+You can use container management commands to check that it is running (=docker ps=).  The container is ready to be used
+when =docker log -f db-free= shows the message: "DATABASE IS READY TO USE!"
+
+** AMD64 container
+Oracle's Autonomous Database 23ai free container is currently only available for the amd64 architecture.  We can use
+this free container to develop software that talks to the database, learn how to use the different functionalities that
+it offers or connecting it other software among many other things.
+
+We are going to start by downloading the image for the Oracle's Autonomous Database 23ai container.
+#+begin_src sh
+  docker pull container-registry.oracle.com/database/adb-free:latest-23ai
+#+end_src
+
+Notice that if we change this command to request the image for the arm64 architecture:
+#+begin_src sh
+  docker pull --platform linux/aarch64 container-registry.oracle.com/database/adb-free:latest-23ai
+#+end_src
+it will show an error because it isn't available for that platform:
+#+begin_quote
+image with reference container-registry.oracle.com/database/adb-free:latest-23ai was found but its platform
+(linux/amd64) does not match the specified platform (linux/arm64)
+#+end_quote
+
+Since we have Rosetta available, we can run the image of the intel container with:
+#+begin_src sh
+  docker run -d \
+  -p 1521:1522 \
+  -p 1522:1522 \
+  -p 8443:8443 \
+  -p 27017:27017 \
+  -e WORKLOAD_TYPE='ATP' \
+  -e WALLET_PASSWORD='Wa((3t_pass' \
+  -e ADMIN_PASSWORD='0pen-S3sam3.' \
+  --cap-add SYS_ADMIN \
+  --device /dev/fuse \
+  --name adb-free \
+  container-registry.oracle.com/database/adb-free:latest-23ai
+#+end_src
+It will give us a warning ("WARNING: The requested image's platform (linux/amd64) does not match the detected host
+platform (linux/arm64/v8) and no specific platform was requested"), but it will return the container ID.  If you add the
+option =--platform linux/amd64=, the error is not shown.
+
+The Oracle Autonomous Database Free Container is ready to use when =docker log -f adb-free= shows the status of the
+listener.
+
+* Summary
+In this article, we have learned the differences between containers, virtual machines and emulators and how we can
+combine them to be able to run what we need in our systems.  We have successfully run the Oracle Database 23ai Free
+Container Image for linux/arm64 and the Oracle's Autonomous Database 23ai Free Container for linux/amd64 in M3
+MacBookPro.  And we can now use either one to learn more about Oracle's databases, try their features or develop
+software that communicates uses them.
+
+Stay curious, Hack your code, See you next time!
+

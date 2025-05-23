@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tags on Jorge Ortiz-Fuentes&#39; DevBites</title>
-    <link>https://jorgeortiz.dev/tags/</link>
-    <description>Recent content in Tags on Jorge Ortiz-Fuentes&#39; DevBites</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright>
-    <atom:link href="https://jorgeortiz.dev/tags/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
+        <link>https://jorgeortiz.dev/tags/</link>
+        <description>Tags - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 22 May 2025 13:02:36 &#43;0200</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Containers</title>
+    <link>https://jorgeortiz.dev/tags/containers/</link>
+    <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/tags/containers/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Mac</title>
+    <link>https://jorgeortiz.dev/tags/mac/</link>
+    <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/tags/mac/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

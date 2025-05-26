@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Containers - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/tags/containers/</link>
+        <link>http://localhost:1313/tags/containers/</link>
         <description>Containers - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 22 May 2025 13:02:36 &#43;0200</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/containers/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 22 May 2025 13:02:36 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/tags/containers/" rel="self" type="application/rss+xml" /><item>
     <title>Running containers with Colima</title>
-    <link>https://jorgeortiz.dev/posts/running_containers_with_colima/</link>
+    <link>http://localhost:1313/posts/running_containers_with_colima/</link>
     <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
     <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/running_containers_with_colima/</guid>
+    <guid>http://localhost:1313/posts/running_containers_with_colima/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/header-image.jpg" referrerpolicy="no-referrer">
             </div><p>

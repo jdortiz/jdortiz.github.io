@@ -11,13 +11,9 @@
     <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
     <author>Jorge Ortiz-Fuentes</author>
     <guid>https://jorgeortiz.dev/posts/running_containers_with_colima/</guid>
-    <description><![CDATA[<p>
-<figure><figcaption>
-      <h4>Running containers</h4>
-    </figcaption>
-</figure>
-</p>
-<p>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
 There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to
 play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous
 Database, containers can be very helpful.</p>
@@ -33,21 +29,11 @@ Goals
 <li>Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container
 so you can use them locally to learn, develop or try their features.</li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
-Concepts
-</h2>
-<div id="outline-text-headline-2" class="outline-text-2">
-<div id="outline-container-headline-3" class="outline-3">
-<h3 id="headline-3">
-Containers
-</h3>
-<div id="outline-text-headline-3" class="outline-text-3">
-<p>A container is a way to run software under some constraints, that takes advantage of some operating system features to
-isolate and control its usage of resources, while still running on the same operating system.  Containers can help you
-to:</p>]]></description>
+<p>Would you prefer to watch the video? Here it is:
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/y6QZqk4a_t4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+</p>]]></description>
 </item>
 </channel>
 </rss>

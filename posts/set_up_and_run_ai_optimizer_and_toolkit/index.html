@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Set up and run AI Optimizer and Toolkit - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Alt text for the featured image."><meta property="og:url" content="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Set up and run AI Optimizer and Toolkit">
+  <meta property="og:description" content="Alt text for the featured image.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-26T00:00:00+00:00">
+    <meta property="article:tag" content="Ai">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Set up and run AI Optimizer and Toolkit">
+  <meta name="twitter:description" content="Alt text for the featured image.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/" /><link rel="prev" href="https://jorgeortiz.dev/posts/running_containers_with_colima/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Set up and run AI Optimizer and Toolkit",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/set_up_and_run_ai_optimizer_and_toolkit\/"
+        },"genre": "posts","keywords": "ai","wordcount":  2009 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/set_up_and_run_ai_optimizer_and_toolkit\/","datePublished": "2025-05-26T00:00:00+00:00","dateModified": "2025-05-26T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Alt text for the featured image."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Set up and run AI Optimizer and Toolkit</h1><h2 class="single-subtitle">A bootstrap guide for the tool</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/howto/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Howto</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-05-26">2025-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2009 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/set_up_and_run_ai_optimizer_and_toolkit/header-image.jpg"
+        data-srcset="/posts/set_up_and_run_ai_optimizer_and_toolkit/header-image.jpg, /posts/set_up_and_run_ai_optimizer_and_toolkit/header-image.jpg 1.5x, /posts/set_up_and_run_ai_optimizer_and_toolkit/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/set_up_and_run_ai_optimizer_and_toolkit/header-image.jpg"
+        title="Alt text for the featured image." width="5760" height="3840" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Intro</a>
+</li>
+<li><a href="#headline-2">AI Optimizer and Toolkit</a>
+</li>
+<li><a href="#headline-3">Set up</a>
+<ul>
+<li><a href="#headline-4">Prerequisites</a>
+</li>
+<li><a href="#headline-5">Installation</a>
+<ul>
+<li><a href="#headline-6">Container runtime</a>
+</li>
+<li><a href="#headline-7">LLM runtime</a>
+</li>
+<li><a href="#headline-8">Install and start Oracle DB 23ai</a>
+</li>
+<li><a href="#headline-9">Python</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-10">Running AI Optimizer and Toolkit</a>
+</li>
+<li><a href="#headline-11">Summary</a>
+</li>
+<li><a href="#headline-12">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Intro
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play
+with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.</p>
+<p>
+AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use
+Oracle&#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of
+their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and
+accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:</p>
+<ol>
+<li>Quickly configure your model to meet your unique needs.</li>
+<li>Extend its knowledge to understand and work with your structured and unstructured business data.</li>
+<li>Automatically test its behavior with any new change.</li>
+<li>Generate a microservice with the results of your iterations that can be deployed to production.</li>
+</ol>
+<p>This video will cover the following topics:</p>
+<ul>
+<li>I will start by briefly explaining how AI Optimizer and Toolkit works, so you get a better understanding of the pieces
+that are needed and how they play together.</li>
+<li>Then, I will go through the configuration of the different pieces, step by step.  If you are using a Linux or a Window
+system, they are both covered in the documentation of the project itself.  But, feel free to ping me in any of the
+social networks mentioned in the home page of this site.</li>
+<li>With all the dependencies up and running, I will show you how to run AI Optimizer and Toolkit.</li>
+<li>Finally, I will end up with a very brief recap.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+AI Optimizer and Toolkit
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>At the Microservices and AI team, we were very excited with all the possibilities and advantages that generative AI
+offers to companies and individuals, but we also were aware that an LLM isn&#39;t enough by itself to produce useful tools.
+You need to choose the proper model and adjust it to your needs.  You also want to extend its knowledge and
+capabilities.</p>
+<p>
+We wanted to contribute to this field and do it in a way that you can freely use and even contribute to if you feel
+inclined to do so.  So the team created AI Optimizer and Toolkit, the no code open-source tool powered by Oracle that
+makes it easier than ever to bring your enterprise-level generative AI projects from prototype to production.</p>
+<p>
+AI Optimizer and Toolkit connects to local or remote LLMs and offers you a chat interface.  The tool allows you to
+modify the parameters of those models and to customize the prompts that you use.  It also helps you with the whole
+ingestion process for RAG, from using an embedding model with each of the pieces of data, to store the data and the
+embedding using AI Vector Search in the Oracle Database 23ai.  You can then use the model and its RAG capabilities and
+even perform automatic tests on it to assess the quality of the tool that you are creating.  And, when you are happy
+with the results, you can generate a microservice that works with Java with Spring AI and that can be deployed to your
+production environment.  You do all of those things from the web user interface without having to type any programming
+language code.</p>
+<img src="brain.jpg" alt="Brain configuration" title="Brain functions" width="100%" height="100%" class="border-2"/>
+<p>
+AI Optimizer and Toolkit is implemented in Python using a client-server architecture.  The client is a front-end
+application that offers a web user interface to the user.  The server is the core of the application and it provides a
+REST API that may be used by several clients.</p>
+<p>
+The server uses LLMs and embedding models that run locally using Ollama and it&#39;s also OpenAI compatible, so you can also
+use remote LLMs and embedding models using OpenAI API interface.  In both cases, it can directly work with their
+parameters and change the prompt to modify their behavior.  And, it can use structured and unstructured data from an
+Oracle Database.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Set up
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Prerequisites
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>Before we run and configure AI Optimizer and Toolkit, let&#39;s take care of some prerequisites.</p>
+<p>
+We are going to need some tool to run containers in your system.  Containers are a very convenient way of installing,
+running and disposing, when no longer needed, software in your system. You can use Podman, Rancher, Docker, or, as <a href="/posts/running_containers_with_colima/">I
+already explained previously, Colima</a>.</p>
+<p>
+It isn&#39;t required, but it is quite useful, and more economical, to have Ollama running on your system.  You can use your
+API keys to access AI providers, like OpenAI, instead or in combination with Ollama.  If you use Ollama, you keep the
+privacy of your data because it doesn&#39;t go out to a third party.  Also, it cannot be used to train future models, by the
+AI online service providers of those models.</p>
+<p>
+Oracle Database 23ai is required only if your use RAG. But this is so useful and can improve the behavior of your tool
+so much, that you want to have it available.</p>
+<p>
+As for running the AI Optimizer and Toolkit software, it requires exactly Python 3.11, neither older nor newer.  If you
+are using a recent version of macOS, you will need to install that version side by side with the builtin one.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Installation
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>Now that I have explained all the required components, I am going to cover how to get them up and running in our system</p>
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+Container runtime
+</h4>
+<div id="outline-text-headline-6" class="outline-text-4">
+<p>
+Assuming that we already have a container runtime installed in your system –Colima, if you followed the article that I
+mentioned before,– the cautious system administrator should check that it is up and running.  If you aren&#39;t a cautious,
+you should do it too, because it will save you some time and swearing 😄.</p>
+<p>
+In your shell prompt, enter:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima status</span></span></code></pre></div>
+</div>
+<p>
+If the runtime is running you should get something similar to this:</p>
+<pre class="example">
+INFO[0000] colima is running using macOS Virtualization.Framework
+INFO[0000] arch: aarch64
+INFO[0000] runtime: docker
+INFO[0000] mountType: virtiofs
+INFO[0000] socket: unix:///Users/jorge/.colima/default/docker.sock
+</pre>
+<p>But, if it isn&#39;t, you will get this instead:</p>
+<pre class="example">
+FATA[0000] colima is not running
+</pre>
+<p>
+If your Colima isn&#39;t running, you need to start it.  Assuming the required settings are already stored
+in the file as I explained in before, you just have to issue this command:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+LLM runtime
+</h4>
+<div id="outline-text-headline-7" class="outline-text-4">
+<p>Although we have just started by having our container runtime ready, we don&#39;t want to run Ollama as a container in a Mac
+with Apple Silicon, because it won&#39;t be able to take advantage of the GPU. You can find more information on why this is
+the case in the references of this <a href="https://chariotsolutions.com/blog/post/apple-silicon-gpus-docker-and-ollama-pick-two/">article</a>.  If you are using a amd64 system with a CUDA enabled GPU running Linux or
+Windows, you can use the container, but please take all the necessary steps to ensure that Ollama is using it.</p>
+<p>
+If Ollama isn&#39;t installed in your macOS system already, you can use brew:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install ollama</span></span></code></pre></div>
+</div>
+<p>
+Then, you can run Ollama as a service with:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew services start ollama</span></span></code></pre></div>
+</div>
+<p>
+Or, if you don&#39;t want/need a background service, you can just run:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  /opt/homebrew/opt/ollama/bin/ollama serve</span></span></code></pre></div>
+</div>
+<p>
+We are going to interact with some LLM models, so we need to install them in Ollama.  We will start with <em>llama3.1</em> as
+the main LLM and <em>mxbai</em> for computing the embeddings<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  ollama pull llama3.1
+</span></span><span style="display:flex;"><span>  ollama pull mxbai-embed-large</span></span></code></pre></div>
+</div>
+<p>
+If you also/instead want to run LLM models online, you will need the <code class="verbatim">OPENAI_API_KEY</code> to authenticate to OpenAI and use
+their services.</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-4">
+<h4 id="headline-8">
+Install and start Oracle DB 23ai
+</h4>
+<div id="outline-text-headline-8" class="outline-text-4">
+<p>Oracle Database 23ai can be installed in a container and it will make our lives easier.  But you can choose to run it in
+a different system or even in the Cloud.  In this article, we are going spin up a container in our system:</p>
+<p>
+The command is very simple:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 1521:1521 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e ORACLE_PWD<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0pen-S3sam3.&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --name db-free <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --platform linux/arm64 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
+</div>
+<p>
+You can use container management commands to check that it is running (<code class="verbatim">docker ps</code>, if you are using the Docker CLI with
+Colima).  The container is ready to be used when <code class="verbatim">docker logs -f db-free</code> shows the message: <code class="verbatim">DATABASE IS READY TO USE!</code></p>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-4">
+<h4 id="headline-9">
+Python
+</h4>
+<div id="outline-text-headline-9" class="outline-text-4">
+<p>We will start by getting a copy of the source code for the project and go to its directory.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  git clone https://github.com/oracle-samples/ai-optimizer.git
+</span></span><span style="display:flex;"><span>  cd ai-optimizer</span></span></code></pre></div>
+</div>
+<p>
+As I mentioned before, AI Optimizer and Toolkit requires exactly Python 3.11.  You shouldn&#39;t use an older or newer
+version of Python.  If you are using a recent version of macOS, you will need to install that version side by side with
+the builtin one.  I recommend you use Homebrew to install Python 3.11:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install python@3.11
+</span></span><span style="display:flex;"><span>  python3.11 --version</span></span></code></pre></div>
+</div>
+<p>
+AI Optimizer and Toolkit&#39;s code requires to have some Python dependencies installed.  While you could just install them
+directly in your system, it is more convenient and a best practice to define a virtual environment for the application.
+The virtual environment will allow us to install the required versions of those dependencies in an isolated environment.</p>
+<p>
+Creating the virtual environment is a very simple task.  We just have to enter the following commands:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cd src/
+</span></span><span style="display:flex;"><span>  python3.11 -m venv .venv --copies
+</span></span><span style="display:flex;"><span>  source .venv/bin/activate
+</span></span><span style="display:flex;"><span>  pip3.11 install --upgrade pip wheel setuptools</span></span></code></pre></div>
+</div>
+<p>
+Here, we are changing the current directory to <code class="verbatim">src</code> and create the virtual environment there.  The virtual environment
+has to be activated and then, we can install the tools that we will use to install the dependencies.  We can now use the
+following commands to install the Python modules that are required by the project:</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  pip3.11 install -e <span style="color:#e6db74">&#34;.[all]&#34;</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Running AI Optimizer and Toolkit
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<p>Client and server can be launched separately, but in this case we are going to use the simplest way to get AI Optimizer
+and Toolkit up and running.  That also means that we will have to configure it manually.</p>
+<img src="launch.jpg" alt="Space shuttle launch" title="Launch" width="100%" height="100%" class="border-2"/>
+<p>
+The following command will launch the client and the server too if the latter hasn&#39;t been launched yet.  It will also
+dump to the terminal the logs of the client.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  streamlit run launch_client.py</span></span></code></pre></div>
+</div>
+<p>
+Executing that command should produce a message like this one:</p>
+<pre class="example">
+  You can now view your Streamlit app in your browser.
+
+  URL: http://localhost:8501
+</pre>
+<p>and some advice about using the watchdog module.</p>
+<p>
+If we use our browser to connect to the URL, after some short waiting for the initial setup, we should get a page like this one:</p>
+<img src="ai_optimizer_initial_screen.png" alt="Initial AI Optimizer and Toolkit screen" title="Initial AI Optimizer and Toolkit screen" width="100%" height="100%" class="border-2"/>
+<p>
+Ollama is running with some models, but we have to enable them in the client. So, we click on <code class="verbatim">Configuration &gt; Models</code>
+and edit the entry for llama3.1 just to enable it.  You can also enable other models if you want.  Actually, the
+embedding models are enabled also in this part of the configuration.</p>
+<img src="ai_optimizer_enable_llama31.png" alt="Enable llama3.1 in AI Optimizer and Toolkit" title="Enable llama3.1 in AI Optimizer and Toolkit configuration" width="100%" height="100%" class="border-2"/>
+<p>
+Finally, we would like to test that we can interact with the model(s) that we have enabled.  From the right panel, we
+click on <code class="verbatim">ChatBot</code> and start a conversation.  The model should reply accordingly.</p>
+<img src="ai_optimizer_start_chat.png" alt="Our model claims to speak Klingon" title="Start a conversation with the selected model" width="100%" height="100%" class="border-2"/>
+<p>
+Using the model&#39;s response: Qapla&#39;!!! We have successfully started a conversation with the selected model.  If you have
+more than one LLM enabled, you can scroll down on the right panel and choose the one you want to talk to, independently
+of whether they are local or remote.</p>
+<p>
+Please notice that in our conversation, we got two warnings: one about not having an embedding model enabled and another
+one about not having configured the database.  I will cover those when I get into why and how to use Retrieval Augmented
+Generation (RAG).</p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
+Summary
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>In this article, I have explained the basics of what AI Optimizer and Toolkit can do and the dependencies it requires.
+We have successfully started the application and interacted with an LLM.  Not bad for a short article!</p>
+<p>
+I will be using this configuration in future articles to use the different features of AI Optimizer and Toolkit and
+explain how to get the most them. Get ready, this only the <em>beginning of a beautiful friendship</em>.</p>
+<p>
+Stay curious, Hack your code, See you next time!</p>
+<img src="beautiful_friendship.jpg" alt="Casablanca: Louie, I think this is the begining of a beautiful friendship" title="Casablanca" width="100%" height="100%" class="border-2"/>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-2">
+<h2 id="headline-12">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator">
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>Don&#39;t worry if you don&#39;t know what the embeddings are yet. I will cover that in future articles.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-05-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/" data-title="Set up and run AI Optimizer and Toolkit" data-hashtags="ai"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/" data-title="Set up and run AI Optimizer and Toolkit" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ai/">Ai</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/running_containers_with_colima/" class="prev" rel="prev" title="Running containers with Colima"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Running containers with Colima</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.5">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

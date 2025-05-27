@@ -1,16 +1,37 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>http://localhost:1313/</link>
+        <link>https://jorgeortiz.dev/</link>
         <description>Sharing things I learned mostly about software development</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Fri, 23 May 2025 11:54:47 &#43;0200</lastBuildDate>
-            <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 26 May 2025 00:00:00 &#43;0000</lastBuildDate>
+            <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Set up and run AI Optimizer and Toolkit</title>
+    <link>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</link>
+    <pubDate>Mon, 26 May 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Intro
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play
+with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.</p>
+<p>
+AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use
+Oracle&#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of
+their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and
+accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:</p>]]></description>
+</item>
+<item>
     <title>Running containers with Colima</title>
-    <link>http://localhost:1313/posts/running_containers_with_colima/</link>
+    <link>https://jorgeortiz.dev/posts/running_containers_with_colima/</link>
     <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
     <author>Jorge Ortiz-Fuentes</author>
-    <guid>http://localhost:1313/posts/running_containers_with_colima/</guid>
+    <guid>https://jorgeortiz.dev/posts/running_containers_with_colima/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/header-image.jpg" referrerpolicy="no-referrer">
             </div><p>

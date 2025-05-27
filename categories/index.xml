@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Categories - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>http://localhost:1313/categories/</link>
+        <link>https://jorgeortiz.dev/categories/</link>
         <description>Categories - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 22 May 2025 13:02:36 &#43;0200</lastBuildDate><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 26 May 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/" rel="self" type="application/rss+xml" /><item>
     <title>Howto</title>
-    <link>http://localhost:1313/categories/howto/</link>
-    <pubDate>Thu, 22 May 2025 13:02:36 &#43;0200</pubDate>
+    <link>https://jorgeortiz.dev/categories/howto/</link>
+    <pubDate>Mon, 26 May 2025 00:00:00 &#43;0000</pubDate>
     <author>Jorge Ortiz-Fuentes</author>
-    <guid>http://localhost:1313/categories/howto/</guid>
+    <guid>https://jorgeortiz.dev/categories/howto/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

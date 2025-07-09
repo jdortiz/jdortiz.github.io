@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
+        <link>https://jorgeortiz.dev/tags/test/</link>
+        <description>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 07 Jul 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing test types</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</link>
+    <pubDate>Mon, 07 Jul 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+So you have finally learned Rust and are writing cool projects with it?  Awesome!  However, as soon as your project
+starts being useful and solving some actual use cases, you realize that the quality of your code is important.  Not only
+that.  The larger and more complex your project becomes, the harder it is to manually test every bit of functionality
+after a change.</p>
+<p>
+Your first temptation might be: &#34;Why should I test everything if my changes only affect this small part of the program?&#34;
+And, while in some situations that might be true, more often than not our changes affect unexpected parts of our
+program.</p>]]></description>
+</item>
+</channel>
+</rss>

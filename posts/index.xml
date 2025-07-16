@@ -4,6 +4,24 @@
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 10 Jul 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: simplify your tests</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</link>
+    <pubDate>Thu, 10 Jul 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+Now that we understand the building blocks for writing unit tests in Rust, you probably feel the urge to apply that
+knowledge and fully cover your application with tests.  Don&#39;t you?  Well, I would ask you to hold your horses and apply
+it gradually. We still have a lot of ground to cover, but the next sections are probably going to simplify your life
+right away.</p>
+<p>
+Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
+incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
+<a href="https://jorgeortiz.dev/">social media accounts</a>.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: test types</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</link>
     <pubDate>Mon, 07 Jul 2025 00:00:00 &#43;0000</pubDate>

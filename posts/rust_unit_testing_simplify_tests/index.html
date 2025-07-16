@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rust unit testing: simplify your tests - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Jewel polishing"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Rust unit testing: simplify your tests">
+  <meta property="og:description" content="Jewel polishing">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-10T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Test">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Rust unit testing: simplify your tests">
+  <meta name="twitter:description" content="Jewel polishing">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_types/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rust unit testing: simplify your tests",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2488 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/","datePublished": "2025-07-15T00:00:00+00:00","dateModified": "2025-07-10T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Jewel polishing"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: simplify your tests</h1><h2 class="single-subtitle">Make your tests more robust and maintainable</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-07-15">2025-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2488 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_simplify_tests/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_simplify_tests/header-image.jpg, /posts/rust_unit_testing_simplify_tests/header-image.jpg 1.5x, /posts/rust_unit_testing_simplify_tests/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_simplify_tests/header-image.jpg"
+        title="Jewel polishing" width="1280" height="850" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Reorganize Testing Code</a>
+<ul>
+<li><a href="#headline-2">Constants to the rescue</a>
+</li>
+<li><a href="#headline-3">Reuse initialization manually</a>
+</li>
+<li><a href="#headline-4">Reuse initialization with a crate</a>
+</li>
+<li><a href="#headline-5">Reusing fixtures</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">Final code</a>
+</li>
+<li><a href="#headline-7">Summary</a>
+</li>
+<li><a href="#headline-8">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+Now that we understand the building blocks for writing unit tests in Rust, you probably feel the urge to apply that
+knowledge and fully cover your application with tests.  Don&#39;t you?  Well, I would ask you to hold your horses and apply
+it gradually. We still have a lot of ground to cover, but the next sections are probably going to simplify your life
+right away.</p>
+<p>
+Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
+incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
+<a href="https://jorgeortiz.dev/">social media accounts</a>.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Reorganize Testing Code
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>There is a concept behind all of the things that I am going to cover in the next few lines: refactoring.  Refactoring is
+changing the code with some purpose while keeping exactly the same functionality.  When we want to refactor our
+production code, we use the tests to verify that its functionality hasn&#39;t changed: we introduce the changes and check
+that the tests still pass.  In this case, we are going to refactor our tests and, since we don&#39;t have tests to verify
+our tests, we are going to be extra-careful with the changes and assume that if they still pass, they do their job.</p>
+<img src="tests_of_tests_inception.webp" alt="Inception totem: do you test the tests?" title="Tests of tests: inception"/>
+<p>
+Code organization is a very personal matter.  If you have been doing this for a while you know how obvious it is to
+write your code in a certain way… to you.  Other people will prefer to do things differently and rightfully so.  But
+the same problem applies to formatting your code properly and we still have linters.  There are a set of rules that most
+developers of a language agree upon.  In the case of the tests, I would claim that robustness, i.e., lack of fragility,
+and avoiding repetition are common goals for all of us.</p>
+<p>
+In any case, the quality of the testing code is as important as that of the production code.  We have to work with it as
+much as with the rest of the code and we want our tests to be readable and maintainable.  Keep them clean and tidy.</p>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Constants to the rescue
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>Let&#39;s start with robustness.  We want to write tests that we can trust both when they pass and when they fail.  If I
+write a test and I have to spend some non-trivial amount of time to understand why it ain&#39;t passing, only to find out
+that it was a problem with some typo that I introduced in a string of the test, that is not very productive.</p>
+<p>
+But we can do better; we can minimize the chances that a typo spoils the tests.  If you take a look at the latest
+version of the code in the last article, you will see that some strings appear several times.  You may be the most
+accurate typist of the world.  I simply am not.  I don&#39;t have ten thumbs, but I do make mistakes more often than I would
+like to admit.</p>
+<p>
+Could I reduce the number of times I have to type/fix each one of those strings?  Yes, I could if I use constants.
+Then, if I make a typo with the name of my constants, the compiler will let me know right away that the constant names
+don&#39;t match and I won&#39;t spend valuable time on trying to find which of the different instances of my string is wrong.
+This is much better than using different strings with the same value.</p>
+<p>
+Let&#39;s apply this to the existing code.  We can start by defining constants for the first and last name.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">PRIMARY_FIRST_NAME</span>: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lex&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">PRIMARY_LAST_NAME</span>: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Luthor&#34;</span>;</span></span></code></pre></div>
+</div>
+<p>
+Then, another one for the full name.  Let me remind you what I said on the previous article: favor literals over
+expressions (like <code>const fn</code>) to define your constants, because if the test fails you will have to spend time figuring
+out if the wrong value comes from the code that you want to test or from the one that you use to define the constant.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">PRIMARY_FULL_NAME</span>: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lex Luthor&#34;</span>;</span></span></code></pre></div>
+</div>
+<p>
+Regarding the names of these constants, I prefer to start with their role (primary or secondary) and then their purpose
+(first name, last name, full name …).  That way, I can use the auto-completion feature of my editor to find the one I
+am looking for and avoid typing the long name or introduce typos.  But if you want to reverse them, it would also be
+fine as long as you are consistent with your naming.  You do you.</p>
+<p>
+Replace the newly defined constants in <strong>all</strong> the tests.  You will have finished this refactoring step only when you run
+the tests with the changes and they all pass again.</p>
+<p>
+When you are done, the strings &#34;Lex&#34;, &#34;Luthor&#34;, and &#34;Lex Luthor&#34; will be defined in just one place of your code.  Should
+you have made a mistake when typing any of them, you can fix that editing this only instance.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_returns_first_name_space_last_name</span>() {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain {
+</span></span><span style="display:flex;"><span>          first_name: <span style="color:#a6e22e">PRIMARY_FIRST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>          last_name: <span style="color:#a6e22e">PRIMARY_LAST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>      };
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> sut.full_name();
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#66d9ef">PRIMARY_FULL_NAME</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//...
+</span></span></span></code></pre></div>
+</div>
+<p>You can and should do the same for the secondary values (<code>SECONDARY_FIRST_NAME</code>, <code>SECONDARY_LAST_NAME</code>, and
+<code>SECONDARY_FULL_NAME</code>).</p>
+<p>
+Breathe in.  Smell your code.  Don&#39;t you notice that it is much better now? Good job! 😄</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Reuse initialization manually
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>Throughout the tests we have created several instances of the supervillain, most of them using the exact same code.
+As Master Yoda used to say: &#34;Repetition leads to anger, anger leads to error, error leads to broken tests&#34; (or something
+similar.)  This kind of repetition is something we could simplify by having the initialization code shared by all the tests before
+they get run.  In other languages that have object oriented capabilities, we would use a type (most often a class or
+struct) to act as a test suite, its fields or properties to refer to the shared data, and make use of a couple of
+predefined methods (most often <em>setUp</em> and <em>tearDown</em>) to put the code that needs to be run before and after each test.</p>
+<p>
+However, this is not the way tests are organized in Rust.  A test in Rust is a top-level function annotated with the
+test attribute.  They aren&#39;t methods of a <code class="verbatim">struct</code> or share state.  And, although you can use a crate like <a href="https://crates.io/crates/suitest">suitest</a> that
+adheres to that structure, here I am going to start with plain Rust code.</p>
+<p>
+What we want to achieve is sharing the initialization of the type instances.  A first approach would be to define a
+static variable in the module and initialize it lazily with <a href="https://github.com/matklad/once_cell">once_cell</a>.  But a much simpler option is to use function
+composition to get our instances passed to each test.</p>
+<img src="recycle_bin.jpg" alt="Recycle bin" title="Recycle bin"/>
+<p>
+Let&#39;s start by defining a <code class="verbatim">struct</code> at the bottom of the <code class="verbatim">tests</code> module to hold the non-<code class="verbatim">Copy</code> instances that are used in
+most/all tests.  In our code, that is just the <em>sut</em>, i.e., the <code class="verbatim">Supervillain</code> instance.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Context</span> {
+</span></span><span style="display:flex;"><span>      sut: <span style="color:#a6e22e">Supervillain</span>,
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+</div>
+<p>
+Add an implementation block that defines <code>set_up()</code>, where we create the instance of the <code class="verbatim">Supervillain</code>, and
+<code>teardown()</code>, that, for the moment, we leave empty.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Context {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">setup</span>() -&gt; <span style="color:#a6e22e">Context</span> {
+</span></span><span style="display:flex;"><span>          Context {
+</span></span><span style="display:flex;"><span>              sut: <span style="color:#a6e22e">Supervillain</span> {
+</span></span><span style="display:flex;"><span>                  first_name: <span style="color:#a6e22e">PRIMARY_FIRST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>                  last_name: <span style="color:#a6e22e">PRIMARY_LAST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>              },
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">teardown</span>(self) {}
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+</div>
+<p>
+We need an instance of this passed to each test, however tests don&#39;t take any arguments.  So how can we do that?  Well,
+we are going to use an auxiliary function to run the tests with this context instance.  This function will perform the
+following tasks:</p>
+<ol>
+<li>It will take the actual test as a parameter.  We will pass a closure to the function with the code that we want to
+run in the test.  That closure will accept a single parameter, a mutable reference to the context that contains the
+things that the test needs.</li>
+<li>Now in the function, it creates that instance of the context using the associated function <code>setup()</code> that we had
+defined above.  Then, it executes the closure passing it the instance of the context.  Finally, it executes the
+<code>teardown()</code> method to clean up, if needed.</li>
+<li>That would be enough if the mechanism for triggering a failure within a test wasn&#39;t a panic.  But if the test fails,
+a panic occurs within the closure and the invocation of <code>teardown()</code> will not be executed.  So we need to have a way
+to catch the panic when it happens, perform the cleanup, and let the panic finish its process.  We can use,
+std::panic::catch_unwind to execute the closure.  This requires that the closure is <code class="verbatim">UnwindSafe</code> and, just in case,
+we wrap the context in an <code>AssertUnwindSafe</code>.</li>
+</ol>
+<p>This is the code for the function:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">run_test</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(tst: <span style="color:#a6e22e">T</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">where</span>
+</span></span><span style="display:flex;"><span>      T: FnOnce(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> Context) -&gt; () <span style="color:#f92672">+</span> panic::UnwindSafe,
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> ctx <span style="color:#f92672">=</span> Context::setup();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> wrapper <span style="color:#f92672">=</span> panic::AssertUnwindSafe(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> ctx);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> panic::catch_unwind(<span style="color:#66d9ef">move</span> <span style="color:#f92672">||</span> tst(<span style="color:#f92672">*</span>wrapper));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      ctx.teardown();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Err(err) <span style="color:#f92672">=</span> result {
+</span></span><span style="display:flex;"><span>          std::panic::resume_unwind(err);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+</div>
+<p>
+We can use that function in each of the tests.  In the code of the repo, I haven&#39;t used it for the test of the <code class="verbatim">From</code>
+trait, because it doesn&#39;t need a previously existing <em>sut</em>, but one created with its associated function.  This is just
+one of the test using this shared initialization.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_returns_first_name_space_last_name</span>() {
+</span></span><span style="display:flex;"><span>      run_test(<span style="color:#f92672">|</span>ctx<span style="color:#f92672">|</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> ctx.sut.full_name();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#66d9ef">PRIMARY_FULL_NAME</span>);
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Reuse initialization with a crate
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>This code is so useful that there is a crate that does that, and some more. Its name is <code class="verbatim">test-context</code> and we can use it in
+our code and reduce the boilerplate code.  This change would be particularly significant if we had more than one <code class="verbatim">tests</code>
+module.</p>
+<p>
+First, we have to add it as a dependency, but only for the tests.  We don&#39;t need it for the production code.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo add --dev test-context</span></span></code></pre></div>
+</div>
+<p>
+The crate doesn&#39;t define the <code class="verbatim">Context</code> <code class="verbatim">struct</code> because it will be different for every <code class="verbatim">tests</code> module, yet it defines the
+<code class="verbatim">TestContext</code> trait that has to be implemented for the struct that will hold the common data.  This trait contains an
+associated function <code>setup()</code> and method <code>teardown()</code><sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  So we replace the default implementation block of <code class="verbatim">Context</code> with
+the implementation of the <code class="verbatim">TestContext</code> trait containing the same code.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> TestContext <span style="color:#66d9ef">for</span> Context {</span></span></code></pre></div>
+</div>
+<p>
+The crate allows us to create tests that receive our <code>struct Context</code> as an argument.  We have to add this argument to
+each of the tests that use it and remove the usage of the auxiliary function.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_returns_first_name_space_last_name</span>(ctx: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Context) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> ctx.sut.full_name();
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#66d9ef">PRIMARY_FULL_NAME</span>);
+</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+</div>
+<p>
+The magic of having tests that receive that <code>ctx</code> argument needs some help to take place.  We have to precede each of
+the tests that need this data with the following macro and keep the existing <code>#[test]</code> one.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test_context(Context)]</span> <span style="color:#75715e">// This is new
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">#[test]</span> <span style="color:#75715e">// Already existing
+</span></span></span></code></pre></div>
+</div>
+<p>
+Finally, delete the auxiliary function and run the tests again. They should pass.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Reusing fixtures
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>The data that we use to create tests may be used in more than one <code class="verbatim">tests</code> module.  It so happens if we define auxiliary
+functions for the tests that we may want to reuse.  Since we have already stated our intent to avoid repetition, it would be
+useful to have a way to share those values.  Rust&#39;s module system comes to the rescue here.</p>
+<img src="fixture_stamps.jpg" alt="Office stamps" title="Stamps"/>
+<p>
+We are going to create a new file to hold the data and functions that we want to share.  Let&#39;s call it <code class="verbatim">test_common.rs</code>.
+We can copy the constants to this new file and make them public.</p>
+<p>
+We don&#39;t want this file to produce any production code.  We just want it for the tests, so when we import it in the main
+file (<code class="verbatim">main.rs</code>), we use the conditional compilation attribute, to get it compiled <strong>only for tests</strong>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">mod</span> test_common;</span></span></code></pre></div>
+</div>
+<p>
+We can now use this module from any of the <code class="verbatim">tests</code> modules by importing it into their namespaces.  So far, we have just
+created a single <code class="verbatim">tests</code> module, so we add it there.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">crate</span>::test_common;</span></span></code></pre></div>
+</div>
+<p>
+We use the shared constants qualifying their usage with the name of the module.  For example, instead of writing this:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#66d9ef">PRIMARY_FULL_NAME</span>);</span></span></code></pre></div>
+</div>
+<p>we have to write this:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(full_name, test_common::<span style="color:#66d9ef">PRIMARY_FULL_NAME</span>);</span></span></code></pre></div>
+</div>
+<p>
+Once we have done this for each of the constants, we can remove them from the <code class="verbatim">tests</code> module and stay with the shared
+ones.  Running the tests again should bring you happiness and calm. 😎</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Final code
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>This is the final version –for this article– of the <code class="verbatim">supervillain</code> file.  You can also find the repo with all the
+incremental commits of the code in this series <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Supervillain</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> first_name: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> last_name: String,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">trait</span> Megaweapon {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> Supervillain {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name</span>(<span style="color:#f92672">&amp;</span>self) -&gt; String {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, self.first_name, self.last_name)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        self.first_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">0</span>].to_string();
+</span></span><span style="display:flex;"><span>        self.last_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">1</span>].to_string();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span>self, weapon: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">impl</span> Megaweapon) {
+</span></span><span style="display:flex;"><span>        weapon.shoot();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> From<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> Supervillain {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; <span style="color:#a6e22e">Self</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Supervillain {
+</span></span><span style="display:flex;"><span>            first_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">0</span>].to_string(),
+</span></span><span style="display:flex;"><span>            last_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">1</span>].to_string(),
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mod</span> tests {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> std::cell::RefCell;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> test_context::{TestContext, test_context};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">crate</span>::test_common;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test_context(Context)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_is_first_name_space_last_name</span>(ctx: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Context) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> ctx.sut.full_name();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(
+</span></span><span style="display:flex;"><span>            full_name,
+</span></span><span style="display:flex;"><span>            test_common::<span style="color:#66d9ef">PRIMARY_FULL_NAME</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;Unexpected full name&#34;</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test_context(Context)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name_sets_first_and_last_names</span>(ctx: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Context) {
+</span></span><span style="display:flex;"><span>        ctx.sut.set_full_name(test_common::<span style="color:#66d9ef">SECONDARY_FULL_NAME</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(ctx.sut.first_name, test_common::<span style="color:#66d9ef">SECONDARY_FIRST_NAME</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(ctx.sut.last_name, test_common::<span style="color:#66d9ef">SECONDARY_LAST_NAME</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from_str_slice_produces_supervillain_full_with_first_and_last_name</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain::from(test_common::<span style="color:#66d9ef">SECONDARY_FULL_NAME</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(sut.first_name, test_common::<span style="color:#66d9ef">SECONDARY_FIRST_NAME</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(sut.last_name, test_common::<span style="color:#66d9ef">SECONDARY_LAST_NAME</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test_context(Context)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack_shoots_weapon</span>(ctx: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Context) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> weapon <span style="color:#f92672">=</span> WeaponDouble::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ctx.sut.attack(<span style="color:#f92672">&amp;</span>weapon);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert!</span>(<span style="color:#f92672">*</span>weapon.is_shot.borrow());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WeaponDouble</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pub</span> is_shot: <span style="color:#a6e22e">RefCell</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> WeaponDouble {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">WeaponDouble</span> {
+</span></span><span style="display:flex;"><span>            WeaponDouble {
+</span></span><span style="display:flex;"><span>                is_shot: <span style="color:#a6e22e">RefCell</span>::new(<span style="color:#66d9ef">false</span>),
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> Megaweapon <span style="color:#66d9ef">for</span> WeaponDouble {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self) {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">*</span>self.is_shot.borrow_mut() <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Context</span> {
+</span></span><span style="display:flex;"><span>        sut: <span style="color:#a6e22e">Supervillain</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> TestContext <span style="color:#66d9ef">for</span> Context {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">setup</span>() -&gt; <span style="color:#a6e22e">Context</span> {
+</span></span><span style="display:flex;"><span>            Context {
+</span></span><span style="display:flex;"><span>                sut: <span style="color:#a6e22e">Supervillain</span> {
+</span></span><span style="display:flex;"><span>                    first_name: <span style="color:#a6e22e">test_common</span>::<span style="color:#66d9ef">PRIMARY_FIRST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>                    last_name: <span style="color:#a6e22e">test_common</span>::<span style="color:#66d9ef">PRIMARY_LAST_NAME</span>.to_string(),
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">teardown</span>(self) {}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Summary
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<p>In this article, I have shown some ways of improving the basic tests that we created in the previous one.  I have shared
+three basic techniques to reduce repetition and increase robustness, that we will be using again in future tests.</p>
+<p>
+You should feel confident with the basics now and to prove yourself you can do some exercises adding production code and
+tests to our program.  Maybe the dark side will reward you for this.</p>
+<p>
+If you run out of ideas on what to test, here are some suggestions:</p>
+<ol>
+<li>Return test: Implement Display trait and test it.</li>
+<li>Implement a method that stores first and last name properly capitalized and test it.</li>
+<li>Change the attack method to receive several weapons but fire only the first one.  Test it.</li>
+</ol>
+<p>Get ready, because my next article is about testing the not so happy path.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>Does this sound familiar? Yep, exactly what we had in our implementation of <code class="verbatim">Context</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-07-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/" data-title="Rust unit testing: simplify your tests" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/" data-title="Rust unit testing: simplify your tests" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_test_types/" class="prev" rel="prev" title="Rust unit testing: test types"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: test types</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.147.8">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

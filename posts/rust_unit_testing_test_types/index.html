@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-07-09T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-07-10T08:27:51+02:00">
+    <meta property="article:modified_time" content="2025-07-16T14:02:25+02:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
@@ -34,7 +34,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_types\/"
         },"genre": "posts","keywords": "rust, test","wordcount":  4575 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_types\/","datePublished": "2025-07-09T00:00:00+00:00","dateModified": "2025-07-10T08:27:51+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_types\/","datePublished": "2025-07-09T00:00:00+00:00","dateModified": "2025-07-16T14:02:25+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -229,7 +229,7 @@ Project creation
 be very profitable, so we are going to devote our new project to evil plans to rule the world.  I have chosen the name
 of the project accordingly and I hope that you like it.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo new detestable-me</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo new detestable-me</span></span></code></pre></div>
 </div>
 <img src="detestable-me.jpg" alt="Detestable me" title="Detestable me"/>
 </div>
@@ -250,7 +250,7 @@ Writing our first type
 <p>We are going to start by creating of a type, named &#34;Supervillain&#34; in its own Rust module, that will be placed in its own
 (new) file called <code class="verbatim">supervillain.rs</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Supervillain</span> {}</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">Supervillain</span><span style="color:#fff"> </span><span style="color:#1f2328">{}</span></span></span></code></pre></div>
 </div>
 <blockquote>
 <p>In case of doubt, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom of this article.</p>
@@ -258,7 +258,7 @@ Writing our first type
 <p>But, as you already know, that module won&#39;t be included in the compilation of this project unless we include it at the
 beginning of <code class="verbatim">main.rs</code>:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">mod</span> supervillain;</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">mod</span> <span style="color:#24292e">supervillain</span><span style="color:#1f2328">;</span></span></span></code></pre></div>
 </div>
 <p>
 There is not much to test yet, so let&#39;s add a public string property for the first name of the supervillain and
@@ -266,18 +266,18 @@ reconsider.  Should we test that property? No!  Setting and getting the value of
 provided by the language.  We haven&#39;t added any functionality, so there is nothing to test yet.  The same happens when we
 add a second property for the last name.  No test either.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> first_name: String,
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> last_name: String,</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>first_name: <span style="color:#6639ba">String</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>last_name: <span style="color:#6639ba">String</span><span style="color:#1f2328">,</span></span></span></code></pre></div>
 </div>
 <p>
 Let&#39;s add some actual functionality in an implementation block and define a method to return the full name of the
 supervillain<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  That, we can test.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Supervillain {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name</span>(<span style="color:#f92672">&amp;</span>self) -&gt; String {
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, self.first_name, self.last_name)
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">full_name</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">String</span> <span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#6639ba">format!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">{}</span><span style="color:#0a3069"> </span><span style="color:#0a3069">{}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -289,19 +289,19 @@ Define a (sub)module for tests
 <p>The first step for having tests is to create a submodule for them and we put it in the same file that contains the
 <code class="verbatim">Supervillain</code>:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">mod</span> tests {}</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">mod</span> <span style="color:#24292e">tests</span><span style="color:#fff"> </span><span style="color:#1f2328">{}</span></span></span></code></pre></div>
 </div>
 <p>But we don&#39;t want this to be part of the production code when it gets released and deployed.  Rather, we would like the
 compiler to include this module only for the tests, so we let it know that by using the conditional compilation
 attribute preceding the module declaration:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[cfg(test)]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">#[cfg(test)]</span></span></span></code></pre></div>
 </div>
 <p>This newly created submodule is where we are going to put our tests for the supervillain and we will need access from
 within it to the public interface of the module that we are testing.  We obtain access to the public methods of the
 <code class="verbatim">supervillain</code> module by importing the main code of this file into the namespace of the tests module.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">use</span><span style="color:#fff"> </span><span style="color:#cf222e">super</span>::<span style="color:#0550ae">*</span><span style="color:#1f2328">;</span></span></span></code></pre></div>
 </div>
 <p>Ok! The groundwork is done. But before we start writing our tests, let&#39;s add some tools to our toolbox.</p>
 </div>
@@ -323,18 +323,18 @@ Select <code class="verbatim">Help =&gt; Show all commands</code> (or Shift-Comm
 VS Code will open a file named <code class="verbatim">rust.json</code>, containing comments that explain how to create a snippet.  First, we will
 add a snippet for creating the test module, as we just did manually.</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  { <span style="color:#75715e">// Already exising curly brackets
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#f92672">&#34;Test modules&#34;</span>: {
-</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;tmod&#34;</span>,
-</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;body&#34;</span>: [
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;#[cfg(test)]&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;mod tests {&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;$0&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;}&#34;</span>
-</span></span><span style="display:flex;"><span>		],
-</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Module for tests&#34;</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#57606a">// Already exising curly brackets
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>	<span style="color:#0550ae">&#34;Test modules&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#0550ae">&#34;prefix&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;tmod&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#0550ae">&#34;body&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;#[cfg(test)]&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;mod tests {&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;$0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Module for tests&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 And then one for creating new tests. In this second snippet, we will have comments to make the structure of the test
@@ -342,21 +342,21 @@ explicit with a comment for each the three parts.  Some people like to refer to 
 <em>then</em>, but I feel more comfortable remembering the AAA: (1) <em>arrange</em>, (2) act, (3) assert.  Feel free to change it to
 use the one that resonates better with you.</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  { <span style="color:#75715e">// Already exising curly brackets
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#f92672">&#34;Test function with comments&#34;</span>: {
-</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;tfnwc&#34;</span>,
-</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;body&#34;</span>: [
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;#[test]&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;fn ${1:test_name} {&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;// Arrange&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;$0&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;// Act&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;// Assert&#34;</span>,
-</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;}&#34;</span>
-</span></span><span style="display:flex;"><span>		],
-</span></span><span style="display:flex;"><span>        	<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Template for tests with comments for the different parts&#34;</span>
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#57606a">// Already exising curly brackets
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>	<span style="color:#0550ae">&#34;Test function with comments&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#0550ae">&#34;prefix&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;tfnwc&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#0550ae">&#34;body&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;#[test]&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;fn ${1:test_name} {&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;// Arrange&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;$0&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;// Act&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;// Assert&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#0a3069">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>        	<span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Template for tests with comments for the different parts&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -384,12 +384,12 @@ re-read your tests when they don&#39;t pass. 😄</p>
 <p>
 This is the skeleton of our first test:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_is_first_name_space_last_name</span>() {
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">full_name_is_first_name_space_last_name</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>The <code class="verbatim">#[test]</code> attribute allows Rust test runner to identify this function as a test and run it when told to do so.</p>
 <p>
@@ -401,45 +401,45 @@ In this case, we want to create an instance of the supervillain, which we will c
 name, but there is a long tradition of using that name to refer to the <em>System Under Test</em>.  This is all that we need to
 arrange for this first test.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>      first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>      last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>  };</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">};</span></span></span></code></pre></div>
 </div>
 <p>
 In the &#34;act&#34; stage, we want to exercise the function/method that we want to test.  This is the <code class="verbatim">full_name()</code> method and
 we store the <em>return value</em> from that function in a(n immutable) variable.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> sut.full_name();</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>full_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>sut<span style="color:#1f2328">.</span>full_name<span style="color:#1f2328">();</span></span></span></code></pre></div>
 </div>
 <p>
 Finally, in the assert stage, we declare our expectations.  We use the <code class="verbatim">assert_eq!</code> macro to state that the return value
 should be equal to &#34;Lex Luthor&#34;.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#e6db74">&#34;Lex Luthor&#34;</span>);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>full_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Lex Luthor&#34;</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>I would like to highlight the importance of using a literal for the expected value rather than computing it.  Even
 though it would be possible to use the following assertion instead of the previous one, it wouldn&#39;t be a good idea
 because, in case it fails, we would have a hard time figuring out if the problem took place in the method being tested
 or in the expression that we used to obtain the expected value.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">// Don&#39;t do this
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, sut.first_name, sut.last_name));</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">// Don&#39;t do this
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">  </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>full_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6639ba">format!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">{}</span><span style="color:#0a3069"> </span><span style="color:#0a3069">{}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>sut<span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span>sut<span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">));</span></span></span></code></pre></div>
 </div>
 <p>
 Our first test is ready.  Let&#39;s try it.  We use cargo for that.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo test</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo test</span></span></code></pre></div>
 </div>
 <p>You can always turn it up a notch by adding a spoken message with the result.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo test <span style="color:#f92672">&amp;&amp;</span> say <span style="color:#e6db74">&#34;Tests passed&#34;</span> <span style="color:#f92672">||</span> say <span style="color:#e6db74">&#34;Tests failed&#34;</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  cargo <span style="color:#6639ba">test</span> <span style="color:#0550ae">&amp;&amp;</span> say <span style="color:#0a3069">&#34;Tests passed&#34;</span> <span style="color:#0550ae">||</span> say <span style="color:#0a3069">&#34;Tests failed&#34;</span></span></span></code></pre></div>
 </div>
 <p>
 A test ain&#39;t good until you have seen it fail.  For the sake of completeness, let&#39;s make it fail by removing the space
 between first and last name in the <code class="verbatim">format!</code> expression of the method and run it again.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}{}</span><span style="color:#e6db74">&#34;</span>, self.first_name, self.last_name)</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">format!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">{}{}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">)</span></span></span></code></pre></div>
 </div>
 <p>You should get a me</p>
 <pre class="example">
@@ -467,7 +467,7 @@ error: test failed, to rerun pass `--bin detestable-me`
 <p>
 Although the message is pretty clear in this case, we can make it more explicit by adding information to the assertion.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#e6db74">&#34;Lex Luthor&#34;</span>, <span style="color:#e6db74">&#34;Unexpected full name&#34;</span>);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>full_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Lex Luthor&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Unexpected full name&#34;</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>
 Running it again produces the following output, that contains the additional information:</p>
@@ -520,40 +520,40 @@ names.  We are going to start with a not very robust implementation that would n
 full name contains two words separated by one space.  It is far from perfect, but it will do for writing the
 corresponding test.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
-</span></span><span style="display:flex;"><span>      self.first_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">0</span>].to_string();
-</span></span><span style="display:flex;"><span>      self.last_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">1</span>].to_string();
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">set_full_name</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>name: <span style="color:#cf222e">&amp;</span><span style="color:#cf222e">str</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>components<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>name<span style="color:#1f2328">.</span>split<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34; &#34;</span><span style="color:#1f2328">).</span>collect::<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>_<span style="color:#0550ae">&gt;&gt;</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>first_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>components<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>last_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>components<span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 Let&#39;s write the test step by step again. We create the scaffold for the test using a meaningful name.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name_sets_first_and_last_names</span>() {
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">set_full_name_sets_first_and_last_names</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>In the arrange stage, we create an instance of <code class="verbatim">Supervillain</code>.  The same one we were using for our previous test, only
 this time we make it mutable so we can change its state.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>      first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>      last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>  };</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">};</span></span></span></code></pre></div>
 </div>
 <p>The act part is as simple as invoking the new method with a new supervillain name.  &#34;Darth Vader&#34; in this case.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  sut.set_full_name(<span style="color:#e6db74">&#34;Darth Vader&#34;</span>);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span>sut<span style="color:#1f2328">.</span>set_full_name<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Darth Vader&#34;</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>And then, the assert stage must state the expected value for the <strong>two</strong> fields of the instance.  While in general, it is
 a bad idea to make more than one assertion per test, there are exceptions to that.  In this case, since both assertions
 point to the same part of the code, it is ok to use more than one,</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(sut.first_name, <span style="color:#e6db74">&#34;Darth&#34;</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assert_eq!</span>(sut.last_name, <span style="color:#e6db74">&#34;Vader&#34;</span>);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Darth&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Vader&#34;</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>If we run the tests again, we will get the two tests passing.  Hooray!</p>
 </div>
@@ -568,49 +568,49 @@ isn&#39;t very idiomatic.  A more common way to implement the same or similar fu
 (<code>fn new(name: &amp;str) -&gt; Option&lt;Supervillain&gt;</code>) or an implementation of the <code class="verbatim">TryFrom</code> trait, but those need dealing with
 optionals or error handling and I don&#39;t want to go there yet.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> TryFrom<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> Supervillain {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Error</span> <span style="color:#f92672">=</span> anyhow::Error;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">try_from</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>Self, Self::Error<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> components.len() <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> {
-</span></span><span style="display:flex;"><span>              Ok(Supervillain {
-</span></span><span style="display:flex;"><span>                  first_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">0</span>].to_string(),
-</span></span><span style="display:flex;"><span>                  last_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">1</span>].to_string(),
-</span></span><span style="display:flex;"><span>              })
-</span></span><span style="display:flex;"><span>          } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>              Err(<span style="color:#a6e22e">anyhow!</span>(<span style="color:#e6db74">&#34;String must contain first and last name.&#34;</span>))
-</span></span><span style="display:flex;"><span>          }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>TryFrom<span style="color:#0550ae">&lt;&amp;</span><span style="color:#cf222e">str</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">type</span> <span style="color:#1f2328">Error</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>anyhow::Error<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">try_from</span><span style="color:#1f2328">(</span>name: <span style="color:#cf222e">&amp;</span><span style="color:#cf222e">str</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">Result</span><span style="color:#0550ae">&lt;</span><span style="color:#6a737d">Self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">Self</span>::Error<span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>components<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>name<span style="color:#1f2328">.</span>split<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34; &#34;</span><span style="color:#1f2328">).</span>collect::<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>_<span style="color:#0550ae">&gt;&gt;</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span>components<span style="color:#1f2328">.</span>len<span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">==</span><span style="color:#fff"> </span><span style="color:#0550ae">2</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span><span style="color:#6639ba">Ok</span><span style="color:#1f2328">(</span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                  </span>first_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                  </span>last_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span><span style="color:#1f2328">})</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#1f2328">}</span><span style="color:#fff"> </span><span style="color:#cf222e">else</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span><span style="color:#6639ba">Err</span><span style="color:#1f2328">(</span><span style="color:#6639ba">anyhow!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;String must contain first and last name.&#34;</span><span style="color:#1f2328">))</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 A middle ground option is to use an associated function without error handling or an implementation of the From trait.
 Let&#39;s implement the later, although that would be testing return instead of state:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> From<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> Supervillain {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; <span style="color:#a6e22e">Self</span> {
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
-</span></span><span style="display:flex;"><span>          Supervillain {
-</span></span><span style="display:flex;"><span>              first_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">0</span>].to_string(),
-</span></span><span style="display:flex;"><span>              last_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">1</span>].to_string(),
-</span></span><span style="display:flex;"><span>          }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#[cfg(test)]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">mod</span> tests {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from_str_slice_produces_supervillain_full_with_first_and_last_name</span>() {
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain::from(<span style="color:#e6db74">&#34;Darth Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#a6e22e">assert_eq!</span>(sut.first_name, <span style="color:#e6db74">&#34;Darth&#34;</span>);
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">assert_eq!</span>(sut.last_name, <span style="color:#e6db74">&#34;Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span><span style="color:#6639ba">From</span><span style="color:#0550ae">&lt;&amp;</span><span style="color:#cf222e">str</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">from</span><span style="color:#1f2328">(</span>name: <span style="color:#cf222e">&amp;</span><span style="color:#cf222e">str</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">Self</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>components<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>name<span style="color:#1f2328">.</span>split<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34; &#34;</span><span style="color:#1f2328">).</span>collect::<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>_<span style="color:#0550ae">&gt;&gt;</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span>first_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span>last_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">#[cfg(test)]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">mod</span> <span style="color:#24292e">tests</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">use</span><span style="color:#fff"> </span><span style="color:#cf222e">super</span>::<span style="color:#0550ae">*</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">          </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain::from<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Darth Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">          </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Darth&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 Notice that this new test doesn&#39;t have an arrange stage part.  There is nothing that needs to be arranged before testing
@@ -638,16 +638,16 @@ attacking and interacting with weapons and supervillains do the same with megawe
 Let&#39;s define what a megaweapon is with a trait.  It basically is anything that can be shot, so, it contains a single
 method, <code>shoot()</code>, that takes no parameters and returns nothing:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">trait</span> Megaweapon {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self);
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">trait</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 As for our supervillain, we add it a new method to provide them with the ability to attack.  The method takes a weapon as a parameter, and shoots the weapon:</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span>self, weapon: <span style="color:#a6e22e">impl</span> Megaweapon) {
-</span></span><span style="display:flex;"><span>      weapon.shoot();
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">attack</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>weapon: <span style="color:#1f2328">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>weapon<span style="color:#1f2328">.</span>shoot<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -661,19 +661,19 @@ Test behavior: Supervillain attacks using weapon
 What we want to test in this scenario is that when a supervillain attacks, they shoot the megaweapon.  As in the
 previous examples, let&#39;s start with the skeleton of the test.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack_shoots_weapon</span>() {
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">attack_shoots_weapon</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">      </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>The arrange part is quite straightforward: we create an instance of our <em>system under test</em>.  The same one we have used before.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>      first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>      last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>  };</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">};</span></span></span></code></pre></div>
 </div>
 <p>The act part isn&#39;t that obvious.  Yes, we want to use the <code>attack()</code> method of the <em>sut</em>, but that method requires
 something that implements the <code class="verbatim">Megaweapon</code> trait and we haven&#39;t defined any type that does that, yet.  Does this mean
@@ -685,20 +685,20 @@ Since this weapon is meant only for testing purposes, we are going to define the
 call it <code class="verbatim">WeaponDouble</code><sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.  The only important thing is that it must implement the <code class="verbatim">Megaweapon</code> trait.  We will take
 care of the details later.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WeaponDouble</span> {}
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Megaweapon <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self) {
-</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">todo!</span>()
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#6639ba">todo!</span><span style="color:#1f2328">()</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 With this new &#34;weapon&#34; available, we can take a step forward and create an instance in the arrange part and use it in
 the act part for attacking.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> weapon <span style="color:#f92672">=</span> WeaponDouble {};
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  sut.attack(weapon);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>weapon<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{};</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">  </span>sut<span style="color:#1f2328">.</span>attack<span style="color:#1f2328">(</span>weapon<span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>We are almost there.  We are only missing the assertion.  But, what should we assert?  Anything about the <em>sut</em>?
 Clearly not!  Let&#39;s take another look at the name of our test: <code class="verbatim">attack_shoots_weapon</code>.  It says it all.  When the <em>sut</em>
@@ -714,27 +714,27 @@ Back to code then. We add a field to the <code class="verbatim">WeaponDouble</co
 convenience, we add an associated function that creates a <code class="verbatim">WeaponDouble</code> setting its initial value to false.  And in the
 implementation of the <code class="verbatim">shoot()</code> method, we change it to true.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">pub</span> is_shot: <span style="color:#66d9ef">bool</span>,
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>          WeaponDouble { is_shot: <span style="color:#a6e22e">false</span> }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Megaweapon <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self) {
-</span></span><span style="display:flex;"><span>          self.is_shot <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>is_shot: <span style="color:#cf222e">bool</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">new</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff"> </span>is_shot: <span style="color:#1f2328">false</span><span style="color:#fff"> </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_shot<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>We can replace the creation of the weapon to use the associated function.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> weapon <span style="color:#f92672">=</span> WeaponDouble::new();</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>weapon<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>WeaponDouble::new<span style="color:#1f2328">();</span></span></span></code></pre></div>
 </div>
 <p>And finally assert that <code>shoot()</code> has been called.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#a6e22e">assert!</span>(weapon.is_shot);</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert!</span><span style="color:#1f2328">(</span>weapon<span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">);</span></span></span></code></pre></div>
 </div>
 <p>And… that would be it if we were using most other programming languages.</p>
 <p>
@@ -817,25 +817,25 @@ after being moved to the function/method.</li>
 <p>The first problem can be solved using <a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">interior mutability</a>, i.e., references with rules checked at run-time.  We can use
 a <code class="verbatim">RefCell</code> and borrow a reference with mutable access to it in the <code class="verbatim">shoot()</code> method.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">pub</span> is_shot: <span style="color:#a6e22e">RefCell</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>,
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>          WeaponDouble {
-</span></span><span style="display:flex;"><span>              is_shot: <span style="color:#a6e22e">RefCell</span>::new(<span style="color:#66d9ef">false</span>),
-</span></span><span style="display:flex;"><span>          }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Megaweapon <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self) {
-</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>self.is_shot.borrow_mut() <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>is_shot: <span style="color:#1f2328">RefCell</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">bool</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">new</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span>is_shot: <span style="color:#1f2328">RefCell</span>::new<span style="color:#1f2328">(</span><span style="color:#cf222e">false</span><span style="color:#1f2328">),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#0550ae">*</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow_mut<span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>After doing this, the reference to the weapon test double that we create doesn&#39;t have to be mutable.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> weapon <span style="color:#f92672">=</span> WeaponDouble::new();</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>weapon<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>WeaponDouble::new<span style="color:#1f2328">();</span></span></span></code></pre></div>
 </div>
 <p>
 The second one can be solved implementing the <code>Drop</code> trait that defines what to do before the instance of our
@@ -843,13 +843,13 @@ test double is released.  There we will check if it has been shot or panic other
 extreme, but this actually what an assert macro does when the assertion is not true.  It is a way to signal the test
 runner that this test didn&#39;t pass.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">impl</span> Drop <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">drop</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self) {
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span>self.is_shot.borrow() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">true</span> {
-</span></span><span style="display:flex;"><span>              <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;Failed to call shoot()&#34;</span>);
-</span></span><span style="display:flex;"><span>          }
-</span></span><span style="display:flex;"><span>      }
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span><span style="color:#6639ba">Drop</span><span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">drop</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow<span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">              </span><span style="color:#6639ba">panic!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Failed to call shoot()&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>By implementing the <code class="verbatim">Drop</code> trait, we can get rid of the assertion in this test, because it happens automatically when
 the weapon test double gets out of scope.
@@ -859,16 +859,16 @@ Still, if you own the design of the <code class="verbatim">Supervillain</code> i
 option for your problem at hand, it is always easier to make the API of the object testable.  We can make <code class="verbatim">attack()</code>
 take a shared reference to something that implements <code class="verbatim">Megaweapon</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span>self, weapon: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">impl</span> Megaweapon) {
-</span></span><span style="display:flex;"><span>      weapon.shoot();
-</span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">attack</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>weapon: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span>weapon<span style="color:#1f2328">.</span>shoot<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 <p>
 In this way, we can remove the implementation of the <code class="verbatim">Drop</code> trait and use a regular assertion.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> weapon <span style="color:#f92672">=</span> WeaponDouble::new();
-</span></span><span style="display:flex;"><span>  sut.attack(<span style="color:#f92672">&amp;</span>weapon);
-</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assert!</span>(<span style="color:#f92672">*</span>weapon.is_shot.borrow());</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>weapon<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>WeaponDouble::new<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>sut<span style="color:#1f2328">.</span>attack<span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>weapon<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#6639ba">assert!</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span>weapon<span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow<span style="color:#1f2328">());</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -884,120 +884,120 @@ Final code
 <p>This is the final version –for this article– of the <code class="verbatim">supervillain</code> file.  You can also find the repo with all the code
 in this series <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>  <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Supervillain</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> first_name: String,
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> last_name: String,
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">trait</span> Megaweapon {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> Supervillain {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name</span>(<span style="color:#f92672">&amp;</span>self) -&gt; String {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, self.first_name, self.last_name)
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
-</span></span><span style="display:flex;"><span>        self.first_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">0</span>].to_string();
-</span></span><span style="display:flex;"><span>        self.last_name <span style="color:#f92672">=</span> components[<span style="color:#ae81ff">1</span>].to_string();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span>self, weapon: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">impl</span> Megaweapon) {
-</span></span><span style="display:flex;"><span>        weapon.shoot();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> From<span style="color:#f92672">&lt;&amp;</span><span style="color:#66d9ef">str</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> Supervillain {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from</span>(name: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; <span style="color:#a6e22e">Self</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> components <span style="color:#f92672">=</span> name.split(<span style="color:#e6db74">&#34; &#34;</span>).collect::<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>_<span style="color:#f92672">&gt;&gt;</span>();
-</span></span><span style="display:flex;"><span>        Supervillain {
-</span></span><span style="display:flex;"><span>            first_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">0</span>].to_string(),
-</span></span><span style="display:flex;"><span>            last_name: <span style="color:#a6e22e">components</span>[<span style="color:#ae81ff">1</span>].to_string(),
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#[cfg(test)]</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">mod</span> tests {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> std::cell::RefCell;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#66d9ef">super</span>::<span style="color:#f92672">*</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">full_name_is_first_name_space_last_name</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>            first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>            last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> full_name <span style="color:#f92672">=</span> sut.full_name();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">assert_eq!</span>(full_name, <span style="color:#e6db74">&#34;Lex Luthor&#34;</span>, <span style="color:#e6db74">&#34;Unexpected full name&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">set_full_name_sets_first_and_last_names</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>            first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>            last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        sut.set_full_name(<span style="color:#e6db74">&#34;Darth Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">assert_eq!</span>(sut.first_name, <span style="color:#e6db74">&#34;Darth&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(sut.last_name, <span style="color:#e6db74">&#34;Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">from_str_slice_produces_supervillain_full_with_first_and_last_name</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain::from(<span style="color:#e6db74">&#34;Darth Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">assert_eq!</span>(sut.first_name, <span style="color:#e6db74">&#34;Darth&#34;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert_eq!</span>(sut.last_name, <span style="color:#e6db74">&#34;Vader&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#[test]</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">attack_shoots_weapon</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Arrange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> sut <span style="color:#f92672">=</span> Supervillain {
-</span></span><span style="display:flex;"><span>            first_name: <span style="color:#e6db74">&#34;Lex&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>            last_name: <span style="color:#e6db74">&#34;Luthor&#34;</span>.to_string(),
-</span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> weapon <span style="color:#f92672">=</span> WeaponDouble::new();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Act
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        sut.attack(<span style="color:#f92672">&amp;</span>weapon);
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Assert
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">assert!</span>(<span style="color:#f92672">*</span>weapon.is_shot.borrow());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pub</span> is_shot: <span style="color:#a6e22e">RefCell</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>,
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">WeaponDouble</span> {
-</span></span><span style="display:flex;"><span>            WeaponDouble {
-</span></span><span style="display:flex;"><span>                is_shot: <span style="color:#a6e22e">RefCell</span>::new(<span style="color:#66d9ef">false</span>),
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> Megaweapon <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">shoot</span>(<span style="color:#f92672">&amp;</span>self) {
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">*</span>self.is_shot.borrow_mut() <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">impl</span> Drop <span style="color:#66d9ef">for</span> WeaponDouble {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">drop</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span>self.is_shot.borrow() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">true</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">panic!</span>(<span style="color:#e6db74">&#34;Failed to call shoot()&#34;</span>);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">Supervillain</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>first_name: <span style="color:#6639ba">String</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>last_name: <span style="color:#6639ba">String</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">trait</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">full_name</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#6639ba">String</span> <span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">format!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;</span><span style="color:#0a3069">{}</span><span style="color:#0a3069"> </span><span style="color:#0a3069">{}</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">set_full_name</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>name: <span style="color:#cf222e">&amp;</span><span style="color:#cf222e">str</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>components<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>name<span style="color:#1f2328">.</span>split<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34; &#34;</span><span style="color:#1f2328">).</span>collect::<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>_<span style="color:#0550ae">&gt;&gt;</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>first_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>components<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>last_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>components<span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">attack</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span>weapon: <span style="color:#cf222e">&amp;</span><span style="color:#1f2328">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>weapon<span style="color:#1f2328">.</span>shoot<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span><span style="color:#6639ba">From</span><span style="color:#0550ae">&lt;&amp;</span><span style="color:#cf222e">str</span><span style="color:#0550ae">&gt;</span><span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">from</span><span style="color:#1f2328">(</span>name: <span style="color:#cf222e">&amp;</span><span style="color:#cf222e">str</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">Self</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>components<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>name<span style="color:#1f2328">.</span>split<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34; &#34;</span><span style="color:#1f2328">).</span>collect::<span style="color:#0550ae">&lt;</span><span style="color:#6639ba">Vec</span><span style="color:#0550ae">&lt;</span>_<span style="color:#0550ae">&gt;&gt;</span><span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>first_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>last_name: <span style="color:#1f2328">components</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">].</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#57606a">#[cfg(test)]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#cf222e">mod</span> <span style="color:#24292e">tests</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">use</span><span style="color:#fff"> </span>std::cell::RefCell<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">use</span><span style="color:#fff"> </span><span style="color:#cf222e">super</span>::<span style="color:#0550ae">*</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">full_name_is_first_name_space_last_name</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">};</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>full_name<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>sut<span style="color:#1f2328">.</span>full_name<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>full_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Lex Luthor&#34;</span><span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Unexpected full name&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">set_full_name_sets_first_and_last_names</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">};</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span>sut<span style="color:#1f2328">.</span>set_full_name<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Darth Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Darth&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain::from<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Darth Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>first_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Darth&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#6639ba">assert_eq!</span><span style="color:#1f2328">(</span>sut<span style="color:#1f2328">.</span>last_name<span style="color:#1f2328">,</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Vader&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#57606a">#[test]</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">attack_shoots_weapon</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>sut<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>Supervillain<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>first_name: <span style="color:#0a3069">&#34;Lex&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>last_name: <span style="color:#0a3069">&#34;Luthor&#34;</span><span style="color:#1f2328">.</span>to_string<span style="color:#1f2328">(),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">};</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">let</span><span style="color:#fff"> </span>weapon<span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span>WeaponDouble::new<span style="color:#1f2328">();</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span>sut<span style="color:#1f2328">.</span>attack<span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>weapon<span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#57606a">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#fff">        </span><span style="color:#6639ba">assert!</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span>weapon<span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow<span style="color:#1f2328">());</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">struct</span> <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">pub</span><span style="color:#fff"> </span>is_shot: <span style="color:#1f2328">RefCell</span><span style="color:#0550ae">&lt;</span><span style="color:#cf222e">bool</span><span style="color:#0550ae">&gt;</span><span style="color:#1f2328">,</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">new</span><span style="color:#1f2328">()</span><span style="color:#fff"> </span>-&gt; <span style="color:#1f2328">WeaponDouble</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span>is_shot: <span style="color:#1f2328">RefCell</span>::new<span style="color:#1f2328">(</span><span style="color:#cf222e">false</span><span style="color:#1f2328">),</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span>Megaweapon<span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">shoot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#0550ae">*</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow_mut<span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">=</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#cf222e">impl</span><span style="color:#fff"> </span><span style="color:#6639ba">Drop</span><span style="color:#fff"> </span><span style="color:#cf222e">for</span><span style="color:#fff"> </span>WeaponDouble<span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#cf222e">fn</span> <span style="color:#6639ba">drop</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#cf222e">mut</span><span style="color:#fff"> </span><span style="color:#6a737d">self</span><span style="color:#1f2328">)</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#cf222e">if</span><span style="color:#fff"> </span><span style="color:#0550ae">*</span><span style="color:#6a737d">self</span><span style="color:#1f2328">.</span>is_shot<span style="color:#1f2328">.</span>borrow<span style="color:#1f2328">()</span><span style="color:#fff"> </span><span style="color:#0550ae">!=</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff"> </span><span style="color:#1f2328">{</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">                </span><span style="color:#6639ba">panic!</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Failed to call shoot()&#34;</span><span style="color:#1f2328">);</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">            </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span><span style="color:#1f2328">}</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff"></span><span style="color:#1f2328">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1050,8 +1050,8 @@ me.</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-07-10&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/8ec8ca488ffbf5e7051a09284b233c6324ec4b0f" target="_blank" title="commit by Jorge David Ortiz Fuentes(jdortiz@gmail.com) 8ec8ca488ffbf5e7051a09284b233c6324ec4b0f: Make minor fixes to first Rust article">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8ec8ca4</a></span>
+                <span>Updated on 2025-07-16&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/fd14e48d58f44a9db73dff3631712a04b88d3ca1" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) fd14e48d58f44a9db73dff3631712a04b88d3ca1: Add second article about Rust unit testing">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>fd14e48</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>

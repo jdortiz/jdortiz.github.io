@@ -3,7 +3,21 @@
         <title>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/rust/</link>
         <description>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 10 Jul 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: the not so happy path</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+So far, we have chosen to test things that matched our expectations of how the code was supposed to work and how the
+user and the environment were supposed to behave.  But, we should also plan for the scenarios in which things don&#39;t go as
+expected, and still we want our program to react properly.  We should also test for these situations and those tests are
+as important as the ones that check the successful use cases.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: simplify your tests</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</link>
     <pubDate>Thu, 10 Jul 2025 00:00:00 &#43;0000</pubDate>

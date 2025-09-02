@@ -268,7 +268,7 @@ you should do it too, because it will save you some time and swearing 😄.</p>
 <p>
 In your shell prompt, enter:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima status</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima status</span></span></code></pre></div>
 </div>
 <p>
 If the runtime is running you should get something similar to this:</p>
@@ -287,7 +287,7 @@ FATA[0000] colima is not running
 If your Colima isn&#39;t running, you need to start it.  Assuming the required settings are already stored
 in the file as I explained in before, you just have to issue this command:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima start</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -303,24 +303,24 @@ Windows, you can use the container, but please take all the necessary steps to e
 <p>
 If Ollama isn&#39;t installed in your macOS system already, you can use brew:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install ollama</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  brew install ollama</span></span></code></pre></div>
 </div>
 <p>
 Then, you can run Ollama as a service with:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew services start ollama</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  brew services start ollama</span></span></code></pre></div>
 </div>
 <p>
 Or, if you don&#39;t want/need a background service, you can just run:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  /opt/homebrew/opt/ollama/bin/ollama serve</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  /opt/homebrew/opt/ollama/bin/ollama serve</span></span></code></pre></div>
 </div>
 <p>
 We are going to interact with some LLM models, so we need to install them in Ollama.  We will start with <em>llama3.1</em> as
 the main LLM and <em>mxbai</em> for computing the embeddings<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  ollama pull llama3.1
-</span></span><span style="display:flex;"><span>  ollama pull mxbai-embed-large</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  ollama pull llama3.1
+</span></span><span class="line"><span class="cl">  ollama pull mxbai-embed-large</span></span></code></pre></div>
 </div>
 <p>
 If you also/instead want to run LLM models online, you will need the <code class="verbatim">OPENAI_API_KEY</code> to authenticate to OpenAI and use
@@ -337,12 +337,12 @@ a different system or even in the Cloud.  In this article, we are going spin up 
 <p>
 The command is very simple:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 1521:1521 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">ORACLE_PWD</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;0pen-S3sam3.&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --name db-free <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --platform linux/arm64 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 1521:1521 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">ORACLE_PWD</span><span class="o">=</span><span class="s1">&#39;0pen-S3sam3.&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name db-free <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --platform linux/arm64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
 </div>
 <p>
 You can use container management commands to check that it is running (<code class="verbatim">docker ps</code>, if you are using the Docker CLI with
@@ -356,16 +356,16 @@ Python
 <div id="outline-text-headline-9" class="outline-text-4">
 <p>We will start by getting a copy of the source code for the project and go to its directory.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  git clone https://github.com/oracle-samples/ai-optimizer.git
-</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">cd</span> ai-optimizer</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  git clone https://github.com/oracle-samples/ai-optimizer.git
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> ai-optimizer</span></span></code></pre></div>
 </div>
 <p>
 As I mentioned before, AI Optimizer and Toolkit requires exactly Python 3.11.  You shouldn&#39;t use an older or newer
 version of Python.  If you are using a recent version of macOS, you will need to install that version side by side with
 the builtin one.  I recommend you use Homebrew to install Python 3.11:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install python@3.11
-</span></span><span style="display:flex;"><span>  python3.11 --version</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  brew install python@3.11
+</span></span><span class="line"><span class="cl">  python3.11 --version</span></span></code></pre></div>
 </div>
 <p>
 AI Optimizer and Toolkit&#39;s code requires to have some Python dependencies installed.  While you could just install them
@@ -374,17 +374,17 @@ The virtual environment will allow us to install the required versions of those 
 <p>
 Creating the virtual environment is a very simple task.  We just have to enter the following commands:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  <span style="color:#6639ba">cd</span> src/
-</span></span><span style="display:flex;"><span>  python3.11 -m venv .venv --copies
-</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">source</span> .venv/bin/activate
-</span></span><span style="display:flex;"><span>  pip3.11 install --upgrade pip wheel setuptools</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  <span class="nb">cd</span> src/
+</span></span><span class="line"><span class="cl">  python3.11 -m venv .venv --copies
+</span></span><span class="line"><span class="cl">  <span class="nb">source</span> .venv/bin/activate
+</span></span><span class="line"><span class="cl">  pip3.11 install --upgrade pip wheel setuptools</span></span></code></pre></div>
 </div>
 <p>
 Here, we are changing the current directory to <code class="verbatim">src</code> and create the virtual environment there.  The virtual environment
 has to be activated and then, we can install the tools that we will use to install the dependencies.  We can now use the
 following commands to install the Python modules that are required by the project:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  pip3.11 install -e <span style="color:#0a3069">&#34;.[all]&#34;</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  pip3.11 install -e <span class="s2">&#34;.[all]&#34;</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -404,7 +404,7 @@ and Toolkit up and running.  That also means that we will have to configure it m
 The following command will launch the client and the server too if the latter hasn&#39;t been launched yet.  It will also
 dump to the terminal the logs of the client.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  streamlit run launch_client.py</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  streamlit run launch_client.py</span></span></code></pre></div>
 </div>
 <p>
 Executing that command should produce a message like this one:</p>

@@ -294,11 +294,11 @@ Install
 <div id="outline-text-headline-9" class="outline-text-3">
 <p>Before we start installing Colima, we should ensure that you have Rosetta available in your system:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  softwareupdate --install-rosetta</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  softwareupdate --install-rosetta</span></span></code></pre></div>
 </div>
 <p>Then, I am going to use <code class="verbatim">brew</code> to install the required software :</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  brew install colima docker docker-compose</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  brew install colima docker docker-compose</span></span></code></pre></div>
 </div>
 <p>Notice that we aren&#39;t installing <code class="verbatim">qemu</code>, because will be using vz for the virtual machine and Rosetta for the amd64
 containers.</p>
@@ -313,11 +313,11 @@ Start
 specify the virtualization type and the file system type, enable Rosetta, and customize the number of CPUs and the
 memory dedicated to the virtual machine:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start --vm-type vz --vz-rosetta --mount-type virtiofs --cpu <span style="color:#0550ae">4</span> --memory <span style="color:#0550ae">8</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima start --vm-type vz --vz-rosetta --mount-type virtiofs --cpu <span class="m">4</span> --memory <span class="m">8</span></span></span></code></pre></div>
 </div>
 <p>Or, set the proper configuration in <code class="verbatim">$HOME/.colima/default/colima.yaml</code> and start the virtual machine, with:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima start --edit</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima start --edit</span></span></code></pre></div>
 </div>
 <p>If you use the latter, double check that you have all the options mentioned above.</p>
 </div>
@@ -329,7 +329,7 @@ Status
 <div id="outline-text-headline-11" class="outline-text-3">
 <p>At any moment you should be able to query the status of the virtual machine with:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima status</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima status</span></span></code></pre></div>
 </div>
 <p>For an arm64 Mac, the architecture should be <code class="verbatim">aarch64</code>.</p>
 </div>
@@ -341,7 +341,7 @@ Stop
 <div id="outline-text-headline-12" class="outline-text-3">
 <p>When you don&#39;t need the virtual machine and the containers running, you can stop it with:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima stop</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima stop</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -352,7 +352,7 @@ Delete the virtual machine
 <div id="outline-text-headline-13" class="outline-text-3">
 <p>If you want to get rid of the current virtual machine and its configuration, you can use the following command:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  colima delete</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  colima delete</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -376,12 +376,12 @@ since we are running a container that was built for the architecture that we hav
 <p>
 The command is very simple:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 1521:1521 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">ORACLE_PWD</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;0pen-S3sam3.&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --name db-free <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --platform linux/arm64 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 1521:1521 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">ORACLE_PWD</span><span class="o">=</span><span class="s1">&#39;0pen-S3sam3.&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name db-free <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --platform linux/arm64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  container-registry.oracle.com/database/free:latest</span></span></code></pre></div>
 </div>
 <p>
 You can use container management commands to check that it is running (<code class="verbatim">docker ps</code>).  The container is ready to be used
@@ -399,12 +399,12 @@ it offers or connecting it other software among many other things.</p>
 <p>
 We are going to start by downloading the image for the Oracle&#39;s Autonomous Database 23ai container.</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker pull container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  docker pull container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
 </div>
 <p>
 Notice that if we change this command to request the image for the arm64 architecture:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker pull --platform linux/aarch64 container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  docker pull --platform linux/aarch64 container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
 </div>
 <p>it will show an error because it isn&#39;t available for that platform:</p>
 <blockquote>
@@ -414,18 +414,18 @@ Notice that if we change this command to request the image for the arm64 archite
 <p>
 Since we have Rosetta available, we can run the image of the intel container with:</p>
 <div class="src src-sh">
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>  docker run -d <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 1521:1522 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 1522:1522 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 8443:8443 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -p 27017:27017 <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">WORKLOAD_TYPE</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;ATP&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">WALLET_PASSWORD</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;Wa((3t_pass&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  -e <span style="color:#953800">ADMIN_PASSWORD</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;0pen-S3sam3.&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --cap-add SYS_ADMIN <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --device /dev/fuse <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  --name adb-free <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>  container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  docker run -d <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 1521:1522 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 1522:1522 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 8443:8443 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p 27017:27017 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">WORKLOAD_TYPE</span><span class="o">=</span><span class="s1">&#39;ATP&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">WALLET_PASSWORD</span><span class="o">=</span><span class="s1">&#39;Wa((3t_pass&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -e <span class="nv">ADMIN_PASSWORD</span><span class="o">=</span><span class="s1">&#39;0pen-S3sam3.&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --cap-add SYS_ADMIN <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --device /dev/fuse <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --name adb-free <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  container-registry.oracle.com/database/adb-free:latest-23ai</span></span></code></pre></div>
 </div>
 <p>It will give us a warning (&#34;WARNING: The requested image&#39;s platform (linux/amd64) does not match the detected host
 platform (linux/arm64/v8) and no specific platform was requested&#34;), but it will return the container ID.  If you add the

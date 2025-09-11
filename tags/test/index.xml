@@ -3,7 +3,25 @@
         <title>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/test/</link>
         <description>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: asynchronous code</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</link>
+    <pubDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+So far, we have only tested synchronous code.  I could postpone talking about asynchronous code, but I don&#39;t want you to
+<em>wait</em> for it. 😄</p>
+<p>
+Asynchronous code, apart from being an inexhaustible source of dad jokes, can be painful to reason about its behavior
+and <a href="https://corrode.dev/blog/async/">not always recommended</a>.  We tend to think that, in a given scope, the lines above are executed before the lines
+below.  It really takes experience and discipline to realize that some parts of the code can be executed at a later time
+and that we may not have yet their results available.  This is important when we write our asynchronous code, but even
+more when we debug it .</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: the not so happy path</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</link>
     <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>

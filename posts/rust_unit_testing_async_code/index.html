@@ -4,42 +4,42 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Rust unit testing: the not so happy path - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Baby crying"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/">
+        <title>Rust unit testing: asynchronous code - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris receiving the results of an async call."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Rust unit testing: the not so happy path">
-  <meta property="og:description" content="Baby crying">
+  <meta property="og:title" content="Rust unit testing: asynchronous code">
+  <meta property="og:description" content="Ferris receiving the results of an async call.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-09-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-01T12:27:18+02:00">
+    <meta property="article:published_time" content="2025-09-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-10T00:00:00+00:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Rust unit testing: the not so happy path">
-  <meta name="twitter:description" content="Baby crying">
+  <meta name="twitter:title" content="Rust unit testing: asynchronous code">
+  <meta name="twitter:description" content="Ferris receiving the results of an async call.">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Rust unit testing: the not so happy path",
+        "headline": "Rust unit testing: asynchronous code",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_not_so_happy_path\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  2975 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_not_so_happy_path\/","datePublished": "2025-09-01T00:00:00+00:00","dateModified": "2025-09-01T12:27:18+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_async_code\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  1339 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_async_code\/","datePublished": "2025-09-10T00:00:00+00:00","dateModified": "2025-09-10T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "Jorge Ortiz-Fuentes"
-            },"description": "Baby crying"
+            },"description": "Ferris receiving the results of an async call."
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -105,384 +105,168 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: the not so happy path</h1><h2 class="single-subtitle">Testing panics and errors</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: asynchronous code</h1><h2 class="single-subtitle">The art of awaiting the expected results</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-01">2025-09-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2975 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-10">2025-09-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1339 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg, /posts/rust_unit_testing_not_so_happy_path/header-image.jpg 1.5x, /posts/rust_unit_testing_not_so_happy_path/header-image.jpg 2x"
+        data-src="/posts/rust_unit_testing_async_code/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_async_code/header-image.jpg, /posts/rust_unit_testing_async_code/header-image.jpg 1.5x, /posts/rust_unit_testing_async_code/header-image.jpg 2x"
         data-sizes="auto"
-        alt="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg"
-        title="Baby crying" width="1280" height="853" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/posts/rust_unit_testing_async_code/header-image.jpg"
+        title="Ferris receiving the results of an async call." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">Expecting Panics 😱</a>
+<li><a href="#headline-1">Executing asynchronous code in tests</a>
 </li>
-<li><a href="#headline-2">Testing for Errors</a>
-<ul>
-<li><a href="#headline-3">Ignoring tests (on purpose) 😅</a>
+<li><a href="#headline-2">(Async)Context for async tests</a>
 </li>
-<li><a href="#headline-4">Returning useful errors</a>
+<li><a href="#headline-3">Final code</a>
 </li>
-<li><a href="#headline-5">Testing the custom errors</a>
-</li>
-</ul>
-</li>
-<li><a href="#headline-6">Bubbling up Errors</a>
-</li>
-<li><a href="#headline-7">Final code</a>
-</li>
-<li><a href="#headline-8">Summary</a>
-</li>
-<li><a href="#headline-9">Footnotes</a>
+<li><a href="#headline-4">Summary</a>
 </li>
 </ul>
 </nav></div>
             </div><div class="content" id="content">
 <p>
-So far, we have chosen to test things that matched our expectations of how the code was supposed to work and how the
-user and the environment were supposed to behave.  But, we should also plan for the scenarios in which things don&#39;t go as
-expected, and still we want our program to react properly.  We should also test for these situations and those tests are
-as important as the ones that check the successful use cases.</p>
+So far, we have only tested synchronous code.  I could postpone talking about asynchronous code, but I don&#39;t want you to
+<em>wait</em> for it. 😄</p>
 <p>
-Now that I am on the topic, I would like to argue against a misconception that some non-technical managers have about
-tests.  If you are on the technical side of software development and you have one of those managers, you will be able to
-identify them when they ask a question to you that is usually very similar to: &#34;If you have (fully) tested the code, how
-come we still have bugs?&#34; 🤯  Tests aren&#39;t omniscient! On the contrary, they tend to be very narrow in scope and they
-focus on a very well defined use case.  And that also means that, most likely, you have not have written a test for each
-possible use case.  The good news is that if you detect anything that wasn&#39;t covered by your tests and that use case
-isn&#39;t working properly, i.e., your code is buggy, you can write a test to verify that use case, fix the code and avoid
-any future regressions.  And by regression, I mean any change to the codebase that re-introduces an error that had been
-previously fixed.  Do you feel better now?  I do.</p>
-<p>
-Testing the not so happy path is as important, if not more as testing your code to know that it implements the desired
-features.  In this case, you are testing the edge cases. What happens when things deviate from the desired scenario.
-And while it is hard to guess and anticipate everything a <em>hideous</em> user could do, you can at the very least start by
-ensuring that you are handling the errors properly.</p>
+Asynchronous code, apart from being an inexhaustible source of dad jokes, can be painful to reason about its behavior
+and <a href="https://corrode.dev/blog/async/">not always recommended</a>.  We tend to think that, in a given scope, the lines above are executed before the lines
+below.  It really takes experience and discipline to realize that some parts of the code can be executed at a later time
+and that we may not have yet their results available.  This is important when we write our asynchronous code, but even
+more when we debug it .</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-Expecting Panics 😱
+Executing asynchronous code in tests
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>A panic in Rust is the only exit from a situation when there is no way to recover.  It prints a message and performs
-housekeeping tasks (unwind and clean up the stack, and exit.)  However, sometimes, we exercise our poetic license and
-<code>panic!</code> in other situations.  Most of them –let&#39;s be honest– out of laziness.  And, yes, I am referring to those
-shameful <code>unwrap</code> that we do now and then.  Whatever the case might be, we still want to test when we expect a panic to
-be triggered.</p>
+<p>As I have done in previous articles, I am going to introduce code that we would like to test first, and then explain how
+to test it.  We know that a plan is something that has to be thought out and supervillains take their time to come up
+with their malevolent plans.  We can implement this functionality in our <code class="verbatim">Supervillain</code> and test it.</p>
 <p>
-Remember when I told you that our initial implementation of <code class="verbatim">Supervillain.set_full_name()</code> <a href="/posts/rust_unit_testing_test_types/">wasn&#39;t very robust</a>?  I meant
-that things would go wrong at run-time if the provided name argument contained less than two words, and the result might
-not be as desired if we had more.  Let&#39;s implement what to do when <code>set_full_name()</code> receives an argument that doesn&#39;t
-contain two words.  We will panic when there aren&#39;t two components in the provided string.</p>
+Although, async/await is part of the language, you need to have a runtime to be able to execute async functions.  The
+designers of this functionality of the Rust language decided to <a href="https://en.wikipedia.org/wiki/Separation_of_mechanism_and_policy">separate mechanism and policy</a>, and decided to define the
+<code class="verbatim">Future</code> trait in the standard library, while allowing developers to use the runtime that matches their needs for each
+project.  It is fair to say that <code class="verbatim">tokio</code> is the de facto standard, yet there are others that focus on other aspects like
+being lightweight (smol) or available for embedded systems (embassy.)</p>
+<p>
+We will be using Tokio for all the async code of this series and we need to add it as a dependency to our project.  We
+will enable three features initially: <code class="verbatim">macros</code>, <code class="verbatim">time</code>, and <code class="verbatim">rt</code>.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add tokio -F macros,time,rt</span></span></code></pre></div>
+</div>
+<p>
+We can now add async code to our project.  So, let&#39;s add the method <code class="verbatim">come_up_with_plan</code> to the implementation block of the
+<code class="verbatim">Supervillain</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Name must have first and last name&#34;</span><span class="p">);</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">come_up_with_plan</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">tokio</span>::<span class="n">time</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">100</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Take over the world!&#34;</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-After this long and tiring change to our implementation 😅, we can work on the tests.  And we can start by creating a
-new test for that use case, in which we will test that a panic is generated if an empty name is used with that method.
-This new test will use the context that I introduced in my <a href="/posts/rust_unit_testing_simplify_tests/">previous article</a> and invoke the method with an empty <code class="verbatim">&amp;str</code>.</p>
+The first challenge that we must address to be able to test asynchronous code is to be able to execute it in our tests.
+Probably you have already read or heard about the <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">function coloring problem</a>, but if you haven&#39;t, the TLDR is that it is
+hard to mix async and non-async functions and, in our case, this results in needing an async context to execute async
+functions.  While this would seem like a trivial problem, it becomes a stopper right away.</p>
+<p>
+Our naive solution for testing that method is going to fail miserably.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">set_full_name_panics_with_empty_name</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">plan_is_sadly_expected</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">come_up_with_plan</span><span class="p">().</span><span class="k">await</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Take over the world!&#34;</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-The only thing that is missing in this test is the assertion.  But, how do we assert that we expect to receive a panic?
-This is indeed challenging, if you consider that the <a href="https://doc.rust-lang.org/std/macro.assert.html"><code class="verbatim">assert!</code> macro</a> itself invokes <code class="verbatim">panic!</code> to signal that the assertion
-failed and the test didn&#39;t pass.  Fortunately, there is a test attribute that we can use to express that a panic is expected:</p>
+If we run <code class="verbatim">cargo t</code>, it complains that the test function &#34;is not async&#34;, and that the await &#34;only allowed inside `async`
+functions and blocks&#34;.  And even though, that sounds like a catch-22, it is exactly what the Tokio crate provides us
+with.  Let&#39;s use it.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[should_panic]</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">plan_is_sadly_expected</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
 </div>
 <p>
-If we add it to the test and run <code class="verbatim">cargo t</code> now, all the tests should pass.  Easy peasy.  Also, notice that the output for
-that test has &#34; - should panic&#34; appended to the name of the test.</p>
-<pre class="example">
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.02s
-     Running unittests src/main.rs (target/debug/deps/detestable_me-acb40a67b9bc1bd9)
-
-running 5 tests
-test supervillain::tests::attack_shoots_weapon ... ok
-test supervillain::tests::from_str_slice_produces_supervillain_full_with_first_and_last_name ... ok
-test supervillain::tests::full_name_is_first_name_space_last_name ... ok
-test supervillain::tests::set_full_name_sets_first_and_last_names ... ok
-test supervillain::tests::set_full_name_panics_with_empty_name - should panic ... ok
-
-test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
-</pre>
-<p>
-But we can be even more specific about the panic message that we expect.  We simply modify the attribute to include the message.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[should_panic(expected = </span><span class="s">&#34;Name must have first and last name&#34;</span><span class="cp">)]</span></span></span></code></pre></div>
-</div>
-<p>
-Run the tests again, and they should pass.  Sweet!</p>
+We have an async test function that allows us to test async functions.  However, this would only be enough if we weren&#39;t
+using a context in our tests, but using it is an application of the <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&#39;t Repeat Yourself principle</a> and helps us to
+simplify our code.</p>
 </div>
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-Testing for Errors
+(Async)Context for async tests
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
-<div id="outline-container-headline-3" class="outline-3">
-<h3 id="headline-3">
-Ignoring tests (on purpose) 😅
-</h3>
-<div id="outline-text-headline-3" class="outline-text-3">
-<p>Fortunately, Rust developers have less disruptive ways to deal with the undesired or unexpected.  And I really like the
-way this is implemented in Rust.  Functions can return <code>Result&lt;T,E&gt;</code>, which is an enum with just two variants.  One for
-when it comes up with the goods (<code>Ok(T)</code>) and another for the moments when you might need a shoulder cry on (<code>Err(E)</code>).
-The snobby programmer in me wants to point out that this is known as an algebraic data type, but I won&#39;t.</p>
-<p>
-Let&#39;s change our implementation, using the <code class="verbatim">From</code> trait, to allow it to fail.  <code class="verbatim">From</code> doesn&#39;t allow conversions to fail,
-but <code class="verbatim">TryFrom</code> does, so we will use it, instead of <code class="verbatim">From</code>, in our <code class="verbatim">Supervillain</code>.</p>
-<p>
-And while we are at it, we are going to experiment with the ability to skip tests.  That is something that you may want
-to do when you know that a test –well, maybe some– is broken and you want to run the rest without the background
-noise.  Preferably, this would happen in the process of refactoring some code, rather than due to having a test that you
-can&#39;t get to work.</p>
-<p>
-In this case, we are going to add the <code class="verbatim">#[ignore]</code> attribute to the test that checks the implementation of the <code class="verbatim">From</code>
-trait.</p>
+<p>We might be tempted to use the <code class="verbatim">test_context</code> macro as it was, but when we provide a <code>Context</code> to a <code class="verbatim">tokio::test</code>, it
+must implement <code>AsyncTestContext</code>.  This trait is very similar to <code class="verbatim">TestContext</code>, but <code>setup()</code> and <code>teardown()</code> must be
+asynchronous.  We can implement that trait for <code class="verbatim">Context</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[ignore]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">AsyncTestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">first_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_FIRST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">last_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_LAST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
-<p>
-If we save and run the tests, we will notice that it is not executed.  Yet, its name is printed, it comes with a result
-(&#34;ignored&#34;), and it gets accounted for.</p>
-<pre class="example">
-running 5 tests
-test supervillain::tests::from_str_slice_produces_supervillain_full_with_first_and_last_name ... ignored
-test supervillain::tests::attack_shoots_weapon ... ok
-test supervillain::tests::full_name_is_first_name_space_last_name ... ok
-test supervillain::tests::set_full_name_sets_first_and_last_names ... ok
-test supervillain::tests::set_full_name_panics_with_empty_name - should panic ... ok
-
-test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
-</pre>
-<p>
-Remember that you can re-enable all the ignored tests from the command line using <code class="verbatim">cargo t -- --include-ignored</code>.  You
-will be ignoring the <code class="verbatim">#[ignore]</code>, not changing the file, though.</p>
-<p>
-Let&#39;s change the implementation of the <code>From</code> trait to <code>TryFrom</code>.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TryFrom</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">fn</span> <span class="nf">try_from</span><span class="p">(</span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
+<blockquote>
+<p>Since Rust 1.75 traits support async functions/methods in the stable version.  But, if for any reason, you are using an
+older version of the toolchain, you can add the async-trait crate.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add async-trait</span></span></code></pre></div>
 </div>
-<p>And we take care of the successful case by wrapping the <code class="verbatim">Supervillain</code> in the <code class="verbatim">Ok</code> variant.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="nb">Ok</span><span class="p">(</span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">first_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">last_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">})</span></span></span></code></pre></div>
-</div>
+<p>and use the macro <code>#[async_trait::async_trait]</code> on the trait.</p>
+</blockquote>
 <p>
-If we try to run the tests, we may take notice of two things:</p>
+However, that still doesn&#39;t work.  A superficial inspection of the error (&#34;error[E0119]: conflicting implementations of
+trait `TestContext` for type `supervillain::tests::Context`&#34;) may suggest that problem is that the two traits use the
+same names for the associated function and the method, and they clashing causing a conflict.  But, quoting the Rust
+Book:</p>
+<blockquote>
+<p>Nothing in Rust prevents a trait from having a method with the same name as another trait’s method, nor does Rust
+prevent you from implementing both traits on one type. It’s also possible to implement a method directly on the type
+with the same name as methods from traits.</p>
+</blockquote>
+<p>
+Wrong suspect then! 😅  Let&#39;s read the note with care:</p>
+<blockquote>
+<p>conflicting implementation in crate `test_context`:</p>
 <ul>
-<li>Even though, we aren&#39;t returning any error yet, the implementation of the <code class="verbatim">TryFrom</code> trait doesn&#39;t compile because we
-haven&#39;t specified the associated type that we want to use for its errors.  We must provide that information to the
-compiler to let it do its job.</li>
-<li>The test that we marked to be <strong>ignored, is still compiled</strong>. And it fails, because we don&#39;t have an associated function
-<code class="verbatim">Supervillain::from(&amp;str)</code> anymore.  Interestingly enough, if the code is just syntactically correct, <code class="verbatim">cargo build</code>
-will compile.  When I say &#34;syntactically correct&#34;, I do it in opposition to semantically correct, i.e. the code &#34;looks
-correct&#34; (e.g., no missing trailing semicolons), but the associated function <code class="verbatim">Supervillain::from(&amp;str)</code> isn&#39;t defined.
-The takeaway here is that <code>#[ignore]</code> won&#39;t help if any of your tests doesn&#39;t compile, but commenting tests out or just
-building the main source while you get the tests again under control, can still do wonders.</li>
+<li>impl&lt;T&gt; TestContext for T
+where T: AsyncTestContext, T: std::marker::Send;</li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-3">
-<h3 id="headline-4">
-Returning useful errors
-</h3>
-<div id="outline-text-headline-4" class="outline-text-3">
-<p>We wanted to return an error and this is what we have to do now.  But, which kind of error should we return?  Well, we
-have at least, four options:</p>
-<ol>
-<li>The simplest option is to use <code class="verbatim">String</code> as the associated <code class="verbatim">Error</code> type.  This is quite straightforward, but then we
-will have a harder time when we want to differentiate among distinct error types or use <code class="verbatim">?</code> for converting errors.
-This could be a temporary solution, but not one we want to take for building high-quality software.</li>
-<li>The next option is using <code class="verbatim">anyhow</code>, <code class="verbatim">eyre</code>, or a similar crate.  It is a better option that using strings.  Out of the
-box, you get a single error type that can be used anywhere, a macro to produce those errors, automatic conversion
-from existing errors, and additional information.  They are great options when you want to manage the errors at the
-application level, but not so useful if you want the different errors produced by your (library) code to be handled
-in different ways.</li>
-<li>A third and much more sophisticated option is to define our own error types.  This allows for a more granular and
-flexible error handling.  However, this is much more tedious than the previous options.  We have to define an enum
-with all the variants for the different error types, describe the associated data for each variant, implement or
-derive <code class="verbatim">Debug</code>, implement <code class="verbatim">Display</code>, and use the blanket implementation of the <code class="verbatim">Error</code> trait.</li>
-<li>Finally, we could use the <code class="verbatim">thiserror</code> crate that allows us to define our own error types, while keeping the amount of
-boilerplate required to the bare minimum.  The only valid reason for not using <code class="verbatim">thiserror</code> here would be to reduce
-the number of external dependencies.  Breath easy.</li>
-</ol>
-<p>Our evil software deserves its own errors and we don&#39;t want to put more effort than necessary.  For this reason, we are
-going to use <code class="verbatim">thiserror</code> to define our error type, which I have decided to call <code class="verbatim">EvilError</code>.</p>
+</blockquote>
+<p>and also the help for error E0119.  Then we realize that the test-context crate implements the synchronous trait
+automatically if we provide the asynchronous implementation.  So, what we have to do is delete the implementation of
+<code class="verbatim">TestContext</code>.</p>
 <p>
-We are going to start by defining the enum for the different variants.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">EvilError</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></div>
-</div>
-<p>
-Inside, we define the variants and its associated data.  Initially, we are going to use just one: <code class="verbatim">ParseError</code>.  And it
-will contain the purpose of this parsing and a reason.  We can add more variants later, when we need them.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span>: <span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span>: <span class="nb">String</span> <span class="p">},</span></span></span></code></pre></div>
-</div>
-<p>
-Despite of the name, this is not a valid error yet.  It doesn&#39;t implement the <code class="verbatim">Error</code> trait and its requirements.  We
-are going to add <code class="verbatim">thiserror</code> to take care of that.</p>
-<div class="src src-sh">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  cargo add thiserror</span></span></code></pre></div>
-</div>
-<p>
-Back in the code, we import <code class="verbatim">thiserror</code>.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">thiserror</span>::<span class="n">Error</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-And we can now derive <code class="verbatim">Error</code> (and <code class="verbatim">Debug</code>) for our type.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[derive(Error, Debug)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">EvilError</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
-</div>
-<p>
-It is important that for each of the variants, we define the error message that we want to be shown.  We do that by
-adding the <code class="verbatim">#[error(...)]</code> attribute to every variant.  For our single variant, this will be:</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[error(</span><span class="s">&#34;Parse error: purpose=&#39;{}&#39;, reason=&#39;{}&#39;&#34;</span><span class="cp">, .purpose, .reason)]</span></span></span></code></pre></div>
-</div>
-<p>
-And that is all that&#39;s needed to define our custom error.</p>
-<p>
-We tell the compiler that the associated type for the Error in the implementation of <code class="verbatim">TryFrom</code> is our new error.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">type</span> <span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EvilError</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-And we can now use it to return an error from our <code class="verbatim">Supervillain::try_from(name: &amp;str)</code> associated function, when we
-receive a name with less that two words.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Err</span><span class="p">(</span><span class="n">EvilError</span>::<span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">purpose</span>: <span class="s">&#34;full_name&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">reason</span>: <span class="s">&#34;Too few arguments&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">})</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Existing Ok goes here
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-<code class="verbatim">cargo b</code> should work fine with this code.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
+We can run <code class="verbatim">cargo t</code> and get all the tests to pass. Hooray!</p>
 </div>
 </div>
-<div id="outline-container-headline-5" class="outline-3">
-<h3 id="headline-5">
-Testing the custom errors
-</h3>
-<div id="outline-text-headline-5" class="outline-text-3">
-<p>Let&#39;s go with the existing test now.  We have to change it to use <code class="verbatim">TryFrom</code> instead of <code class="verbatim">From</code>.  We update its name
-accordingly and use let-else pattern matching to check that the operation was successful, aborting the test with a
-<code>panic!</code> otherwise.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">try_from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">sut</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Unexpected error returned by try_from&#34;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_LAST_NAME</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-All this code and we haven&#39;t tested the not-so-happy path yet!  Let&#39;s write another test that checks if the expected
-error is received when <code class="verbatim">TryFrom</code> is invoked with an empty string.  It is similar, but easier than the previous one.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">try_from_str_slice_produces_error_with_less_than_two_substrings</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Unexpected value returned by try_from&#34;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-Running the tests with cargo will show six shining tests passing.  But we would like to go a step beyond.  We have put
-some, admittedly not much, effort into having our custom error type and we would like to check that the right variant
-–there might be more in the future– with the right associated data is returned.</p>
-<p>
-We only have to make a small change to the current test and capture the error in the less else pattern match.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Unexpected value returned by try_from&#34;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span></span></span></code></pre></div>
-</div>
-<p>
-Then we can use this value to compare it to our expectations, including the associated data.  We can use the <a href="https://doc.rust-lang.org/std/macro.matches.html"><code class="verbatim">matches!</code>
-macro</a> for that purpose.  I have been waiting forever for the <a href="https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html"><code class="verbatim">assert_matches!</code> macro</a> to be available in the stable Rust
-version, but at the moment it is a nightly-only feature.  Bummer!</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert!</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">matches!</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">EvilError</span>::<span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="o">==</span><span class="s">&#34;full_name&#34;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;Too few arguments&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span></span></span></code></pre></div>
-</div>
-<p>
-We run this new version with <code class="verbatim">cargo t</code> and we will have tests that include checking the error that are passing.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-6" class="outline-2">
-<h2 id="headline-6">
-Bubbling up Errors
-</h2>
-<div id="outline-text-headline-6" class="outline-text-2">
-<p>We can simplify some of the tests, so let&#39;s do it.</p>
-<p>
-The <code>try_from</code> associated function returns a <code>Result</code> and we know that <code>Result::expect(&amp;self)</code> panics if it is an <code class="verbatim">Err</code>.
-Then, in the test <code class="verbatim">try_from_str_slice_produces_supervillain_full_with_first_and_last_name</code>, we can use <code>expect()</code> and assign
-the return of <code>Supervillain::try_from(&amp;str)</code> directly to the <code>sut</code> variable.  We can get rid of the let-else statement,
-which should be removed.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">sut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Unexpected error returned by try_from&#34;</span><span class="p">);</span></span></span></code></pre></div>
-</div>
-<p>
-If we are testing for the successful case of functions that return results, we can bubble errors up.  That is available
-since the 2018 edition and it just requires to define a return type in the test function with the expected error type,
-or one that it can be converted to.</p>
-<p>
-In that same test, replace <code>expect()</code> with the <code>?</code> operator.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">sut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">)</span><span class="o">?</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-If a function returns an <code class="verbatim">Err</code>, the <code class="verbatim">?</code> operator will bubble up the error and the test will fail, so this is useful when
-we are testing the happy path.  In that case, we don&#39;t need a panic/assert to fail the test; returning an error will
-suffice, but the signature of the test function must return a <code class="verbatim">Result</code> to allow using the <code class="verbatim">?</code> operator.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">try_from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="n">EvilError</span><span class="o">&gt;</span></span></span></code></pre></div>
-</div>
-<p>
-This change forces us to return <code>Ok(())</code> at the bottom to fulfill the commitment expressed in the signature.  That&#39;s
-it.  Run <code class="verbatim">cargo t</code> and they will all pass again.  Yippie ki-yay, Rust developer!</p>
-</div>
-</div>
-<div id="outline-container-headline-7" class="outline-2">
-<h2 id="headline-7">
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
 Final code
 </h2>
-<div id="outline-text-headline-7" class="outline-text-2">
-<p>We have made some changes to the <code class="verbatim">supervillain.rs</code> file, and, it should look like this after all those changes.  You can
-also find the repo with all the code in this series <a href="https://github.com/jdortiz/detestable-me-rs">here</a> with several commits for this article.</p>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>We have added some new code to <code class="verbatim">supervillain.rs</code> file.  You can find the code in the corresponding commit of the <a href="https://github.com/jdortiz/detestable-me-rs">repo
+with all the code in this series</a> or read it here with all the changes introduced in this article.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">time</span>::<span class="n">Duration</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">thiserror</span>::<span class="n">Error</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -510,6 +294,11 @@ also find the repo with all the code in this series <a href="https://github.com/
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">weapon</span>: <span class="kp">&amp;</span><span class="nc">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">weapon</span><span class="p">.</span><span class="n">shoot</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">come_up_with_plan</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">tokio</span>::<span class="n">time</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">100</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Take over the world!&#34;</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -541,7 +330,7 @@ also find the repo with all the code in this series <a href="https://github.com/
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">test_context</span>::<span class="p">{</span><span class="n">TestContext</span><span class="p">,</span><span class="w"> </span><span class="n">test_context</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">test_context</span>::<span class="p">{</span><span class="n">AsyncTestContext</span><span class="p">,</span><span class="w"> </span><span class="n">TestContext</span><span class="p">,</span><span class="w"> </span><span class="n">test_context</span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">test_common</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -605,6 +394,12 @@ also find the repo with all the code in this series <a href="https://github.com/
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert!</span><span class="p">(</span><span class="o">*</span><span class="n">weapon</span><span class="p">.</span><span class="n">is_shot</span><span class="p">.</span><span class="n">borrow</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">plan_is_sadly_expected</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">come_up_with_plan</span><span class="p">().</span><span class="k">await</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Take over the world!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="n">is_shot</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
@@ -625,8 +420,8 @@ also find the repo with all the code in this series <a href="https://github.com/
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">TestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">AsyncTestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">first_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_FIRST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
@@ -635,55 +430,35 @@ also find the repo with all the code in this series <a href="https://github.com/
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-8" class="outline-2">
-<h2 id="headline-8">
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
 Summary
 </h2>
-<div id="outline-text-headline-8" class="outline-text-2">
-<p>In this article, I have shown how to go beyond the happy path and test the edge cases of your Rust code.  I have covered
-how to write tests both when you expect a panic and when you are willing to get errors.  You can now write tests that
-check for better and for worse.</p>
-<p>
-I have also covered how to ignore and temporary re-enable some test, explaining what that does and doesn&#39;t do.  This is
-a useful tool for your tool belt.</p>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>Once again, dealing with asynchronicity proves to be harder than you initially thought it would.  However, once you know
+what has to be done, testing basic async code isn&#39;t that difficult.  There is more to cover about asynchronous code that
+interacts with other asynchronous parts of the codebase, but we will get into those in future articles.  Await
+publication soon! 😂</p>
 <p>
 Stay curious. Hack your code. See you next time!</p>
-</div>
-</div>
-<div id="outline-container-headline-9" class="outline-2">
-<h2 id="headline-9">
-Footnotes
-</h2>
-</div>
-<div class="footnotes">
-<hr class="footnotes-separatator"/>
-<div class="footnote-definitions">
-<div class="footnote-definition">
-<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
-<div class="footnote-body">
-<p>BTW, if you get tired of this &#34;never used&#34; warnings, you can put <code>#![allow(unused)]</code> in the first line of
-<code class="verbatim">supervillain.rs</code>, as I also did.</p>
-</div>
-</div>
 </div>
 </div>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-09-01&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/a52684b37c8e0605ff6a07017f6cf67b595576bb" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) a52684b37c8e0605ff6a07017f6cf67b595576bb: Add new article on testing the not-so-happy path in Rust">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a52684b</a></span>
+                <span>Updated on 2025-09-10</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/" data-title="Rust unit testing: the not so happy path" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/" data-title="Rust unit testing: the not so happy path" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/" data-title="Rust unit testing: asynchronous code" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/" data-title="Rust unit testing: asynchronous code" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -695,8 +470,7 @@ Footnotes
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/rust_unit_testing_simplify_tests/" class="prev" rel="prev" title="Rust unit testing: simplify your tests"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: simplify your tests</a>
-            <a href="/posts/rust_unit_testing_async_code/" class="next" rel="next" title="Rust unit testing: asynchronous code">Rust unit testing: asynchronous code<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/rust_unit_testing_not_so_happy_path/" class="prev" rel="prev" title="Rust unit testing: the not so happy path"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: the not so happy path</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

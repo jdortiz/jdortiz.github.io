@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Full-Stack Apps - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="A stack of stones composing a structure."><meta property="og:url" content="https://jorgeortiz.dev/posts/full_stack_apps/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Full-Stack Apps">
+  <meta property="og:description" content="A stack of stones composing a structure.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-16T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Java">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Full-Stack Apps">
+  <meta name="twitter:description" content="A stack of stones composing a structure.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/full_stack_apps/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_async_code/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Full-Stack Apps",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/full_stack_apps\/"
+        },"genre": "posts","keywords": "rust, go, java","wordcount":  1487 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/full_stack_apps\/","datePublished": "2025-09-16T00:00:00+00:00","dateModified": "2025-09-16T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "A stack of stones composing a structure."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Full-Stack Apps</h1><h2 class="single-subtitle">Exploring full-stack development in three languages</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/background/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Background</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-16">2025-09-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1487 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/full_stack_apps/header-image.jpg"
+        data-srcset="/posts/full_stack_apps/header-image.jpg, /posts/full_stack_apps/header-image.jpg 1.5x, /posts/full_stack_apps/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/full_stack_apps/header-image.jpg"
+        title="A stack of stones composing a structure." width="1280" height="720" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">The goal</a>
+</li>
+<li><a href="#headline-2">The application</a>
+</li>
+<li><a href="#headline-3">The architecture</a>
+<ul>
+<li><a href="#headline-4">The front end</a>
+</li>
+<li><a href="#headline-5">The back end</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">Summary</a>
+</li>
+<li><a href="#headline-7">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+I must confess.  For many years, I have tried to avoid front-end web development by all means.  I didn&#39;t want to touch
+it with a ten foot pole.  And the main reason was because I have never felt comfortable with having to combine HTML, CSS
+and JavaScript with the nuances of each of the browsers to get the UI I wanted to produce.</p>
+<p>
+When it came to develop user interfaces for my applications, I have preferred to use well established APIs.  I started,
+looong ago, writing some small Windows applications, moved to X Window first and then to GTK, and after a while focused
+on mobile development.  Even at that stage, I jumped from PalmOS to Android and iOS, almost skipping webOS<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> because
+of it being based on web development.</p>
+<p>
+In my mind, despite a few brief attempts to work with Ruby on Rails, web development meant:</p>
+<ul>
+<li>Three languages and a myriad of frameworks,</li>
+<li>Time consuming efforts to deal with the way major browsers are implemented, and</li>
+<li>Too much work for outcomes of below-average quality.</li>
+</ul>
+<p>I know, I know.  There are great front-end applications out there.  Yes, there are.  And they deserve my deepest respect
+and admiration.  I&#39;d have a really hard time to create something half as good even if my life depended on it.</p>
+<p>
+I admit that for a short while I even wished that <a href="https://flutter.dev/multi-platform/web ">Flutter</a> succeeded<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  But I kept limiting myself to desktop user
+interfaces that were specific to a limited set of languages and platforms.  An example of those would be the nice
+SwiftUI that I enjoy using: it is excellent for macOS/iOS/etc and Swift, but not the best option for writing a UI for
+your next Rust application even using FFI.</p>
+<p>
+But enough is enough, so I have, finally, decided to step out of my comfort zone and give a try to full-stack
+development.  The world belongs to the brave and they say that full-stack development is always something nice to put in
+your CV 😜.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+The goal
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>I would like to start small with this project. I&#39;d like to dip my toe in the water, before declaring myself all-in.  So,
+instead of writing the next <a href="https://myspace.com/">Myspace</a> competitor (😄), or any other full-fledged application, I am going to create a project
+and focus on a small part of an application.  Consider this a PoC that I may extend depending on the results.</p>
+<p>
+However, I don&#39;t want to limit this exploration to a single language/tech-stack.  While avoiding writing any JavaScript
+or CSS is still a goal, I will write the same thing in three different languages: Java, Go, and Rust.  And for each one
+of them, I am going to try to use the best tech-stack.  At least the most promising and appealing one after conducting
+the required due diligence.  Yet, if you know of a better option, I would like to know.  Please share! And remember,
+this is not a comparison, but an exploration of what I can do with my favorite languages.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+The application
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>The functionality of the application is not that relevant.  It is more an excuse to explore full-stack development, than
+the purpose of this effort.  Still, I need some &#34;real&#34; functionality to implement.</p>
+<p>
+I have decided to rescue an idea that I have implemented in the past for other platforms: a checklist manager.  The app
+will allow us to store the things that we have to do in a given situation.  The checklists can be reused and composed.
+You could store the things that you have to check before you go on a trip or before you fly your drone.  And if you are
+traveling to fly your drone at your destination, you can combine both checklists and go through all of the items.</p>
+<p>
+An application like this that can run in the web, should be multi-user.  Initially, users will only have access to their
+checklists.  When we get to our series A funding, we may consider having some public checklists as well as the ability
+to share the private ones.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+The architecture
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>A full-stack app is one that integrates a front end with a back end into a single system.  Both parts of the system
+could be put into a single program, but we are going to keep them separated into two different executables.  This way, we
+will be able to identify and understand the responsibilities of each part.</p>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+The front end
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>I want the user interface to be browser-based.  No mobile front end this time.  So I will need to provide the content
+that is going to be displayed in HTML.  I can live with that.  I&#39;m definitely not a master on HTML, but I can manage to
+produce, more or less, what I want.  Also, I don&#39;t plan to have complex controls in this application.  At least, not
+initially.</p>
+<p>
+My design skills are similar to those of the Little Prince: my UI sketches can be hardly distinguished from a snake that
+has swallowed an elephant.  Still, despite my aversion to writing CSS, some color and formatting is going to be
+required<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.  And for this, I will use an off-the-shelf solution.  TailwindCSS<sup class="footnote-reference"><a id="footnote-reference-4" href="#footnote-4">4</a></sup> seems to be the trending one
+nowadays and its promise is that you just have to combine different utility classes to make your web pages look good.  I
+will have a <a href="https://nerdcave.com/tailwind-cheat-sheet">cheat sheet</a> handy, use <a href="https://play.tailwindcss.com/">Tailwind Playground</a>, cross my fingers, and use it across all three implementations.
+My full-stack app is going to have a consistent look&amp;feel and I don&#39;t want to invest any more time than required into
+that.  Most likely, it will deserve a place at the Hall of Horrors of Web Design, but all three versions will
+<strong>consistently</strong> share the prize.</p>
+<p>
+Also, I would like to have some interactivity on my web pages.  I like the react way of doing things, but it seems that
+in order to achieve that, <strong>most</strong> solutions are JavaScript based and require writing code in that language.  That is a
+no-go for this project, but I will try to get as much of it, with the minimum amount of JavaScript.  Let&#39;s see what we
+can do.  In any case, I will try to minimize work done by the browser to compose the UI and render as much as possible at
+the server side using some kind of template engine that can allow me to reuse parts of the view and get everything ready
+for the browser.</p>
+<p>
+The front-end server that I am going to write, in each of the languages, will be responsible for serving all this
+pre-rendered HTML and the static assets, including the CSS and off-the-shelf JavaScript files, should I add any.  And it
+will also be in charge of making requests to the back end to obtain the data required by the users.</p>
+<p>
+It is important to highlight that the front-end API is not going to be a REST API, but an RPC API.  Each endpoint will
+take care of some functionality of the front end, like login (<code class="verbatim">/app/login</code>), sign in (<code class="verbatim">/app/signin</code>) or the main access
+to the app (<code class="verbatim">/app</code>).</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+The back end
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>The back-end server is going to be much simpler.  It will implement a REST API for the resources of the application,
+namely the checklists, but also the users and the sessions.  I will try to avoid using a back-end framework for each of
+the languages, but I will take advantage of what I am already using.  That means that, most likely, I will stay with the
+standard library in Go, Spring in Java, and Axum in Rust.</p>
+<p>
+We are going to use a solid database to persist the data and will run it in a container. We are going to use a database
+that allows us to incorporate new functionality as we grow and there are no better options than <a href="https://oaim.short.gy/adb-free-fs0">Oracle Database 23ai
+Free</a> or <a href="https://oaim.short.gy/adb-free-fs0">Oracle Autonomous Database Free</a>.  We will talk to the database using one of the drivers available for each of
+the languages, but I might consider other implementations that take advantage of their features, once I have put the main
+pieces together.</p>
+<p>
+Remember that if you need help to get those containers up &amp; running, you can use what <a href="/posts/running_containers_with_colima/">I shared about this topic</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Summary
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>In this article, I have shared with you my plans to create a full-stack application.  I will be releasing some new
+content for Rust, Go and Java in the upcoming weeks.  I&#39;m looking forward to trying this new –for me– software
+development role and to learning from your feedback on how I implement it using each of the language and their
+development ecosystems.  Please, be kind, but do let me know your thoughts.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>Do you remember those <a href="https://en.wikipedia.org/wiki/Palm_Pre">really cool Palm Pre</a>s?</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>Which hasn&#39;t happened besides a <a href="https://survey.stackoverflow.co/2025/technology#2-programming-scripting-and-markup-languages">high level of admiration for Dart</a>.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p>Sorry if a make your eyes bleed 🙏</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-4"><a href="#footnote-reference-4">4</a></sup>
+<div class="footnote-body">
+<p>Other options were Bootstrap, Foundation, or MaterialUI.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-09-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/full_stack_apps/" data-title="Full-Stack Apps" data-hashtags="rust,go,java"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/full_stack_apps/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/full_stack_apps/" data-title="Full-Stack Apps" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/full_stack_apps/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/java/">Java</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_async_code/" class="prev" rel="prev" title="Rust unit testing: asynchronous code"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: asynchronous code</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.150.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

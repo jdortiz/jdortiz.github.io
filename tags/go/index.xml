@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
+        <link>https://jorgeortiz.dev/tags/go/</link>
+        <description>Go - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 16 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Full-Stack Apps</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_apps/</link>
+    <pubDate>Tue, 16 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_apps/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+I must confess.  For many years, I have tried to avoid front-end web development by all means.  I didn&#39;t want to touch
+it with a ten foot pole.  And the main reason was because I have never felt comfortable with having to combine HTML, CSS
+and JavaScript with the nuances of each of the browsers to get the UI I wanted to produce.</p>
+<p>
+When it came to develop user interfaces for my applications, I have preferred to use well established APIs.  I started,
+looong ago, writing some small Windows applications, moved to X Window first and then to GTK, and after a while focused
+on mobile development.  Even at that stage, I jumped from PalmOS to Android and iOS, almost skipping webOS<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> because
+of it being based on web development.</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_async_code\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  1339 ,
+        },"genre": "posts","keywords": "rust, test","wordcount":  1340 ,
         "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_async_code\/","datePublished": "2025-09-10T00:00:00+00:00","dateModified": "2025-09-11T18:48:36+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -107,7 +107,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: asynchronous code</h1><h2 class="single-subtitle">The art of awaiting the expected results</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-10">2025-09-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1339 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-10">2025-09-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1340 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -242,13 +242,11 @@ with the same name as methods from traits.</p>
 </blockquote>
 <p>
 Wrong suspect then! 😅  Let&#39;s read the note with care:</p>
-<blockquote>
-<p>conflicting implementation in crate `test_context`:</p>
-<ul>
-<li>impl&lt;T&gt; TestContext for T
-where T: AsyncTestContext, T: std::marker::Send;</li>
-</ul>
-</blockquote>
+<pre class="example">
+conflicting implementation in crate `test_context`:
+            - impl&lt;T&gt; TestContext for T
+              where T: AsyncTestContext, T: std::marker::Send;
+</pre>
 <p>and also the help for error E0119.  Then we realize that the test-context crate implements the synchronous trait
 automatically if we provide the asynchronous implementation.  So, what we have to do is delete the implementation of
 <code class="verbatim">TestContext</code>.</p>

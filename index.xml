@@ -3,9 +3,23 @@
         <title>Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/</link>
         <description>Sharing things I learned mostly about software development</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 16 Sep 2025 00:00:00 &#43;0000</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Rust unit testing: builtin tools</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
+    <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous
+articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
+It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
+them, and reporting the results.  Could we ask for more?</p>]]></description>
+</item>
+<item>
     <title>Full-Stack Apps</title>
     <link>https://jorgeortiz.dev/posts/full_stack_apps/</link>
     <pubDate>Tue, 16 Sep 2025 00:00:00 &#43;0000</pubDate>
@@ -160,36 +174,6 @@ AI Optimizer and Toolkit is an Open Source project created by our team, the Micr
 Oracle&#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of
 their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and
 accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:</p>]]></description>
-</item>
-<item>
-    <title>Running containers with Colima</title>
-    <link>https://jorgeortiz.dev/posts/running_containers_with_colima/</link>
-    <pubDate>Thu, 22 May 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/running_containers_with_colima/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to
-play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous
-Database, containers can be very helpful.</p>
-<div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-Goals
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>By the end of this article you will:</p>
-<ul>
-<li>Understand the pieces required to run containers in your ARM or Intel macOS system.</li>
-<li>Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS.</li>
-<li>Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container
-so you can use them locally to learn, develop or try their features.</li>
-</ul>
-<p>Would you prefer to watch the video? Here it is:
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/y6QZqk4a_t4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
-</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -3,7 +3,21 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: builtin tools</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
+    <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous
+articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
+It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
+them, and reporting the results.  Could we ask for more?</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: asynchronous code</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</link>
     <pubDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</pubDate>

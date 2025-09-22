@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rust unit testing: builtin tools - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris and his toolset."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Rust unit testing: builtin tools">
+  <meta property="og:description" content="Ferris and his toolset.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-22T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Test">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Rust unit testing: builtin tools">
+  <meta name="twitter:description" content="Ferris and his toolset.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/" /><link rel="prev" href="https://jorgeortiz.dev/posts/full_stack_apps/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rust unit testing: builtin tools",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_tools_builtin\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2840 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_tools_builtin\/","datePublished": "2025-09-22T00:00:00+00:00","dateModified": "2025-09-22T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris and his toolset."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: builtin tools</h1><h2 class="single-subtitle">Beyond cargo test</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-22">2025-09-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2840 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_tools_builtin/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_tools_builtin/header-image.jpg, /posts/rust_unit_testing_tools_builtin/header-image.jpg 1.5x, /posts/rust_unit_testing_tools_builtin/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_tools_builtin/header-image.jpg"
+        title="Ferris and his toolset." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Doc Tests</a>
+<ul>
+<li><a href="#headline-2">Adding doc comments</a>
+</li>
+<li><a href="#headline-3">Package with binary and library</a>
+</li>
+<li><a href="#headline-4">Making doctests work</a>
+</li>
+<li><a href="#headline-5">Lints FTW</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">Cargo test features</a>
+<ul>
+<li><a href="#headline-7">Show output in cargo test</a>
+</li>
+<li><a href="#headline-8">Selecting tests with cargo</a>
+</li>
+<li><a href="#headline-9">Debugging tests from the command line</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-10">Final code</a>
+</li>
+<li><a href="#headline-11">Summary</a>
+</li>
+<li><a href="#headline-12">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous
+articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
+It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
+them, and reporting the results.  Could we ask for more?</p>
+<p>
+Well, I don&#39;t know if we can, but certainly Rust comes with more.  Some of this goodies are builtin, some are add-ons.
+In this article, I am going to cover some functionality that might be useful to add to your list of charms and
+spells. Wingardium Leviosa! 🪶</p>
+<p>
+I have split this content into two pieces.  This one contains information that can be used with the builtin tools, and
+the for the next one we will be using some additional applications.  Let&#39;s get started!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Doc Tests
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Adding doc comments
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>Probably you already know about <a href="https://rust-lang.github.io/mdBook/">mdBook</a>. It is a wonderful tool that allows us to create books and disseminate knowledge
+among the community.  It is used by <a href="https://doc.rust-lang.org/book/">the Book</a>, but also by many other very interesting titles, like the <a href="https://doc.rust-lang.org/nomicon/">the Rustonomicon</a>,
+<a href="https://doc.rust-lang.org/cargo/index.html">the Cargo Book</a>, <a href="https://doc.rust-lang.org/stable/embedded-book/">the Embedded Rust Book</a>, or the yet unfinished <a href="https://rust-lang.github.io/async-book/">Asynchronous Programming in Rust</a> book.</p>
+<p>
+Unlocking the full potential of the Open Source ecosystem requires more than useful manuals and high-quality code. To truly
+enable others to benefit from our work, we need to make it easy for them to use and build upon our project. That&#39;s where
+Rust&#39;s documentation features come in.</p>
+<p>
+With Rust, we can seamlessly integrate documentation into our codebase, making it simple for third-party developers to
+understand and leverage our implementation.  This is achieved through the use of special comments, known as doc
+comments, which provide a structured way to document our code.</p>
+<p>
+There are two types of doc comments:</p>
+<dl>
+<dt>
+<code class="verbatim">//!</code> and <code class="verbatim">/*! ...*/</code>
+</dt>
+<dd>Used to document, inline or as a block respectively, the parent item. Typically used for
+module documentation.</dd>
+<dt>
+<code class="verbatim">///</code> and <code class="verbatim">/** ...*/</code>
+</dt>
+<dd>Used to document, inline or as a block respectively, the item right below them.</dd>
+</dl>
+<p>The <code class="verbatim">rustdoc</code> tool takes these comments, that may use markdown formatting, and generates high-quality documentation
+that&#39;s easily accessible.  But it goes a step further.  If you insert code blocks within those comments, they are
+treated as both, documentation examples and tests.  Two for the price of one.  Rust gives you the most bang for your
+buck!</p>
+<p>
+Let&#39;s try this out incrementally. First we say something about the module at the top of the <code class="verbatim">supervillain.rs</code> file.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for supervillains and their related stuff
+</span></span></span></code></pre></div>
+</div>
+<p>
+We also want to document our <code class="verbatim">Supervillain</code> type.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents supervillains.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
+</div>
+<p>
+Well, this was easy.  Now we can produce the documentation using cargo.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo doc --open --no-deps</span></span></code></pre></div>
+</div>
+<p>
+The <code class="verbatim">--open</code> option will take care of showing you the resulting documentation.  And even though, we haven&#39;t added enough
+comments, the structure and our comments are present in the generated documentation.</p>
+<p>
+We can continue by documenting the methods of the <code class="verbatim">Supervillain</code> type.  The desired format for the documentation of a
+method is:</p>
+<pre class="example">
+[short explanations of what the item does]
+
+[code example showing how to use it]
+
+[OPTIONAL: more explanations and code examples in case some specific cases have to be explained in detail]
+</pre>
+<p>
+So let&#39;s document the first method:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Return the value of the full name as a single string.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// Full name is produced concatenating first name, a single space, and the last name.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// # Examples
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// let lex = Supervillain {
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///     first_name: &#34;Lex&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///     last_name: &#34;Luthor&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// };
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// assert_eq!(lex.full_name(), &#34;Lex Luthor&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span></span></span></code></pre></div>
+</div>
+<p>
+If we run <code class="verbatim">cargo doc --no-deps</code>, the documentation will be refreshed (the browser page has to be refreshed too), and the
+example will be shown.  But if we run <code class="verbatim">cargo test --doc</code> this code will also be used as a test too.  There is a gotcha,
+though. It must be a library, not a binary.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Package with binary and library
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>We could move our library to its own workspace, but I am going to go with a simpler option.  We can have both a library
+and a binary in the same crate.  We just need to add a source file to be able to produce the library, but it is a tiny
+one, that can be created with a shell command from the root of our project.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;pub mod supervillain;\n#[cfg(test)]\nmod test_common;\n&#34;</span> &gt; src/lib.rs</span></span></code></pre></div>
+</div>
+<p>
+Cargo needs to know about this too to have both possibilities, so we modify the cargo manifest by adding the following
+lines <sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[[</span><span class="nx">bin</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;detestable-me&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">path</span> <span class="p">=</span> <span class="s2">&#34;src/main.rs&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">test</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">lib</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;evil&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">path</span> <span class="p">=</span> <span class="s2">&#34;src/lib.rs&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+From the command line (or your IDE), we can use cargo to execute all the tests or just the doc tests.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t <span class="c1"># Would execute tests twice: bin and lib if bin didn&#39;t have test = false</span>
+</span></span><span class="line"><span class="cl">  cargo t --lib <span class="c1"># or --bin &lt;bin name&gt; to run one or the other, but no doctests</span>
+</span></span><span class="line"><span class="cl">  cargo t --doc <span class="c1"># Run doc tests only</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Making doctests work
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>However, it&#39;s not all sunshine and roses.  Our new doc test complains that <code>Supervillain</code> isn&#39;t known in the scope.</p>
+<p>
+Strange.  It&#39;s right there…</p>
+<p>
+Well, that is true, but we have to import what we use in our doctests, as we do in our <code class="verbatim">tests</code> module.  We can add
+<code class="verbatim">Supervillain</code> to the namespace of the doctest using the name of the library that we have declared in the manifest.  We
+add the <code class="verbatim">use</code> statement at the beginning of the code block.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// use evil::supervillain::Supervillain;
+</span></span></span></code></pre></div>
+</div>
+<p>
+And if you feel that this line doesn&#39;t add value to the example in the documentation, you can hide it using a &#34;#&#34; right
+at the beginning of the line.  With this change in place, the doctests will still run, but the documentation will not
+have that line.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">///# use evil::supervillain::Supervillain;
+</span></span></span></code></pre></div>
+</div>
+<p>
+We can also use attributes at the beginning of the doctest code blocks (<code class="verbatim">```&lt;attribute&gt;</code>), should we need them.</p>
+<dl>
+<dt>
+ignore
+</dt>
+<dd>If the block isn&#39;t compiled nor run with the tests.</dd>
+<dt>
+no_run
+</dt>
+<dd>If the block has to be compiled but not run, because it might produce undesired side effects.</dd>
+<dt>
+should_panic
+</dt>
+<dd>If a panic is expected when the code block is run.</dd>
+<dt>
+compile_fail
+</dt>
+<dd>If the block is expected to fail compilation.</dd>
+<dt>
+edition20XX
+</dt>
+<dd>If a specific edition of Rust has to be used with the code block.</dd>
+<dt>
+standalone_crate
+</dt>
+<dd>If the block cannot be combined with other doc tests.</dd>
+</dl>
+<p>The initial implementation of doctests was to compile each one into a separate binary.  That resulted into a lot of
+overhead, making doctests much slower than regular unit tests.  So much so that in some situations it was useful to just
+run the unit tests using <code class="verbatim">cargo t --lib</code>.  However, from the 2024 edition, rustdoc attempts to combine the
+doctests into a single binary, making their execution much faster.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Lints FTW
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>We can use the Rust compiler to detect when our code isn&#39;t properly documented.  If we add a lint check attribute at the
+top of the <code class="verbatim">lib.rs</code>, the compiler will alert us (<code class="verbatim">warn</code>) or fail (<code class="verbatim">deny</code>) when any documentation is missing.</p>
+<p>
+My recommended approach is that you don&#39;t add any lint at first, until you get your code to a point where it is mostly
+documented.  Then move to a <code class="verbatim">warn</code> configuration –<code>#![warn(missing_docs)]</code>–, to help you complete the documentation.
+And once (almost) all of the warnings are gone, change the attribute to <code class="verbatim">deny</code> –<code>#![deny(missing_docs)]</code>– so Cargo
+fails compilation if any changes are made that don&#39;t include the required documentation, enforcing our codebase to
+remain consistently well-documented.  By using this incremental strategy, we can ensure that our codebase is thoroughly
+documented while also allowing us to make targeted improvements.</p>
+<p>
+If you are using nightly, you can also have an attribute for the <code class="verbatim">missing_doc_code_examples</code>.  This lint checks if a
+documentation block is missing a code example.  There are <a href="https://doc.rust-lang.org/rustdoc/lints.html">other lints</a> available for <code class="verbatim">rustdoc</code>.  Take a look at them.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Cargo test features
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Show output in cargo test
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>Sometimes it is useful to get more information from your tests beyond whether they passed or failed.  But if you try to
+print information from your tests, it won&#39;t be shown when they are executed.  This might be confusing, but it&#39;s actually
+a deliberate design choice to show a clean report to the developer, prioritizing test output quality over unnecessary
+verbosity.</p>
+<p>
+We can verify this behavior by adding a print statement to our <code>set_full_name()</code> method.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// existing let components = ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Received </span><span class="si">{}</span><span class="s"> components.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// existing if components.len() ...
+</span></span></span></code></pre></div>
+</div>
+<p>Even though our tests execute that method twice when we run the tests with <code class="verbatim">cargo t</code>, that output is indeed &#34;lost.&#34;  Or, at
+least, there is no trace of it.  We just get a clean report with the list of tests, their result and a summary.</p>
+<p>
+We can tell Cargo to not to capture what is sent to <code class="verbatim">stdout</code> or <code class="verbatim">stderr</code>, and to show it right away.  We have to run the
+tests with the <code class="verbatim">--no-capture</code> option.  Just remember to precede the option with a double dash (<code class="verbatim">--</code>), because otherwise
+the argument is passed to cargo, rather than to the subcommand <code class="verbatim">cargo test</code>.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- --no-capture</span></span></code></pre></div>
+</div>
+<p>
+But if you execute that command a few times, you will notice that the output of the two invocations of that print
+statement appear in different positions of the report.  Cargo runs your tests in parallel using threads and the order of
+execution is not predictable.  If this is confusing with two print statements, imagine the output of a full-fledged
+application.</p>
+<p>
+However, there is another way to get this information to be displayed.  We can use the option <code class="verbatim">=--show-output</code>
+instead. This prints the output, with other information, after all the tests have been run, but in an orderly fashion.
+Using this option the output of each test is more readable and it doesn&#39;t get mixed with the output of other tests.  The
+price that we pay in exchange is that the report is more verbose.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- --show-output</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Selecting tests with cargo
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>It is reassuring to have a good test harness, but there are times when you don&#39;t want to run every single test.  Perhaps
+you&#39;re testing a specific scenario or feature, and want to focus on some tests and ignore the others. Maybe, you might
+need to execute a single test in isolation.  In those dark moments of testing uncertainty, you might struggle to recall
+the names of all your tests, and particularly the ones that you want to run.</p>
+<p>
+You can use cargo with the <code class="verbatim">--list</code> option to list the available tests.  Remember to precede the option with the double
+dash (<code class="verbatim">--</code>) as I mentioned before.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- --list</span></span></code></pre></div>
+</div>
+<p>This produces this output (that you can narrow down using <code class="verbatim">ripgrep</code>, for example):</p>
+<pre class="example">
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/evil-5ab356f2245c3541)
+supervillain::tests::attack_shoots_weapon: test
+supervillain::tests::full_name_is_first_name_space_last_name: test
+supervillain::tests::plan_is_sadly_expected: test
+supervillain::tests::set_full_name_panics_with_empty_name: test
+supervillain::tests::set_full_name_sets_first_and_last_names: test
+supervillain::tests::try_from_str_slice_produces_error_with_less_than_two_substrings: test
+supervillain::tests::try_from_str_slice_produces_supervillain_full_with_first_and_last_name: test
+
+7 tests, 0 benchmarks
+   Doc-tests evil
+src/supervillain.rs - supervillain::Supervillain::full_name (line 23): test
+
+1 test, 0 benchmarks
+</pre>
+<p>
+As you can see, you get a list with all the unit tests and it includes the doctests too. Notice there are 2 tests that
+start with <code class="verbatim">try_from_str</code> and 4 tests contain &#34;full_name&#34; in their name (including the doctest.)  Let&#39;s use them to
+illustrate some uses.</p>
+<p>
+We start by adding the <code>#[ignore = &#34;temporary disabled&#34;]</code> attribute in the second test
+(<code class="verbatim">try_from_str_slice_produces_supervillain_full_with_first_and_last_name</code>).  Also, we change the beginning of our
+doctest block to <code>/// ```ignore</code>. If we run the tests, these two will be skipped and the report will also show the
+reason that we included in the unit test attribute.</p>
+<pre class="example">
+test supervillain::tests::try_from_str_slice_produces_supervillain_full_with_first_and_last_name ... ignored, temporary disabled
+...
+test src/supervillain.rs - supervillain::Supervillain::full_name (line 23) ... ignored
+</pre>
+<p>
+We can run just the ignored tests with:</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- --ignored</span></span></code></pre></div>
+</div>
+<p>or run all the tests, including the ignored ones:</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- --include-ignored</span></span></code></pre></div>
+</div>
+<p>
+We could select and run the tests by name.  For example, we can select all the tests that contain the string
+&#34;full_name&#34;.  But if we do, only the unit tests will be run.</p>
+<pre class="example">
+% cargo t full_name                                                                     250918142706
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/lib.rs (target/debug/deps/evil-5ab356f2245c3541)
+
+running 3 tests
+[[test supervillain::tests::set_full_name_sets_first_and_last_names ... ok
+test supervillain::tests::full_name_is_first_name_space_last_name ... ok
+test supervillain::tests::set_full_name_panics_with_empty_name - should panic ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+</pre>
+<p>
+If we want the doctests to be selected by the string, we need to be a little bit more explicit with <code class="verbatim">cargo t full_name
+--doc</code>, but it will only pick tests from the doctests list.</p>
+<p>
+We can also combine test selection with other options.  For example, if we want all the tests that contain the string
+&#34;from_str&#34;, ignored or not, we should use the following command.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t from_str -- --include-ignored</span></span></code></pre></div>
+</div>
+<p>
+If we just want to select the tests for the <code>full_name()</code> method, we have to be more specific with the name.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo t -- full_name <span class="c1"># It also selects set_full_name() tests</span>
+</span></span><span class="line"><span class="cl">  cargo t -- Supervillain::full_name <span class="c1"># selects the doctest</span>
+</span></span><span class="line"><span class="cl">  cargo t -- ::full_name <span class="c1"># Without -- doesn&#39;t select doctest</span></span></span></code></pre></div>
+</div>
+<p>
+And, if we want to just run a test that exactly matches the string, we can use the <code class="verbatim">--exact</code> option.  And remember that
+the complete name can be obtained from the list.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  cargo t -- --exact supervillain::test::full_name_returns_first_name_space_last_name</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+Debugging tests from the command line
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>We create tests to improve the quality of our codebase and to scare away errors.  Yet, errors sneak their way into our
+code and into our tests.</p>
+<p>
+To err is human, to debug is divine.  But certainly, not obvious.  An executable is produced with the tests and it isn&#39;t
+the same one that we create to run our application.  Where is that binary then?  And how do we connect to it and debug it?</p>
+<p>
+Let&#39;s take it step by step.  We need an error in our codebase that isn&#39;t obvious.  We can add an extra space in the code
+that splits the full name into its components.  The important difference with the existing code is that I have added a
+*second space to the argument of the <code>split()</code> method.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">try_from</span><span class="p">(</span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#34;  &#34;</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+When we run the tests we get one of the tests failing.</p>
+<pre class="example">
+% cargo t                                                                               250918164712
+   Compiling detestable-me v0.1.0 (/Users/jorge/Developer/Rust/detestable-me)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests src/lib.rs (target/debug/deps/evil-5ab356f2245c3541)
+
+running 7 tests
+...
+test supervillain::tests::try_from_str_slice_produces_supervillain_full_with_first_and_last_name ... FAILED
+...
+</pre>
+<p>
+The output produced when we run the tests show the name of the binary used in the process
+(<code class="verbatim">target/debug/deps/evil-5ab356f2245c3541</code>)<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  This is the one we need to use with the debugger:</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  rust-lldb target/debug/deps/evil-5ab356f2245c3541</span></span></code></pre></div>
+</div>
+<p>
+Now, we can set a breakpoint at the beginning of the failing test.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  br <span class="nb">set</span> -r try_from_str_slice_produces_supervillain_full_with_first_and_last_name</span></span></code></pre></div>
+</div>
+<p>
+We run it with &#34;<code class="verbatim">r</code>&#34; and, if there is more that one breakpoint location, we continue &#34;<code class="verbatim">c</code>&#34; until you see the source.
+Then we get go to the next line (&#34;<code class="verbatim">n</code>&#34;) which invokes the <code class="verbatim">TryFrom</code> associated function.  We want to step into (&#34;<code class="verbatim">s</code>&#34;)
+its code to see what happens there.</p>
+<p>
+In the <code>try_from()</code> function, we execute the first line (<code class="verbatim">n</code>) and check the value of the variable <code>components</code>.</p>
+<pre class="example">
+(lldb) p components
+(alloc::vec::Vec&lt;&amp;str, alloc::alloc::Global&gt;) size=1 {
+  [0] = &#34;Darth Vader&#34; {
+    [0] = &#39;D&#39;
+    [1] = &#39;a&#39;
+    [2] = &#39;r&#39;
+    [3] = &#39;t&#39;
+    [4] = &#39;h&#39;
+    [5] = &#39; &#39;
+    [6] = &#39;V&#39;
+    [7] = &#39;a&#39;
+    [8] = &#39;d&#39;
+    [9] = &#39;e&#39;
+    [10] = &#39;r&#39;
+  }
+}
+</pre>
+<p>
+This should raise our suspicions, because we have one element in the <code>components</code> vector, but <strong>it does have a space</strong>.  Time to
+take a look at the argument of <code>split()</code>, realize that we made a mistake with the argument, fix it, run the tests again,
+and get a T-shirt with the message &#34;I debugged an error that I found with my Rust tests.&#34; 😄</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Final code
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<p>While we haven&#39;t modified the code much in this article, because we were mostly focusing on executing the tests, the
+whole code is available <a href="https://github.com/jdortiz/detestable-me-rs">in the repo</a>, as always.  That includes the changes to the <code class="verbatim">cargo.toml</code> with several commits for
+this article.</p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
+Summary
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>In this article I have shared several techniques for improving your code documentation, streamlining your interactions with
+unit tests, and simplifying debugging when faced with challenging issues.  The good news is that you don&#39;t need to
+venture outside Rust&#39;s standard toolset to reap those benefits.</p>
+<p>
+However, with some extra help, we can take our testing to the next level.  In my upcoming article, I&#39;ll will cover test
+coverage and the usage of other tools for your tests that may improve your workflows.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-2">
+<h2 id="headline-12">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>The reason why <code class="verbatim">bin</code> uses double square brackets, while <code class="verbatim">lib</code> uses single square brackets, is because there can
+be more than one binary in a crate, but only a library.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>Yours will be different, or rather use a different hash at the second part of the name.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-09-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/" data-title="Rust unit testing: builtin tools" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/" data-title="Rust unit testing: builtin tools" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/full_stack_apps/" class="prev" rel="prev" title="Full-Stack Apps"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Full-Stack Apps</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.150.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

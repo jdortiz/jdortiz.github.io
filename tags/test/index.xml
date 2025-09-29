@@ -3,7 +3,23 @@
         <title>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/test/</link>
         <description>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: add-ons</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
+    <pubDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to
+produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust
+ecosystem is very rich and active and people with other needs have contributed with really useful tools.</p>
+<p>
+Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
+following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: builtin tools</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
     <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>

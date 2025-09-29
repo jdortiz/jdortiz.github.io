@@ -3,7 +3,23 @@
         <title>All Posts - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 06 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: add-ons</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
+    <pubDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to
+produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust
+ecosystem is very rich and active and people with other needs have contributed with really useful tools.</p>
+<p>
+Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
+following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: builtin tools</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
     <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>
@@ -151,27 +167,6 @@ consider useful.  Although, I will not chicken out on sharing my reasons for tak
 describing how to get the most out of them.  I am sharing my experience here and would love to hear about yours.  Feel
 free to ping me in any of the social media platforms, using the links on the home page, if you need, and let me know
 other tips that have been useful to you.  I am looking forward to learning more on the topic!</p>]]></description>
-</item>
-<item>
-    <title>Set up and run AI Optimizer and Toolkit</title>
-    <link>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</link>
-    <pubDate>Mon, 26 May 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-Intro
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play
-with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.</p>
-<p>
-AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use
-Oracle&#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of
-their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and
-accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rust unit testing: add-ons - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris taking its toolset to the beach."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Rust unit testing: add-ons">
+  <meta property="og:description" content="Ferris taking its toolset to the beach.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-29T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Test">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Rust unit testing: add-ons">
+  <meta name="twitter:description" content="Ferris taking its toolset to the beach.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rust unit testing: add-ons",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_tools_add_ons\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2316 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_tools_add_ons\/","datePublished": "2025-09-29T00:00:00+00:00","dateModified": "2025-09-29T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris taking its toolset to the beach."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: add-ons</h1><h2 class="single-subtitle">Beyond cargo test</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-29">2025-09-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2316 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_tools_add_ons/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_tools_add_ons/header-image.jpg, /posts/rust_unit_testing_tools_add_ons/header-image.jpg 1.5x, /posts/rust_unit_testing_tools_add_ons/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_tools_add_ons/header-image.jpg"
+        title="Ferris taking its toolset to the beach." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Knowing your Coverage</a>
+<ul>
+<li><a href="#headline-2">Rant</a>
+</li>
+<li><a href="#headline-3">Generate code coverage reports</a>
+</li>
+<li><a href="#headline-4">Understanding the report</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">A different test runner: nextest</a>
+<ul>
+<li><a href="#headline-6">Intro and installation</a>
+</li>
+<li><a href="#headline-7">Selecting and running tests</a>
+</li>
+<li><a href="#headline-8">Other interesting features</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">Summary</a>
+</li>
+<li><a href="#headline-10">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to
+produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust
+ecosystem is very rich and active and people with other needs have contributed with really useful tools.</p>
+<p>
+Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
+following paragraphs, so fasten your USB-C cable and get ready!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Knowing your Coverage
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Rant
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>Coverage is a good idea perverted by management and sales.  &lt;Mic 🎤 drop&gt;</p>
+<p>
+I don&#39;t want to preach to the choir and tell you how important tests are.  If you are reading this, chances are that you
+are already a believer, or, at least, that you agree with the importance of having tests in place.  So, it might be
+useful to know that all/most of the features implemented by our software are fully tested.  Even better if we could
+ensure that the edge cases are tested too.  But life ain&#39;t easy and there is no easy way to ensure that that is the case
+other than experience, hard work, and many what-if questions.</p>
+<p>
+The best next thing seems to be test coverage.  Test coverage is a way to measure that, or rather, to get an
+approximation to that measure by counting how many lines of our codebase are executed at least once by the tests.
+However, that is quite different from what we are trying to measure.  The problem is that a line executed as part of a
+test is just that.  It might not even be involved in the result of the test.</p>
+<p>
+I am pretty sure that you have heard the <a href="https://www.folklore.org/Negative_2000_Lines_Of_Code.html">story of great software developer</a> that, when everybody in his team was paid by
+lines of code contributed the codebase, reported a huge negative number that was the result of some proper refactoring.
+It goes without saying that he didn&#39;t have to pay to his employer to improve the code.  It was just the final prove that
+this method of measuring performance wasn&#39;t the right one.  So it didn&#39;t take longer before it went out of fashion,
+thankfully.  However, we still have people that get measured, among other things, by the test coverage of the codebase.</p>
+<p>
+While this might not be that terrible if code reviews are required for every commit to the codebase.  There is still a
+conflict of interests.  Particularly if the requirement comes from an external party, a customer of a development shop.</p>
+<blockquote>
+<p>Just between you and me: if you ever have to be paid by code coverage, know that if you invoke one after another the
+functions/methods of your code, even in a single test, you can get as close as you want to 100% coverage.</p>
+<p>
+If you choose to do that, it is your responsibility.  I <strong>do not</strong> promote that behavior.  But… if you want to be freed
+from your sins, send me my part. 😅</p>
+</blockquote>
+<p>
+Well, you have been warned.  Still, if properly used, test coverage can be useful.  So let me show you how to get those
+reports for your codebase.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Generate code coverage reports
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>The tool that we will be using for dealing with the code coverage information is <code class="verbatim">grcov</code>.  It is integrated with <code class="verbatim">cargo</code>
+and this is how we are going to use it.  It also requires having <code class="verbatim">llvm-tools</code> to inspect the binaries<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> produced by
+our projects and it can be installed as a <code class="verbatim">rustup</code> component.  This installation will make it available for all your
+projects, not just this one.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  rustup component add llvm-tools-preview
+</span></span><span class="line"><span class="cl">  cargo install grcov</span></span></code></pre></div>
+</div>
+<p>
+We need to run the tests to gather code coverage information, but it imposes some requirements on how we run them.
+Fortunately, those requirements only apply to when we want to refresh the data.  Any other runs can be done with the
+same commands that we have been using so far.</p>
+<ul>
+<li>First, we must disable incremental compilation, but just to update the code coverage data.  We will do it using an
+environment variable (<code class="verbatim">CARGO_INCREMENTAL</code>) and setting it to <code class="verbatim">0</code>.  Please, don&#39;t change that behavior with the
+<code class="verbatim">cargo.toml</code> key (<code class="verbatim">build.incremental</code>), because that is more persistent and applies to any other time you run the
+tests.</li>
+<li>Also, we need to enable support for instrumentation-based code coverage with another environment variable
+(<code class="verbatim">RUSTFLAGS</code>), that is used by the Rust compiler.  We set it to <code class="verbatim">-C instrument-coverage</code>, which adds information to
+the compiler output about the different regions that have to be counted, and through LLVM intrinsics<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>, the
+compiler inserts code for counting execution at every function/method and at every branch<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.</li>
+<li>Finally, we have to tell it where to store the raw profile data that we will use to generate the report.  The
+environment variable <code class="verbatim">LLVM_PROFILE_FILE</code> is responsible for defining those filenames and it uses some pattern strings
+that change the name depending on other data, like %p for the process ID, %h for the hostname or %m for the binary
+signature.  If it specifies a path to a non-existent directory, the missing directory structure will be created.</li>
+</ul>
+<p>The command that includes all this settings could be the following one.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nv">CARGO_INCREMENTAL</span><span class="o">=</span><span class="m">0</span> <span class="nv">RUSTFLAGS</span><span class="o">=</span><span class="s1">&#39;-C instrument-coverage&#39;</span> <span class="nv">LLVM_PROFILE_FILE</span><span class="o">=</span><span class="s1">&#39;target/prof/cargo-test-%p-%m.profraw&#39;</span> cargo t</span></span></code></pre></div>
+</div>
+<p>
+If this command line is too complex and you don&#39;t want to have to use the shell history to avoid making mistakes, you
+can use a shell alias.  And if you add it to you shell configuration, you can use it in any other Rust project 🎉!</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nb">alias</span> <span class="nv">gathercov</span><span class="o">=</span><span class="s2">&#34;CARGO_INCREMENTAL=0 RUSTFLAGS=&#39;-C instrument-coverage&#39; LLVM_PROFILE_FILE=&#39;target/prof/cargo-test-%p-%m.profraw&#39; cargo t&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+The gathered data can be visualized after processing it with <code class="verbatim">grcov</code>.  We add another directory inside of the <code class="verbatim">target</code>
+one, where <code class="verbatim">grcov</code> will put the resulting report.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  mkdir -p target/coverage/html</span></span></code></pre></div>
+</div>
+<p>
+Then, we run <code class="verbatim">grcov</code> to produce the report in HTML format.  <code class="verbatim">grcov</code> supports other formats, notably markdown, but check
+the list if you need something else.  Having an alias for this command too can also be useful.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  grcov -s . -b target/debug/deps/ -t html --branch --ignore-not-existing -o target/coverage/html .</span></span></code></pre></div>
+</div>
+<p>
+The report can be visualized in your web browser.  If you are in a macOS, it can be opened with the following command.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  open target/coverage/html/index.html</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Understanding the report
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>The report has a tree of code files on the left side.  You can expand directories and files by clicking on them.</p>
+<p>
+For each file or directory there is a summary line, and at the top you have the totals for the current directory and its
+subdirectories.  The summary provides coverage information per line, per function, and per branch.  For example, in the
+following image, <code class="verbatim">snippet_handler.rs</code> has 129 out of 143 lines (90.21%) covered by at least one test. It has 21
+functions/methods and 20 are executed by at least one test.  Branches are always 0/0 (100%) because <a href="https://github.com/rust-lang/rust/issues/79649">the compiler doesn&#39;t
+support that yet</a>.</p>
+<p>
+This report will give you a better idea of which parts of your project need more love.</p>
+<img src="report_1.png" alt="Code coverage report: files summary" title="Example files summary of a code coverage report"/>
+<p>
+If you visit any of the files, you will be able to check which functions and lines are covered by tests.  You can use
+this view to find out parts of the code that aren&#39;t covered yet, so you try and fix it.</p>
+<img src="report_2.png" alt="Code coverage report: file coverage" title="Example file code coverage report"/>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+A different test runner: nextest
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Intro and installation
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>By default, <code class="verbatim">cargo test</code> <a href="https://doc.rust-lang.org/rustc/tests/">builds a binary with the tests we have written, coordinated by libtest</a><sup class="footnote-reference"><a id="footnote-reference-4" href="#footnote-4">4</a></sup> and then acts as test
+runner.  A test runner is responsible for finding the tests in the binary –selected ones or all of them,– organizing
+them, run them, get their results and present a report to the developer.  It does a good job at that and it has improved
+a lot through the years.</p>
+<p>
+But there are alternatives.  Please meet <a href="https://nexte.st/"><code class="verbatim">nextest</code></a>, the next-generation test runner for Rust.  I believe one of its main
+motivations was to be able to run tests in parallel, which is possible now, but was very hard at the time due to the
+interface between <code class="verbatim">cargo test</code> and the test harness.  But nextest goes above and beyond and offers many other advantages:</p>
+<ul>
+<li>It has a(n arguably) nicer interface.</li>
+<li>It is more flexible for selecting the tests that you want to run.</li>
+<li>It helps to detect flaky (–retries), leaky and slow tests.</li>
+<li>It can be configured with a file (<code class="verbatim">.config/nextest.toml</code>) even with per-test overrides.</li>
+<li>It is more performant using threads.</li>
+<li>It can distribute tests in partitions that run in different machines for CI.</li>
+</ul>
+<p>It is an easy sell.</p>
+<p>
+I recommend you to install nextest from source.  This installation will make it available for all your projects, not just this one.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo install cargo-nextest --locked <span class="c1"># Locked uses the versions of the crate stored on Cargo.lock in the repo</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Selecting and running tests
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>We can obtain the list of tests with the following command:</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo nextest list</span></span></code></pre></div>
+</div>
+<p>which provides a list of tests organized by package (and indented) as you can see in this example of another project,
+which I have used to show something with a broader selection of tests.</p>
+<pre class="example">
+ast2md:
+    lexer::tests::close_parenthesis_returns_token
+    lexer::tests::double_quoted_string_is_stored_in_token
+    lexer::tests::empty_input_returns_no_tokens
+    lexer::tests::equals_returns_token
+    lexer::tests::error_is_produced_with_expected_data
+    lexer::tests::identifier_name_is_stored_in_token
+    lexer::tests::only_spaces_input_returns_no_tokens
+    lexer::tests::open_parenthesis_returns_token
+    lexer::tests::single_quoted_string_is_stored_in_token
+    lexer::tests::square_bracketed_string_is_stored_in_token
+    lexer::tests::tokenize_declaration_accepts_at
+    lexer::tests::tokenize_declaration_accepts_brackets
+    lexer::tests::tokenize_declaration_accepts_colon
+    lexer::tests::tokenize_declaration_accepts_comma
+    lexer::tests::tokenize_declaration_accepts_dots
+    lexer::tests::tokenize_declaration_accepts_hash
+    lexer::tests::tokenize_declaration_accepts_parenthesis
+    lexer::tests::tokenize_declaration_accepts_slash
+    lexer::tests::tokenize_double_quoted_string_fails_without_ending_quotes
+    lexer::tests::tokenize_double_quoted_string_fails_without_initial_quotes
+    lexer::tests::tokenize_identifier_accepts_brackets
+    lexer::tests::tokenize_identifier_accepts_dashes
+    lexer::tests::tokenize_identifier_accepts_parenthesis
+    lexer::tests::tokenize_identifier_starting_with_parenthesis
+    lexer::tests::tokenize_single_quoted_string_fails_without_final_quote
+    lexer::tests::tokenize_single_quoted_string_fails_without_initial_quote
+    lexer::tests::tokenize_square_bracket_string_fails_without_close_bracket
+    lexer::tests::tokenize_square_bracket_string_fails_without_open_bracket
+    lexer::tests::tokenize_unquoted_code_file_identifiers
+    metrics::test::add_a_method_to_a_list
+    metrics::test::add_a_method_to_a_list_error
+    metrics::test::add_a_method_to_a_type_data_structure
+    metrics::test::add_a_method_to_a_type_data_structure_error
+    metrics::test::add_a_property_to_a_list
+    metrics::test::add_a_property_to_a_list_error
+    metrics::test::add_a_property_to_a_type_data_structure
+    metrics::test::add_a_property_to_a_type_data_structure_error
+    metrics::test::add_uses_to_a_type_data_structure
+    metrics::test::add_uses_to_a_type_data_structure_error
+    metrics::test::empty_ast_produces_empty_array_of_type_data
+    node_type::tests::check_if_element_already_in_list_with_is_in_list
+    node_type::tests::check_if_element_not_already_in_list_with_is_in_list
+    node_type::tests::check_if_type_is_a_primitive_type
+    node_type::tests::check_if_type_is_not_a_primitive_type
+    node_type::tests::generate_intermediate_structures_decl_ref_expr
+    node_type::tests::generate_intermediate_structures_decl_ref_expr_error
+    node_type::tests::generate_intermediate_structures_error_node_enum
+    node_type::tests::generate_intermediate_structures_error_node_enum_error
+    node_type::tests::generate_intermediate_structures_func_decl
+    node_type::tests::generate_intermediate_structures_func_decl_error
+    node_type::tests::generate_intermediate_structures_member_ref_expr
+    node_type::tests::generate_intermediate_structures_member_ref_expr_error
+    node_type::tests::generate_intermediate_structures_struct_decl
+    node_type::tests::generate_intermediate_structures_struct_decl_error
+    node_type::tests::generate_intermediate_structures_var_decl
+    node_type::tests::generate_intermediate_structures_var_decl_error
+    parser::tests::create_dump_produces_empty_tree_with_no_tokens
+    parser::tests::create_dump_produces_error_if_first_token_is_not_begin_parens
+    parser::tests::create_dump_produces_multiple_nested_nodes
+    parser::tests::create_dump_produces_multiple_nested_nodes_as_children
+    parser::tests::create_dump_produces_nested_nodes_as_children
+    parser::tests::create_dump_produces_node_with_double_quoted_string_attribute
+    parser::tests::create_dump_produces_node_with_empty_property_attribute_from_identifier
+    parser::tests::create_dump_produces_node_with_empty_property_attribute_from_single_quoted
+    parser::tests::create_dump_produces_node_with_property_as_first_token
+    parser::tests::create_dump_produces_node_with_property_attribute_from_identifier_and_declaration
+    parser::tests::create_dump_produces_node_with_property_attribute_with_identifier_value
+    parser::tests::create_dump_produces_node_with_property_attribute_with_single_quoted_value
+    parser::tests::create_dump_produces_node_with_property_attribute_with_square_bracket_quoted_value
+    parser::tests::create_dump_produces_trivial_node
+    parser::tests::create_dump_produces_trivial_node_with_eof
+    swift_dump_ast::tests::dfs_child_node_before_sibling_node
+    swift_dump_ast::tests::dfs_child_nodes_in_depth_before_sibling_node
+    swift_dump_ast::tests::dfs_empty_tree_iterator_returns_no_data
+    swift_dump_ast::tests::dfs_sibling_nodes_from_first_to_last
+    swift_dump_ast::tests::dfs_single_node_tree_iterator_returns_data_for_that_node
+ast2md-cli::integration_test:
+    read_input_file
+    report_non_existing_input_file
+    test_golden_file::input_01_tests_input_ClassTypeUsed_ast
+    test_golden_file::input_02_tests_input_ClassesTypesUsed_ast
+    test_golden_file::input_03_tests_input_ClassesTypesUsedReverse_ast
+    test_golden_file::input_04_tests_input_EmptyClass_ast
+    test_golden_file::input_05_tests_input_EmptyEnum_ast
+    test_golden_file::input_06_tests_input_EmptyMultiStruct_ast
+    test_golden_file::input_07_tests_input_EmptyNestedStruct_ast
+    test_golden_file::input_08_tests_input_EmptyStruct_ast
+    test_golden_file::input_09_tests_input_MethodUsed_ast
+    test_golden_file::input_10_tests_input_NestedPropertiesAndMethodsUsed_ast
+    test_golden_file::input_11_tests_input_NestedStructWithProperties_ast
+    test_golden_file::input_12_tests_input_NestedStructWithPropertiesIn2ndType_ast
+    test_golden_file::input_13_tests_input_NestedStructWithPropertiesIn3Types_ast
+    test_golden_file::input_14_tests_input_PropertiesAndMethodsUsed_ast
+    test_golden_file::input_15_tests_input_PropertyAndMethodUsed_ast
+    test_golden_file::input_16_tests_input_PropertyUsed_ast
+    test_golden_file::input_17_tests_input_Protocol1_ast
+    test_golden_file::input_18_tests_input_Return_ast
+    test_golden_file::input_19_tests_input_StructWithMethods_ast
+    test_golden_file::input_20_tests_input_StructWithProperties_ast
+    test_golden_file::input_21_tests_input_ViewController_ast
+couplinglib:
+    coupling_interface::tests::test_get_assessment_level_high
+    coupling_interface::tests::test_get_assessment_level_low
+    coupling_interface::tests::test_get_assessment_level_no
+    coupling_interface::tests::test_get_assessment_level_normal
+    no_protocol_freq::tests::test_remove_protocol_couplings
+    no_protocol_freq::tests::test_remove_protocol_empty_couplings
+    no_protocol_freq::tests::test_type_is_not_protocol
+    no_protocol_freq::tests::test_type_is_protocol
+metcomp::integration_test:
+    test_coupling_full_frec::input_1_tests_full_frequency_input_strat1_low_frequency_json
+    test_coupling_full_frec::input_2_tests_full_frequency_input_strat1_medium_frequency_json
+    test_coupling_no_protocol_frec::input_1_tests_no_protocol_freq_input_strat2_low_freq_with_protocol_json
+    test_coupling_no_protocol_frec::input_2_tests_no_protocol_freq_input_strat2_low_freq_with_two_protocols_
+    test_coupling_no_protocol_frec::input_3_tests_no_protocol_freq_input_strat2_low_frequency_json
+    test_coupling_no_protocol_frec::input_4_tests_no_protocol_freq_input_strat2_medium_frequency_json
+</pre>
+<p>If you list the tests in our project instead, you will notice that doctests don&#39;t show up.  This is still a limitation of
+nextest.</p>
+<p>
+We can run the tests with nextest.  It is usually faster than regular <code class="verbatim">cargo t</code>.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo nextest run</span></span></code></pre></div>
+</div>
+<p>
+Nextest allows us to decide what to do with the ignored tests.  <code class="verbatim">cargo nextest run --run-ignored only</code> is equivalent to
+<code class="verbatim">cargo t -- --ignored</code> and <code class="verbatim">--run-ignored all</code> corresponds to <code class="verbatim">--include-ignored</code>.</p>
+<p>
+You can also use strings to select some of the tests, but you have more options here than with the regular <code class="verbatim">cargo test</code>.
+For starters, more than one string is allowed here.  But more importantly, nextest supports a domain specific language
+for selecting tests, known as <a href="https://nexte.st/docs/filtersets/">filterset DSL</a>.  Filterset makes it trivial to select tests based on their dependencies,
+packages, or names, including the ability to use regular expressions.</p>
+<p>
+We could select the tests that contain &#34;full_name&#34; in their name as we did before.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo nextest run -E <span class="s1">&#39;test(full_name)&#39;</span> <span class="c1"># It also selects set_full_name() tests</span></span></span></code></pre></div>
+</div>
+<p>
+But we can be more selective by combining expressions.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo nextest run -E <span class="s1">&#39;test(full_name) and not test(set)&#39;</span> <span class="c1"># Selects only the one for full_test</span>
+</span></span><span class="line"><span class="cl">  cargo nextest run -E <span class="s1">&#39;test(full_name) - test(set)&#39;</span> <span class="c1"># Same</span></span></span></code></pre></div>
+</div>
+<p>
+And if we have more specific needs, we can even use globs or regular expressions.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo nextest run -E <span class="s1">&#39;test(/full.*space/)&#39;</span></span></span></code></pre></div>
+</div>
+<p>
+It supports having a default filter defined in a toml file.  And that filter can be different for each different
+profile.</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Other interesting features
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>A test runner can be helpful in more ways that just running the tests and returning a report.  It can be a valuable tool
+to assess the quality of our tests.  These are three things that nextest can do.</p>
+<dl>
+<dt>
+Flaky tests
+</dt>
+<dd>It can run the same tests repeatedly and detect those that don&#39;t behave deterministically –sometimes
+they pass, sometimes they fail without changing anything in the codebase.  You can even tune this feature to eliminate
+timing issues when you are dealing with external resources that require some time to be released.</dd>
+<dt>
+Slow tests
+</dt>
+<dd>It can flag slow tests automatically.  The threshold can be configured and even defined for each
+profile, and it can gracefully terminate the tests that take longer than a given amount of time.  If you have specific
+requirements for some tests, you can override their settings using filtersets.  You can also define a global timeout
+so the whole test harness doesn&#39;t take longer than whatever you define.</dd>
+<dt>
+Leaky tests
+</dt>
+<dd>Yes, I know what you are thinking.  Leaky and Rust together: they don&#39;t match!  Well, we are talking
+about tests that create subprocesses and don&#39;t do the proper cleaning afterwards.  This doesn&#39;t cover every possible
+scenario, so expect false negatives, but worry when a test is shown as leaky.</dd>
+<dt>
+Stress tests
+</dt>
+<dd>It runs tests many times in a loop.</dd>
+</dl>
+<p>Besides supporting all the features that <code class="verbatim">cargo test</code> has, nextest has some features that can be very useful for using
+it in the continuous integration pipeline.  Let me highlight some.</p>
+<ul>
+<li>You can distribute your tests among different <em>partitions</em> and run each one in a different system.</li>
+<li>You can produce output in JUnit/XUnit format (XML), but also in JSON.  This facilitates the integration with other tools.</li>
+<li>You can define what to do if there are no tests in the codebase.  You either accept that as a valid option and PASS or
+make the tests FAIL in that situation.  And you can disable fail-fast –let the tests finish even if there are some of
+them failing.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+Summary
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<p>In this article, I have explained how to produce code coverage reports and keep your customers/managers happy. I have
+also shown some of the advantages of using nextest as your test runner that go beyond speed and nice output.</p>
+<p>
+Notice that in this case, I haven&#39;t added any code to the repository, because we were focusing on how to execute the
+test to get the most out of them.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>All the architectures supported by the Rust compiler work with llvm-tools.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>Functions that implement certain functionality for the target platform.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p>Not really yet.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-4"><a href="#footnote-reference-4">4</a></sup>
+<div class="footnote-body">
+<p>We used this binary when we were executing and debugging a test from the command line.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-09-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/" data-title="Rust unit testing: add-ons" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/" data-title="Rust unit testing: add-ons" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_tools_builtin/" class="prev" rel="prev" title="Rust unit testing: builtin tools"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: builtin tools</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.150.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

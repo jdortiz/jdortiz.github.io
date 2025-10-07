@@ -3,7 +3,21 @@
         <title>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/rust/</link>
         <description>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 07 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: test doubles &amp; stubs</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/</link>
+    <pubDate>Tue, 07 Oct 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+Unit testing is about writing tests for individual units (Duh!), most frequently these units are the types that we
+define in our code, i.e., structs / enums / unions, or first-class functions.  But the types that we want to test
+usually have dependencies on other types and we would like to test them in isolation without having to worry about the
+details of those dependencies.  That&#39;s why you need test doubles.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: add-ons</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
     <pubDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</pubDate>

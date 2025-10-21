@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Rust unit testing: spies and dummy test doubles - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris has become a spy."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/">
+        <title>Rust unit testing: spy and dummy test doubles - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris has become a spy."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Rust unit testing: spies and dummy test doubles">
+  <meta property="og:title" content="Rust unit testing: spy and dummy test doubles">
   <meta property="og:description" content="Ferris has become a spy.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -19,7 +19,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Rust unit testing: spies and dummy test doubles">
+  <meta name="twitter:title" content="Rust unit testing: spy and dummy test doubles">
   <meta name="twitter:description" content="Ferris has become a spy.">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
 <meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -28,7 +28,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Rust unit testing: spies and dummy test doubles",
+        "headline": "Rust unit testing: spy and dummy test doubles",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -105,7 +105,7 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: spies and dummy test doubles</h1><h2 class="single-subtitle">Adventures of a spy and a dummy</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: spy and dummy test doubles</h1><h2 class="single-subtitle">Adventures of a spy and a dummy</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-10-20">2025-10-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2440 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
@@ -744,7 +744,7 @@ near you… soon.</p>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spies and dummy test doubles" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spies and dummy test doubles" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spy and dummy test doubles" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spy and dummy test doubles" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

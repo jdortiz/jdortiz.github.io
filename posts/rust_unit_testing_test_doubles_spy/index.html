@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Rust unit testing: spies and dummy test doubles - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Alt text for the featured image."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/">
+        <title>Rust unit testing: spies and dummy test doubles - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris has become a spy."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
   <meta property="og:title" content="Rust unit testing: spies and dummy test doubles">
-  <meta property="og:description" content="Alt text for the featured image.">
+  <meta property="og:description" content="Ferris has become a spy.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-10-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-10-21T14:09:46+02:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
   <meta name="twitter:title" content="Rust unit testing: spies and dummy test doubles">
-  <meta name="twitter:description" content="Alt text for the featured image.">
+  <meta name="twitter:description" content="Ferris has become a spy.">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
 <meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -34,12 +34,12 @@
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/"
         },"genre": "posts","keywords": "rust, test","wordcount":  2440 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/","datePublished": "2025-10-20T00:00:00+00:00","dateModified": "2025-10-20T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/","datePublished": "2025-10-20T00:00:00+00:00","dateModified": "2025-10-21T14:09:46+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "Jorge Ortiz-Fuentes"
-            },"description": "Alt text for the featured image."
+            },"description": "Ferris has become a spy."
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -116,7 +116,7 @@
         data-srcset="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 2x"
         data-sizes="auto"
         alt="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
-        title="Alt text for the featured image." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+        title="Ferris has become a spy." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -738,7 +738,8 @@ near you… soon.</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-10-20</span>
+                <span>Updated on 2025-10-21&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/6ac40edd611f9e1a98b8e3bbfca2776c7cf4db1e" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 6ac40edd611f9e1a98b8e3bbfca2776c7cf4db1e: Add article on spy and dummy tests doubles">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6ac40ed</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>

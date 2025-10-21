@@ -4,42 +4,42 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Rust unit testing: test doubles &amp; stubs - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris with its doppelganger"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/">
+        <title>Rust unit testing: spies and dummy test doubles - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Alt text for the featured image."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Rust unit testing: test doubles & stubs">
-  <meta property="og:description" content="Ferris with its doppelganger">
+  <meta property="og:title" content="Rust unit testing: spies and dummy test doubles">
+  <meta property="og:description" content="Alt text for the featured image.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-10-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-08T12:04:32+02:00">
+    <meta property="article:published_time" content="2025-10-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-10-20T00:00:00+00:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Rust unit testing: test doubles & stubs">
-  <meta name="twitter:description" content="Ferris with its doppelganger">
+  <meta name="twitter:title" content="Rust unit testing: spies and dummy test doubles">
+  <meta name="twitter:description" content="Alt text for the featured image.">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Rust unit testing: test doubles \u0026 stubs",
+        "headline": "Rust unit testing: spies and dummy test doubles",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_stub\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  3462 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_stub\/","datePublished": "2025-10-07T00:00:00+00:00","dateModified": "2025-10-08T12:04:32+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2440 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/","datePublished": "2025-10-20T00:00:00+00:00","dateModified": "2025-10-20T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "Jorge Ortiz-Fuentes"
-            },"description": "Ferris with its doppelganger"
+            },"description": "Alt text for the featured image."
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -105,27 +105,27 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: test doubles & stubs</h1><h2 class="single-subtitle">Manual test doubles</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: spies and dummy test doubles</h1><h2 class="single-subtitle">Adventures of a spy and a dummy</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-10-07">2025-10-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3462 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-10-20">2025-10-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2440 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_stub/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_stub/header-image.jpg, /posts/rust_unit_testing_test_doubles_stub/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_stub/header-image.jpg 2x"
+        data-src="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 2x"
         data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_stub/header-image.jpg"
-        title="Ferris with its doppelganger" width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
+        title="Alt text for the featured image." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">Add sidekick and gadget: A wicked scenario</a>
+<li><a href="#headline-1">Building the scenario for the Adventures of a spy and a dummy</a>
 </li>
-<li><a href="#headline-2">Test Stub</a>
+<li><a href="#headline-2">Test dummies and test spies</a>
 </li>
 <li><a href="#headline-3">Final code</a>
 </li>
@@ -137,430 +137,131 @@
 </nav></div>
             </div><div class="content" id="content">
 <p>
-Unit testing is about writing tests for individual units (Duh!), most frequently these units are the types that we
-define in our code, i.e., structs / enums / unions, or first-class functions.  But the types that we want to test
-usually have dependencies on other types and we would like to test them in isolation without having to worry about the
-details of those dependencies.  That&#39;s why you need test doubles.</p>
+In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two
+different types of test doubles: <strong>the spy</strong> and <strong>the dummy</strong>.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
 <p>
-Test doubles provide us with the following advantages:</p>
-<dl>
-<dt>
-Avoid collateral effects
-</dt>
-<dd>By using a test double instead of the actual type, we avoid or, at least control, any
-actions performed by the actual type, like writing to a file or communicating through the network.</dd>
-<dt>
-Control the behavior of the replaced type and its responses
-</dt>
-<dd>We can then trigger the responses that allows us to
-test different scenarios.  You can get responses from them that would be hard to obtain under normal circumstances,
-including errors that would require a lot of work to make them happen.</dd>
-<dt>
-Be aware of the interactions with the replaced instance
-</dt>
-<dd>The test doubles are able to register when its methods are
-invoked and the parameters used each time.  We can use that information to check that our expectations are correct.</dd>
-</dl>
-<p>However, for this replacement to take place, we need to have a mechanism for providing the test double instead of the
-actual type.  We refer to this as &#34;dependency injection&#34;, meaning that the dependency can be <em>injected</em> into the <em>unit</em>
-that we are testing<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  If the type that we want to replace is created inside of the code that we want to test, for
-example inside of a method, and this creation is hard-coded, it would be very much harder or even not possible to
-replace it.  In that case, your code ain&#39;t water, my friend 🥋.</p>
-<p>
-There are several ways in which we can inject the dependency in the instance of our type.  According to Mark Seemann,
-these are the main ones:</p>
-<dl>
-<dt>
-Constructor injection
-</dt>
-<dd>The dependency is provided as a parameter to the constructor (associated function <code class="verbatim">new()</code> or
-similar) of the type that we want to test.</dd>
-<dt>
-Field injection
-</dt>
-<dd>The dependency is in a field of the type that we are testing and it can be replaced by our test
-double.</dd>
-<dt>
-Method injection
-</dt>
-<dd>The dependency is taken from one of the arguments of the method or function that we want to
-exercise in our test.</dd>
-<dt>
-Ambient context
-</dt>
-<dd>The dependency is accessed from a static item, that can also be replaced by the test double.</dd>
-</dl>
-<p>Even if the code of the type that we are testing offers any of those injection points, to use a test double, they have to
-be replaceable.  If a dependency can be provided as constructor argument, a field, a method argument, or a static
-variable, we need that the type of that dependency has some flexibility.  Rust doesn&#39;t allow inheritance, so passing a
-subtype of the dependency where we modify the way it works by overriding its methods is not an option.  But Rust allows
-instances to be replaced if the type is defined as an implementation of a trait (for example, <code>fn do(x: impl
-SomeTrait)</code>, <code>fn do&lt;X: SomeTrait&gt;(x: X)</code>, or a trait object <code>fn do(x: &amp;dyn SomeTrait)</code>).</p>
-<p>
-Test doubles can help us simplify the architecture of the code, but we should only alter the interface of the type being
-tested if we cannot replace the dependency in any other way.  In most cases, the usability of the interface gets along
-with the testability of the type.</p>
-<p>
-Finally in this introduction to test doubles, I would like to introduce the <a href="https://martinfowler.com/bliki/TestDouble.html">different kinds of tests doubles as
-described by Martin Fowler</a><sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  I provide a brief description of each kind, but I will extend them when I implement
-each one of them, and its implementation will clarify their purpose and differences.</p>
-<dl>
-<dt>
-Dummy
-</dt>
-<dd>An instance of a type that is required to make our test code work –for example, an argument of the constructor
-or the method that we want to test,– but that is not actually used in the test.</dd>
-<dt>
-Fake
-</dt>
-<dd>A type that has a simpler, but working implementation that makes more sense for the test.  For example, it can
-be computationally cheaper.</dd>
-<dt>
-Stub
-</dt>
-<dd>A type that can be controlled to provide the desired answer to the invocations of the methods used in the test.</dd>
-<dt>
-Spy
-</dt>
-<dd>A type that does the same as the stub, but also keeps track of the methods that have been invoked and can be
-interrogated later.</dd>
-<dt>
-Mock
-</dt>
-<dd>A spy that contains the logic for the verification of the expectations of its usage and can react to
-unexpected interactions.</dd>
-</dl>
-<p>Notice that a dummy in one test might become a full-fledged mock in another.</p>
-<p>
-In this article and the following ones, I will introduce a series of scenarios that have to be tested and we will write
-the required test double from scratch, i.e. no mocking library.  It is time to warm up your finger muscles and start
-typing.</p>
+A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It
+<em>spies</em> on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something
+else.</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-Add sidekick and gadget: A wicked scenario
+Building the scenario for the Adventures of a spy and a dummy
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>The power of the wicked is growing around us, and supervillains don&#39;t like doing everything by themselves.  Having a
-sidekick is one of the perks of becoming being promoted from villain to supervillain.  Let&#39;s start by defining the
-<code class="verbatim">Sidekick</code> type in a new module, i.e., a new file <code class="verbatim">sidekick.rs</code>.</p>
+<p>Let me put you in context.  Supervillains aren&#39;t super because they can fly –most they can&#39;t,– but because they can
+reach far when spreading evil.  And if they want to be really effective, a sidekick ain&#39;t enough.  They also need some
+henchmen.  Henchmen are useful and disposable.  Not very smart, though.  So the orders issued to them by the
+supervillian must be clear and concise.</p>
+<p>
+We are going to start by defining a henchman, which we are going to model as a trait.  We put it in a new file
+(<code class="verbatim">henchman.rs</code>) and add it to <code class="verbatim">lib.rs</code>. The trait is going to have a single method that will be used to tell a henchman
+to build the headquarters.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for sideckicks and all the related functionality
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module to define henchmen.
 </span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(dead_code)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents a sidekick.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></div>
-</div>
-<p>
-And we add it to the library (<code class="verbatim">lib.rs</code>).</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span> <span class="nn">sidekick</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-A Supervillain <strong>may</strong> have a Sidekick, but it doesn&#39;t require one to exist.  Remember: it is a perk, not an obligation.
-We encode this by adding a field to Supervillain.  It must be an <code>Option&lt;&gt;</code>, because it might not have one.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents supervillains.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">sidekick</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Sidekick</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Henchman trait.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Henchman</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">build_secret_hq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-That change requires making a modification to the implementation of the <code>TryFrom</code> trait so the code can continue
-compiling (<code class="verbatim">cargo b --lib</code><sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>):</p>
+We add it to the <code class="verbatim">lib.rs</code> file.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="nb">Ok</span><span class="p">(</span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">first_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">last_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">sidekick</span>: <span class="nb">None</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">})</span></span></span></code></pre></div>
-</div>
-<p>
-When we compile the tests (<code class="verbatim">cargo t --lib</code>) we realize that there is another case of an incomplete initialization in the
-creation of the context for the tests.  We could solve them adding the new field and its value, but a better solution
-would be to complete the rest of the fields with their defaults.  We need to derive <code>Default</code> for <code class="verbatim">Supervillain</code>.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[derive(Default)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
-</div>
-<p>
-And use it to complete the struct.  Notice that we have to do this just once, because the context is used for all (most)
-of the tests.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">first_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_FIRST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">last_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_LAST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="o">..</span><span class="nb">Default</span>::<span class="n">default</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">},</span></span></span></code></pre></div>
-</div>
-<p>
-At this point, our tests should compile and pass. Ta-da!</p>
-<p>
-A sidekick is worth nothing unless they have a gadget, and a gadget can be many things.  We can define a gadget as
-&#34;something that does stuff&#34;.  Yes, I know that this is not very specific, but life ain&#39;t either and outlaws, even less.
-So, we define a trait for gadgets with just one associated function (<code>do_stuff()</code>) in a new file (<code class="verbatim">gadget.rs</code>).</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for gadgets and all the related functionality
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(dead_code)]</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span> <span class="nn">henchman</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Trait that represents a gadget.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Gadget</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">henchman</span>::<span class="n">Henchman</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+Once the supervillains have started to <em>work</em>, they need to establish themselves, and, since housing prices have gone to
+the roof, they need their henchmen to build their headquarters.  We have to admit that supervillians use top-notch
+architects to design their headquarters and that they <em>somehow</em> get bargains when aquiring the land.  In any case, the
+supervillian can start world domination by using a new method, <code>start_world_domination_stage1()</code>.  In it, the
+supervillian will give a gadget to their sidekick and ask them to provide a list of cities that can be used as targets,
+because they are weak.  Then they will ask the henchman to build the headquarters in the first city of the list, which
+should probably be the weakest.</p>
+<p>
+Let&#39;s start by defining the new <code>Supervillain</code> method and import <code>Henchman</code> and <code>Gadget</code>.  We had already defined
+<code>Gadget</code> in a previous article.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">start_world_domination_stage1</span><span class="o">&lt;</span><span class="n">H</span>: <span class="nc">Henchman</span><span class="p">,</span><span class="w"> </span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">henchman</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-We have to add <code class="verbatim">gadget</code> to the library (<code class="verbatim">lib.rs</code>), too.</p>
+In the implementation of that method, we need to have a sidekick that gets the list of weak targets from the sidekick
+using the gadget.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span> <span class="nn">gadget</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">gadget</span>::<span class="n">Gadget</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-Sidekicks require a <code class="verbatim">Gadget</code> to exist (to be constructed), and they store them in a field.  However, a trait can not be
-used as the type of a parameter because a trait it is not a type in itself.  We could use a type constraint as we did in
-the method <code>Supervillain::attack(&amp;self, weapon: &amp;impl Megaweapon)</code>, but instead, we can pass a reference or smart
-pointer to a trait object and store it.  Assuming that we want the sidekick to be the owner of the gadget, we are going
-to use a <code class="verbatim">Box</code> to store it.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">Gadget</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents a sidekick.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">gadget</span>: <span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Gadget</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">new</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gadget</span>: <span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">gadget</span>: <span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="n">gadget</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sidekick</span><span class="p">.</span><span class="n">get_weak_targets</span><span class="p">(</span><span class="n">gadget</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-If we compile the code as it is now (<code class="verbatim">cargo b --lib</code>), the compiler will complain the lifetime of the gadget.  Let&#39;s add
-explicit lifetimes to the <code class="verbatim">Sidekick</code>.</p>
+We can only continue if the vector with the list of weak cities isn&#39;t empty.  Otherwise, we should finish working on the
+first stage of world domination and return.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">gadget</span>: <span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Gadget</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">new</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gadget</span>: <span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">gadget</span>: <span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="n">gadget</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">targets</span><span class="p">.</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-This change must be propagated to the <code class="verbatim">Supervillian</code>.</p>
+But if there is at least one entry in the list of weak cities, the supervillain can tell the henchman that was passed
+onto this method to <code>build_secret_hq()</code> in the selected target.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">sidekick</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">//...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TryFrom</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">//...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">    </span><span class="n">henchman</span><span class="p">.</span><span class="n">build_secret_hq</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">clone</span><span class="p">());</span></span></span></code></pre></div>
 </div>
 <p>
-This new version should build without errors. But, if we try to run the tests (<code class="verbatim">cargo t --lib</code>), we will notice that it
-also must be propagated to the <code class="verbatim">Context</code> test helper and to its implementation of <code class="verbatim">AsyncContext</code>.</p>
+There is still a missing piece.  Our <code>Sidekick</code> needs to have the new method declared, but we don&#39;t need anything else than a
+void implementation.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AsyncTestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="p">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_weak_targets</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">vec!</span><span class="p">[]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-However, when we try to compile (<code class="verbatim">cargo t --lib</code>), we still get an error.  This time, it is because <code class="verbatim">Gadget</code> is not
-<code>Send</code>.  We can <em>politely</em> force it to be <code>Send</code>.</p>
+That should be enough, but let&#39;s compile it to check that everything is fine.  We first compile the library with <code class="verbatim">cargo
+b --lib</code>.  So far, so good.  And we also run the tests with <code class="verbatim">cargo t --lib</code> and… the new method is missing in the test
+double of the <code>Sidekick</code> that we created in the last article.  We need to define it in <code class="verbatim">tests::doubles</code> and import
+<code>Gadget</code> in that module.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Gadget</span>: <span class="nb">Send</span> <span class="p">{</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_weak_targets</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">vec!</span><span class="p">[]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Finally, we need to provide a placeholder lifetime for the async context that is provided as <code>test_context</code> so that it
-gets inferred and everything compiles fine.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">plan_is_sadly_expected</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
-</div>
-<p>
-Our tests are working and passing again.  Inhale, exhale, and relax.</p>
+The scenario is now ready.</p>
 </div>
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-Test Stub
+Test dummies and test spies
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
-<p>Now that the code compiles and the tests pass again, we can implement one of the most important functions of a sidekick:
-agreeing.  We could add an argument that explains what they have to agree to, but that would be unrealistic. 😄</p>
+<p>We want to test the method that triggers the first stage of the world domination, and that method requires a henchman
+and a gadget.  We will take care of the henchman later, but we realize that the gadget that we need to use with the
+method is directly passed onto the sidekick.  The sidekick of the test that we will write is going to be a test double,
+so it doesn&#39;t have to do anything with it.</p>
+<p>
+That is the typical use case for a dummy: we can&#39;t write the test without it, but it can be an empty shell because it
+won&#39;t be used.</p>
+<p>
+We create a <code>GadgetDummy</code> in the <code>tests</code> module of the <code>Supervillain</code>.  We will reserve <code>tests::doubles</code> for the doubles
+that have to be replaced at compile time using configuration conditional checks, as we did in <a href="/posts/rust_unit_testing_test_doubles_stub/">my last article</a>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">agree</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>Notice that in this implementation we are returning <code>true</code>, because either <code>true</code> or <code>false</code> must be returned, and the
-former makes more sense.  We could have more (business? wicked?) logic in this method, but we should be able to test the
-supervillain independently of this implementation.</p>
-<p>
-<code class="verbatim">Supervillain</code> can now implement the <code>conspire()</code> method.  In it, they will ask their sidekick, if any, to agree with
-them.  <code class="verbatim">Supervillain</code> uses the method <code>Sidekick::agree(&amp;self)</code> of the Sidekick and <strong>strongly expects</strong> a positive
-response (<code>true</code>).  If the answer is affirmative, the supervillain keeps their sidekick, otherwise they fire them (sets
-the field to <code>None</code>).</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">conspire</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">sidekick</span><span class="p">.</span><span class="n">agree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-We want to test three scenarios.  The first one is that when the sidekicks agree to the conspiracy, the supervillain keeps
-them.  We could use the original <code class="verbatim">Sidekick</code> for that, but we would be conditioning this test of the <code class="verbatim">Supervillain</code> to the current
-implementation of the <code class="verbatim">Sidekick</code>, which doesn&#39;t seem like a great idea.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">keep_sidekick_if_agrees_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Arrange
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Act
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Assert
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="fm">unimplemented!</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-The second scenario is that, if the sidekicks don&#39;t agree to the conspiracy, the supervillian fires them.  We need to
-convince the sidekick to answer negatively, but that might be really hard because it is part of his essence and
-hard-coded in our code.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">fire_sidekick_if_doesnt_agree_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Arrange
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Act
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Assert
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="fm">unimplemented!</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-The third one is trivial in respect to the sidekick, because we want to be sure that everything goes well when there is
-no sidekick.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">conspiracy_without_sidekick_doesnt_fail</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Arrange
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Act
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// Assert
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="fm">unimplemented!</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-Let&#39;s get the last one out of the way.  Delete the line with <code>unimplemented!()</code> and add this code.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">.</span><span class="n">is_none</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;Unexpected sidekick&#34;</span><span class="p">);</span></span></span></code></pre></div>
-</div>
-<p>We run it and it should pass.  So far, so good!</p>
-<p>
-In order to test the method properly, we need a test double for the sidekick.  Otherwise, we won&#39;t be able to control
-the answer from the sidekick and, consequently, we won&#39;t be able to test the case in which the sidekicks answer that
-they don&#39;t agree and the supervillain fires them.  Also, our test would be depending on the current implementation of the
-<code class="verbatim">Sidekick</code> and future changes of it may affect the outcome of the test.</p>
-<p>
-When using languages that support inheritance, if a dependency uses a concrete type, it is generally replaced by a test
-double by taking advantage of the inheritance.  The subclass can be used instead of the original type and the behavior is
-changed by overriding the desired methods.</p>
-<p>
-However, Rust doesn&#39;t support inheritance, so a different method must be used to replace those types.  The mechanism
-used by the <code class="verbatim">mockall</code> crate is to modify the path to the actual object using the namespace of the test double.  Don&#39;t
-worry if you don&#39;t fully understand what I have just said, because we are going to implement the same thing manually.</p>
-<p>
-Let&#39;s start by defining a new module for the test doubles within the existing test module in the <code class="verbatim">supervillain.rs</code> file.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="p">(</span><span class="k">crate</span><span class="p">)</span><span class="w"> </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-In that module, we have to create a struct with the same name of the type that we want to replace.  It doesn&#39;t have to
-be exactly the same structure with the same fields, but it must contain the fields and methods that are used by the
-regular code.  This will be our doppelganger.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></div>
-</div>
-<p>
-We can now take advantage of the namespaces to use one or the other.  Basically we will tell the compiler to use the
-<code class="verbatim">Sidekick</code> that is the <code class="verbatim">sidekick</code> module of this crate (<code class="verbatim">crate::sidekick::Sidekick</code>), except when it is producing the
-tests.  In that case, we want it to use the one in the <code class="verbatim">doubles</code> module of our <code class="verbatim">tests</code> module (<code class="verbatim">tests::doubles::Sidekick</code>).</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">Sidekick</span><span class="p">;</span></span></span></code></pre></div>
-</div>
-<p>
-But, if we try to compile the tests (<code class="verbatim">cargo t --lib</code>), we will get errors about the lifetime.  However, adding one to
-the struct won&#39;t be enough unless we use it.  Since we don&#39;t want the test double to depend on a Gadget, or else we will
-need a gadget dummy, we can use phantom data to include the lifetime without having a real field.  Notice that we only
-import the <code class="verbatim">PhantomData</code> type inside of the <code class="verbatim">doubles</code> module.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">marker</span>::<span class="n">PhantomData</span><span class="p">;</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">GadgetDummy</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="o">&lt;&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Gadget</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-The implementation only has to contain the associated functions and methods that are used by <code class="verbatim">Supervillian</code> or our tests.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">agree</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-We have to modify the implementation slightly, because we want to control the response from the <code>agree()</code> method.  That
-is what a stub is supposed to be good for.</p>
+In the previous article, we implemented a stub for the <code>Sidekick</code> in which we could control what the <code>Sidekick</code> double
+returned when its <code>agree()</code> method was invoked.  We are now going to do the same for another method:
+<code>get_weak_targets()</code>.  We add a field to the <code>Sidekick</code> double that will hold the values that will be used to reply to
+its invocation and initialize it in the constructor associated function.<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup></p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="o">&lt;&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">agree_answer</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">targets</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -568,43 +269,98 @@ is what a stub is supposed to be good for.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">agree_answer</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">targets</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[],</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We want to define some constants that will help us make the test more readable and reduce the mistakes attributable to
+typos, as I explained in the <a href="/posts/rust_unit_testing_simplify_tests/">second article of this series</a>.  These constants will contain the first target city and the
+whole list.  We are only going to use these constants in only one test, but we will put them in the <code class="verbatim">test_common</code> module
+(<code class="verbatim">test_common.rs</code> file) just for consistency.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="no">FIRST_TARGET</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;Tampa&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="no">TARGETS</span>: <span class="p">[</span><span class="o">&amp;</span><span class="nb">&#39;static</span><span class="w"> </span><span class="kt">str</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="no">FIRST_TARGET</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Pamplona&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Vilnius&#34;</span><span class="p">];</span></span></span></code></pre></div>
+</div>
+<p>
+And we implement the method in the <code>Sidekick</code> double to return what we have stored in its <code>targets</code> field.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_weak_targets</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Now that the rest is in place, it is time to lower the lights and play &#34;The Spy Who Loved Me&#34; in your favorite music
+streaming platform.  We are going to implement a test double for the <code>Henchman</code> and it is going to be a spy, because we
+want to know if the supervillain tells them to build the secret headquarters and, if so, what is the location provided
+to do so.</p>
+<p>
+We create a <code>HenchmanSpy</code> type in the <code>tests</code> module of the <code>Supervillain</code>.  That type has to implement the <code>Henchman</code>
+trait, so it can be used in the method that we are testing.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">HenchmanSpy</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">agree</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="bp">self</span><span class="p">.</span><span class="n">agree_answer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Henchman</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">build_secret_hq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Now, we can write the test for the first scenario.  We can be sure that the sidekick will answer positively
-independently of any future implementation of the <code>agree()</code> method.</p>
+In order to fulfill the purpose of a (test) spy, we add a field to the <code>HenchmanSpy</code> to remember the argument used to
+invoke <code>build_secret_hq()</code>.  This field is going to be an <code>Option&lt;String&gt;</code> because it will contain <code>None</code> if the method
+hasn&#39;t been invoked.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">keep_sidekick_if_agrees_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">sk_double</span><span class="p">.</span><span class="n">agree_answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">.</span><span class="n">is_some</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;Sidekick fired unexpectedly&#34;</span><span class="p">);</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">hq_location</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-And also for the second scenario, where we can force the sidekicks to answer against what is coded in their DNA.</p>
+And in the implementation of the method that we want to monitor, we store the argument in the field that we have just
+defined.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">fire_sidekick_if_doesnt_agree_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">sk_double</span><span class="p">.</span><span class="n">agree_answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">.</span><span class="n">is_none</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;Sidekick not fired unexpectedly&#34;</span><span class="p">);</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Henchman</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">build_secret_hq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="bp">self</span><span class="p">.</span><span class="n">hq_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">location</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Use cargo to run the tests.  All should pass.  Freakingcalifragilisticexpialidocious! </p>
+Now that we have prepared all the test doubles, we can write the test.  Let&#39;s start with its skeleton.  We want to test
+that when stage 1 of world domination is used, the headquarters are built in the weakest city.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">world_domination_stage1_builds_hq_in_first_weak_target</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+On the arrangements, we create an instance of <code>GadgetDummy</code>, <code>HenchmanSpy</code> (including the initialization of its field,)
+and the <code>Sidekick</code> double.  Also we tell the sidekick double the targets that we want they to provide when requested for
+a list.  And we assign that sidekick double to the supervillain instance that we are testing: our system under test
+(SUT.)</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">gdummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="p">{};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">hq_location</span>: <span class="nb">None</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sk_double</span><span class="p">.</span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">TARGETS</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">).</span><span class="n">to_vec</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+The act part of the test is the simplest one.  We invoke the method that triggers the first stage of world domination, providing
+our henchman spy and the gadget dummy as arguments.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">start_world_domination_stage1</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gdummy</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+And the assert checks that the headquarters location stored in the henchman spy is the first city in the targets list,
+which can only happen if the method of <code>Henchman</code> was invoked with the right argument.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">hm_spy</span><span class="p">.</span><span class="n">hq_location</span><span class="p">,</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">FIRST_TARGET</span><span class="p">.</span><span class="n">to_string</span><span class="p">()));</span></span></span></code></pre></div>
+</div>
+<p>
+We compile, correct the seasoning, and run the tests  (<code class="verbatim">cargo t --lib</code>). They should all pass.  Hallelujah!</p>
 </div>
 </div>
 <div id="outline-container-headline-3" class="outline-2">
@@ -612,9 +368,9 @@ Use cargo to run the tests.  All should pass.  Freakingcalifragilisticexpialidoc
 Final code
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
-<p>There are many changes in this article and I recommend you to visit the  corresponding commit of the <a href="https://github.com/jdortiz/detestable-me-rs">repo
-with all the code in this series</a>.  However, I have copied the final version of the <code class="verbatim">supervillain.rs</code> file so you can
-check it to understand where the changes take place.</p>
+<p>We have changed several files in this article and I would advise you to check the corresponding commit of the <a href="https://github.com/jdortiz/detestable-me-rs">repo with
+all the code in this series</a>.  However, this is the final version of the <code class="verbatim">supervillain.rs</code> file, as of this article, so
+you can have a better understanding of the changes that we did.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for supervillains and their related stuff
 </span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
@@ -624,6 +380,7 @@ check it to understand where the changes take place.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="p">{</span><span class="n">Gadget</span><span class="p">,</span><span class="w"> </span><span class="n">Henchman</span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -680,6 +437,19 @@ check it to understand where the changes take place.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">sidekick</span><span class="p">.</span><span class="n">agree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">start_world_domination_stage1</span><span class="o">&lt;</span><span class="n">H</span>: <span class="nc">Henchman</span><span class="p">,</span><span class="w"> </span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">henchman</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sidekick</span><span class="p">.</span><span class="n">get_weak_targets</span><span class="p">(</span><span class="n">gadget</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">targets</span><span class="p">.</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">henchman</span><span class="p">.</span><span class="n">build_secret_hq</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">clone</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
@@ -817,12 +587,32 @@ check it to understand where the changes take place.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">.</span><span class="n">is_none</span><span class="p">(),</span><span class="w"> </span><span class="s">&#34;Unexpected sidekick&#34;</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">world_domination_stage1_builds_hq_in_first_weak_target</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">gdummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="w"> </span><span class="p">{};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">hq_location</span>: <span class="nb">None</span> <span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sk_double</span><span class="p">.</span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">TARGETS</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">).</span><span class="n">to_vec</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">start_world_domination_stage1</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gdummy</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">hm_spy</span><span class="p">.</span><span class="n">hq_location</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nb">Some</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">FIRST_TARGET</span><span class="p">.</span><span class="n">to_string</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="p">(</span><span class="k">crate</span><span class="p">)</span><span class="w"> </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">marker</span>::<span class="n">PhantomData</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">Gadget</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="o">&lt;&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">agree_answer</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">targets</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -830,12 +620,33 @@ check it to understand where the changes take place.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">agree_answer</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">targets</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[],</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">agree</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">agree_answer</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_weak_targets</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">GadgetDummy</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Gadget</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">hq_location</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Henchman</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HenchmanSpy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">build_secret_hq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">hq_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">location</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -881,15 +692,21 @@ check it to understand where the changes take place.</p>
 Summary
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
-<p>This has been a longer one, but I hope it was worth it.  I started with a &#34;theoretical&#34; introduction to why we want to
-use test doubles and what each of the different kinds can do.  Then, the rest of the article has been about when you
-need a stub, how to build it, and how to use it.</p>
+<p>This time, I have introduced and used a couple of test doubles: spies and dummies.</p>
 <p>
-It is important to notice that, even though at the beginning of this article I was talking about replaceable
-dependencies and how traits define abstractions that can be use for that, we haven&#39;t used that in this case.  We have
-taken the hardest path first and used namespaces to take care of the &#34;dirty work&#34;.  We have used field injection to get
-our dependency into the unit that we were testing.  We could have used a dummy gadget and pass it to the constructor, but we
-have done better and fully replaced the type used as a dependency and remove the transitive dependency on the gadget.</p>
+The former is very useful when you want to know if the system under test has interacted with another type in the
+expected way: expected method, expected arguments, and even expected number of times.  In fact, this is what I used in
+the <a href="/posts/rust_unit_testing_test_types/">first article of this series</a> to verify that the supervillain attacked used the megaweapon.</p>
+<p>
+The latter doesn&#39;t do much, but invoking some methods or creating some instances would be impossible without them.</p>
+<p>
+In this case, we have replaced instances because they implemented the required type.  It is certainly easier than what
+we did for replacing the <code>Sidekick</code> stub, but not always possible.  While one can argue that having a mutable reference
+to a <code>Henchman</code> is a little bit self-serving –and I may agree,– I already explained in the megaweapon double how to
+use interior mutability as a workaround when the reference is not mutable.</p>
+<p>
+In my next article, I will explain mocks and we will write together one.  Three tests doubles types explained, two more
+to go.</p>
 <p>
 Stay curious. Hack your code. See you next time!</p>
 </div>
@@ -905,19 +722,14 @@ Footnotes
 <div class="footnote-definition">
 <sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
 <div class="footnote-body">
-<p>Dependency injection goes beyond unit testing, but this explanation is good enough for our purposes.</p>
+<p>I couldn&#39;t help myself to have this movie subtitle: &#34;Adventures of a spy and a dummy.&#34;  Coming to a movie theater
+near you… soon.</p>
 </div>
 </div>
 <div class="footnote-definition">
 <sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
 <div class="footnote-body">
-<p>Indisputably a rockstar.</p>
-</div>
-</div>
-<div class="footnote-definition">
-<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
-<div class="footnote-body">
-<p>If you omit the <code class="verbatim">--lib</code> option, it will not compile, because the module <code class="verbatim">sidekick</code> is not part of the binary.</p>
+<p>We can also derive <code>Default</code> for the <code>Sidekick</code> double and simplify its initialization if new fields are added.</p>
 </div>
 </div>
 </div>
@@ -926,13 +738,12 @@ Footnotes
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-10-08&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/2615f01a04d1ac2e7288dd5629640face6dad218" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 2615f01a04d1ac2e7288dd5629640face6dad218: Add article on test doubles and manually implement a stub">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>2615f01</a></span>
+                <span>Updated on 2025-10-20</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" data-title="Rust unit testing: test doubles &amp; stubs" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" data-title="Rust unit testing: test doubles &amp; stubs" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spies and dummy test doubles" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" data-title="Rust unit testing: spies and dummy test doubles" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -944,8 +755,7 @@ Footnotes
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/rust_unit_testing_tools_add_ons/" class="prev" rel="prev" title="Rust unit testing: add-ons"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: add-ons</a>
-            <a href="/posts/rust_unit_testing_test_doubles_spy/" class="next" rel="next" title="Rust unit testing: spies and dummy test doubles">Rust unit testing: spies and dummy test doubles<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/rust_unit_testing_test_doubles_stub/" class="prev" rel="prev" title="Rust unit testing: test doubles &amp; stubs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: test doubles & stubs</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

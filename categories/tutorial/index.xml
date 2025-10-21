@@ -3,7 +3,23 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 07 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 20 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: spies and dummy test doubles</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</link>
+    <pubDate>Mon, 20 Oct 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two
+different types of test doubles: <strong>the spy</strong> and <strong>the dummy</strong>.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
+<p>
+A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It
+<em>spies</em> on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something
+else.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: test doubles &amp; stubs</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/</link>
     <pubDate>Tue, 07 Oct 2025 00:00:00 &#43;0000</pubDate>

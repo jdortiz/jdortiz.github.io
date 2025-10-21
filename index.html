@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-	<meta name="generator" content="Hugo 0.150.1">
+	<meta name="generator" content="Hugo 0.151.2">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
@@ -99,6 +99,27 @@
         data-sizes="auto"
         alt="/images/avatar.jpg"
         title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="jdortiz" rel="me"></a><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/rust_unit_testing_test_doubles_spy/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
+        title="Alt text for the featured image." width="1312" height="736" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/rust_unit_testing_test_doubles_spy/">Rust unit testing: spies and dummy test doubles</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-10-20">2025-10-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
+In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two
+different types of test doubles: <strong>the spy</strong> and <strong>the dummy</strong>.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
+<p>
+A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It
+<em>spies</em> on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something
+else.</p></div><div class="post-footer">
+        <a href="/posts/rust_unit_testing_test_doubles_spy/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/rust_unit_testing_test_doubles_stub/"><img
         class="lazyload"
@@ -204,25 +225,6 @@ more when we debug it .</p></div><div class="post-footer">
         <a href="/posts/rust_unit_testing_async_code/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_not_so_happy_path/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg, /posts/rust_unit_testing_not_so_happy_path/header-image.jpg 1.5x, /posts/rust_unit_testing_not_so_happy_path/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_not_so_happy_path/header-image.jpg"
-        title="Baby crying" width="1280" height="853" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_not_so_happy_path/">Rust unit testing: the not so happy path</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-09-01">2025-09-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-So far, we have chosen to test things that matched our expectations of how the code was supposed to work and how the
-user and the environment were supposed to behave.  But, we should also plan for the scenarios in which things don&#39;t go as
-expected, and still we want our program to react properly.  We should also test for these situations and those tests are
-as important as the ones that check the successful use cases.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_not_so_happy_path/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -237,7 +239,7 @@ as important as the ones that check the successful use cases.</p></div><div clas
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.150.1">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.151.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

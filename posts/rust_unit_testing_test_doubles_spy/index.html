@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-10-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-21T14:09:46+02:00">
+    <meta property="article:modified_time" content="2025-10-22T09:07:11+02:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
@@ -22,7 +22,7 @@
   <meta name="twitter:title" content="Rust unit testing: spy and dummy test doubles">
   <meta name="twitter:description" content="Ferris has become a spy.">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -34,7 +34,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/"
         },"genre": "posts","keywords": "rust, test","wordcount":  2440 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/","datePublished": "2025-10-20T00:00:00+00:00","dateModified": "2025-10-21T14:09:46+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_doubles_spy\/","datePublished": "2025-10-20T00:00:00+00:00","dateModified": "2025-10-22T09:07:11+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -738,8 +738,8 @@ near you… soon.</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-10-21&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/6ac40edd611f9e1a98b8e3bbfca2776c7cf4db1e" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 6ac40edd611f9e1a98b8e3bbfca2776c7cf4db1e: Add article on spy and dummy tests doubles">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6ac40ed</a></span>
+                <span>Updated on 2025-10-22&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/9551d30d348e1e966376676584acadd9cfccf1de" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 9551d30d348e1e966376676584acadd9cfccf1de: Fix typo">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9551d30</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -756,7 +756,8 @@ near you… soon.</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/rust_unit_testing_test_doubles_stub/" class="prev" rel="prev" title="Rust unit testing: test doubles &amp; stubs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: test doubles & stubs</a></div>
+    <div class="post-nav"><a href="/posts/rust_unit_testing_test_doubles_stub/" class="prev" rel="prev" title="Rust unit testing: test doubles &amp; stubs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: test doubles & stubs</a>
+            <a href="/posts/rust_unit_testing_test_doubles_mock/" class="next" rel="next" title="Rust unit testing: mock test doubles">Rust unit testing: mock test doubles<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

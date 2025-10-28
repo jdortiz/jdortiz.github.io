@@ -3,7 +3,25 @@
         <title>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/rust/</link>
         <description>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 20 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: mock test doubles</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</link>
+    <pubDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+This is the third article on test doubles.  So far, I have covered stubs –that are used to control the responses to
+the methods of the type they double,– dummies –that fill &#34;holes&#34; that are required for some tests without any
+functionality,– and spies –that remember the interactions with the type they double.  It is time to talk about the
+<em>face of the band</em>: mocks.</p>
+<p>
+For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not
+talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.
+All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: spy and dummy test doubles</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</link>
     <pubDate>Mon, 20 Oct 2025 00:00:00 &#43;0000</pubDate>

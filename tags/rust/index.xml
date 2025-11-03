@@ -3,7 +3,24 @@
         <title>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/rust/</link>
         <description>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing test doubles: fakes</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we
+can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,
+and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
+<p>
+Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
+slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
+should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: mock test doubles</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</link>
     <pubDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</pubDate>
@@ -148,24 +165,6 @@ right away.</p>
 Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
 incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
 <a href="https://jorgeortiz.dev/">social media accounts</a>.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: test types</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</link>
-    <pubDate>Mon, 07 Jul 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So you have finally learned Rust and are writing cool projects with it?  Awesome!  However, as soon as your project
-starts being useful and solving some actual use cases, you realize that the quality of your code is important.  Not only
-that.  The larger and more complex your project becomes, the harder it is to manually test every bit of functionality
-after a change.</p>
-<p>
-Your first temptation might be: &#34;Why should I test everything if my changes only affect this small part of the program?&#34;
-And, while in some situations that might be true, more often than not our changes affect unexpected parts of our
-program.</p>]]></description>
 </item>
 </channel>
 </rss>

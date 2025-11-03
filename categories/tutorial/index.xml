@@ -3,7 +3,24 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing test doubles: fakes</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we
+can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,
+and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
+<p>
+Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
+slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
+should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: mock test doubles</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</link>
     <pubDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</pubDate>

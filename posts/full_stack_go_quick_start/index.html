@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Full-stack application in Go: Quick start - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="The adventure starts."><meta property="og:url" content="https://jorgeortiz.dev/posts/full_stack_go_quick_start/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Full-stack application in Go: Quick start">
+  <meta property="og:description" content="The adventure starts.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-03T00:00:00+00:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Full-stack">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Full-stack application in Go: Quick start">
+  <meta name="twitter:description" content="The adventure starts.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/full_stack_go_quick_start/" /><link rel="prev" href="https://jorgeortiz.dev/posts/full_stack_java_quick_start/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Full-stack application in Go: Quick start",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/full_stack_go_quick_start\/"
+        },"genre": "posts","keywords": "go, full-stack","wordcount":  2507 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/full_stack_go_quick_start\/","datePublished": "2025-11-03T00:00:00+00:00","dateModified": "2025-11-03T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "The adventure starts."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Full-stack application in Go: Quick start</h1><h2 class="single-subtitle">Go project quick start</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-11-03">2025-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2507 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/full_stack_go_quick_start/header-image.jpg"
+        data-srcset="/posts/full_stack_go_quick_start/header-image.jpg, /posts/full_stack_go_quick_start/header-image.jpg 1.5x, /posts/full_stack_go_quick_start/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/full_stack_go_quick_start/header-image.jpg"
+        title="The adventure starts." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Project structure and setup</a>
+</li>
+<li><a href="#headline-2">Build automation</a>
+<ul>
+<li><a href="#headline-3">The rules for your magefile</a>
+</li>
+<li><a href="#headline-4">Mage best practices</a>
+<ul>
+<li><a href="#headline-5">Use global constants and variables</a>
+</li>
+<li><a href="#headline-6">Simplify your tasks</a>
+</li>
+<li><a href="#headline-7">Identify dependencies</a>
+</li>
+<li><a href="#headline-8">Use different run methods</a>
+</li>
+<li><a href="#headline-9">Use namespaces</a>
+</li>
+<li><a href="#headline-10">Define aliases</a>
+</li>
+<li><a href="#headline-11">Use global variable to define default action</a>
+</li>
+<li><a href="#headline-12">First version of the build automation</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-13">Set up Air</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-14">Configuration</a>
+<ul>
+<li><a href="#headline-15">HTTP server</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-16">Summary</a>
+</li>
+<li><a href="#headline-17">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Project structure and setup
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>First things first. Let&#39;s initialize the module with the following commands on the shell.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  mkdir rexlists
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> rexlists
+</span></span><span class="line"><span class="cl">  go mod init rexlists</span></span></code></pre></div>
+</div>
+<p>
+As I shared in the introduction to this series, I plan to produce two binaries.  The first will handle all front-end
+tasks as an HTTP server, serving HTML and related content, while communicating with the back end.  The second binary
+will manage the back-end tasks and responsibilities.  The front-end binary will implement the role of a <a href="https://samnewman.io/patterns/architectural/bff/">Back end For
+Front end (BFF)</a>, which will be especially useful as the application grows to support clients like web, mobile, and
+desktop, and connects to various back-end services such as checklist management, payments, and calendar.</p>
+<p>
+We set up a <code class="verbatim">cmd</code> directory to hold the main packages for the front-end and back-end binaries. Each binary has its own
+subdirectory.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  mkdir -p cmd/<span class="o">{</span>rexlists-fe,rexlists-be<span class="o">}</span>
+</span></span><span class="line"><span class="cl">  touch cmd/rexlists-fe/main.go
+</span></span><span class="line"><span class="cl">  touch cmd/rexlists-be/main.go</span></span></code></pre></div>
+</div>
+<p>
+And we add a <code class="verbatim">main.go</code> to each of those directories.  The first one is <code class="verbatim">cmd/rexlists-fe/main.go</code>:</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;log&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Running front end&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+And similarly, <code class="verbatim">cmd/rexlists-be/main.go</code> contains:</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;log&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Running back end&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We could produce the binaries in their respective directories, but we will also create a <code class="verbatim">target</code> directory and add it
+to our <code class="verbatim">.gitignore</code>.</p>
+<p>
+With this structure in place, we can produce both binaries and run each one of them.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  go build -o target/rexlists-fe cmd/rexlists-fe/main.go
+</span></span><span class="line"><span class="cl">  ./target/rexlists-fe
+</span></span><span class="line"><span class="cl">  go build -o target/rexlists-be cmd/rexlists-be/main.go
+</span></span><span class="line"><span class="cl">  ./target/rexlists-be</span></span></code></pre></div>
+</div>
+<p>
+There will be more directories for organizing the code in packages<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>, but I will take care of them as the needs
+arise.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Build automation
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>Despite most Go developers&#39; love for <code class="verbatim">go build</code>, it is really useful to have some kind of automation that simplifies our
+repetitive build process.  We are going to work on the user interface using iterative and incremental development, and
+it would be nice to have a tool that restarts the front-end server whenever we save changes to its source files.  <a href="https://github.com/air-verse/air">Air</a>,
+which offers &#34;live reload for Go apps,&#34; is the tool that I have chosen for that purpose.  And I am going to install it
+with <code class="verbatim">go install</code>.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  go install github.com/air-verse/air@latest</span></span></code></pre></div>
+</div>
+<p>
+However, Air is meant only to address very specific needs and only for the front end.  We are also going to use
+<a href="https://magefile.org/">Mage</a> for any other automation in the project, because it provides all of the benefits of a <code class="verbatim">Makefile</code> using the Go
+syntax that we know and love.</p>
+<p>
+We can install Mage in many ways, but I strongly suggest using <code class="verbatim">go install</code> here, since it will also install the
+packages we need to write the tasks in our <code class="verbatim">magefile.go</code>.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  go install github.com/magefile/mage@latest</span></span></code></pre></div>
+</div>
+<p>
+We create a new directory called <code class="verbatim">magefiles</code> at the root of our project, and we place our <code class="verbatim">magefile.go</code> in it, so our
+project stays nice and tidy.  You can use another name for your <code class="verbatim">magefile.go</code>, but I believe that using that one makes
+things clearer to the readers of our repository.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  mkdir magefiles
+</span></span><span class="line"><span class="cl">  touch magefiles/magefile.go</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+The rules for your magefile
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>There are a few rules that you have to keep in mind to write your build automation:</p>
+<ul>
+<li>File(s) must start with <code>//go:build mage</code> in its own line. Other build tags are allowed if necessary.</li>
+<li>Task file(s) must belong to the <code class="verbatim">main</code> package.  Other packages may be added.</li>
+<li>One exported function per task, i.e., starting with a capital letter.</li>
+<li>The first sentence of the comment above the exported function is the short description of the task.</li>
+<li>The full comment is the long description printed with <code class="verbatim">-h</code> and the task name.</li>
+<li>A comment above the <code>package</code> declaration is printed before the list of tasks.</li>
+</ul>
+<p>Using these rules, we can write the seed of the build automation &#34;script.&#34;  I am using <code class="verbatim">sh.Run()</code> here, that is a helper
+provided by Mage to run commands with arguments and return an error, if needed.  This function will not display the
+output of the command unless we run <code class="verbatim">mage</code> with the <code class="verbatim">-v</code> flag.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">//go:build mage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Automated build tasks for development and release to production.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;github.com/magefile/mage/sh&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build front end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">Build</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">sh</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;go&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;build&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;-o&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;target/rexlists-fe&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;cmd/rexlists-fe/main.go&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Remember to get this module so it is available during compilation.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">go</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">magefile</span><span class="o">/</span><span class="n">mage</span><span class="o">/</span><span class="n">sh</span></span></span></code></pre></div>
+</div>
+<p>
+Although this is very simple, we can now build the front end without specifying all the parameters to the build
+subcommand.  Running <code class="verbatim">mage</code> from the project root returns the list of tasks, and <code class="verbatim">mage build</code> produces
+the front-end executable.</p>
+<pre class="example">
+% mage
+Automated build tasks for development and release to production.
+
+Targets:
+  build    front end application
+% mage build
+% rm -f target/rexlists-*
+% mage -v build
+Running target: Build
+exec: go &#34;build&#34; &#34;-o&#34; &#34;target/rexlists-fe&#34; &#34;cmd/rexlists-fe/main.go&#34;
+% ls target
+rexlists-fe
+</pre>
+<p>
+Wow! With just three comments and five lines of code, we&#39;ve made solid progress. Mage offers even more
+capabilities. I&#39;ll walk through a few additional features and finish the first version of the build automation.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Mage best practices
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>Mage really helps to have a streamlined build process that applies the best practices.  Let&#39;s cover some of the more
+frequently used ones.</p>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+Use global constants and variables
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>Constants and variables are as useful as in any other Go code.  We can define some constants for the most common strings.
+This will reduce the amount of problems caused by typos.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">appName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;rexlists&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">targetDir</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;target&#34;</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+Simplify your tasks
+</h4>
+<div id="outline-text-headline-6" class="outline-text-4">
+<p>So far, Mage is able to build the binary for the front end.  We should add a task for the back end, which,
+unsurprisingly, is going to be very similar.</p>
+<p>
+If tasks share part of the code or get too complex, you can/should use non-exported functions to avoid repetition or
+simplify code.  In our case, the tasks for building the front end and the back end share most of the code with some
+small differences in the file names.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build front end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">BuildFrontEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Building front end.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;fe&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build back end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">BuildBackEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Building back end.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;be&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">bin</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;target/%s-%s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">src</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;cmd/%s-%s/main.go&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">sh</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;go&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;build&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;-o&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">bin</span><span class="p">,</span><span class="w"> </span><span class="nx">src</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+Identify dependencies
+</h4>
+<div id="outline-text-headline-7" class="outline-text-4">
+<p>Build tools simplify repetitive tasks by organizing them hierarchically.  If you use <code>mg.Deps</code> with a list of the tasks
+that the current one depends on, they will be run in parallel.  You can also use <code>mg.SerialDeps</code>, if you need to ensure
+execution order.</p>
+<p>
+We can create a task that builds both parts by depending on them.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build both applications</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">BuildAll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">mg</span><span class="p">.</span><span class="nf">Deps</span><span class="p">(</span><span class="nx">BuildFrontEnd</span><span class="p">,</span><span class="w"> </span><span class="nx">BuildBackEnd</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-4">
+<h4 id="headline-8">
+Use different run methods
+</h4>
+<div id="outline-text-headline-8" class="outline-text-4">
+<p>We may need to show the output always or only when the user requires it.  There are helper functions for that.</p>
+<dl>
+<dt>
+<code>sh.Run</code>
+</dt>
+<dd>executes the command, but output is only shown with <code class="verbatim">mage -v</code></dd>
+<dt>
+<code>sh.RunV</code>
+</dt>
+<dd>executes the command and shows the output (Useful for a linter, for example)</dd>
+<dt>
+<code>sh.Output</code>
+</dt>
+<dd>executes the command and returns the output (Useful to capture output of auxiliary commands, for
+example, <code class="verbatim">git</code> related)</dd>
+</dl>
+<p>If we run a linter task<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>, we want its output displayed.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Run linters.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">CheckLint</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Run Linters.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">sh</span><span class="p">.</span><span class="nf">RunV</span><span class="p">(</span><span class="s">&#34;golangci-lint&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;run&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-4">
+<h4 id="headline-9">
+Use namespaces
+</h4>
+<div id="outline-text-headline-9" class="outline-text-4">
+<p>Namespaces group related tasks.  We just have to define them and use them as receivers of the task functions.  The names
+of the tasks will include the namespace they belong to when you print the list.</p>
+<p>
+We can use one namespace for building tasks and another for quality assurance tasks like testing and linting.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Namespaces</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">type</span><span class="w"> </span><span class="nx">Build</span><span class="w"> </span><span class="nx">mg</span><span class="p">.</span><span class="nx">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">type</span><span class="w"> </span><span class="nx">Check</span><span class="w"> </span><span class="nx">mg</span><span class="p">.</span><span class="nx">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build front end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">FrontEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="cp">//...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build back end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">BackEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="cp">//...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Builg both applications</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">All</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="cp">//...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Run linters.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Check</span><span class="p">)</span><span class="w"> </span><span class="nf">Lint</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="cp">//...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Check code quality.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Check</span><span class="p">)</span><span class="w"> </span><span class="nf">All</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">mg</span><span class="p">.</span><span class="nf">Deps</span><span class="p">(</span><span class="nx">Check</span><span class="p">.</span><span class="nx">Lint</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-4">
+<h4 id="headline-10">
+Define aliases
+</h4>
+<div id="outline-text-headline-10" class="outline-text-4">
+<p>Aliases allow for keeping the amount of typing to a minimum.</p>
+<p>
+We can define them for the most frequent tasks.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">Aliases</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;b&#34;</span><span class="p">:</span><span class="w">  </span><span class="nx">Build</span><span class="p">.</span><span class="nx">All</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;bf&#34;</span><span class="p">:</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">FrontEnd</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;bb&#34;</span><span class="p">:</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">BackEnd</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;c&#34;</span><span class="p">:</span><span class="w">  </span><span class="nx">Check</span><span class="p">.</span><span class="nx">All</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-4">
+<h4 id="headline-11">
+Use global variable to define default action
+</h4>
+<div id="outline-text-headline-11" class="outline-text-4">
+<p>Optionally, we can identify the action run by Mage by default, i.e., using <code class="verbatim">mage</code> with no other arguments.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">Default</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">All</span></span></span></code></pre></div>
+</div>
+<p>
+We can still print the list of available tasks using <code class="verbatim">mage -l</code>.</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-4">
+<h4 id="headline-12">
+First version of the build automation
+</h4>
+<div id="outline-text-headline-12" class="outline-text-4">
+<p>The <code class="verbatim">magefile.go</code> should be similar to the following one.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">//go:build mage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Automated build tasks for development and release to production.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;github.com/magefile/mage/mg&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;github.com/magefile/mage/sh&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">appName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;rexlists&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">targetDir</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;target&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">Aliases</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;b&#34;</span><span class="p">:</span><span class="w">  </span><span class="nx">Build</span><span class="p">.</span><span class="nx">All</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;bf&#34;</span><span class="p">:</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">FrontEnd</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;bb&#34;</span><span class="p">:</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">BackEnd</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;c&#34;</span><span class="p">:</span><span class="w">  </span><span class="nx">Check</span><span class="p">.</span><span class="nx">All</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Default target to run when none is specified</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// If not set, running mage will list available targets</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">Default</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">All</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Namespaces</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">type</span><span class="w"> </span><span class="nx">Build</span><span class="w"> </span><span class="nx">mg</span><span class="p">.</span><span class="nx">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">type</span><span class="w"> </span><span class="nx">Check</span><span class="w"> </span><span class="nx">mg</span><span class="p">.</span><span class="nx">Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build front end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">FrontEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Building front end.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;fe&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build back end application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">BackEnd</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Building back end.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;be&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">buildVariant</span><span class="p">(</span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">bin</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;target/%s-%s&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">src</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;cmd/%s-%s/main.go&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">appName</span><span class="p">,</span><span class="w"> </span><span class="nx">variant</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">sh</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;go&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;build&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;-o&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">bin</span><span class="p">,</span><span class="w"> </span><span class="nx">src</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Build both applications</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Build</span><span class="p">)</span><span class="w"> </span><span class="nf">All</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">mg</span><span class="p">.</span><span class="nf">Deps</span><span class="p">(</span><span class="nx">Build</span><span class="p">.</span><span class="nx">FrontEnd</span><span class="p">,</span><span class="w"> </span><span class="nx">Build</span><span class="p">.</span><span class="nx">BackEnd</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Run linters.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Check</span><span class="p">)</span><span class="w"> </span><span class="nf">Lint</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Run Linters.&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">sh</span><span class="p">.</span><span class="nf">RunV</span><span class="p">(</span><span class="s">&#34;golangci-lint&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;run&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Check code quality.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">Check</span><span class="p">)</span><span class="w"> </span><span class="nf">All</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">mg</span><span class="p">.</span><span class="nf">Deps</span><span class="p">(</span><span class="nx">Check</span><span class="p">.</span><span class="nx">Lint</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+Set up Air
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<p>Air will handle live reloading of the front end when we change anything, but we need to provide it with some information
+for that.  We have to create a configuration file using <code class="verbatim">air init</code> and edit the resulting file <code class="verbatim">.air.toml</code> to capture our needs.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="nx">root</span> <span class="p">=</span> <span class="s2">&#34;.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">testdata_dir</span> <span class="p">=</span> <span class="s2">&#34;testdata&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tmp_dir</span> <span class="p">=</span> <span class="s2">&#34;tmp&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">build</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">args_bin</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bin</span> <span class="p">=</span> <span class="s2">&#34;./target/rexlists-fe&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cmd</span> <span class="p">=</span> <span class="s2">&#34;go build -o ./target/rexlists-fe cmd/rexlists-fe/main.go&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">delay</span> <span class="p">=</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">exclude_dir</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;assets&#34;</span><span class="p">,</span> <span class="s2">&#34;tmp&#34;</span><span class="p">,</span> <span class="s2">&#34;vendor&#34;</span><span class="p">,</span> <span class="s2">&#34;testdata&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">exclude_file</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">exclude_regex</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;_test.go&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">exclude_unchanged</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">follow_symlink</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">full_bin</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">include_dir</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">include_ext</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;go&#34;</span><span class="p">,</span> <span class="s2">&#34;tpl&#34;</span><span class="p">,</span> <span class="s2">&#34;tmpl&#34;</span><span class="p">,</span> <span class="s2">&#34;html&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">include_file</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">kill_delay</span> <span class="p">=</span> <span class="s2">&#34;0s&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span> <span class="p">=</span> <span class="s2">&#34;build-errors.log&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">poll</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">poll_interval</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">post_cmd</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pre_cmd</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rerun</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rerun_delay</span> <span class="p">=</span> <span class="mi">500</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">send_interrupt</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stop_on_error</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">color</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">app</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">build</span> <span class="p">=</span> <span class="s2">&#34;yellow&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">main</span> <span class="p">=</span> <span class="s2">&#34;magenta&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">runner</span> <span class="p">=</span> <span class="s2">&#34;green&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">watcher</span> <span class="p">=</span> <span class="s2">&#34;cyan&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">log</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">main_only</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">silent</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">time</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">misc</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clean_on_exit</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">proxy</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">app_port</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">enabled</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">proxy_port</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">screen</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clear_on_rebuild</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">keep_scroll</span> <span class="p">=</span> <span class="kc">true</span></span></span></code></pre></div>
+</div>
+<p>
+Our front end will have an HTTP server and an HTTP client that talks to the back end.  The server sends the browser the
+HTML and assets needed to render and interact with the user interface.  The client makes requests to the back end
+to access and modify the data.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-2">
+<h2 id="headline-14">
+Configuration
+</h2>
+<div id="outline-text-headline-14" class="outline-text-2">
+<p>Following the Twelve-Factor App methodology, we want to <a href="https://12factor.net/config">store the configuration in the environment</a>, for both the front
+end and back end.  So, we first create a <code class="verbatim">config</code> directory for the helper functions in that package.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  mkdir config</span></span></code></pre></div>
+</div>
+<p>
+And we put the first function inside of a new file, <code class="verbatim">config.go</code>, in that directory.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Package config provides configuration functions for the application.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="s">&#34;os&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">GetFromEnvOrDefault</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">fallback</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    	</span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nf">LookupEnv</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    	</span><span class="k">return</span><span class="w"> </span><span class="nx">fallback</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Now, let&#39;s use some configuration from the HTTP server.</p>
+<div id="outline-container-headline-15" class="outline-3">
+<h3 id="headline-15">
+HTTP server
+</h3>
+<div id="outline-text-headline-15" class="outline-text-3">
+<p>First, we add a new directory named <code class="verbatim">app</code> at the root of the project to hold the front-end application code.  Inside
+<code class="verbatim">app</code>, we create an <code class="verbatim">app.go</code> file and define a struct for the application.  This struct will store the configuration and
+any needed dependencies.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Package app provides the front-end application code.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kn">package</span><span class="w"> </span><span class="nx">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">type</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">serverAddr</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">serverPort</span><span class="w"> </span><span class="kt">uint16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+This new type will define methods for controlling the application and contain the necessary configuration.  The most
+obvious one would be a method for launching the HTTP server, but we also want to have a constructor function to load or
+set the configuration.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">New</span><span class="p">()</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="kd">var</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">if</span><span class="w"> </span><span class="nx">port</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Atoi</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nf">GetFromEnvOrDefault</span><span class="p">(</span><span class="s">&#34;FRONTEND_PORT&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;4000&#34;</span><span class="p">));</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span><span class="nx">port</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">App</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span><span class="nx">serverAddr</span><span class="p">:</span><span class="w"> </span><span class="nx">config</span><span class="p">.</span><span class="nf">GetFromEnvOrDefault</span><span class="p">(</span><span class="s">&#34;FRONTEND_ADDR&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;localhost&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  		</span><span class="nx">serverPort</span><span class="p">:</span><span class="w"> </span><span class="nb">uint16</span><span class="p">(</span><span class="nx">port</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">app</span><span class="w"> </span><span class="o">*</span><span class="nx">App</span><span class="p">)</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Launching RexLists front-end server: http://%s:%d\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">serverAddr</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">serverPort</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="k">return</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%d&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">serverAddr</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">serverPort</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+I have chosen to use a pointer receiver –*App– instead of a value one, because the struct is going to grow and
+I don&#39;t want to refactor it later.</p>
+<p>
+The method can now be used in the <code>main</code> function (in <code class="verbatim">rexlists-fe/main.go</code>), after creating an instance of the type
+with the constructor.</p>
+<div class="src src-go">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="w">  </span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;log&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="s">&#34;rexlists/app&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Running front end&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">app</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nf">Start</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+This should be enough to use the configuration data and run with those values or the defaults.  We can try that using
+the following commands.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  mage bf
+</span></span><span class="line"><span class="cl">  target/rexlists-fe</span></span></code></pre></div>
+</div>
+<p>
+The front-end server should be up and running and you can connect to it from the browser using the default URL
+<code class="verbatim">http://localhost:4000/</code>.  However, your welcome message is going to be more disappointing than warm: &#34;404 page not
+found&#34;.  But fear not!  That is expected because there is no content being served yet.</p>
+<p>
+You can use a different port, though.  Just run the command preceded by the corresponding environment variable and the
+application will use the designated port, for example 5646.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nv">FRONTEND_PORT</span><span class="o">=</span><span class="m">5646</span> target/rexlists-fe</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-2">
+<h2 id="headline-16">
+Summary
+</h2>
+<div id="outline-text-headline-16" class="outline-text-2">
+<p>In this first article, we have created the structure for our project and automated the building tasks.  We have gone
+beyond the build capabilities offered by Go.  Not yet <em>to infinity</em>, but quite further.</p>
+<p>
+As for the front-end HTTP server, we&#39;ve made some initial progress.  Mostly around reading the configuration and
+launching it with those parameters.  This is still completely useless as an application, but I hope you agree that we
+have provided a solid foundation for it.</p>
+<p>
+The <a href="https://github.com/jdortiz/rexlists-go">full code repository</a> for this project with individual commits for each part of the explanation is available for you
+to check what I did and where, and code along with me.</p>
+<p>
+In the next article we will work on the front end to make it more useful.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-2">
+<h2 id="headline-17">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>There are many recommendations for Golang project structure.  I&#39;d recommend using <a href="https://github.com/golang-standards/project-layout">Standard Go Project Layout</a> as a
+starting point.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>This assumes that you have <code class="verbatim">golangci-lint</code> installed in your system.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-11-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/full_stack_go_quick_start/" data-title="Full-stack application in Go: Quick start" data-hashtags="go,full-stack"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/full_stack_go_quick_start/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/full_stack_go_quick_start/" data-title="Full-stack application in Go: Quick start" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/full_stack_go_quick_start/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/full_stack_java_quick_start/" class="prev" rel="prev" title="Full-stack application in Java: Quick start"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Full-stack application in Java: Quick start</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.151.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

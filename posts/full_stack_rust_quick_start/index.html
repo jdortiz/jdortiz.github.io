@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Full-stack application in Rust: Quick start - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris starting a new adventure."><meta property="og:url" content="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Full-stack application in Rust: Quick start">
+  <meta property="og:description" content="Ferris starting a new adventure.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-03T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Full-stack">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Full-stack application in Rust: Quick start">
+  <meta name="twitter:description" content="Ferris starting a new adventure.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/" /><link rel="next" href="https://jorgeortiz.dev/posts/full_stack_java_quick_start/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Full-stack application in Rust: Quick start",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/full_stack_rust_quick_start\/"
+        },"genre": "posts","keywords": "rust, full-stack","wordcount":  1598 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/full_stack_rust_quick_start\/","datePublished": "2025-11-03T00:00:00+00:00","dateModified": "2025-11-03T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris starting a new adventure."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Full-stack application in Rust: Quick start</h1><h2 class="single-subtitle">Rust project quick start</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-11-03">2025-11-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1598 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/full_stack_rust_quick_start/header-image.jpg"
+        data-srcset="/posts/full_stack_rust_quick_start/header-image.jpg, /posts/full_stack_rust_quick_start/header-image.jpg 1.5x, /posts/full_stack_rust_quick_start/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/full_stack_rust_quick_start/header-image.jpg"
+        title="Ferris starting a new adventure." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Project structure and setup</a>
+<ul>
+<li><a href="#headline-2">Initial HTTP servers</a>
+</li>
+<li><a href="#headline-3">Simplify dependencies</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-4">Build automation</a>
+<ul>
+<li><a href="#headline-5">Enable clippy pedantic lints group</a>
+</li>
+<li><a href="#headline-6">Use Bacon to watch</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">Summary</a>
+</li>
+<li><a href="#headline-8">Footnotes</a>
+</li>
+<li><a href="#headline-9">Summary</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Project structure and setup
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>First things first. Let&#39;s initialize the project with the following commands on the shell.</p>
+<div class="src src-sh">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  mkdir rexlists
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> rexlists</span></span></code></pre></div>
+</div>
+<p>
+Next, let&#39;s create the seed for the cargo configuration of this workspace<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">workspace</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">resolver</span><span class="p">=</span><span class="s2">&#34;3&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+As I mentioned earlier, I plan to produce two binaries.  The first will handle all front-end tasks as an HTTP server,
+serving HTML and related content, while communicating with the back end.  The second binary will manage the back-end
+tasks and responsibilities.  The front-end binary will implement the role of a <a href="https://samnewman.io/patterns/architectural/bff/">Back end For Front end (BFF)</a>, which will
+be especially useful as the application grows to support clients like web, mobile, and desktop, and connects to various
+back-end services such as checklist management, payments, and calendar.</p>
+<p>
+Now, let&#39;s make a package in the workspace for both the front and the back end.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">cargo</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">frontend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">cargo</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">backend</span></span></span></code></pre></div>
+</div>
+<p>
+Workspaces take care of producing the binaries in the same <code class="verbatim">target</code> directory, which we add to our <code class="verbatim">.gitignore</code>.</p>
+<p>
+With this structure in place, we can build and run both binaries.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo run -p frontend
+</span></span><span class="line"><span class="cl">  cargo run -p backend</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Initial HTTP servers
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>Both binaries will act as HTTP servers, and we will use <a href="https://github.com/tokio-rs/axum">Axum</a>, one of the most popular web application frameworks for
+Rust, to implement that functionality.</p>
+<p>
+Let&#39;s start by adding <code class="verbatim">axum</code> to the front end, which in turn adds Tokio.  But since we need to enable a couple of
+its features, we also add it manually.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add -p frontend axum
+</span></span><span class="line"><span class="cl">  cargo add -p frontend -F macros,rt-multi-thread tokio</span></span></code></pre></div>
+</div>
+<p>
+Now we modify the code in <code class="verbatim">frontend/src/main.rs</code> as shown below.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="n">Router</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[tokio::main]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">server_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;localhost:3000&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Launching front end: http://</span><span class="si">{server_addr}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokio</span>::<span class="n">net</span>::<span class="n">TcpListener</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">axum</span>::<span class="n">serve</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">router</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We can run the front-end server with <code class="verbatim">cargo run -p frontend</code>.  You can connect to it from the browser using the default
+URL <code class="verbatim">http://localhost:3000/</code>.  However, your welcome message is going to be more disappointing than warm: A 404 error.
+What?!?  No worries, that is expected because no content is being served yet.</p>
+<p>
+We can repeat, more or less, the same process for the back-end server.  First, we add the dependencies.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add -p backend axum
+</span></span><span class="line"><span class="cl">  cargo add -p backend -F macros,rt-multi-thread tokio</span></span></code></pre></div>
+</div>
+<p>
+And the code in <code class="verbatim">backend/src/main.rs</code> should also be almost identical.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="n">Router</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[tokio::main]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">server_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;localhost:3100&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Launching back end: http://</span><span class="si">{server_addr}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokio</span>::<span class="n">net</span>::<span class="n">TcpListener</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">axum</span>::<span class="n">serve</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">router</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+You can run the back end with <code class="verbatim">cargo run -p backend</code> and try it in the browser too.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Simplify dependencies
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>If you take a look at the <code class="verbatim">Cargo.toml</code> files of each package in the workspace, you will realize that the
+dependencies are identical, which is fair because we added exactly the same ones to both packages.  But we would like to
+keep them in sync instead of having to update each one independently.</p>
+<p>
+I wish <code class="verbatim">cargo add</code> let me <a href="https://github.com/rust-lang/cargo/issues/10608">add dependencies to the whole workspace</a>, but that&#39;s not possible yet.  So we have two options:</p>
+<ul>
+<li>We could use <a href="https://github.com/mainmatter/cargo-autoinherit">cargo-autoinherit</a>, which finds dependencies used in more than one package and that can be merged in the
+workspace.</li>
+<li>Alternatively, we can do it manually by editing the three <code class="verbatim">Cargo.toml</code> files.</li>
+</ul>
+<p>In this case, I will go with the latter.  In the manifest of the workspace, the one in the root of the project, we add a
+new section and copy the two dependencies that are shared by the two packages in their manifests.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">axum</span> <span class="p">=</span> <span class="s2">&#34;0.8.6&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tokio</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;1.48.0&#34;</span><span class="p">,</span> <span class="nx">features</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;macros&#34;</span><span class="p">,</span> <span class="s2">&#34;rt-multi-thread&#34;</span><span class="p">]</span> <span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Then, in the manifests of the packages, we express dependencies using inheritance.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">axum</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">workspace</span> <span class="p">=</span> <span class="kc">true</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tokio</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">workspace</span> <span class="p">=</span> <span class="kc">true</span> <span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We could also add the <code>features</code> and <code>optional</code> keys, should we need them.  The former adds features to those declared
+in the workspace manifesto, specifically for the current package.  The latter allows us to include them only when some
+feature is enabled.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Build automation
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>Cargo comes with most of the building tasks automated out of the box.  But, just in case you want to add an automatic
+rebuild after saving changes, let&#39;s add that.</p>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Enable clippy pedantic lints group
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>Cargo has a built-in subcommand to run the <code class="verbatim">clippy</code> linter, and it is <strong>very</strong> useful to improve the quality of our code<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.</p>
+<p>
+By default, only some of the lints are enabled.  However, we can easily change the configuration of our project to make
+clippy a little more picky, using the pedantic lints group.</p>
+<p>
+The configuration also uses inheritance, like we did with dependencies.  In the project manifest, we add the following
+two sections.  The first one avoids unsafe code, and the second one enables the pedantic lints group to produce warnings.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">lints</span><span class="p">.</span><span class="nx">rust</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">unsafe_code</span> <span class="p">=</span> <span class="s2">&#34;forbid&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">workspace</span><span class="p">.</span><span class="nx">lints</span><span class="p">.</span><span class="nx">clippy</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">pedantic</span> <span class="p">=</span> <span class="s2">&#34;warn&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+And we add the following section to each of the packages that wants to use the same configuration.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">lints</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">workspace</span> <span class="p">=</span> <span class="kc">true</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Use Bacon to watch
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>Since <code class="verbatim">cargo watch</code> is now on life support, we will use <a href="https://dystroy.org/bacon/">bacon</a> to monitor changes to the source and act accordingly.  So
+we can start by installing it.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo install --locked bacon</span></span></code></pre></div>
+</div>
+<p>
+Bacon runs a job when the code changes.  It knows the files it has to watch and, by default, ignores the same files that
+Git does.  We can specify the job we want to run in the command line or use the one that is configured as the default.
+We can also use Control-J to select a different job from the ones that are configured.</p>
+<p>
+I have produced a <code class="verbatim">bacon.toml</code> file with the default configuration using <code class="verbatim">cargo --init</code>, and I have modified that
+configuration to include the jobs that make more sense to me.  Each job is defined in a different TOML section.</p>
+<dl>
+<dt>
+<code class="verbatim">jobs.clippy</code>
+</dt>
+<dd>Runs clippy with the default arguments (using the configuration that we have set up above)</dd>
+<dt>
+<code class="verbatim">jobs.test</code> and <code class="verbatim">jobs.nextest</code>
+</dt>
+<dd>Run the tests with the default test runner or with Nextest, respectively</dd>
+<dt>
+<code class="verbatim">jobs.doc</code> and <code class="verbatim">jobs.doc-open</code>
+</dt>
+<dd>Produce the documentation using <code class="verbatim">rustdoc</code> and the latter opens the browser</dd>
+<dt>
+<code class="verbatim">jobs.run-frontend</code> and <code class="verbatim">jobs:run-backend</code>
+</dt>
+<dd>Run the front or back end package, respectively</dd>
+</dl>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="nx">default_job</span> <span class="p">=</span> <span class="s2">&#34;clippy&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">env</span><span class="p">.</span><span class="nx">CARGO_TERM_COLOR</span> <span class="p">=</span> <span class="s2">&#34;always&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">clippy</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;clippy&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># This job lets you run</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># - all tests: bacon test</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># - a specific test: bacon test -- config::test_default_files</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># - the tests of a package: bacon test -- -- -p config</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">test</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;test&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">nextest</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;nextest&#34;</span><span class="p">,</span> <span class="s2">&#34;run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;--hide-progress-bar&#34;</span><span class="p">,</span> <span class="s2">&#34;--failure-output&#34;</span><span class="p">,</span> <span class="s2">&#34;final&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">analyzer</span> <span class="p">=</span> <span class="s2">&#34;nextest&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">doc</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;doc&#34;</span><span class="p">,</span> <span class="s2">&#34;--no-deps&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># If the doc compiles, then it opens in your browser and bacon switches</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># to the previous job</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">doc-open</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;doc&#34;</span><span class="p">,</span> <span class="s2">&#34;--no-deps&#34;</span><span class="p">,</span> <span class="s2">&#34;--open&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">on_success</span> <span class="p">=</span> <span class="s2">&#34;back&#34;</span> <span class="c"># so that we don&#39;t open the browser at each change</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">run-frontend</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;run&#34;</span><span class="p">,</span> <span class="s2">&#34;-p&#34;</span><span class="p">,</span> <span class="s2">&#34;frontend&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">allow_warnings</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">background</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">on_change_strategy</span> <span class="p">=</span> <span class="s2">&#34;kill_then_restart&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">jobs</span><span class="p">.</span><span class="nx">run-backend</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">command</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;cargo&#34;</span><span class="p">,</span> <span class="s2">&#34;run&#34;</span><span class="p">,</span> <span class="s2">&#34;-p&#34;</span><span class="p">,</span> <span class="s2">&#34;backend&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">need_stdout</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">allow_warnings</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">background</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">on_change_strategy</span> <span class="p">=</span> <span class="s2">&#34;kill_then_restart&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">keybindings</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">c</span> <span class="p">=</span> <span class="s2">&#34;job:clippy&#34;</span> <span class="c"># comment this to have &#39;c&#39; run clippy on only the default target</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">shift-f</span> <span class="p">=</span> <span class="s2">&#34;job:run-frontend&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">shift-b</span> <span class="p">=</span> <span class="s2">&#34;job:run-backend&#34;</span></span></span></code></pre></div>
+</div>
+<p>
+We can run <code class="verbatim">bacon</code> in the terminal.  If we don&#39;t provide any argument, it will run the default job, i.e., <code class="verbatim">clippy</code> for
+my configuration.  But we can also use the name of any of the defined jobs as an argument and provide additional
+arguments, if needed.  We can use this later on with <code class="verbatim">bacon run-frontend</code> to run the front end when its code changes.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Summary
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<p>This has been the first article of a series on writing a full-stack application in Rust.  We have created a workspace
+for our project and a couple of packages for both the front and back end.  We may add more in the future.</p>
+<p>
+I have explained how to use dependency inheritance in a workspace, allowing dependencies to be shared among its packages.</p>
+<p>
+I have also added some extra build automation tasks using <code class="verbatim">bacon</code> on top of the capabilities offered by <code class="verbatim">cargo</code>.  We will
+have the clippy linter running across the entire project for us every time a change is made to the source code.</p>
+<p>
+The <a href="https://github.com/jdortiz/rexlists-rust">full code repository</a> for this project with individual commits for each part of the explanation is available for you
+to check what I did and where, and code along with me.</p>
+<p>
+We don&#39;t have a full-stack application yet, but this is a pretty solid foundation.  In the next article, we will write
+some real code.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Footnotes
+</h2>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+Summary
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>The <code class="verbatim">resolver</code> is the algorithm used to resolve the dependencies.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>Say what you will about linters, but they are one of the cornerstones to maintain mental health in development teams.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-11-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/" data-title="Full-stack application in Rust: Quick start" data-hashtags="rust,full-stack"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/" data-title="Full-stack application in Rust: Quick start" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/full_stack_rust_quick_start/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_test_doubles_fake/" class="prev" rel="prev" title="Rust unit testing test doubles: fakes"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing test doubles: fakes</a>
+            <a href="/posts/full_stack_java_quick_start/" class="next" rel="next" title="Full-stack application in Java: Quick start">Full-stack application in Java: Quick start<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.151.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

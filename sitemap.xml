@@ -2,9 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://jorgeortiz.dev/</loc><lastmod>2025-11-06T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2025-11-06T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/categories/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/full-stack/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/go/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/java/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/tags/rust/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/tags/</loc><lastmod>2025-11-03T00:00:00&#43;00:00</lastmod></url><url>
@@ -17,8 +23,6 @@
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</loc><lastmod>2025-09-22T12:00:40&#43;02:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/categories/background/</loc><lastmod>2025-09-16T13:26:54&#43;02:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/full_stack_apps/</loc><lastmod>2025-09-16T13:26:54&#43;02:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/go/</loc><lastmod>2025-09-16T13:26:54&#43;02:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/java/</loc><lastmod>2025-09-16T13:26:54&#43;02:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</loc><lastmod>2025-09-22T12:00:40&#43;02:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</loc><lastmod>2025-09-01T12:27:18&#43;02:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</loc><lastmod>2025-09-01T12:17:50&#43;02:00</lastmod></url><url>

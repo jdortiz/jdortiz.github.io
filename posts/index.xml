@@ -3,7 +3,61 @@
         <title>All Posts - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 18 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Full-stack application in Go: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+<item>
+    <title>Full-stack application in Java: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.png" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Java + Spring.  I will cover project creation and structure,
+and build automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a
+good and helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+<item>
+    <title>Full-stack application in Rust: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing test doubles: fakes</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
     <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -115,56 +169,6 @@ When it came to develop user interfaces for my applications, I have preferred to
 looong ago, writing some small Windows applications, moved to X Window first and then to GTK, and after a while focused
 on mobile development.  Even at that stage, I jumped from PalmOS to Android and iOS, almost skipping webOS<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> because
 of it being based on web development.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: asynchronous code</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</link>
-    <pubDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So far, we have only tested synchronous code.  I could postpone talking about asynchronous code, but I don&#39;t want you to
-<em>wait</em> for it. 😄</p>
-<p>
-Asynchronous code, apart from being an inexhaustible source of dad jokes, can be painful to reason about its behavior
-and <a href="https://corrode.dev/blog/async/">not always recommended</a>.  We tend to think that, in a given scope, the lines above are executed before the lines
-below.  It really takes experience and discipline to realize that some parts of the code can be executed at a later time
-and that we may not have yet their results available.  This is important when we write our asynchronous code, but even
-more when we debug it .</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: the not so happy path</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</link>
-    <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So far, we have chosen to test things that matched our expectations of how the code was supposed to work and how the
-user and the environment were supposed to behave.  But, we should also plan for the scenarios in which things don&#39;t go as
-expected, and still we want our program to react properly.  We should also test for these situations and those tests are
-as important as the ones that check the successful use cases.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: simplify your tests</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</link>
-    <pubDate>Thu, 10 Jul 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-Now that we understand the building blocks for writing unit tests in Rust, you probably feel the urge to apply that
-knowledge and fully cover your application with tests.  Don&#39;t you?  Well, I would ask you to hold your horses and apply
-it gradually. We still have a lot of ground to cover, but the next sections are probably going to simplify your life
-right away.</p>
-<p>
-Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
-incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
-<a href="https://jorgeortiz.dev/">social media accounts</a>.</p>]]></description>
 </item>
 </channel>
 </rss>

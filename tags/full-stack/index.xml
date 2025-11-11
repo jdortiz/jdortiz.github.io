@@ -1,0 +1,61 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Full-stack - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
+        <link>https://jorgeortiz.dev/tags/full-stack/</link>
+        <description>Full-stack - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/full-stack/" rel="self" type="application/rss+xml" /><item>
+    <title>Full-stack application in Go: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+<item>
+    <title>Full-stack application in Java: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.png" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Java + Spring.  I will cover project creation and structure,
+and build automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a
+good and helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+<item>
+    <title>Full-stack application in Rust: Quick start</title>
+    <link>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</link>
+    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
+wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
+connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
+the checklists.</p>
+<p>
+This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
+automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
+helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
+</item>
+</channel>
+</rss>

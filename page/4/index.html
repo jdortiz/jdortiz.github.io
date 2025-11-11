@@ -100,141 +100,41 @@
         alt="/images/avatar.jpg"
         title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="jdortiz" rel="me"></a><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/full_stack_go_quick_start/"><img
+            <a href="/posts/running_containers_with_colima/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/full_stack_go_quick_start/header-image.jpg"
-        data-srcset="/posts/full_stack_go_quick_start/header-image.jpg, /posts/full_stack_go_quick_start/header-image.jpg 1.5x, /posts/full_stack_go_quick_start/header-image.jpg 2x"
+        data-src="/posts/running_containers_with_colima/header-image.jpg"
+        data-srcset="/posts/running_containers_with_colima/header-image.jpg, /posts/running_containers_with_colima/header-image.jpg 1.5x, /posts/running_containers_with_colima/header-image.jpg 2x"
         data-sizes="auto"
-        alt="/posts/full_stack_go_quick_start/header-image.jpg"
-        title="The adventure starts." width="1312" height="736" /></a>
+        alt="/posts/running_containers_with_colima/header-image.jpg"
+        title="A person running and jumping on top of a container" width="1080" height="720" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/full_stack_go_quick_start/">Full-stack application in Go: Quick start</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-03">2025-11-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
-wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
-connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
-the checklists.</p>
-<p>
-This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build
-automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
-helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="post-footer">
-        <a href="/posts/full_stack_go_quick_start/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
+        <a href="/posts/running_containers_with_colima/">Running containers with Colima</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-04-08">2025-04-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/howto/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Howto</a></span></div><div class="content"><p>
+There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to
+play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous
+Database, containers can be very helpful.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Goals
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>By the end of this article you will:</p>
+<ul>
+<li>Understand the pieces required to run containers in your ARM or Intel macOS system.</li>
+<li>Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS.</li>
+<li>Launch and run the Oracle Database 23ai Free Container Image or the Oracle&#39;s Autonomous Database 23ai Free Container
+so you can use them locally to learn, develop or try their features.</li>
+</ul>
+<p>Would you prefer to watch the video? Here it is:
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/y6QZqk4a_t4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+</p></div><div class="post-footer">
+        <a href="/posts/running_containers_with_colima/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/containers/">Containers</a>,&nbsp;<a href="/tags/mac/">Mac</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/full_stack_java_quick_start/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/full_stack_java_quick_start/header-image.png"
-        data-srcset="/posts/full_stack_java_quick_start/header-image.png, /posts/full_stack_java_quick_start/header-image.png 1.5x, /posts/full_stack_java_quick_start/header-image.png 2x"
-        data-sizes="auto"
-        alt="/posts/full_stack_java_quick_start/header-image.png"
-        title="A new adventure ahead." width="1392" height="752" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/full_stack_java_quick_start/">Full-stack application in Java: Quick start</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-03">2025-11-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
-wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
-connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
-the checklists.</p>
-<p>
-This article is the first one describing what I am doing in Java + Spring.  I will cover project creation and structure,
-and build automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a
-good and helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="post-footer">
-        <a href="/posts/full_stack_java_quick_start/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/full_stack_rust_quick_start/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/full_stack_rust_quick_start/header-image.jpg"
-        data-srcset="/posts/full_stack_rust_quick_start/header-image.jpg, /posts/full_stack_rust_quick_start/header-image.jpg 1.5x, /posts/full_stack_rust_quick_start/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/full_stack_rust_quick_start/header-image.jpg"
-        title="Ferris starting a new adventure." width="1312" height="736" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/full_stack_rust_quick_start/">Full-stack application in Rust: Quick start</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-03">2025-11-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
-wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
-connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
-the checklists.</p>
-<p>
-This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
-automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
-helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="post-footer">
-        <a href="/posts/full_stack_rust_quick_start/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_test_doubles_fake/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg, /posts/rust_unit_testing_test_doubles_fake/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_fake/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg"
-        title="Ferris dressed in a luxury white puffer jacket" width="832" height="448" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_test_doubles_fake/">Rust unit testing test doubles: fakes</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-03">2025-11-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we
-can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,
-and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
-<p>
-Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
-slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
-should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_test_doubles_fake/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_test_doubles_mock/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg, /posts/rust_unit_testing_test_doubles_mock/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_mock/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg"
-        title="Ferris becomes a mockingcrab" width="1312" height="736" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_test_doubles_mock/">Rust unit testing: mock test doubles</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-10-27">2025-10-27</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-This is the third article on test doubles.  So far, I have covered stubs –that are used to control the responses to
-the methods of the type they double,– dummies –that fill &#34;holes&#34; that are required for some tests without any
-functionality,– and spies –that remember the interactions with the type they double.  It is time to talk about the
-<em>face of the band</em>: mocks.</p>
-<p>
-For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not
-talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.
-All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_test_doubles_mock/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_test_doubles_spy/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_spy/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_spy/header-image.jpg"
-        title="Ferris has become a spy." width="1312" height="736" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_test_doubles_spy/">Rust unit testing: spy and dummy test doubles</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-10-20">2025-10-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two
-different types of test doubles: <strong>the spy</strong> and <strong>the dummy</strong>.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
-<p>
-A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It
-<em>spies</em> on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something
-else.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_test_doubles_spy/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
-<ul class="pagination"><li class="page-item active">
+<ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
                     </span>
@@ -246,7 +146,7 @@ else.</p></div><div class="post-footer">
                     <span class="page-link">
                         <a href="/page/3/">3</a>
                     </span>
-                </li><li class="page-item ">
+                </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
                     </span>

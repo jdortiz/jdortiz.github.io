@@ -4,6 +4,21 @@
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 18 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: assertion libraries</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
+    <pubDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and
+assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&#39;ve written in
+those tests used the <code>assert_eq!()</code> macro.  Sometimes, they were a very obvious way to state what was expected and the
+actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is
+awkward or doesn&#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.</p>]]></description>
+</item>
+<item>
     <title>Full-stack application in Go: Quick start</title>
     <link>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</link>
     <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -151,24 +166,6 @@ As many other modern languages, regarding testing, Rust comes with batteries inc
 articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
 It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
 them, and reporting the results.  Could we ask for more?</p>]]></description>
-</item>
-<item>
-    <title>Full-Stack Apps</title>
-    <link>https://jorgeortiz.dev/posts/full_stack_apps/</link>
-    <pubDate>Tue, 16 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/full_stack_apps/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-I must confess.  For many years, I have tried to avoid front-end web development by all means.  I didn&#39;t want to touch
-it with a ten foot pole.  And the main reason was because I have never felt comfortable with having to combine HTML, CSS
-and JavaScript with the nuances of each of the browsers to get the UI I wanted to produce.</p>
-<p>
-When it came to develop user interfaces for my applications, I have preferred to use well established APIs.  I started,
-looong ago, writing some small Windows applications, moved to X Window first and then to GTK, and after a while focused
-on mobile development.  Even at that stage, I jumped from PalmOS to Android and iOS, almost skipping webOS<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> because
-of it being based on web development.</p>]]></description>
 </item>
 </channel>
 </rss>

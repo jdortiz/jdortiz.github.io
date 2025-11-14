@@ -3,7 +3,22 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: assertion libraries</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
+    <pubDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and
+assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&#39;ve written in
+those tests used the <code>assert_eq!()</code> macro.  Sometimes, they were a very obvious way to state what was expected and the
+actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is
+awkward or doesn&#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.</p>]]></description>
+</item>
+<item>
     <title>Full-stack application in Go: Quick start</title>
     <link>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</link>
     <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -151,24 +166,6 @@ As many other modern languages, regarding testing, Rust comes with batteries inc
 articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
 It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
 them, and reporting the results.  Could we ask for more?</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: asynchronous code</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</link>
-    <pubDate>Wed, 10 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So far, we have only tested synchronous code.  I could postpone talking about asynchronous code, but I don&#39;t want you to
-<em>wait</em> for it. 😄</p>
-<p>
-Asynchronous code, apart from being an inexhaustible source of dad jokes, can be painful to reason about its behavior
-and <a href="https://corrode.dev/blog/async/">not always recommended</a>.  We tend to think that, in a given scope, the lines above are executed before the lines
-below.  It really takes experience and discipline to realize that some parts of the code can be executed at a later time
-and that we may not have yet their results available.  This is important when we write our asynchronous code, but even
-more when we debug it .</p>]]></description>
 </item>
 </channel>
 </rss>

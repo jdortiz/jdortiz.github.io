@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rust unit testing: assertion libraries - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris holding a checklist."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Rust unit testing: assertion libraries">
+  <meta property="og:description" content="Ferris holding a checklist.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-14T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Test">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Rust unit testing: assertion libraries">
+  <meta name="twitter:description" content="Ferris holding a checklist.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/" /><link rel="prev" href="https://jorgeortiz.dev/posts/full_stack_go_quick_start/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rust unit testing: assertion libraries",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_assertion_libraries\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2706 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_assertion_libraries\/","datePublished": "2025-11-14T00:00:00+00:00","dateModified": "2025-11-14T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris holding a checklist."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: assertion libraries</h1><h2 class="single-subtitle">Using libraries for asserting</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-11-14">2025-11-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2706 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_assertion_libraries/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_assertion_libraries/header-image.jpg, /posts/rust_unit_testing_assertion_libraries/header-image.jpg 1.5x, /posts/rust_unit_testing_assertion_libraries/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_assertion_libraries/header-image.jpg"
+        title="Ferris holding a checklist." width="832" height="448" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Easier assertions</a>
+<ul>
+<li><a href="#headline-2">Simplify matching in assertions</a>
+</li>
+<li><a href="#headline-3">Simplify assertions with containers</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-4">More functional assertions</a>
+<ul>
+<li><a href="#headline-5">Test to the end</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">Final code</a>
+</li>
+<li><a href="#headline-7">Summary</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and
+assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&#39;ve written in
+those tests used the <code>assert_eq!()</code> macro.  Sometimes, they were a very obvious way to state what was expected and the
+actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is
+awkward or doesn&#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.</p>
+<p>
+In this article, I will replace some of the assertions made in the tests that we have written so far with others that
+are easier to read and write or provide enhanced functionality.  Get ready to assert yourself!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Easier assertions
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>Rust’s standard library gives us three assertion macros: <code>assert_eq!()</code>, <code>assert_ne!()</code>, and the more <em>flexible</em>
+<code>assert!()</code>, each designed for different comparison needs.  If you use the nightly version, you also get
+<code>assert_matches!()</code>, which improves pattern matching in assertions.  These macros are useful, but sometimes lack the
+precision or clarity required for certain checks.</p>
+<p>
+Let me introduce <code class="verbatim">assertables</code>, the crate that comes to the rescue 🦸.  It provides several assertion macros that add
+richer expressiveness, conciseness, and better debug information.  It has assertions to compare values beyond equality
+and inequality (less than, greater than, less than or equal to, greater than or equal to, or within a range) and takes
+precision into account for floating-point values.  It has specific assertions for strings: if they start with a prefix,
+end with a suffix, contain a substring, or are even valid email addresses.  It also offers assertions to verify groups
+and find out if a value is equal to any or all of the elements.  It has assertions for iterators or sets that simplify
+collection comparison.  And many more…  With all of the available macros, your code can be very specific about what you
+are trying to assert, and they will take care of the nitty-gritty of the verification.</p>
+<p>
+Without further ado, let&#39;s add to the project.  Since we plan to use <code class="verbatim">assertables</code> only with our tests, not our
+production code, we specify it as a development dependency with the corresponding option.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add --dev assertables</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Simplify matching in assertions
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>In one of the tests for the implementation of the <code>TryFrom</code> trait
+–<code>try_from_str_slice_produces_error_with_less_than_two_substrings()</code>– we wanted to verify that the associated function
+<code>try_from()</code> returned an error when the provided argument didn&#39;t contain two &#34;words&#34; or more.  Our supervillain wants to
+have full control and know when things are going wrong, so the error must be a specific variant of the <code>EvilError</code> enum
+and contain some specific associated data.  So we used the <code>matches!()</code> macro inside the assertion to verify this use
+case.  The expression used was <code>assert!(matches!(...));</code>, that is not as clarifying as it could be.</p>
+<p>
+I have used similar expressions for quite a while, but I was secretly hoping that <code>assert_matches!()</code> would become part
+of stable Rust.  Thankfully, <code class="verbatim">assertables</code> has that assertion available, and we can use it to simplify the expression
+and make explicit that we expect a specific pattern. It makes the assertion a little bit easier to write and read.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_matches!</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">EvilError</span>::<span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="o">==</span><span class="s">&#34;full_name&#34;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;Too few arguments&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Simplify assertions with containers
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>It is also quite common that the values we want to compare are wrapped in an <code>Option&lt;T&gt;</code> or a <code>Result&lt;T,E&gt;</code>.  If that is
+the case, we can either unwrap the value first and compare it to the expected contents or produce an expected value that
+is wrapped too before comparing them in the assertion.  This might not be complex, but it makes the test more wordy and
+less readable, as you can see in the assertion used in <code>world_domination_stage1_builds_hq_in_first_weak_target()</code>:
+<code>assert_eq!(hm_spy.hq_location, Some(test_common::FIRST_TARGET.to_string()));</code></p>
+<p>
+Instead, <code class="verbatim">assertables</code> provides a macro that directly compares container values, making assertions shorter and the
+intention behind the check clear. For <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code>, this avoids redundant unwrapping or rewrapping and
+emphasizes what you are actually trying to verify.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">assertables</span>::<span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hm_spy</span><span class="p">.</span><span class="n">hq_location</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">FIRST_TARGET</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+However, we can also use it to simplify assertions that check simply for the presence –<code>Some(T)</code>– or absence
+–<code>None</code>– of a value in an <code>Option&lt;T&gt;</code>.</p>
+<p>
+The assertion for <code>keep_sidekick_if_agrees_with_conspiracy()</code> becomes:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_some!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Sidekick fired unexpectedly&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>And we need to implement debug for <code>doubles::Sidekick</code>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Debug</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Formatter</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">fmt</span>::<span class="nb">Result</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">f</span><span class="p">.</span><span class="n">debug_struct</span><span class="p">(</span><span class="s">&#34;Sidekick&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;agree_answer&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">agree_answer</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;targets&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;received_msg&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">received_msg</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">finish</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+The one in <code>fire_sidekick_if_doesnt_agree_with_conspiracy()</code> is replaced by:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_none!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Sidekick not fired unexpectedly&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+And the assertion for <code>conspiracy_without_sidekick_doesnt_fail()</code> can be instead:</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_none!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Unexpected sidekick&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+These cases highlight how the right macro can simplify tough assertions. If you struggle to write an assertion, check if
+there’s a specific macro available for your needs.</p>
+<p>
+Don&#39;t forget to run the tests one more time with <code class="verbatim">cargo t --lib</code> to ensure that they are all passing.  And feel free to
+make some changes to also check that they fail when they should.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+More functional assertions
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>When I explained the basics of writing unit tests, I strongly suggested having a single assertion per test,
+unless the multiple assertions were related to the same part of the production code.  The reason for this practice is
+that if a test fails, it points to a narrow piece of code, and you know exactly what went wrong.</p>
+<p>
+However, when we tested <code>set_fullname()</code>, we wrote two assertions that verified that both the first name and the last
+name had been properly set.  That was entirely in line with my suggestion, as a single line of code was responsible for
+extracting the two strings.</p>
+<p>
+That said, our assertions in this test are less than ideal, because if the first name is wrong, the test will fail
+without telling us anything about the last name.  It is possible that we encounter an error in that test, complaining
+about the first name being incorrect.  We apply some fixes to the code to address that part only to realize that the
+second assertion is also not passing, and our test is still failing.</p>
+<p>
+It would be better to have the entire verdict before proceeding to apply fixes to the code.  However, the implementation
+of tests and assertions makes this more challenging in Rust.  The last step of all the assert macros is to panic, which
+is used by the test runner to indicate that the test has failed.  You panic, and there is no way back to continue with
+the test.</p>
+<p>
+There is another crate that can help us with that: <code class="verbatim">assert2</code>.  They used a different approach to empower your
+assertions.  Instead of providing different expressive macros to fulfill your needs when making assertions, it uses just
+a couple of macros, but they do the heavy lifting, parsing the expressions that you use with them to figure out what you
+want.  Your code gets to be more expressive because the intent is stated in the expression contained in the assert.
+This works well for inequality comparisons (&gt;, &lt;, &gt;=, &lt;=), not so much for collections.  Yet, it has the ability to
+match patterns, and can even capture parts of it with a specific macro (<code>let_assert!()</code>.)</p>
+<p>
+Nevertheless, the reason I decided to include <code class="verbatim">assert2</code> here is that it provides us with the <code>check!()</code> macro, that
+works similarly to the typical assertion, but allows the test to continue.  As you would expect by now, it does that by
+creating an instance that panics when it gets out of scope, taking advantage of the <code>Drop</code> trait again.</p>
+<p>
+Let&#39;s add the crate to the project, also as a developer dependency, and see how it works.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add --dev assert2</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Test to the end
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>We can improve our existing test and tell it to continue if the first check fails.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">set_full_name_sets_first_and_last_names</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">assert2</span>::<span class="fm">check!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">assert2</span>::<span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_LAST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Notice that I have qualified both assertions, so I don&#39;t mix <code class="verbatim">assert2</code> and standard library macros in the same test.</p>
+<p>
+If you want to verify that the test runs to completion, you can temporarily replace the assertions and check that it
+prints, in full color, both failures in the output.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">assert2</span>::<span class="fm">check!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;A&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">assert2</span>::<span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;B&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+Change the assertions back to the previous ones, run the tests again with <code class="verbatim">cargo t --lib</code>, and relax and enjoy 😎.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Final code
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>We haven&#39;t made many changes to our code, but it is always useful to have the final version available.  You can find the
+<code class="verbatim">supervillain.rs</code> code file right below this paragraph.  And if you want to check the whole project, they are, as
+always, in the corresponding commit of the <a href="https://github.com/jdortiz/detestable-me-rs">repo with all the code in this series</a>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for supervillains and their related stuff
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">time</span>::<span class="n">Duration</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">thiserror</span>::<span class="n">Error</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="p">{</span><span class="n">Cipher</span><span class="p">,</span><span class="w"> </span><span class="n">Gadget</span><span class="p">,</span><span class="w"> </span><span class="n">Henchman</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents supervillains.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#[derive(Default)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">sidekick</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">shared_key</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Megaweapon</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">shoot</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// Return the value of the full name as a single string.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// Full name is produced concatenating first name, a single space, and the last name.
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// # Examples
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///# use evil::supervillain::Supervillain;
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// let lex = Supervillain {
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///     first_name: &#34;Lex&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///     last_name: &#34;Luthor&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// };
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// assert_eq!(lex.full_name(), &#34;Lex Luthor&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">set_full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Received </span><span class="si">{}</span><span class="s"> components.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Name must have first and last name&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="bp">self</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="bp">self</span><span class="p">.</span><span class="n">last_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">to_string</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">weapon</span>: <span class="kp">&amp;</span><span class="nc">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="p">,</span><span class="w"> </span><span class="n">intense</span>: <span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">weapon</span><span class="p">.</span><span class="n">shoot</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="n">intense</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">rng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span>::<span class="n">rng</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rng</span><span class="p">.</span><span class="n">random_range</span><span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="n">times</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">weapon</span><span class="p">.</span><span class="n">shoot</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">come_up_with_plan</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">tokio</span>::<span class="n">time</span>::<span class="n">sleep</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">100</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Take over the world!&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">conspire</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">sidekick</span><span class="p">.</span><span class="n">agree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">start_world_domination_stage1</span><span class="o">&lt;</span><span class="n">H</span>: <span class="nc">Henchman</span><span class="p">,</span><span class="w"> </span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">henchman</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sidekick</span><span class="p">.</span><span class="n">get_weak_targets</span><span class="p">(</span><span class="n">gadget</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">targets</span><span class="p">.</span><span class="n">is_empty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">henchman</span><span class="p">.</span><span class="n">build_secret_hq</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">clone</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">start_world_domination_stage2</span><span class="o">&lt;</span><span class="n">H</span>: <span class="nc">Henchman</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">henchman</span>: <span class="nc">H</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">henchman</span><span class="p">.</span><span class="n">fight_enemies</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">henchman</span><span class="p">.</span><span class="n">do_hard_things</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">tell_plans</span><span class="o">&lt;</span><span class="n">C</span>: <span class="nc">Cipher</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">secret</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">cipher</span>: <span class="kp">&amp;</span><span class="nc">C</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">sidekick</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="n">ciphered_msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">shared_key</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">sidekick</span><span class="p">.</span><span class="n">tell</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ciphered_msg</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TryFrom</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">type</span> <span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EvilError</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">try_from</span><span class="p">(</span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="bp">Self</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="n">components</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nb">Err</span><span class="p">(</span><span class="n">EvilError</span>::<span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">purpose</span>: <span class="s">&#34;full_name&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">reason</span>: <span class="s">&#34;Too few arguments&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nb">Ok</span><span class="p">(</span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">first_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">last_name</span>: <span class="nc">components</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="o">..</span><span class="nb">Default</span>::<span class="n">default</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[derive(Error, Debug)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">EvilError</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[error(</span><span class="s">&#34;Parse error: purpose=&#39;{}&#39;, reason=&#39;{}&#39;&#34;</span><span class="cp">, .purpose, .reason)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span>: <span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span>: <span class="nb">String</span> <span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">assertables</span>::<span class="p">{</span><span class="n">assert_matches</span><span class="p">,</span><span class="w"> </span><span class="n">assert_none</span><span class="p">,</span><span class="w"> </span><span class="n">assert_some</span><span class="p">,</span><span class="w"> </span><span class="n">assert_some_eq_x</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">Cell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">test_context</span>::<span class="p">{</span><span class="n">AsyncTestContext</span><span class="p">,</span><span class="w"> </span><span class="n">TestContext</span><span class="p">,</span><span class="w"> </span><span class="n">test_context</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">test_common</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">full_name_is_first_name_space_last_name</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">full_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">full_name</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">full_name</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">test_common</span>::<span class="no">PRIMARY_FULL_NAME</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="s">&#34;Unexpected full name&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">set_full_name_sets_first_and_last_names</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// assert2::check!(ctx.sut.first_name == &#34;A&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="c1">// assert2::assert!(ctx.sut.last_name == &#34;B&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="n">assert2</span>::<span class="fm">check!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">assert2</span>::<span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_LAST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[should_panic(expected = </span><span class="s">&#34;Name must have first and last name&#34;</span><span class="cp">)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">set_full_name_panics_with_empty_name</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">try_from_str_slice_produces_supervillain_full_with_first_and_last_name</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="n">EvilError</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">sut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_LAST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">try_from_str_slice_produces_error_with_less_than_two_substrings</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Supervillain</span>::<span class="n">try_from</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="nb">Err</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="fm">panic!</span><span class="p">(</span><span class="s">&#34;Unexpected value returned by try_from&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_matches!</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">EvilError</span>::<span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">purpose</span><span class="w"> </span><span class="o">==</span><span class="s">&#34;full_name&#34;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&#34;Too few arguments&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">non_intensive_attack_shoots_weapon_once</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponDouble</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">weapon</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">weapon</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">once</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">intensive_attack_shoots_weapon_twice_or_more</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponDouble</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">weapon</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">weapon</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">at_least</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">plan_is_sadly_expected</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">come_up_with_plan</span><span class="p">().</span><span class="k">await</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Take over the world!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">keep_sidekick_if_agrees_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sk_double</span><span class="p">.</span><span class="n">agree_answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_some!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Sidekick fired unexpectedly&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">fire_sidekick_if_doesnt_agree_with_conspiracy</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sk_double</span><span class="p">.</span><span class="n">agree_answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_none!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Sidekick not fired unexpectedly&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">conspiracy_without_sidekick_doesnt_fail</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">conspire</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_none!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Unexpected sidekick&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">world_domination_stage1_builds_hq_in_first_weak_target</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">gdummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="w"> </span><span class="p">{};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HenchmanDouble</span>::<span class="n">default</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sk_double</span><span class="p">.</span><span class="n">targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">TARGETS</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">).</span><span class="n">to_vec</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">start_world_domination_stage1</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">hm_spy</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gdummy</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hm_spy</span><span class="p">.</span><span class="n">hq_location</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">FIRST_TARGET</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">world_domination_stage2_tells_henchman_to_do_hard_things_and_fight_with_enemies</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">henchman</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HenchmanDouble</span>::<span class="n">default</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">henchman</span><span class="p">.</span><span class="n">assertions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">|</span><span class="n">h</span><span class="o">|</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">verify_two_things_done</span><span class="p">())];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">start_world_domination_stage2</span><span class="p">(</span><span class="n">henchman</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">tell_plans_sends_ciphered_message</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sk_double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doubles</span>::<span class="n">Sidekick</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sk_double</span><span class="p">.</span><span class="n">assertions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">|</span><span class="n">s</span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">s</span><span class="p">.</span><span class="n">verify_received_msg</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">MAIN_CIPHERED_MESSAGE</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">})];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">sidekick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">sk_double</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">fake_cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CipherDouble</span><span class="w"> </span><span class="p">{};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">tell_plans</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">MAIN_SECRET_MESSAGE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fake_cipher</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="p">(</span><span class="k">crate</span><span class="p">)</span><span class="w"> </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="n">cell</span>::<span class="n">RefCell</span><span class="p">,</span><span class="w"> </span><span class="n">fmt</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span>::<span class="n">PhantomData</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">Gadget</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="o">&lt;&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">agree_answer</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">targets</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">received_msg</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="n">assertions</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="nb">Fn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Sidekick</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Sidekick</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">Sidekick</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">phantom</span>: <span class="nc">PhantomData</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">agree_answer</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">targets</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[],</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">received_msg</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">assertions</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[],</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">agree</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">agree_answer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_weak_targets</span><span class="o">&lt;</span><span class="n">G</span>: <span class="nc">Gadget</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">_gadget</span>: <span class="kp">&amp;</span><span class="nc">G</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">tell</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">ciphered_msg</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">,</span><span class="o">*</span><span class="bp">self</span><span class="p">.</span><span class="n">received_msg</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ciphered_msg</span><span class="p">.</span><span class="n">to_owned</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">verify_received_msg</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">expected_msg</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="p">.</span><span class="n">received_msg</span><span class="p">.</span><span class="n">borrow</span><span class="p">(),</span><span class="w"> </span><span class="n">expected_msg</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">impl</span><span class="w"> </span><span class="nb">Drop</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">fn</span> <span class="nf">drop</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">assertions</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">a</span><span class="p">(</span><span class="bp">self</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">impl</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Debug</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Sidekick</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Formatter</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">fmt</span>::<span class="nb">Result</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">f</span><span class="p">.</span><span class="n">debug_struct</span><span class="p">(</span><span class="s">&#34;Sidekick&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;agree_answer&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">agree_answer</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;targets&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">targets</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="p">.</span><span class="n">field</span><span class="p">(</span><span class="s">&#34;received_msg&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">received_msg</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="p">.</span><span class="n">finish</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">CipherDouble</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Cipher</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">CipherDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">transform</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">secret</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">_key</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;+&#34;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">secret</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;+&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">GadgetDummy</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Gadget</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GadgetDummy</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[derive(Default)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">HenchmanDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">hq_location</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">current_invocation</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">u32</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">done_hard_things</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">u32</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">fought_enemies</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">u32</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">assertions</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="nb">Fn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HenchmanDouble</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Send</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">HenchmanDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">verify_two_things_done</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="fm">assert!</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">done_hard_things</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">fought_enemies</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Henchman</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HenchmanDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">build_secret_hq</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">hq_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">location</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">do_hard_things</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">done_hard_things</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">fight_enemies</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">fought_enemies</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_invocation</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="nb">Drop</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">HenchmanDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">drop</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">assertions</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">a</span><span class="p">(</span><span class="bp">self</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="n">times_shot</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">u32</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">times_shot</span>: <span class="nc">Cell</span>::<span class="n">default</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">verify</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">Fn</span><span class="p">(</span><span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">check</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="fm">assert!</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">times_shot</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">fn</span> <span class="nf">shoot</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="bp">self</span><span class="p">.</span><span class="n">times_shot</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">times_shot</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AsyncTestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="n">sut</span>: <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">first_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_FIRST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="n">last_name</span>: <span class="nc">test_common</span>::<span class="no">PRIMARY_LAST_NAME</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="o">..</span><span class="nb">Default</span>::<span class="n">default</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">teardown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">at_least</span><span class="p">(</span><span class="n">min_times</span>: <span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">impl</span><span class="w"> </span><span class="nb">Fn</span><span class="p">(</span><span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">|</span><span class="n">times</span>: <span class="kt">u32</span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">times</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">min_times</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">once</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">impl</span><span class="w"> </span><span class="nb">Fn</span><span class="p">(</span><span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">|</span><span class="n">times</span>: <span class="kt">u32</span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">times</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Summary
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<p>I have used the <code class="verbatim">assertables</code> crate to modify the assertions that didn&#39;t fit well with the standard macros.  In my
+opinion, that results in a much clearer code with a more obvious intent.</p>
+<p>
+I have also used <code class="verbatim">assert2</code> to illustrate how to write a test that finishes running even if its first verification fails.
+This could help reduce the need to go back and forth to fix the kind of tests that require several assertions, making
+you more productive.</p>
+<p>
+There are other libraries that you may want to consider, such as <a href="https://crates.io/crates/speculoos"><code class="verbatim">speculoos</code></a>, which allows you to use fluent
+assertions, which are quite popular among some developers.  Still, there is some amount of bikeshedding here, so don&#39;t
+forget that he goal is to have a good test harness for your code, and you should only resort to these libraries when they
+serve a real purpose for your codebase.</p>
+<p>
+In any case, I strongly advise against using more than one assertion library in the same project.  It increases the
+number of dependencies and makes the testing code more convoluted and less readable, which was the main reason to
+consider them in the first place.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-11-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/" data-title="Rust unit testing: assertion libraries" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/" data-title="Rust unit testing: assertion libraries" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/full_stack_go_quick_start/" class="prev" rel="prev" title="Full-stack application in Go: Quick start"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Full-stack application in Go: Quick start</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.151.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

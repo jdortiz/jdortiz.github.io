@@ -3,7 +3,22 @@
         <title>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/test/</link>
         <description>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: assertion libraries</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
+    <pubDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and
+assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&#39;ve written in
+those tests used the <code>assert_eq!()</code> macro.  Sometimes, they were a very obvious way to state what was expected and the
+actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is
+awkward or doesn&#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing test doubles: fakes</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
     <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -147,24 +162,6 @@ right away.</p>
 Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
 incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
 <a href="https://jorgeortiz.dev/">social media accounts</a>.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: test types</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</link>
-    <pubDate>Mon, 07 Jul 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So you have finally learned Rust and are writing cool projects with it?  Awesome!  However, as soon as your project
-starts being useful and solving some actual use cases, you realize that the quality of your code is important.  Not only
-that.  The larger and more complex your project becomes, the harder it is to manually test every bit of functionality
-after a change.</p>
-<p>
-Your first temptation might be: &#34;Why should I test everything if my changes only affect this small part of the program?&#34;
-And, while in some situations that might be true, more often than not our changes affect unexpected parts of our
-program.</p>]]></description>
 </item>
 </channel>
 </rss>

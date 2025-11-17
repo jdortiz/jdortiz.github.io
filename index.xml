@@ -6,6 +6,23 @@
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 18 Nov 2025 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Rust unit testing: mocking library</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</link>
+    <pubDate>Mon, 17 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In earlier articles about test doubles, I showed how to create them without using any libraries.  While I believe that
+is the best way to understand how they work, how they can help, and how to use them, it is far from being a convenient
+way of writing your tests.</p>
+<p>
+In this article, I will explain how to use a mocking library and replace all the test doubles we wrote with others that
+are produced by the library.  Prepare for a more streamlined version of the code that achieves the same goals with less
+effort!</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: assertion libraries</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
     <pubDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -154,20 +171,6 @@ ecosystem is very rich and active and people with other needs have contributed w
 <p>
 Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
 following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: builtin tools</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
-    <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous
-articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
-It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
-them, and reporting the results.  Could we ask for more?</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -100,6 +100,28 @@
         alt="/images/avatar.jpg"
         title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="jdortiz" rel="me"></a><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/rust_unit_testing_mocking_library/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_mocking_library/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_mocking_library/header-image.jpg, /posts/rust_unit_testing_mocking_library/header-image.jpg 1.5x, /posts/rust_unit_testing_mocking_library/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_mocking_library/header-image.jpg"
+        title="Ferris scared of a black box." width="832" height="448" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/rust_unit_testing_mocking_library/">Rust unit testing: mocking library</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-17">2025-11-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
+In earlier articles about test doubles, I showed how to create them without using any libraries.  While I believe that
+is the best way to understand how they work, how they can help, and how to use them, it is far from being a convenient
+way of writing your tests.</p>
+<p>
+In this article, I will explain how to use a mocking library and replace all the test doubles we wrote with others that
+are produced by the library.  Prepare for a more streamlined version of the code that achieves the same goals with less
+effort!</p></div><div class="post-footer">
+        <a href="/posts/rust_unit_testing_mocking_library/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/rust_unit_testing_assertion_libraries/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -208,29 +230,6 @@ Fakes are tests doubles that implement a simplified version of a task or computa
 slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
 should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p></div><div class="post-footer">
         <a href="/posts/rust_unit_testing_test_doubles_fake/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_test_doubles_mock/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg, /posts/rust_unit_testing_test_doubles_mock/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_mock/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_mock/header-image.jpg"
-        title="Ferris becomes a mockingcrab" width="1312" height="736" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_test_doubles_mock/">Rust unit testing: mock test doubles</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-10-27">2025-10-27</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-This is the third article on test doubles.  So far, I have covered stubs –that are used to control the responses to
-the methods of the type they double,– dummies –that fill &#34;holes&#34; that are required for some tests without any
-functionality,– and spies –that remember the interactions with the type they double.  It is time to talk about the
-<em>face of the band</em>: mocks.</p>
-<p>
-For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not
-talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.
-All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_test_doubles_mock/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">

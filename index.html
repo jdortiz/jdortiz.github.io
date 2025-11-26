@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-	<meta name="generator" content="Hugo 0.151.2">
+	<meta name="generator" content="Hugo 0.152.2">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
@@ -98,7 +98,29 @@
         data-srcset="/images/avatar.jpg, /images/avatar.jpg 1.5x, /images/avatar.jpg 2x"
         data-sizes="auto"
         alt="/images/avatar.jpg"
-        title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="jdortiz" rel="me"></a><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
+        title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a><a href="jdortiz" rel="me"></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/rust_unit_testing_file_reading/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_file_reading/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_file_reading/header-image.jpg, /posts/rust_unit_testing_file_reading/header-image.jpg 1.5x, /posts/rust_unit_testing_file_reading/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_file_reading/header-image.jpg"
+        title="Ferris writing to a friend." width="832" height="448" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/rust_unit_testing_file_reading/">Rust unit testing: file reading</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-24">2025-11-24</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
+So far, I have covered several scenarios. Yet all the interactions in those scenarios occurred in memory: one instance
+of a type talking to another instance of another type. However, in the real world, our applications do more than just
+invoke functions or methods, and we would like to test those use cases.</p>
+<p>
+One of the most common things that applications do and that deserves testing is reading from and writing to files.
+Files are among the most frequently used input and output mechanisms in many applications, and it is key that they behave
+as expected when using files.</p></div><div class="post-footer">
+        <a href="/posts/rust_unit_testing_file_reading/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/rust_unit_testing_mocking_library/"><img
         class="lazyload"
@@ -210,28 +232,6 @@ helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="pos
         <a href="/posts/full_stack_rust_quick_start/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/rust_unit_testing_test_doubles_fake/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg, /posts/rust_unit_testing_test_doubles_fake/header-image.jpg 1.5x, /posts/rust_unit_testing_test_doubles_fake/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_test_doubles_fake/header-image.jpg"
-        title="Ferris dressed in a luxury white puffer jacket" width="832" height="448" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/rust_unit_testing_test_doubles_fake/">Rust unit testing test doubles: fakes</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-03">2025-11-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we
-can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,
-and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
-<p>
-Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
-slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
-should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p></div><div class="post-footer">
-        <a href="/posts/rust_unit_testing_test_doubles_fake/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -250,7 +250,7 @@ should.  So, instead of performing the (real) encryption, we will have a fake th
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.151.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.152.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

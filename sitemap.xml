@@ -2,14 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://jorgeortiz.dev/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/categories/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/rust/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/</loc><lastmod>2025-11-26T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2025-11-26T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/categories/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/rust/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/test/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/categories/tutorial/</loc><lastmod>2025-11-24T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/test/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/categories/tutorial/</loc><lastmod>2025-11-17T00:00:00&#43;00:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</loc><lastmod>2025-11-14T15:43:51&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/tags/full-stack/</loc><lastmod>2025-11-12T16:02:57&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</loc><lastmod>2025-11-12T16:02:57&#43;01:00</lastmod></url><url>

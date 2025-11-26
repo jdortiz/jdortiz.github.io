@@ -3,7 +3,24 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 17 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 24 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: file reading</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</link>
+    <pubDate>Mon, 24 Nov 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+So far, I have covered several scenarios. Yet all the interactions in those scenarios occurred in memory: one instance
+of a type talking to another instance of another type. However, in the real world, our applications do more than just
+invoke functions or methods, and we would like to test those use cases.</p>
+<p>
+One of the most common things that applications do and that deserves testing is reading from and writing to files.
+Files are among the most frequently used input and output mechanisms in many applications, and it is key that they behave
+as expected when using files.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: mocking library</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</link>
     <pubDate>Mon, 17 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -153,22 +170,6 @@ Unit testing is about writing tests for individual units (Duh!), most frequently
 define in our code, i.e., structs / enums / unions, or first-class functions.  But the types that we want to test
 usually have dependencies on other types and we would like to test them in isolation without having to worry about the
 details of those dependencies.  That&#39;s why you need test doubles.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: add-ons</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
-    <pubDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to
-produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust
-ecosystem is very rich and active and people with other needs have contributed with really useful tools.</p>
-<p>
-Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
-following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -100,6 +100,36 @@
         alt="/images/avatar.jpg"
         title="/images/avatar.jpg" /></a></div><h1 class="home-title">Jorge Ortiz-Fuentes' DevBites</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/jdortiz" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jorgeortiz" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="https://www.reddit.com/user/jorgedortiz" title="Reddit" target="_blank" rel="noopener noreffer me"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a><a href="https://fosstodon.org/@jdortiz" title="Mastodon" target="_blank" rel="noopener noreffer me"><i class="fab fa-mastodon fa-fw" aria-hidden="true"></i></a><a href="https://bsky.app/profile/jdortiz.bsky.social" title="Bluesky" target="_blank" rel="noopener noreffer me"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/bluesky.svg" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a><a href="jdortiz" rel="me"></a><a href="https://www.youtube.com/channel/UCSWMy-eceH92WHirjzrMqfw" title="YouTube" target="_blank" rel="noopener noreffer me"><i class="fab fa-youtube fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/posts/rust_unit_testing_file_buf_reading/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_file_buf_reading/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_file_buf_reading/header-image.jpg, /posts/rust_unit_testing_file_buf_reading/header-image.jpg 1.5x, /posts/rust_unit_testing_file_buf_reading/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_file_buf_reading/header-image.jpg"
+        title="Ferris reads some text chunks" width="832" height="448" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/rust_unit_testing_file_buf_reading/">Rust unit testing: buffered file reading</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-12-09">2025-12-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
+In the previous article, I explained how to use a test double to replace a <code>File</code> instance and control the behavior
+required by a function that reads from it.  With the test double in place, I was able not only to return what I needed
+for the scenarios where I needed reading, but also to produce errors that allowed me <a href="/posts/rust_unit_testing_not_so_happy_path/">to test the not-so-happy path</a>.</p>
+<p>
+I got some concerned comments pointing out that the test code wasn&#39;t reading, which was an essential part of what we
+were testing.  I agree that the test code isn&#39;t actually reading.  It isn&#39;t, and that is on purpose.  On the one hand,
+reading isn&#39;t an essential part of what we are testing.  On the contrary, <code>File</code> is a dependency of the
+<code>are_there_vulnerable_locations()</code> method, and, as with any other dependency, it can be replaced by a test double.  The
+code isn&#39;t making it easy to inject the dependency, because the <code>File</code> instance is created inside of the method –and as
+you may already know, every time you create an instance inside of your code, a kitten is killed<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  But I applied
+what I had already explained to replace dependencies using the namespace.  On the other hand, we gain additional
+benefits by using a test double.  I mentioned that performance is much better, but you can only notice the difference
+with a large test suite.  However, it is also important that the test double can easily reproduce <code>File</code> behaviors that
+would require some work when you are actually interacting with the filesystem.  For example, opening the file for
+reading successfully and then failing to read from it right away.</p></div><div class="post-footer">
+        <a href="/posts/rust_unit_testing_file_buf_reading/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
             <a href="/posts/rust_unit_testing_file_reading/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -208,29 +238,6 @@ and build automation.  We won&#39;t have much of the application implemented by 
 good and helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="post-footer">
         <a href="/posts/full_stack_java_quick_start/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/posts/full_stack_rust_quick_start/"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/full_stack_rust_quick_start/header-image.jpg"
-        data-srcset="/posts/full_stack_rust_quick_start/header-image.jpg, /posts/full_stack_rust_quick_start/header-image.jpg 1.5x, /posts/full_stack_rust_quick_start/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/full_stack_rust_quick_start/header-image.jpg"
-        title="Ferris starting a new adventure." width="1312" height="736" /></a>
-        </div><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/full_stack_rust_quick_start/">Full-stack application in Rust: Quick start</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-11-11">2025-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div><div class="content"><p>
-In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
-wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
-connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
-the checklists.</p>
-<p>
-This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
-automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
-helpful start. So buckle up and let&#39;s get cracking!</p></div><div class="post-footer">
-        <a href="/posts/full_stack_rust_quick_start/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/full-stack/">Full-stack</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">

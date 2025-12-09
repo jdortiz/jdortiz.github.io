@@ -3,7 +3,32 @@
         <title>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/rust/</link>
         <description>Rust - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 24 Nov 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 09 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: buffered file reading</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</link>
+    <pubDate>Tue, 09 Dec 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In the previous article, I explained how to use a test double to replace a <code>File</code> instance and control the behavior
+required by a function that reads from it.  With the test double in place, I was able not only to return what I needed
+for the scenarios where I needed reading, but also to produce errors that allowed me <a href="/posts/rust_unit_testing_not_so_happy_path/">to test the not-so-happy path</a>.</p>
+<p>
+I got some concerned comments pointing out that the test code wasn&#39;t reading, which was an essential part of what we
+were testing.  I agree that the test code isn&#39;t actually reading.  It isn&#39;t, and that is on purpose.  On the one hand,
+reading isn&#39;t an essential part of what we are testing.  On the contrary, <code>File</code> is a dependency of the
+<code>are_there_vulnerable_locations()</code> method, and, as with any other dependency, it can be replaced by a test double.  The
+code isn&#39;t making it easy to inject the dependency, because the <code>File</code> instance is created inside of the method –and as
+you may already know, every time you create an instance inside of your code, a kitten is killed<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  But I applied
+what I had already explained to replace dependencies using the namespace.  On the other hand, we gain additional
+benefits by using a test double.  I mentioned that performance is much better, but you can only notice the difference
+with a large test suite.  However, it is also important that the test double can easily reproduce <code>File</code> behaviors that
+would require some work when you are actually interacting with the filesystem.  For example, opening the file for
+reading successfully and then failing to read from it right away.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: file reading</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</link>
     <pubDate>Mon, 24 Nov 2025 00:00:00 &#43;0000</pubDate>
@@ -150,20 +175,6 @@ ecosystem is very rich and active and people with other needs have contributed w
 <p>
 Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
 following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: builtin tools</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
-    <pubDate>Mon, 22 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous
-articles of this series, you don&#39;t need to take any extra steps to be able to write and run unit tests for your code.
-It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running
-them, and reporting the results.  Could we ask for more?</p>]]></description>
 </item>
 </channel>
 </rss>

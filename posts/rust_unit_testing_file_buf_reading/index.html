@@ -4,42 +4,42 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Rust unit testing: file reading - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris reading a letter from a friend."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/">
+        <title>Rust unit testing: buffered file reading - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris reads some text chunks"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Rust unit testing: file reading">
-  <meta property="og:description" content="Ferris reading a letter from a friend.">
+  <meta property="og:title" content="Rust unit testing: buffered file reading">
+  <meta property="og:description" content="Ferris reads some text chunks">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-11-26T17:14:29+01:00">
+    <meta property="article:published_time" content="2025-12-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-09T00:00:00+00:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Rust unit testing: file reading">
-  <meta name="twitter:description" content="Ferris reading a letter from a friend.">
+  <meta name="twitter:title" content="Rust unit testing: buffered file reading">
+  <meta name="twitter:description" content="Ferris reads some text chunks">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Rust unit testing: file reading",
+        "headline": "Rust unit testing: buffered file reading",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_file_reading\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  3022 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_file_reading\/","datePublished": "2025-11-24T00:00:00+00:00","dateModified": "2025-11-26T17:14:29+01:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_file_buf_reading\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  3260 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_file_buf_reading\/","datePublished": "2025-12-09T00:00:00+00:00","dateModified": "2025-12-09T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "Jorge Ortiz-Fuentes"
-            },"description": "Ferris reading a letter from a friend."
+            },"description": "Ferris reads some text chunks"
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -105,425 +105,382 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: file reading</h1><h2 class="single-subtitle">Testing file operations for free</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: buffered file reading</h1><h2 class="single-subtitle">Testing other file operations</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-11-24">2025-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3022 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-12-09">2025-12-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3260 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_file_reading/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_file_reading/header-image.jpg, /posts/rust_unit_testing_file_reading/header-image.jpg 1.5x, /posts/rust_unit_testing_file_reading/header-image.jpg 2x"
+        data-src="/posts/rust_unit_testing_file_buf_reading/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_file_buf_reading/header-image.jpg, /posts/rust_unit_testing_file_buf_reading/header-image.jpg 1.5x, /posts/rust_unit_testing_file_buf_reading/header-image.jpg 2x"
         data-sizes="auto"
-        alt="/posts/rust_unit_testing_file_reading/header-image.jpg"
-        title="Ferris reading a letter from a friend." width="832" height="448" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/posts/rust_unit_testing_file_buf_reading/header-image.jpg"
+        title="Ferris reads some text chunks" width="832" height="448" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">Reading files scenario</a>
+<li><a href="#headline-1">Buffered reading</a>
 </li>
-<li><a href="#headline-2">Testing with file operations</a>
+<li><a href="#headline-2">Testing Buffered Reading</a>
 <ul>
-<li><a href="#headline-3">Test when the file cannot be opened</a>
+<li><a href="#headline-3">Refactoring the code<sup class="footnote-reference">1</sup></a>
 </li>
-<li><a href="#headline-4">Test when the file cannot be read</a>
+<li><a href="#headline-4">Make the dependency controllable</a>
 </li>
-<li><a href="#headline-5">Test file contents</a>
+<li><a href="#headline-5">Test when the file cannot be opened</a>
 </li>
-<li><a href="#headline-6">A more elegant solution</a>
+<li><a href="#headline-6">Test when the file contains a weak target</a>
+</li>
+<li><a href="#headline-7">Test when file doesn&#39;t contain a weak target</a>
 </li>
 </ul>
 </li>
-<li><a href="#headline-7">Final code</a>
+<li><a href="#headline-8">Final code</a>
 </li>
-<li><a href="#headline-8">Summary</a>
+<li><a href="#headline-9">Summary</a>
+</li>
+<li><a href="#headline-10">Footnotes</a>
 </li>
 </ul>
 </nav></div>
             </div><div class="content" id="content">
 <p>
-So far, I have covered several scenarios. Yet all the interactions in those scenarios occurred in memory: one instance
-of a type talking to another instance of another type. However, in the real world, our applications do more than just
-invoke functions or methods, and we would like to test those use cases.</p>
+In the previous article, I explained how to use a test double to replace a <code>File</code> instance and control the behavior
+required by a function that reads from it.  With the test double in place, I was able not only to return what I needed
+for the scenarios where I needed reading, but also to produce errors that allowed me <a href="/posts/rust_unit_testing_not_so_happy_path/">to test the not-so-happy path</a>.</p>
 <p>
-One of the most common things that applications do and that deserves testing is reading from and writing to files.
-Files are among the most frequently used input and output mechanisms in many applications, and it is key that they behave
-as expected when using files.</p>
+I got some concerned comments pointing out that the test code wasn&#39;t reading, which was an essential part of what we
+were testing.  I agree that the test code isn&#39;t actually reading.  It isn&#39;t, and that is on purpose.  On the one hand,
+reading isn&#39;t an essential part of what we are testing.  On the contrary, <code>File</code> is a dependency of the
+<code>are_there_vulnerable_locations()</code> method, and, as with any other dependency, it can be replaced by a test double.  The
+code isn&#39;t making it easy to inject the dependency, because the <code>File</code> instance is created inside of the method –and as
+you may already know, every time you create an instance inside of your code, a kitten is killed<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  But I applied
+what I had already explained to replace dependencies using the namespace.  On the other hand, we gain additional
+benefits by using a test double.  I mentioned that performance is much better, but you can only notice the difference
+with a large test suite.  However, it is also important that the test double can easily reproduce <code>File</code> behaviors that
+would require some work when you are actually interacting with the filesystem.  For example, opening the file for
+reading successfully and then failing to read from it right away.</p>
+<p>
+I hope that by now, you are on board with the idea of using test doubles for file operations, because I am going to do
+it again.  This time, I will extend the idea to a buffering scenario that wasn&#39;t covered in the previous article, and,
+in the next article, I will cover writing to a file.  It would be impractical, and, being honest, quite boring too, to
+try to cover every possible scenario about file I/O.  Also, the scenarios might be useful if you are trying to write
+very similar tests, but don&#39;t let them dazzle you; focus on the techniques I will be using, which I consider more useful
+in the long run.</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-Reading files scenario
+Buffered reading
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>Supervillains have long realized that communicating with their subordinates requires more than just spoken
-words. Detailed, confidential surveillance data should not be communicated aloud, and some orders must be written down
-so they are available to all when needed. It is our chore to implement this communication and, for the sake of our
-survival, test it.</p>
+<p>Our supervillain is gathering a lot of collaborators who can inspect many locations and assess their vulnerability much
+faster, so we have been told to write our method more efficiently. We have started by adding buffered reading to the
+method.</p>
 <p>
-In this article, I will focus on a method that reads information from a pre-established text file in CSV
-(comma-separated values) format.  The lines will have two columns: the name of a city and a label for its weakness
-(&#34;strong&#34; or &#34;weak&#34;.)  The method will return true only if it can read the file and find at least one city labeled as
-<em>weak</em>.</p>
+As you may already know, Rust provides a trait for buffered reading operations: <code>BufRead</code>.  Types that implement this
+trait use an internal buffer to improve reading performance, reducing the number of system calls.  But it also builds on
+the <code>Read</code> trait, offering more options for reading content, such as the ability to iterate over the lines of a file
+without first reading the whole file into a string using the <code>lines()</code> method.  The standard library provides several
+types that implement that trait.  In particular, <code>BufReader</code> takes a <code>File</code> and adds all the buffered operations.</p>
+<p>
+We can write another and more efficient version of our existing method using buffered reading.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">are_there_vulnerable_locations</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">listing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">are_there_vulnerable_locations_efficient</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">file_listing</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span>::<span class="n">open</span><span class="p">(</span><span class="no">LISTING_PATH</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file_listing</span><span class="p">.</span><span class="n">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">listing</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">listing</span><span class="p">.</span><span class="n">lines</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">ends_with</span><span class="p">(</span><span class="s">&#34;weak&#34;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">buf_listing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BufReader</span>::<span class="n">new</span><span class="p">(</span><span class="n">file_listing</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">list_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf_listing</span><span class="p">.</span><span class="n">lines</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list_iter</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">ends_with</span><span class="p">(</span><span class="s">&#34;weak&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">return</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Some</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
+<p>
+Try and compile the code with <code class="verbatim">cargo b --lib</code>.  It should work, but the tests aren&#39;t ready yet. In the process of adding
+this new method, we broke it because our <code>File</code> double doesn&#39;t implement some of the functionality that a <code>BufReader</code>
+requires.  Let&#39;s work on fixing the tests and adding new ones for the new method.</p>
 </div>
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-Testing with file operations
+Testing Buffered Reading
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
-<p>If you have ever considered writing tests that involve code that reads or writes files and didn&#39;t know where to start,
-you may have found resources explaining how to use the <a href="https://crates.io/crates/tempdir">tempdir</a> crate that produces a directory in the filesystem, which is
-automatically deleted when it goes out of scope.  And this is a very valid approach for some scenarios, but it has some
-cons:</p>
-<ul>
-<li>For starters, creating files containing the content to be read or verifying the contents of a file written by the code
-is slightly more complex than the equivalent operation with memory.</li>
-<li>Reading from or writing to the filesystem, no matter how small the exchanged data is, is a very expensive operation.
-It really depends on the actual disk, but it is <strong>at least</strong> four orders of magnitude (10.000 times) slower than the same
-operation on memory.</li>
-<li>You may think duration is totally irrelevant because we are talking about milliseconds rather than nanoseconds. And you will
-be right,… if it were only a test. But all these operations usually require multiple tests, and the time spent adds
-up. This is very important when we do TDD, which we will soon, or for Continuous Integration/Continuous Delivery
-(CI/CD). But it is always useful to have a fast test harness you can run as often as you wish, without having to go
-for a coffee while you wait for the results.</li>
-</ul>
-<p>In the implementation of <code>are_there_vulnerable_locations()</code>, there are two file-related operations.  The first one is the
-usage of <code>open()</code> to obtain an instance of <code>File</code> or an error.  The other one is when we read the file&#39;s contents
-into a <code>String</code>.</p>
+<p>The problem with our new code is that we have only implemented <code>open()</code> and <code>read_to_string()</code> for the <code>File</code> test
+double.  Good enough to be usable by the code existing at the time, yet only a small part of the functionality that the
+actual type offers.  Specifically, the <code>File</code> test double doesn&#39;t implement <code>Read</code>, which is required by the <code>BufReader</code>
+we instantiate in the new method, causing the tests to fail compilation.</p>
 <div id="outline-container-headline-3" class="outline-3">
 <h3 id="headline-3">
-Test when the file cannot be opened
+Refactoring the code<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>
 </h3>
 <div id="outline-text-headline-3" class="outline-text-3">
-<p>Our first test cannot be simpler.  We want to verify that the method <code>are_there_vulnerable_locations()</code> returns <code>None</code> if
-the file cannot be opened.  I have used one of the assertions that <a href="/posts/rust_unit_testing_assertion_libraries/">I explained in a previous article</a>.</p>
+<p>We could create a test double for <code>BufReader</code> that returns something that we control when we invoke the <code>new()</code> method.
+But that is a convoluted solution because this <code>BufReader</code> would have to implement <code>lines()</code>, returning an iterator
+over the lines, and we would have to write two or three test doubles for that method.  We can do better.</p>
+<p>
+Also, it might be tempting to pass that test double as an argument of the tested method.  However, that definitely
+wouldn&#39;t be refactoring, and we might have other constraints in real-world code, such as other code that invokes our
+method, API ergonomics, etc.  So we don&#39;t want to change the interface of the <code>Supervillain</code>, and the declaration of the
+method <code>are_there_vulnerable_locations_efficient()</code> stays untouched.</p>
+<p>
+Another option would be to extract the part of the code that produces the <code>BufReader</code> into a function and implement a
+different version of that function for the tests.  This would be easier if we didn&#39;t have to handle the case where the
+file cannot be opened.  But, since we don&#39;t need to use the specific error, we can return an <code>Option&lt;BufReader&gt;</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="n">BufReader</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span>::<span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Some</span><span class="p">(</span><span class="n">BufReader</span>::<span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-We would like to control those two operations, so we can make <code>open()</code> succeed or fail, independently of the path, and
-<code>read_to_string()</code>, return whatever we need to test every possible case.  That sounds like using a double to me.</p>
-<p>
-Sadly enough, we cannot use <code class="verbatim">mockall</code> in this case.  On the one hand, the original type is defined in the standard
-library, and we cannot add the <code>automock</code> attribute in there.  On the other hand, if we created the mock with the
-<code>mock!</code> macro, the combination of renaming the type –the mock would be called <code>MockFile</code>–, mocking the associated
-function <code>open()</code> using a context and returning the mock, and creating an expectation over the returned instance for
-reading, isn&#39;t trivial.  Instead, we will use a technique we learned in a previous article.  We will define a type with
-the same name that implements the required functionality, then replace the original type with it in the tests using the
-namespace.  For this to work, the name of the struct must be exactly the same.  We cannot call it <code>FileDouble</code>, because
-it won&#39;t work.</p>
-<p>
-Inside the <code>tests</code> module, we create another module for our double.  We have done this in a <a href="/posts/rust_unit_testing_test_doubles_stub/">prior article</a>, but we
-removed it when we changed our code to use <code class="verbatim">mockall</code>.  Let&#39;s bring this module back and create our <code>File</code> test double.</p>
+We can then use this function in the method we plan to test, preserving the same functionally, while replacing the file
+operations and isolating them.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">File</span><span class="w"> </span><span class="p">{</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">buf_listing</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">Self</span>::<span class="n">open_buf_read</span><span class="p">(</span><span class="no">LISTING_PATH</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span></span></span></code></pre></div>
+</div>
+<p>
+However, to make this work, we need to swap <code>open_buf_read()</code> for a test version.  Also, since the code afterward is
+basically using the <code>BufRead</code> implementation, we want to return something that implements <code>BufRead</code>, but makes it easier
+to control its behavior.</p>
+<p>
+Let&#39;s solve these challenges one by one.  First, let&#39;s move the function we just wrote into an auxiliary module so we
+can play with the namespace for the replacement.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">aux</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="n">fs</span>::<span class="n">File</span><span class="p">,</span><span class="w"> </span><span class="n">io</span>::<span class="n">BufReader</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="n">BufReader</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span>::<span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Some</span><span class="p">(</span><span class="n">BufReader</span>::<span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-We will import this type instead of the one offered by the standard library, but only for the tests.</p>
+And we import the function from that module into the main code.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fs</span>::<span class="n">File</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">File</span><span class="p">;</span></span></span></code></pre></div>
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">aux</span>::<span class="n">open_buf_read</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>
-In the <code>tests::doubles</code> module, we define the implementation block that contains only the associated function <code>open()</code> and the
-method <code>read_to_string()</code>, because they are the only ones used by the code we want to test.</p>
+With that change, we can use the function without qualification in our method, enabling the replacement later.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">open</span><span class="o">&lt;</span><span class="n">P</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">path</span>: <span class="nc">P</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">are_there_vulnerable_locations_efficient</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">buf_listing</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open_buf_read</span><span class="p">(</span><span class="no">LISTING_PATH</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// ...
+</span></span></span></code></pre></div>
 </div>
 <p>
-Since our first test is to check that the method <code>are_there_vulnerable_locations()</code> returns a none if the file cannot be
-opened, we will simply hard-code the result of the associated function to be an error.  We will do the same for the
-method, with a different error, so it can compile, even though this method isn&#39;t executed in this first test.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open</span><span class="o">&lt;</span><span class="n">P</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">path</span>: <span class="nc">P</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">NotFound</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">Other</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-We run the tests with <code class="verbatim">cargo t --lib</code> and they should all pass.  Definitely, a good first step!</p>
+This is enough to extract the dependency and make it replaceable.  The code compiles with <code class="verbatim">cargo b --lib</code>, but the tests
+still cannot be compiled. Now, let&#39;s work on having the dependency replaced with something we can control for testing
+our code.</p>
 </div>
 </div>
 <div id="outline-container-headline-4" class="outline-3">
 <h3 id="headline-4">
-Test when the file cannot be read
+Make the dependency controllable
 </h3>
 <div id="outline-text-headline-4" class="outline-text-3">
-<p>Our next test should address a failure to read the file&#39;s contents.</p>
+<p><code>File</code> implements the <code>Read</code> trait, but <code>BufReader</code> implements <code>BufRead</code> on top of it, which provides more efficient
+read operations by using a buffer.  And our method only uses the functionality provided by <code>BufRead</code>, so we can return
+something that implements that trait instead of the more specific type <code>BufReader&lt;File&gt;</code>.  That could be the more
+flexible type <code>Option&lt;impl BufRead&gt;</code>, which uses <code>impl</code> in a return position.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_file_reading_error_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
 </div>
 <p>
-What we are missing here is the ability to control the behavior of the test double.  We weren&#39;t doing it in the previous
-step either, but we hard-coded the behavior that we needed: <code>open()</code> had to fail.  The problem is that we now need
-<code>open()</code> to succeed and <code>read_to_string()</code> to fail.</p>
+We can make the change and compile with <code class="verbatim">cargo b --lib</code> to verify it.</p>
 <p>
-In previous examples, we added fields to our test double that controlled the behavior of its methods or their responses.
-But <code>open()</code> is an associated function, so there is no <code>File</code> instance before it is called.  Putting a field in the
-<code>File</code> test double wouldn&#39;t help.  We need to control that behavior using a static variable in the <code>tests</code> module.</p>
+The advantage of returning an implementation of <code>BufRead</code> is that we can implement an object that uses those methods at
+our will, and that it doesn&#39;t require a file.  However, implementing the <code>BufRead</code> trait means implementing all its
+methods and the methods of its supertrait, i.e., <code>Read</code>, or at least, the required ones.  Working for a supervillain has
+taught me that it is always better to let others do the hard work and take the credit, so I suggest to taking a look at
+the <a href="https://doc.rust-lang.org/std/io/trait.BufRead.html#implementors"><code>BufRead</code> documentation</a> and seeing if there is an implementor that we can use.</p>
 <p>
-We will need to set the value of that static variable for each test that uses the <code>File</code> test double, which we will name
-according to <a href="https://rust-lang.github.io/api-guidelines/naming.html">RFC-430</a>.  However, a mutable static is unsafe because it can be mutated by multiple threads, and having
-multiple threads running the tests is not unusual at all.</p>
+It turns out that <code>&amp;[u8]</code> implements <code>BufRead</code>, which is very convenient for us. Let&#39;s use it in the test version of the
+function that we have extracted to produce the dependency.</p>
 <p>
-We can use the <code>thread_local!</code> macro, which creates thread-local versions of the static variables defined with it.  But
-that will only allow us to obtain a shared reference, so we need to use either <code>Cell&lt;T&gt;</code> or <code>RefCell&lt;T&gt;</code> to achieve
-interior mutability.</p>
+First, we define another thread-local variable to hold the buffer contents for each test.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">thread_local!</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_READ_RESULT</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">static</span><span class="w"> </span><span class="no">BUF_CONTENTS</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">String</span>::<span class="n">new</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-These static variables can be used in the test double to alter its behavior at will.</p>
+And we add a test double of our function that returns a <code>BufRead</code> implementation using that string.  Or, rather, it&#39;s
+conversion to <code>&amp;[u8]</code>.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open</span><span class="o">&lt;</span><span class="n">P</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">path</span>: <span class="nc">P</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="p">{})</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">NotFound</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">take</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Ok</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">Other</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nb">Some</span><span class="p">(</span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">take</span><span class="p">().</span><span class="n">as_bytes</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Then the tests set these variables to control the behavior of the test double as required.</p>
+And we can import that function from its namespace when we are compiling the code for testing.</p>
 <div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_file_reading_error_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">open_buf_read</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+But… (<a href="https://www.youtube.com/watch?v=CQeezCdF4mk">sad trombone</a>), let me remind you that this isn&#39;t just another programming language, and it won&#39;t allow us to do
+this.  We are obtaining the string from thread-local storage and borrowing a reference to its <code>[u8]</code> content, which will
+be released by the end of that function test double, i.e., the end of its scope, and render the reference
+invalid. Should we surrender and accept this code as non-testable?  No way!  Let&#39;s wrap our heads around the problem
+then.</p>
+<p>
+We need another implementation of <code>BufRead</code>, one that takes ownership of its contents, and taking a look at the list of
+<del>usual suspects</del> implementors, <code>Cursor</code> catches our eye.  Let&#39;s try that.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Some</span><span class="p">(</span><span class="n">Cursor</span>::<span class="n">new</span><span class="p">(</span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">take</span><span class="p">()))</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Let&#39;s run the tests again with <code class="verbatim">cargo t --lib</code> and make sure they all pass.</p>
+Compile and run the tests with <code class="verbatim">cargo b --lib</code> and show your extreme happiness to the rest of the world.  But we haven&#39;t
+finished yet.  We still have to write the tests for our new method.</p>
+<p>
+We will test for the efficient code on three of the scenarios that we did for the original one:</p>
+<ul>
+<li>When the file cannot be opened</li>
+<li>When the file contains a weak target</li>
+<li>When the file doesn&#39;t contain a weak target</li>
+</ul>
+<p>The one where the file cannot be read isn&#39;t relevant here, because <code>lines()</code> filters out read errors and returns an
+empty iterator.</p>
 </div>
 </div>
 <div id="outline-container-headline-5" class="outline-3">
 <h3 id="headline-5">
-Test file contents
+Test when the file cannot be opened
 </h3>
 <div id="outline-text-headline-5" class="outline-text-3">
-<p>This is all well and good, but we open a file to read its contents, and we would like to check what happens with
-different contents.  Fortunately, we already have some space in the static variable that we created to control
-<code>read_to_string()</code>.</p>
+<p>The auxiliary function returns an option, and in the original code, we use None to indicate &#34;the file cannot be opened&#34;.
+The function test double does not cover that; nonetheless, we can add it now.</p>
 <p>
-We want to add two tests: one for when a line ends with &#34;weak&#34; and another for when it doesn&#39;t.</p>
+We will need another thread-local static variable, a simple <code>Cell&lt;bool&gt;</code>, to control that behavior<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">thread_local!</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_CAN_OPEN</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+The function test double can check that value to implement the desired behavior.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">Cursor</span>::<span class="n">new</span><span class="p">(</span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">take</span><span class="p">()))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We can test what happens when the file cannot be opened with a very similar version to the first iteration in the
+previous article.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_weak_returns_true</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
-</span></span></span><span class="line"><span class="cl"><span class="s">             Las Vegas,weak
-</span></span></span><span class="line"><span class="cl"><span class="s">             New York,strong&#34;#</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_without_weak_returns_false</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
-</span></span></span><span class="line"><span class="cl"><span class="s">             Oregon,strong
-</span></span></span><span class="line"><span class="cl"><span class="s">             New York,strong&#34;#</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-We modify the test double method to return the string we have stored in the variable.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">FILE_READ_RESULT</span><span class="p">.</span><span class="n">take</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="o">*</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">content</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Ok</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">len</span><span class="p">())</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">Other</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-We run the tests with <code class="verbatim">cargo t --lib</code> and celebrate!  We can test interactions with files and read their contents.  Not
-only to make reading possible, but also to control what is actually read.</p>
+Run the tests with <code class="verbatim">cargo t --lib</code>.  So far, so good!</p>
 </div>
 </div>
 <div id="outline-container-headline-6" class="outline-3">
 <h3 id="headline-6">
-A more elegant solution
+Test when the file contains a weak target
 </h3>
 <div id="outline-text-headline-6" class="outline-text-3">
-<p>While it is true that we must use a static variable to control the behavior of the associated function, the method can
-be controlled using fields of the test double, as we have done many times in the past.  That means, though, that we need
-<code>open()</code> to produce a <code>File</code> test double that contains the &#34;expected behavior&#34; for the method, so it can be used later.</p>
-<p>
-Let&#39;s first add a field to the <code>File</code> double to hold that information.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">File</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">read_result</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-And we create an associated function to produce a <code>File</code> with the expected value in this field.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">read_result</span>: <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">File</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">File</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">read_result</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-Now we only need to get <code>open()</code> to return the <code>File</code> test double with the information.  There are several ways to do
-this, but I would say that the easiest one is to put the data in the static variable that controls <code>open()</code>.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">doubles</span>::<span class="n">File</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span></span></span></code></pre></div>
-</div>
-<p>
-We can use that in the <code>open()</code> method.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open</span><span class="o">&lt;</span><span class="n">P</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">path</span>: <span class="nc">P</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">take</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Ok</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">NotFound</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-And then we can use the field from the <code>read_to_string()</code> method.</p>
-<div class="src src-rust">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="k">ref</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">read_result</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="o">*</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">content</span><span class="p">.</span><span class="n">to_owned</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Ok</span><span class="p">(</span><span class="n">buf</span><span class="p">.</span><span class="n">len</span><span class="p">())</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">Other</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
-</div>
-<p>
-The tests have to use the new static variable.</p>
+<p>This will be very similar to the original test.  We arrange the configuration of our function test double so the file
+can be opened, and the contents have a weak target, call the method, and expect a result that confirms the existence
+of vulnerable locations.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_file_reading_error_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_weak_returns_true</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_with_weak_returns_true</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
 </span></span></span><span class="line"><span class="cl"><span class="s">             Las Vegas,weak
 </span></span></span><span class="line"><span class="cl"><span class="s">             New York,strong&#34;#</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)))));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">vulnerable_locations_without_weak_returns_false</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
-</span></span></span><span class="line"><span class="cl"><span class="s">             Oregon,strong
-</span></span></span><span class="line"><span class="cl"><span class="s">             New York,strong&#34;#</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">)))));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-And we can remove the <code>FILE_READ_RESULT</code> static variable, since we no longer need it.</p>
+Run the tests with <code class="verbatim">cargo t --lib</code>.  Getting there!</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Test when file doesn&#39;t contain a weak target
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>To nobody&#39;s surprise, this time we set the configuration of the function test double so the file can be opened, but the
+contents don&#39;t have a weak target.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_without_weak_returns_false</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
+</span></span></span><span class="line"><span class="cl"><span class="s">           Oregon,strong
+</span></span></span><span class="line"><span class="cl"><span class="s">           New York,strong&#34;#</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
 <p>
-Run the tests one more time with <code class="verbatim">cargo t --lib</code> and give kudos to yourself!</p>
+Run the tests with <code class="verbatim">cargo t --lib</code> and see them pass with flying colors.  Hooray!</p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-7" class="outline-2">
-<h2 id="headline-7">
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
 Final code
 </h2>
-<div id="outline-text-headline-7" class="outline-text-2">
-<p>We have added four more tests to our harness and described a couple of versions of the same code.  The last version of
-the code in the <code class="verbatim">supervillain.rs</code> file is provided below for your reference, but you can check the whole project and the
+<div id="outline-text-headline-8" class="outline-text-2">
+<p>I have kept both versions of the reading method and their seven tests, three of which are new.  The last version of the
+code in the <code class="verbatim">supervillain.rs</code> file is provided below for your reference, but you can check the whole project and the
 individual commits, as always, in the <a href="https://github.com/jdortiz/detestable-me-rs">repo with all the code in this series</a>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for supervillains and their related stuff
 </span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fs</span>::<span class="n">File</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="n">io</span>::<span class="n">Read</span><span class="p">,</span><span class="w"> </span><span class="n">time</span>::<span class="n">Duration</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">io</span>::<span class="p">{</span><span class="n">BufRead</span><span class="p">,</span><span class="w"> </span><span class="n">BufReader</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">time</span>::<span class="n">Duration</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">File</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -537,6 +494,10 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg_attr(test, double)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">sidekick</span>::<span class="n">Sidekick</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="p">{</span><span class="n">Cipher</span><span class="p">,</span><span class="w"> </span><span class="n">Gadget</span><span class="p">,</span><span class="w"> </span><span class="n">Henchman</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(not(test))]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">aux</span>::<span class="n">open_buf_read</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">tests</span>::<span class="n">doubles</span>::<span class="n">open_buf_read</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">LISTING_PATH</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;tmp/listings.csv&#34;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -647,6 +608,21 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Some</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">are_there_vulnerable_locations_efficient</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">buf_listing</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open_buf_read</span><span class="p">(</span><span class="no">LISTING_PATH</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">list_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf_listing</span><span class="p">.</span><span class="n">lines</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">while</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list_iter</span><span class="p">.</span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">ends_with</span><span class="p">(</span><span class="s">&#34;weak&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="k">return</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Some</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TryFrom</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -675,6 +651,20 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">ParseError</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">purpose</span>: <span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span>: <span class="nb">String</span> <span class="p">},</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">aux</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">fs</span>::<span class="n">File</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">io</span>::<span class="p">{</span><span class="n">BufRead</span><span class="p">,</span><span class="w"> </span><span class="n">BufReader</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span>::<span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">return</span><span class="w"> </span><span class="nb">None</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nb">Some</span><span class="p">(</span><span class="n">BufReader</span>::<span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="p">{</span><span class="n">Cell</span><span class="p">,</span><span class="w"> </span><span class="n">RefCell</span><span class="p">};</span><span class="w">
@@ -688,9 +678,9 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">thread_local!</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">doubles</span>::<span class="n">File</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// static FILE_OPEN_OK: Cell&lt;bool&gt; = Cell::new(true);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_READ_RESULT</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_IF_CAN_OPEN</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">doubles</span>::<span class="n">File</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">static</span><span class="w"> </span><span class="no">FILE_CAN_OPEN</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">static</span><span class="w"> </span><span class="no">BUF_CONTENTS</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="nb">String</span>::<span class="n">new</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
@@ -860,21 +850,21 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_IF_CAN_OPEN</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">None</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_file_reading_error_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_IF_CAN_OPEN</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">)));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">());</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">vulnerable_locations_with_weak_returns_true</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_IF_CAN_OPEN</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
 </span></span></span><span class="line"><span class="cl"><span class="s">                 Las Vegas,weak
 </span></span></span><span class="line"><span class="cl"><span class="s">                 New York,strong&#34;#</span><span class="p">,</span><span class="w">
@@ -885,12 +875,43 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">vulnerable_locations_without_weak_returns_false</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_IF_CAN_OPEN</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">doubles</span>::<span class="n">File</span>::<span class="n">new</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
 </span></span></span><span class="line"><span class="cl"><span class="s">                 Oregon,strong
 </span></span></span><span class="line"><span class="cl"><span class="s">                 New York,strong&#34;#</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">)))));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_with_no_file_returns_none</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_none!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_with_weak_returns_true</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
+</span></span></span><span class="line"><span class="cl"><span class="s">               Las Vegas,weak
+</span></span></span><span class="line"><span class="cl"><span class="s">               New York,strong&#34;#</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">(),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test_context(Context)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">efficient_vulnerable_locations_without_weak_returns_false</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="sa">r</span><span class="s">#&#34;Madrid,strong
+</span></span></span><span class="line"><span class="cl"><span class="s">               Oregon,strong
+</span></span></span><span class="line"><span class="cl"><span class="s">               New York,strong&#34;#</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_some_eq_x!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">are_there_vulnerable_locations_efficient</span><span class="p">(),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">struct</span> <span class="nc">Context</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -913,7 +934,7 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">mod</span> <span class="nn">doubles</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">io</span>::<span class="p">{</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorKind</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">io</span>::<span class="p">{</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">Cursor</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorKind</span><span class="p">},</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="n">path</span>::<span class="n">Path</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -929,7 +950,7 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open</span><span class="o">&lt;</span><span class="n">P</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="n">Path</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">path</span>: <span class="nc">P</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">io</span>::<span class="nb">Result</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">FILE_OPEN_OK</span><span class="p">.</span><span class="n">take</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">FILE_IF_CAN_OPEN</span><span class="p">.</span><span class="n">take</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="nb">Ok</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                      </span><span class="nb">Err</span><span class="p">(</span><span class="n">Error</span>::<span class="n">from</span><span class="p">(</span><span class="n">ErrorKind</span>::<span class="n">NotFound</span><span class="p">))</span><span class="w">
@@ -944,40 +965,73 @@ individual commits, as always, in the <a href="https://github.com/jdortiz/detest
 </span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">open_buf_read</span><span class="p">(</span><span class="n">path</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="k">impl</span><span class="w"> </span><span class="n">BufRead</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="no">FILE_CAN_OPEN</span><span class="p">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nb">Some</span><span class="p">(</span><span class="n">Cursor</span>::<span class="n">new</span><span class="p">(</span><span class="no">BUF_CONTENTS</span><span class="p">.</span><span class="n">take</span><span class="p">()))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nb">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-8" class="outline-2">
-<h2 id="headline-8">
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
 Summary
 </h2>
-<div id="outline-text-headline-8" class="outline-text-2">
-<p>In this article, I have explained how to mock types that are defined in the standard library.  In particular the <code>File</code>
-type that is used to interact with the files in the filesystem.  I have also shared how to mock associated functions and
-use static variables to change their behavior.</p>
+<div id="outline-text-headline-9" class="outline-text-2">
+<p>I have explained how to make a more complex dependency replaceable by moving its creation to an auxiliary function.
+That is particularly useful when the signature of the method that we are testing cannot be changed for one reason or
+another.</p>
 <p>
-Using static to control the behavior of the test doubles is useful, but it is more convenient to use fields in the test
-double.  We have written both approaches for your reference so you can compare and choose.</p>
-<p>
-But, what is more important, we have tested several interactions with files without ever performing <strong>any</strong> operation on
-the filesystem.</p>
+I have also covered how to use <code>Cursor</code> as a <code>BufRead</code> replacement, as well as the thinking process for choosing the
+right type to help you with your tests.</p>
 <p>
 Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>In all fairness, you can only refactor code that has testing in place to verify that your changes didn&#39;t affect
+its behavior.  But this would be a catch-22.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>Not actually.  Just kidding, but try to avoid this whenever you can.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p>I have also renamed the existing <code>FILE_OPEN_OK</code> to <code>FILE_IF_CAN_OPEN</code>.</p>
+</div>
+</div>
 </div>
 </div>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-11-26&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/88d910e027e70b72bfcb063796c964262217161f" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 88d910e027e70b72bfcb063796c964262217161f: Add article about testing code that reads a file">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>88d910e</a></span>
+                <span>Updated on 2025-12-09</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/" data-title="Rust unit testing: file reading" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/" data-title="Rust unit testing: file reading" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/" data-title="Rust unit testing: buffered file reading" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/" data-title="Rust unit testing: buffered file reading" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -989,8 +1043,7 @@ Stay curious. Hack your code. See you next time!</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/rust_unit_testing_mocking_library/" class="prev" rel="prev" title="Rust unit testing: mocking library"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: mocking library</a>
-            <a href="/posts/rust_unit_testing_file_buf_reading/" class="next" rel="next" title="Rust unit testing: buffered file reading">Rust unit testing: buffered file reading<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/rust_unit_testing_file_reading/" class="prev" rel="prev" title="Rust unit testing: file reading"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: file reading</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

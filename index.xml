@@ -6,6 +6,28 @@
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Rust unit testing: file writing</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</link>
+    <pubDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+This is the third and last article on file I/O testing, and yet again, the focus is on the technique for injecting a
+dependency so we can use it in the tests.  In this article, I will cover a writing scenario that requires us to access the
+test double after invoking our code to check the written contents.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Writing to a file
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>If you are just a regular villain, your henchmen are close to you.  You have recruited them personally, know what they
+can do, and call each one of them by their name…  Well, not really, because you don&#39;t care about their names.  But you
+don&#39;t have any issues letting them know what you want from them, because they are always around you.  Those times are
+long gone and deeply missed.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: buffered file reading</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</link>
     <pubDate>Tue, 09 Dec 2025 00:00:00 &#43;0000</pubDate>
@@ -167,22 +189,6 @@ functionality,– and spies –that remember the interactions with the type they
 For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not
 talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.
 All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: spy and dummy test doubles</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</link>
-    <pubDate>Mon, 20 Oct 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two
-different types of test doubles: <strong>the spy</strong> and <strong>the dummy</strong>.<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup></p>
-<p>
-A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It
-<em>spies</em> on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something
-else.</p>]]></description>
 </item>
 </channel>
 </rss>

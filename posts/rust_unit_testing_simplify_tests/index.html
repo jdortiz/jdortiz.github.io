@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  2488 ,
+        },"genre": "posts","keywords": "rust, test","wordcount":  2429 ,
         "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/","datePublished": "2025-07-15T00:00:00+00:00","dateModified": "2025-09-01T12:17:50+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -107,7 +107,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: simplify your tests</h1><h2 class="single-subtitle">Make your tests more robust and maintainable</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-07-15">2025-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2488 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-07-15">2025-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2429 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -147,74 +147,73 @@
 <p>
 Now that we understand the building blocks for writing unit tests in Rust, you probably feel the urge to apply that
 knowledge and fully cover your application with tests.  Don&#39;t you?  Well, I would ask you to hold your horses and apply
-it gradually. We still have a lot of ground to cover, but the next sections are probably going to simplify your life
-right away.</p>
+it gradually. We still have a lot of ground to cover, but the next sections will probably simplify your life right away.</p>
 <p>
-Again in this article, you have the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom and the repo with the
-incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach me through any of my
+Again, in this article, you&#39;ll find the final version of the <code class="verbatim">supervillain.rs</code> file at the bottom, and the repo with the
+incremental commits is available <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.  In case of doubt, check the code or feel free to reach out to me on any of my
 <a href="https://jorgeortiz.dev/">social media accounts</a>.</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
 Reorganize Testing Code
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>There is a concept behind all of the things that I am going to cover in the next few lines: refactoring.  Refactoring is
-changing the code with some purpose while keeping exactly the same functionality.  When we want to refactor our
-production code, we use the tests to verify that its functionality hasn&#39;t changed: we introduce the changes and check
-that the tests still pass.  In this case, we are going to refactor our tests and, since we don&#39;t have tests to verify
-our tests, we are going to be extra-careful with the changes and assume that if they still pass, they do their job.</p>
+<p>There is a concept behind everything that I am going to cover in the next few lines: refactoring.  Refactoring is
+changing the code with some purpose while keeping exactly the same functionality.  When we refactor our production code,
+we use tests to verify that its functionality hasn&#39;t changed: we introduce the changes and check that the tests still
+pass.  In this case, we are going to refactor our tests and, since we don&#39;t have tests to verify our tests, we are going
+to be extra-careful with the changes and assume that if they still pass, they do their job.</p>
 <img src="tests_of_tests_inception.webp" alt="Inception totem: do you test the tests?" title="Tests of tests: inception"/>
 <p>
-Code organization is a very personal matter.  If you have been doing this for a while you know how obvious it is to
+Code organization is a very personal matter.  If you have been doing this for a while, you know how obvious it is to
 write your code in a certain way… to you.  Other people will prefer to do things differently and rightfully so.  But
-the same problem applies to formatting your code properly and we still have linters.  There are a set of rules that most
+the same problem applies to properly formatting your code, and we still have linters.  There is a set of rules that most
 developers of a language agree upon.  In the case of the tests, I would claim that robustness, i.e., lack of fragility,
 and avoiding repetition are common goals for all of us.</p>
 <p>
 In any case, the quality of the testing code is as important as that of the production code.  We have to work with it as
-much as with the rest of the code and we want our tests to be readable and maintainable.  Keep them clean and tidy.</p>
+much as with the rest of the code, and we want our tests to be readable and maintainable.  Keep them clean and tidy.</p>
 <div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
 Constants to the rescue
 </h3>
 <div id="outline-text-headline-2" class="outline-text-3">
 <p>Let&#39;s start with robustness.  We want to write tests that we can trust both when they pass and when they fail.  If I
-write a test and I have to spend some non-trivial amount of time to understand why it ain&#39;t passing, only to find out
-that it was a problem with some typo that I introduced in a string of the test, that is not very productive.</p>
+write a test and have to spend some non-trivial amount of time understanding why it ain&#39;t passing, only to find out it
+was a typo I introduced in a string of the test, that is not very productive.</p>
 <p>
 But we can do better; we can minimize the chances that a typo spoils the tests.  If you take a look at the latest
 version of the code in the last article, you will see that some strings appear several times.  You may be the most
-accurate typist of the world.  I simply am not.  I don&#39;t have ten thumbs, but I do make mistakes more often than I would
+accurate typist in the world.  I simply am not.  I don&#39;t have ten thumbs, but I do make mistakes more often than I would
 like to admit.</p>
 <p>
-Could I reduce the number of times I have to type/fix each one of those strings?  Yes, I could if I use constants.
+Could I reduce the number of times I have to type/fix each one of those strings?  Yes, I could if I used constants.
 Then, if I make a typo with the name of my constants, the compiler will let me know right away that the constant names
-don&#39;t match and I won&#39;t spend valuable time on trying to find which of the different instances of my string is wrong.
+don&#39;t match, and I won&#39;t spend valuable time trying to find which of the different instances of my string is wrong.
 This is much better than using different strings with the same value.</p>
 <p>
-Let&#39;s apply this to the existing code.  We can start by defining constants for the first and last name.</p>
+Let&#39;s apply this to the existing code.  We can start by defining constants for the first and last names.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">PRIMARY_FIRST_NAME</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;Lex&#34;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">PRIMARY_LAST_NAME</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;Luthor&#34;</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>
-Then, another one for the full name.  Let me remind you what I said on the previous article: favor literals over
-expressions (like <code>const fn</code>) to define your constants, because if the test fails you will have to spend time figuring
+Then, another one for the full name.  Let me remind you what I said in the previous article: favor literals over
+expressions (like <code>const fn</code>) to define your constants, because if the test fails, you will have to spend time figuring
 out if the wrong value comes from the code that you want to test or from the one that you use to define the constant.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">PRIMARY_FULL_NAME</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;Lex Luthor&#34;</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>
 Regarding the names of these constants, I prefer to start with their role (primary or secondary) and then their purpose
-(first name, last name, full name …).  That way, I can use the auto-completion feature of my editor to find the one I
-am looking for and avoid typing the long name or introduce typos.  But if you want to reverse them, it would also be
-fine as long as you are consistent with your naming.  You do you.</p>
+(first name, last name, full name …).  That way, I can use my editor&#39;s auto-completion feature to find the one I am
+looking for and avoid typing the long name or introducing typos.  But if you want to reverse them, it would also be fine
+as long as you are consistent with your naming.  You do you.</p>
 <p>
 Replace the newly defined constants in <strong>all</strong> the tests.  You will have finished this refactoring step only when you run
-the tests with the changes and they all pass again.</p>
+the tests with the changes, and they all pass again.</p>
 <p>
-When you are done, the strings &#34;Lex&#34;, &#34;Luthor&#34;, and &#34;Lex Luthor&#34; will be defined in just one place of your code.  Should
-you have made a mistake when typing any of them, you can fix that editing this only instance.</p>
+When you are done, the strings &#34;Lex&#34;, &#34;Luthor&#34;, and &#34;Lex Luthor&#34; will be defined in just one place in your code.  Should
+you have made a mistake when typing any of them, you can fix that by editing this only instance.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">full_name_returns_first_name_space_last_name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -239,18 +238,18 @@ Breathe in.  Smell your code.  Don&#39;t you notice that it is much better now? 
 Reuse initialization manually
 </h3>
 <div id="outline-text-headline-3" class="outline-text-3">
-<p>Throughout the tests we have created several instances of the supervillain, most of them using the exact same code.
-As Master Yoda used to say: &#34;Repetition leads to anger, anger leads to error, error leads to broken tests&#34; (or something
-similar.)  This kind of repetition is something we could simplify by having the initialization code shared by all the tests before
-they get run.  In other languages that have object oriented capabilities, we would use a type (most often a class or
-struct) to act as a test suite, its fields or properties to refer to the shared data, and make use of a couple of
-predefined methods (most often <em>setUp</em> and <em>tearDown</em>) to put the code that needs to be run before and after each test.</p>
+<p>Throughout the tests, we created several instances of the supervillain, most of which used the exact same code.  As
+Master Yoda used to say: &#34;Repetition leads to anger, anger leads to error, error leads to broken tests&#34; (or something
+similar.)  This kind of repetition could be simplified by sharing the initialization code among all the tests before
+they run.  In other languages that have object oriented capabilities, we would use a type (most often a class or struct)
+to act as a test suite, its fields or properties to refer to the shared data, and make use of a couple of predefined
+methods (most often <em>setUp</em> and <em>tearDown</em>) to put the code that needs to be run before and after each test.</p>
 <p>
 However, this is not the way tests are organized in Rust.  A test in Rust is a top-level function annotated with the
 test attribute.  They aren&#39;t methods of a <code class="verbatim">struct</code> or share state.  And, although you can use a crate like <a href="https://crates.io/crates/suitest">suitest</a> that
 adheres to that structure, here I am going to start with plain Rust code.</p>
 <p>
-What we want to achieve is sharing the initialization of the type instances.  A first approach would be to define a
+What we want to achieve is to share the initialization of type instances.  A first approach would be to define a
 static variable in the module and initialize it lazily with <a href="https://doc.rust-lang.org/std/cell/struct.OnceCell.html">OnceCell</a>.  But a much simpler option is to use function
 composition to get our instances passed to each test.</p>
 <img src="recycle_bin.jpg" alt="Recycle bin" title="Recycle bin"/>
@@ -263,8 +262,8 @@ most/all tests.  In our code, that is just the <em>sut</em>, i.e., the <code cla
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Add an implementation block that defines <code>set_up()</code>, where we create the instance of the <code class="verbatim">Supervillain</code>, and
-<code>teardown()</code>, that, for the moment, we leave empty.</p>
+Add an implementation block that defines <code>set_up()</code>, which creates the instance of the <code class="verbatim">Supervillain</code>, and <code>teardown()</code>,
+which, for the moment, we leave empty.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">setup</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Context</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -285,16 +284,16 @@ we are going to use an auxiliary function to run the tests with this context ins
 following tasks:</p>
 <ol>
 <li>It will take the actual test as a parameter.  We will pass a closure to the function with the code that we want to
-run in the test.  That closure will accept a single parameter, a mutable reference to the context that contains the
-things that the test needs.</li>
-<li>Now in the function, it creates that instance of the context using the associated function <code>setup()</code> that we had
-defined above.  Then, it executes the closure passing it the instance of the context.  Finally, it executes the
-<code>teardown()</code> method to clean up, if needed.</li>
+run in the test.  That closure will accept a single parameter: a mutable reference to the context that contains the
+resources the test needs.</li>
+<li>Now, in the function, it creates an instance of the context using the associated function <code>setup()</code> that we had
+defined above.  Then it executes the closure, passing it the context instance.  Finally, it executes the <code>teardown()</code>
+method to clean up, if needed.</li>
 <li>That would be enough if the mechanism for triggering a failure within a test wasn&#39;t a panic.  But if the test fails,
-a panic occurs within the closure and the invocation of <code>teardown()</code> will not be executed.  So we need to have a way
-to catch the panic when it happens, perform the cleanup, and let the panic finish its process.  We can use,
-std::panic::catch_unwind to execute the closure.  This requires that the closure is <code class="verbatim">UnwindSafe</code> and, just in case,
-we wrap the context in an <code>AssertUnwindSafe</code>.</li>
+a panic occurs within the closure, and <code>teardown()</code> will not be invoked.  So we need a way to catch the panic when it
+happens, perform cleanup, and let it finish its process.  We can use <code>std::panic::catch_unwind</code> to execute the
+closure.  This requires that the closure is <code class="verbatim">UnwindSafe</code> and, just in case, we wrap the context in an
+<code>AssertUnwindSafe</code>.</li>
 </ol>
 <p>This is the code for the function:</p>
 <div class="src src-rust">
@@ -313,9 +312,9 @@ we wrap the context in an <code>AssertUnwindSafe</code>.</li>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-We can use that function in each of the tests.  In the code of the repo, I haven&#39;t used it for the test of the <code class="verbatim">From</code>
-trait, because it doesn&#39;t need a previously existing <em>sut</em>, but one created with its associated function.  This is just
-one of the test using this shared initialization.</p>
+We can use that function in each test.  In the repo code, I haven&#39;t used it for the <code class="verbatim">From</code> trait test because it doesn&#39;t
+need a previously existing <em>sut</em>; it uses one created with its associated function.  This is just one of the tests using
+this shared initialization.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">full_name_returns_first_name_space_last_name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -333,8 +332,8 @@ one of the test using this shared initialization.</p>
 Reuse initialization with a crate
 </h3>
 <div id="outline-text-headline-4" class="outline-text-3">
-<p>This code is so useful that there is a crate that does that, and some more. Its name is <code class="verbatim">test-context</code> and we can use it in
-our code and reduce the boilerplate code.  This change would be particularly significant if we had more than one <code class="verbatim">tests</code>
+<p>This code is so useful that there is a crate that does that, and some more. Its name is <code class="verbatim">test-context</code>, and we can use
+it in our code to reduce boilerplate.  This change would be particularly significant if we had more than one <code class="verbatim">tests</code>
 module.</p>
 <p>
 First, we have to add it as a dependency, but only for the tests.  We don&#39;t need it for the production code.</p>
@@ -342,16 +341,16 @@ First, we have to add it as a dependency, but only for the tests.  We don&#39;t 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  cargo add --dev test-context</span></span></code></pre></div>
 </div>
 <p>
-The crate doesn&#39;t define the <code class="verbatim">Context</code> <code class="verbatim">struct</code> because it will be different for every <code class="verbatim">tests</code> module, yet it defines the
-<code class="verbatim">TestContext</code> trait that has to be implemented for the struct that will hold the common data.  This trait contains an
-associated function <code>setup()</code> and method <code>teardown()</code><sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  So we replace the default implementation block of <code class="verbatim">Context</code> with
-the implementation of the <code class="verbatim">TestContext</code> trait containing the same code.</p>
+The crate doesn&#39;t define the <code class="verbatim">Context</code> <code class="verbatim">struct</code> because it will be different for every <code class="verbatim">tests</code> module, yet it defines
+the <code class="verbatim">TestContext</code> trait that has to be implemented for the struct that will hold the common data.  This trait contains
+an associated function <code>setup()</code> and method <code>teardown()</code><sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  So we replace the default implementation block of
+<code class="verbatim">Context</code> with the <code class="verbatim">TestContext</code> trait implementation that contains the same code.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TestContext</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
 </div>
 <p>
 The crate allows us to create tests that receive our <code>struct Context</code> as an argument.  We have to add this argument to
-each of the tests that use it and remove the usage of the auxiliary function.</p>
+each test that uses it and remove the auxiliary function.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">full_name_returns_first_name_space_last_name</span><span class="p">(</span><span class="n">ctx</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">full_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">full_name</span><span class="p">();</span><span class="w">
@@ -359,15 +358,15 @@ each of the tests that use it and remove the usage of the auxiliary function.</p
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-The magic of having tests that receive that <code>ctx</code> argument needs some help to take place.  We have to precede each of
-the tests that need this data with the following macro and keep the existing <code>#[test]</code> one.</p>
+The magic of having tests that receive that <code>ctx</code> argument needs some help to take place.  We have to precede each test
+that needs this data with the following macro and keep the existing <code>#[test]</code> one.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test_context(Context)]</span><span class="w"> </span><span class="c1">// This is new
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="cp">#[test]</span><span class="w"> </span><span class="c1">// Already existing
 </span></span></span></code></pre></div>
 </div>
 <p>
-Finally, delete the auxiliary function and run the tests again. They should pass.</p>
+Finally, delete the auxiliary function and rerun the tests. They should pass.</p>
 </div>
 </div>
 <div id="outline-container-headline-5" class="outline-3">
@@ -375,16 +374,16 @@ Finally, delete the auxiliary function and run the tests again. They should pass
 Reusing fixtures
 </h3>
 <div id="outline-text-headline-5" class="outline-text-3">
-<p>The data that we use to create tests may be used in more than one <code class="verbatim">tests</code> module.  It so happens if we define auxiliary
-functions for the tests that we may want to reuse.  Since we have already stated our intent to avoid repetition, it would be
-useful to have a way to share those values.  Rust&#39;s module system comes to the rescue here.</p>
+<p>The data that we use to create tests may be used in more than one <code class="verbatim">tests</code> module.  It also happens when we define
+auxiliary functions for tests we may want to reuse.  Since we have already stated our intent to avoid repetition, it
+would be useful to have a way to share those values.  Rust&#39;s module system comes to the rescue here.</p>
 <img src="fixture_stamps.jpg" alt="Office stamps" title="Stamps"/>
 <p>
 We are going to create a new file to hold the data and functions that we want to share.  Let&#39;s call it <code class="verbatim">test_common.rs</code>.
 We can copy the constants to this new file and make them public.</p>
 <p>
-We don&#39;t want this file to produce any production code.  We just want it for the tests, so when we import it in the main
-file (<code class="verbatim">main.rs</code>), we use the conditional compilation attribute, to get it compiled <strong>only for tests</strong>.</p>
+We don&#39;t want this file to produce any production code.  We just want it for the tests, so when we import it into the
+main file (<code class="verbatim">main.rs</code>), we use the conditional compilation attribute to get it compiled <strong>only for tests</strong>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">test_common</span><span class="p">;</span></span></span></code></pre></div>
@@ -396,7 +395,7 @@ created a single <code class="verbatim">tests</code> module, so we add it there.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="n">test_common</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>
-We use the shared constants qualifying their usage with the name of the module.  For example, instead of writing this:</p>
+We use the shared constants, qualifying their use with the module name.  For example, instead of writing this:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">full_name</span><span class="p">,</span><span class="w"> </span><span class="no">PRIMARY_FULL_NAME</span><span class="p">);</span></span></span></code></pre></div>
 </div>
@@ -405,8 +404,8 @@ We use the shared constants qualifying their usage with the name of the module. 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">full_name</span><span class="p">,</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">PRIMARY_FULL_NAME</span><span class="p">);</span></span></span></code></pre></div>
 </div>
 <p>
-Once we have done this for each of the constants, we can remove them from the <code class="verbatim">tests</code> module and stay with the shared
-ones.  Running the tests again should bring you happiness and calm. 😎</p>
+Once we have done this for each constant, we can remove them from the <code class="verbatim">tests</code> module and stick with the shared ones.
+Running the tests again should bring you happiness and calm. 😎</p>
 </div>
 </div>
 </div>
@@ -417,7 +416,7 @@ Final code
 </h2>
 <div id="outline-text-headline-6" class="outline-text-2">
 <p>This is the final version –for this article– of the <code class="verbatim">supervillain</code> file.  You can also find the repo with all the
-incremental commits of the code in this series <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.</p>
+incremental commits for this code series <a href="https://github.com/jdortiz/detestable-me-rs">here</a>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
@@ -543,19 +542,19 @@ incremental commits of the code in this series <a href="https://github.com/jdort
 Summary
 </h2>
 <div id="outline-text-headline-7" class="outline-text-2">
-<p>In this article, I have shown some ways of improving the basic tests that we created in the previous one.  I have shared
-three basic techniques to reduce repetition and increase robustness, that we will be using again in future tests.</p>
+<p>In this article, I have shown ways to improve the basic tests we created in the previous article.  I have shared three
+basic techniques to reduce repetition and increase robustness, which we will be using again in future tests.</p>
 <p>
-You should feel confident with the basics now and to prove yourself you can do some exercises adding production code and
+You should feel confident with the basics now, and to prove yourself, you can do some exercises, adding production code and
 tests to our program.  Maybe the dark side will reward you for this.</p>
 <p>
 If you run out of ideas on what to test, here are some suggestions:</p>
 <ol>
-<li>Return test: Implement Display trait and test it.</li>
-<li>Implement a method that stores first and last name properly capitalized and test it.</li>
-<li>Change the attack method to receive several weapons but fire only the first one.  Test it.</li>
+<li>Return test: Implement the Display trait and test it.</li>
+<li>Implement a method that stores first and last names properly capitalized and test it.</li>
+<li>Change the attack method to receive several weapons, but fire only the first one.  Test it.</li>
 </ol>
-<p>Get ready, because my next article is about testing the not so happy path.</p>
+<p>Get ready, because my next article is about testing the not-so-happy path.</p>
 <p>
 Stay curious. Hack your code. See you next time!</p>
 </div>
@@ -571,7 +570,7 @@ Footnotes
 <div class="footnote-definition">
 <sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
 <div class="footnote-body">
-<p>Does this sound familiar? Yep, exactly what we had in our implementation of <code class="verbatim">Context</code>.</p>
+<p>Does this sound familiar? Yep, exactly what we had in our <code class="verbatim">Context</code> implementation.</p>
 </div>
 </div>
 </div>

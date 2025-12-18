@@ -3,7 +3,24 @@
         <title>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/tags/test/</link>
         <description>Test - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/test/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: basic HTTP testing</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</link>
+    <pubDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In previous articles in this series, I have highlighted the importance of unit testing your code.  However, I
+must reckon that most of the examples I have used were mostly isolated.  There weren&#39;t many connections between one
+scenario and the next, and, admittedly, not a single application that integrated all the scenarios as a whole.</p>
+<p>
+I hope this has fulfilled the purpose of sharing knowledge about unit testing in Rust.  But one of the first challenges
+I had to overcome once I had learned the very basics of writing automated tests was integrating them into a real
+codebase.  But it is hard to walk this path alone, since the first (real) tests are also the hardest.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: file writing</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</link>
     <pubDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</pubDate>
@@ -163,22 +180,6 @@ Unit testing is about writing tests for individual units (Duh!), most frequently
 define in our code, i.e., structs / enums / unions, or first-class functions.  But the types that we want to test
 usually have dependencies on other types and we would like to test them in isolation without having to worry about the
 details of those dependencies.  That&#39;s why you need test doubles.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: add-ons</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
-    <pubDate>Mon, 29 Sep 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to
-produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust
-ecosystem is very rich and active and people with other needs have contributed with really useful tools.</p>
-<p>
-Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the
-following paragraphs, so fasten your USB-C cable and get ready!</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -3,7 +3,24 @@
         <title>All Posts - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Rust unit testing: basic HTTP testing</title>
+    <link>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</link>
+    <pubDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+In previous articles in this series, I have highlighted the importance of unit testing your code.  However, I
+must reckon that most of the examples I have used were mostly isolated.  There weren&#39;t many connections between one
+scenario and the next, and, admittedly, not a single application that integrated all the scenarios as a whole.</p>
+<p>
+I hope this has fulfilled the purpose of sharing knowledge about unit testing in Rust.  But one of the first challenges
+I had to overcome once I had learned the very basics of writing automated tests was integrating them into a real
+codebase.  But it is hard to walk this path alone, since the first (real) tests are also the hardest.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: file writing</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</link>
     <pubDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</pubDate>
@@ -169,24 +186,6 @@ and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
 Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
 slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
 should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: mock test doubles</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</link>
-    <pubDate>Mon, 27 Oct 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-This is the third article on test doubles.  So far, I have covered stubs –that are used to control the responses to
-the methods of the type they double,– dummies –that fill &#34;holes&#34; that are required for some tests without any
-functionality,– and spies –that remember the interactions with the type they double.  It is time to talk about the
-<em>face of the band</em>: mocks.</p>
-<p>
-For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not
-talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.
-All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.</p>]]></description>
 </item>
 </channel>
 </rss>

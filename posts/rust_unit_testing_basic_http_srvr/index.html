@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Rust unit testing: basic HTTP testing - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris uses its phone to connect to our new app."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Rust unit testing: basic HTTP testing">
+  <meta property="og:description" content="Ferris uses its phone to connect to our new app.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-18T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Test">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Rust unit testing: basic HTTP testing">
+  <meta name="twitter:description" content="Ferris uses its phone to connect to our new app.">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Rust unit testing: basic HTTP testing",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_basic_http_srvr\/"
+        },"genre": "posts","keywords": "rust, test","wordcount":  2319 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_basic_http_srvr\/","datePublished": "2025-12-18T00:00:00+00:00","dateModified": "2025-12-18T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris uses its phone to connect to our new app."
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: basic HTTP testing</h1><h2 class="single-subtitle">Real-world application testing - Beginning with Axum</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-12-18">2025-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2319 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_unit_testing_basic_http_srvr/header-image.jpg"
+        data-srcset="/posts/rust_unit_testing_basic_http_srvr/header-image.jpg, /posts/rust_unit_testing_basic_http_srvr/header-image.jpg 1.5x, /posts/rust_unit_testing_basic_http_srvr/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_unit_testing_basic_http_srvr/header-image.jpg"
+        title="Ferris uses its phone to connect to our new app." width="1312" height="736" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">A &#34;real-world&#34; application</a>
+</li>
+<li><a href="#headline-2">Cleaning up after myself</a>
+</li>
+<li><a href="#headline-3">Test basic HTTP server</a>
+<ul>
+<li><a href="#headline-4">Start asynchronously</a>
+</li>
+<li><a href="#headline-5">Simplest HTTP server</a>
+</li>
+<li><a href="#headline-6">Static handler and first test</a>
+</li>
+<li><a href="#headline-7">Test non-existing URIs</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-8">Final code</a>
+</li>
+<li><a href="#headline-9">Summary</a>
+</li>
+<li><a href="#headline-10">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+In previous articles in this series, I have highlighted the importance of unit testing your code.  However, I
+must reckon that most of the examples I have used were mostly isolated.  There weren&#39;t many connections between one
+scenario and the next, and, admittedly, not a single application that integrated all the scenarios as a whole.</p>
+<p>
+I hope this has fulfilled the purpose of sharing knowledge about unit testing in Rust.  But one of the first challenges
+I had to overcome once I had learned the very basics of writing automated tests was integrating them into a real
+codebase.  But it is hard to walk this path alone, since the first (real) tests are also the hardest.</p>
+<p>
+So, in this article and others to follow, I would like to defeat the challenge of testing something beyond the fact that
+2+2=4.  And, in order to do that, I am going to define some &#34;real&#34; application that I will implement with you<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>
+while adding tests along the way.  So, more often than not, I will be asking myself<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup> whether I need to write a test
+for a given piece of code.  Please answer out loud before you continue reading 😉.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+A &#34;real-world&#34; application
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>Our supervillain is an ambitious person and wants to be more efficient.  A baddie with a mission that knows that the
+world ain&#39;t gonna conquer itself.  After many productivity courses, we have been tasked to write an evilness management
+tool.  Very similar to a time management tool, but it manages evilness.</p>
+<p>
+Luckily, there are other <del>prisoners</del> developers that will take care of the front end, and we <em>just</em> have to write the
+back end.  It will provide a REST API that uses JSON for data exchange.  I have decided to use <a href="https://github.com/tokio-rs/axum">Axum</a>, a web application
+framework, to help implement the app.  And we will be using <a href="https://oaim.short.gy/db26ai-free-rust-test">Oracle db26ai in a FREE container</a> for
+persisting the data.</p>
+<p>
+I will make no assumptions on how much you know about Axum, just that you have a basic idea of what a web application
+framework is.  Also, I don&#39;t expect you to know how to run the container with the database or how to use it from Rust.
+I have already published an article on <a href="/posts/running_containers_with_colima/">running Oracle Database container</a>, and I will explain how to connect to the
+database in this series.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Cleaning up after myself
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>All the code from the previous articles in this series is in a single Git repository with a single Cargo project.  I
+could continue adding code in the same project, but I thought you&#39;d appreciate a clean slate for the new application.
+Yet, I prefer to have all the code in a single repo.  So, I have decided to use the same project and add workspaces to it.  I
+will move the existing code into a workspace called &#34;evil&#34; and create another workspace for the new application.</p>
+<p>
+If you are coding along and want to do the same, here are the steps I followed.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  mkdir evilguys
+</span></span><span class="line"><span class="cl">  mv Cargo.toml src evilguys/
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> -e <span class="s2">&#34;[workspace]\nmembers = [\&#34;evilguys\&#34;]\nresolver = \&#34;3\&#34;&#34;</span> &gt; Cargo.toml
+</span></span><span class="line"><span class="cl">  rm Cargo.lock</span></span></code></pre></div>
+</div>
+<p>
+The cargo manifest of the <code class="verbatim">evilguys</code> workspace must be edited.  The package name must match the one in the
+workspace, and I have finally removed the unused binary package.</p>
+<div class="src src-toml">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">package</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;evilguys&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.0&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">edition</span> <span class="p">=</span> <span class="s2">&#34;2024&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">lib</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;evil&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">path</span> <span class="p">=</span> <span class="s2">&#34;src/lib.rs&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span></span></span></code></pre></div>
+</div>
+<p>
+And finally, I can remove the file <code class="verbatim">main.rs</code> and run the tests to check that everything is fine.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  rm evilguys/src/main.rs
+</span></span><span class="line"><span class="cl">  cargo t -p evilguys</span></span></code></pre></div>
+</div>
+<p>
+All the regular tests should pass, but we will get an error in our doctest.  However, that problem isn&#39;t due to this
+change, but to the fact that we didn&#39;t update that test when we should, and running the tests with <code class="verbatim">cargo t --lib</code> was
+ignoring the doctests.  Fortunately, the change that we have to make is trivial.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// # Examples
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///# use evil::supervillain::Supervillain;
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// let lex = Supervillain {
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///     first_name: &#34;Lex&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///     last_name: &#34;Luthor&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">///     ..Default::default()
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// };
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// assert_eq!(lex.full_name(), &#34;Lex Luthor&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="sd">/// ```
+</span></span></span></code></pre></div>
+</div>
+<p>
+I have also applied all the recommendations provided by <code class="verbatim">clippy</code>.  In some cases, I was trying to make the code easier
+and keep the focus on what I was explaining.  In others, I should have done better.</p>
+<p>
+We run the tests again with <code class="verbatim">cargo t -p evilguys</code>, and we should be back on track. 🎉</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Test basic HTTP server
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>As I promised above, the new application will be placed in a new workspace.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo new evilmgmt</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Start asynchronously
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>Axum requires Tokio, so let&#39;s start there.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">cargo</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">evilmgmt</span><span class="w"> </span><span class="o">-</span><span class="n">F</span><span class="w"> </span><span class="n">macros</span><span class="p">,</span><span class="n">rt</span><span class="o">-</span><span class="n">multi</span><span class="o">-</span><span class="n">thread</span><span class="w"> </span><span class="n">tokio</span></span></span></code></pre></div>
+</div>
+<p>
+Asynchronous functions must be called from asynchronous functions. In <code class="verbatim">evilmgmt/src/main.rs</code>, make <code>main</code> async and use
+tokio&#39;s <code>main</code> macro.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[tokio::main]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></span></span></code></pre></div>
+</div>
+<p>
+We could run the code with <code class="verbatim">cargo -p evilmgmt r</code>, so the first question is due. Do we have to run a test for this code?</p>
+<p>
+I couldn&#39;t hear what you said, so I am going to share my answer: NO.  Nevertheless, let me elaborate.  We still talk
+about unit tests, and the only unit that could be tested here is the main function to verify that it is executed
+asynchronously.  But this is none of our business.  It is the Tokio development team&#39;s responsibility to verify that
+their macro works and a non-async main that uses the async one we have written.  Not very valuable.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Simplest HTTP server
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>The next step is adding Axum to the dependencies.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add -p evilmgmt axum</span></span></code></pre></div>
+</div>
+<p>
+Define the address as a constant string and show it to the user to make their lives easier.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">SERVER_ADDR</span>: <span class="kp">&amp;</span><span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;127.0.0.1:8080&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Launching evilmgmt: http://</span><span class="si">{server_addr}</span><span class="s">&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+Create an Axum&#39;s router, which is the piece that knows the relationships between the URLs and what the server has to
+do.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+Tell the operating system that this application will be listening on the previously defined address by creating a
+listener with <code>tokio::net::TcpListener</code> instead of the one in the standard library.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TcpListener</span>::<span class="n">bind</span><span class="p">(</span><span class="no">SERVER_ADDR</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="k">await</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Unable to create listener&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+Use the router to serve requests received by the listener.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">axum</span>::<span class="n">serve</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">router</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+If you have already noticed the <em>stink</em> of <code>unwrap()</code>, keep calm and read Axum&#39;s docs.  I quote:</p>
+<blockquote>
+<p>Although this future resolves to io::Result&lt;()&gt;, it will never actually complete or return an error. Errors on the TCP
+socket will be handled by sleeping for a short while (currently, one second).</p>
+</blockquote>
+<p>
+This is enough to get the most basic HTTP server up and running.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo r -p evilmgmt</span></span></code></pre></div>
+</div>
+<p>
+Time to ask again about testing.  Should we write any unit tests for this code?  I couldn&#39;t hear your answer this time
+either.  Mine is again &#34;NO&#34;.  Testing that we can create a listener, a router, or even that the application creates an
+HTTP server when launched is again beyond the responsibilities of our code.  All of these are produced by Axum, and we
+must not write tests for somebody else&#39;s code<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.  The furthest we can go is to verify that the HTTP server is
+handling requests at the expected address and port, and we can use <code class="verbatim">curl</code> for that.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  curl -i localhost:8080/</span></span></code></pre></div>
+</div>
+<p>
+Notice that we will get a reply from the HTTP server, but it will be a &#34;404 Not Found&#34; because we haven&#39;t defined any
+routes yet.</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Static handler and first test
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>Let&#39;s add some ingredients of our own, and that can be the simplest static handler.  We can define a handler for the
+HTTP GET verb at the root path using an asynchronous closure and replace the line where the router was created.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">().</span><span class="n">route</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&#34;Evilness Management&#34;</span><span class="w"> </span><span class="p">}));</span></span></span></code></pre></div>
+</div>
+<p>
+This change should compile and run with <code class="verbatim">cargo r -p evilmgmt</code>.  So, I raise the question again: should we write any test
+now?  I know you have shouted a loud &#34;YES&#34; and that you aren&#39;t cheating and haven&#39;t been inspired by the title of this
+section.  Well done!</p>
+<p>
+We would like to test that requests to the server root are returned with the correct content.  We could do this manually
+with <code class="verbatim">curl</code> or <code class="verbatim">wget</code> and even include the requests in a bash script.  We can also use tools to automate queries,
+such as Postman, <a href="https://apidog.com/">Apidog</a>, or <a href="https://www.usebruno.com/">Bruno</a>. And even write code that does the request using <a href="https://crates.io/crates/reqwest">reqwest</a> or <a href="https://github.com/alexcrichton/curl-rust">curl-rust</a>.  But all these
+alternatives rely on the network and are not suitable for unit tests.</p>
+<p>
+This is analogous to what I explained about file I/O.  We don&#39;t need or want to use the network.  It is even worse than
+interacting with a file by a few orders of magnitude.  Even if we run the client and server in the same system, with
+localhost.  We will just make Axum produce the response in memory by using the <code class="verbatim">Router</code> instance separately from the
+server.  We would send the request to the <code class="verbatim">Router</code> instance and receive a response without using the network at all.</p>
+<p>
+We start by moving the router creation into a separate function in a different module (<code class="verbatim">routes.rs</code>).</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Routes for the HTTP application
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">app</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Router</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Router</span>::<span class="n">new</span><span class="p">().</span><span class="n">route</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&#34;Evilness Management&#34;</span><span class="w"> </span><span class="p">}))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+And we use it in <code class="verbatim">main.rs</code>.  Including the module in the application  with <code>mod routes;</code>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">axum</span>::<span class="n">serve</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">routes</span>::<span class="n">app</span><span class="p">()).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+Now we can test this router.  The handlers&#39; responses will be futures, so we need to use async tests.  We create our
+first test inside the standard <code class="verbatim">tests</code> module.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">root_return_static_response_and_ok</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We will write this test using the customary three parts: arrange, act, and assert.  In the arrange part, we get an
+instance of the <code class="verbatim">Router</code> and prepare the request that we want to make.  The request will contain the URI that we are
+testing, i.e., the root of this server, and an empty body, because we don&#39;t need to pass any data in it.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span>::<span class="n">builder</span><span class="p">().</span><span class="n">uri</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">).</span><span class="n">body</span><span class="p">(</span><span class="n">Body</span>::<span class="n">empty</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+<code>axum::extract::Request</code> can be extended with a blanket implementation of the <code>oneshot()</code> method, which takes a request
+and returns a future for the response.  But that trait requires adding the <a href="https://crates.io/crates/tower">tower crate</a> and importing the <code>ServiceExt</code>
+trait.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add -p evilmgmt -F util tower</span></span></code></pre></div>
+</div>
+<p>
+After importing <code>tower::ServiceExt</code>, we can use the request and obtain a response in the act part.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routes</span><span class="p">.</span><span class="n">oneshot</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span></span></span></code></pre></div>
+</div>
+<p>
+Getting the body contents from the response can be simplified using the trait <code>BodyExt</code>, provided by the
+<code>http_body_util</code> crate.  So, we add it to the workspace.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo add -p evilmgmt http_body_util</span></span></code></pre></div>
+</div>
+<p>
+With <code>http_body_util::BodyExt</code> imported, we can make assertions on the response.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status</span><span class="p">(),</span><span class="w"> </span><span class="n">StatusCode</span>::<span class="no">OK</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">into_body</span><span class="p">().</span><span class="n">collect</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_bytes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Evilness Management&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+We run the tests with <code class="verbatim">cargo t -p evilmgmt</code> and see our first test passing. Hooray!</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Test non-existing URIs
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>It may also be valuable to check what happens when somebody tries to reach a URI that is not defined for our server.</p>
+<p>
+We define a test where the arrange and act are very similar to the previous one, with the only exception of having a
+non-existing URI.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">nonexisting_url_returns_emply_response_and_not_found</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span>::<span class="n">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">uri</span><span class="p">(</span><span class="s">&#34;/nonexisting&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">body</span><span class="p">(</span><span class="n">Body</span>::<span class="n">empty</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routes</span><span class="p">.</span><span class="n">oneshot</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+The assertion part will use the &#34;not found&#34; status code and an empty body.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status</span><span class="p">(),</span><span class="w"> </span><span class="n">StatusCode</span>::<span class="no">NOT_FOUND</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">into_body</span><span class="p">().</span><span class="n">collect</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_bytes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">.</span><span class="n">is_empty</span><span class="p">());</span></span></span></code></pre></div>
+</div>
+<p>
+We run the tests with <code class="verbatim">cargo t -p evilmgmt</code>, and they all pass.  However, this only makes sense if we have customized
+this fallback behavior.  Otherwise, we would be testing Axum&#39;s ability to respond to URIs that haven&#39;t been configured in
+the router.  Again, none of our business.</p>
+<p>
+We can change the code so it needs to be tested by adding a fallback handler.  We could use an async closure, as we did
+with our static HTTP handler; in this case, we will use an async function instead.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">fallback_handler</span><span class="p">(</span><span class="n">uri</span>: <span class="nc">Uri</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">StatusCode</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">(</span><span class="n">StatusCode</span>::<span class="no">NOT_FOUND</span><span class="p">,</span><span class="w"> </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;No route for </span><span class="si">{uri}</span><span class="s">&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+We add this handler to the router&#39;s configuration in the <code>app()</code> function.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="p">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">fallback_handler</span><span class="p">)</span></span></span></code></pre></div>
+</div>
+<p>
+We also changed the body assertion to expect what we added in our handler.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;No route for /nonexisting&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>
+We run the tests again with <code class="verbatim">cargo t -p evilmgmt</code> and get OKs for both tests.  We can go to our next social event and
+tell everybody how good we are at writing tests.  A session of fun and engagement guaranteed!</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Final code
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<p>I have included the latest version of the code in the <code class="verbatim">routes.rs</code> file below, because it is the one the contains the
+tests.  Remember that the new project is in a workspace, but you can put it in its own Cargo project.  The whole project
+with its workspaces is in the <a href="https://github.com/jdortiz/detestable-me-rs">repo with all the code in this series</a>.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Routes for the HTTP application
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Router</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">http</span>::<span class="p">{</span><span class="n">StatusCode</span><span class="p">,</span><span class="w"> </span><span class="n">Uri</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">app</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Router</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&#34;Evilness Management&#34;</span><span class="w"> </span><span class="p">}))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">fallback</span><span class="p">(</span><span class="n">fallback_handler</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">fallback_handler</span><span class="p">(</span><span class="n">uri</span>: <span class="nc">Uri</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">StatusCode</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">(</span><span class="n">StatusCode</span>::<span class="no">NOT_FOUND</span><span class="p">,</span><span class="w"> </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;No route for </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">uri</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">body</span>::<span class="n">Body</span><span class="p">,</span><span class="w"> </span><span class="n">extract</span>::<span class="n">Request</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">http_body_util</span>::<span class="n">BodyExt</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="n">tower</span>::<span class="n">ServiceExt</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">root_return_static_response_and_ok</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span>::<span class="n">builder</span><span class="p">().</span><span class="n">uri</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">).</span><span class="n">body</span><span class="p">(</span><span class="n">Body</span>::<span class="n">empty</span><span class="p">()).</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routes</span><span class="p">.</span><span class="n">oneshot</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status</span><span class="p">(),</span><span class="w"> </span><span class="n">StatusCode</span>::<span class="no">OK</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">into_body</span><span class="p">().</span><span class="n">collect</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_bytes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Evilness Management&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="cp">#[tokio::test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">nonexisting_url_returns_emply_response_and_not_found</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">routes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Request</span>::<span class="n">builder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">uri</span><span class="p">(</span><span class="s">&#34;/nonexisting&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">body</span><span class="p">(</span><span class="n">Body</span>::<span class="n">empty</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">routes</span><span class="p">.</span><span class="n">oneshot</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">status</span><span class="p">(),</span><span class="w"> </span><span class="n">StatusCode</span>::<span class="no">NOT_FOUND</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">into_body</span><span class="p">().</span><span class="n">collect</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">to_bytes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="o">&amp;</span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;No route for /nonexisting&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+Summary
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<p>After completing some cleaning tasks, I have started a new application: This one is implemented as an HTTP server that
+provides a REST API.  I have explained when tests are needed and how to write tests for static content generated by
+Axum.</p>
+<p>
+We will explore other realistic scenarios in upcoming articles.</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>Should you honor me by joining me in writing the code.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p>And to you by extension.</p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p>Unless you do it to prove that it doesn&#39;t behave as expected according to its documentation or specs.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-12-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" data-title="Rust unit testing: basic HTTP testing" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" data-title="Rust unit testing: basic HTTP testing" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_file_writing/" class="prev" rel="prev" title="Rust unit testing: file writing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: file writing</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.152.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

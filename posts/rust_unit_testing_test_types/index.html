@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_types\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  4575 ,
+        },"genre": "posts","keywords": "rust, test","wordcount":  4497 ,
         "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_test_types\/","datePublished": "2025-07-09T00:00:00+00:00","dateModified": "2025-09-01T12:17:50+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -107,7 +107,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: test types</h1><h2 class="single-subtitle">Understand the building blocks for automated testing in Rust</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-07-09">2025-07-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4575 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-07-09">2025-07-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4497 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -124,7 +124,7 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
 <ul>
 <li><a href="#headline-1">Basic Unit Testing</a>
-<ul>
+</li>
 <li><a href="#headline-2">Project creation</a>
 </li>
 <li><a href="#headline-3">Return Test</a>
@@ -157,8 +157,6 @@
 </li>
 </ul>
 </li>
-</ul>
-</li>
 <li><a href="#headline-15">Final code</a>
 </li>
 <li><a href="#headline-16">Summary</a>
@@ -169,37 +167,36 @@
 </nav></div>
             </div><div class="content" id="content">
 <p>
-So you have finally learned Rust and are writing cool projects with it?  Awesome!  However, as soon as your project
-starts being useful and solving some actual use cases, you realize that the quality of your code is important.  Not only
-that.  The larger and more complex your project becomes, the harder it is to manually test every bit of functionality
-after a change.</p>
+So, you have finally learned Rust and are writing cool projects with it.  Awesome!  However, as soon as your project
+becomes useful and solves real use cases, you realize that code quality is important.  Not only that.  The larger and
+more complex your project becomes, the harder it is to manually test every bit of functionality after a change.</p>
 <p>
 Your first temptation might be: &#34;Why should I test everything if my changes only affect this small part of the program?&#34;
-And, while in some situations that might be true, more often than not our changes affect unexpected parts of our
+And, while in some situations that might be true, more often than not, our changes affect unexpected parts of our
 program.</p>
 <p>
 Writing automated tests is one of the most amusing and intellectually rewarding aspects of software development.  It
-helps you break the problem into the right bite-sized parts and let you know when you have properly solved them.  Thus,
+helps you break the problem into the right bite-sized parts and lets you know when you have properly solved them.  Thus,
 for a long while, I have wanted to write a book on this topic.  However, I never find the time to put the content
-together and I have decided to release a series of articles on Rust automated testing that contain and extend the
-contents that I have delivered in some of my courses and workshops.</p>
+together and I have decided to release a series of articles on Rust automated testing that will contain and extend the
+material I have delivered in some of my courses and workshops.</p>
 <p>
 In this first article, I want to cover the basics of unit testing in Rust; the building blocks.  I will briefly explain
 the syntax, but I&#39;d like to go further and get you into the mindset of writing automated tests for the win.  I will
-expand it to some other aspects in future articles, but, at the very least, I hope this is a gentle introduction to the
-concepts behind testing, starting by what to test and how to test it.</p>
+expand on this in future articles, but at the very least, I hope this is a gentle introduction to the concepts behind
+testing, starting with what to test and how to test it.</p>
 <p>
-Although I have some material on the tools used for testing, I will start with plain vanilla Rust, because this is
-all that we need to understand and write good tests.  Sharpen your favorite editor –I will be using Emacs here– and
-your mind and, if this your first experience with automated testing, get ready to change the way you look at your code.
-There is no way back.</p>
+Although I have some material on the tools used for testing, I will start with plain-vanilla Rust, because that is all
+we need to understand and write good tests.  Sharpen your favorite editor –I will be using Emacs here– and your mind.
+And, if this is your first experience with automated testing, get ready to change the way you look at your code.  There
+is no way back.</p>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
 Basic Unit Testing
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<p>First things first.  I&#39;m not going to make any assumptions on your background on unit testing.  Hence, the safest way to
-start is by describing the &#34;building blocks&#34; for adding tests to your code and then <strong>we</strong> will write one of each type,
+<p>First things first.  I&#39;m not going to make any assumptions about your background in unit testing.  Hence, the safest way
+to start is by describing the &#34;building blocks&#34; for adding tests to your code, and then <strong>we</strong> will write one of each type,
 step by step.</p>
 <p>
 There are three types of tests that we can write in a language like Rust.  Those are:</p>
@@ -215,39 +212,40 @@ State test
 <dt>
 Behavior test
 </dt>
-<dd>where we test the interactions between different type instances of our program.</dd>
+<dd>where we test the interactions between different instances of types of our program.</dd>
 </dl>
-<p>Don&#39;t worry if this seems too abstract or not obvious right away.  It will be clearer when we start writing the code,
-but you can use this taxonomy later to understand how to approach each type of test later on.  So, let&#39;s begin with some
-actual code.</p>
-<div id="outline-container-headline-2" class="outline-3">
-<h3 id="headline-2">
+<p>Don&#39;t worry if this seems too abstract or not obvious right away.  It will be clearer once we start writing code, but
+you can use this taxonomy later to understand how to approach each test type.  So, let&#39;s begin with some actual code.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
 Project creation
-</h3>
-<div id="outline-text-headline-2" class="outline-text-3">
-<p>We will start by creating a new project using cargo.  We all have learned from movies that working for the bad guys can
-be very profitable, so we are going to devote our new project to evil plans to rule the world.  I have chosen the name
-of the project accordingly and I hope that you like it.</p>
-<div class="src src-sh">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">  cargo new detestable-me</span></span></code></pre></div>
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>We will start by creating a new project using Cargo.  We all have learned from movies that working for the bad guys can
+be very profitable, so we are going to devote our new project to evil plans to rule the world.  I have chosen the
+project&#39;s name accordingly and I hope that you like it.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo new detestable-me</span></span></code></pre></div>
 </div>
 <img src="detestable-me.jpg" alt="Detestable me" title="Detestable me"/>
 </div>
 </div>
-<div id="outline-container-headline-3" class="outline-3">
-<h3 id="headline-3">
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
 Return Test
-</h3>
-<div id="outline-text-headline-3" class="outline-text-3">
-<p>In a return test we work with a function or method that returns something.  We use that function or method with a set of
-values for the arguments, most times even set the state of the instance, and check if the value produced and returned is
-the one that was expected.</p>
-<div id="outline-container-headline-4" class="outline-4">
-<h4 id="headline-4">
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>In a return test, we work with a function or method that returns something.  We use that function or method with a set
+of values for the arguments, most times even setting the instance&#39;s state, and check whether the value produced and
+returned is the one expected.</p>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
 Writing our first type
-</h4>
-<div id="outline-text-headline-4" class="outline-text-4">
-<p>We are going to start by creating of a type, named &#34;Supervillain&#34; in its own Rust module, that will be placed in its own
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>We are going to start by creating a type, named &#34;Supervillain&#34; in its own Rust module, that will be placed in its own
 (new) file called <code class="verbatim">supervillain.rs</code>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></div>
@@ -261,17 +259,17 @@ beginning of <code class="verbatim">main.rs</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">supervillain</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>
-There is not much to test yet, so let&#39;s add a public string property for the first name of the supervillain and
-reconsider.  Should we test that property? No!  Setting and getting the value of a property is part of the functionality
-provided by the language.  We haven&#39;t added any functionality, so there is nothing to test yet.  The same happens when we
-add a second property for the last name.  No test either.</p>
+There isn&#39;t much to test yet, so let&#39;s add a public string field for the supervillain&#39;s first name and reconsider.
+Should we test that field?  No!  The act of setting and getting the value of a field is part of the functionality
+provided by the language.  We haven&#39;t added any functionality, so there is nothing to test yet.  The same happens when
+we add a second property for the last name.  No test either.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span></span></span></code></pre></div>
 </div>
 <p>
-Let&#39;s add some actual functionality in an implementation block and define a method to return the full name of the
-supervillain<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  That, we can test.</p>
+Let&#39;s add some actual functionality in an implementation block and define a method to return the supervillain&#39;s  full
+name<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>.  That, we can test.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
@@ -281,12 +279,12 @@ supervillain<sup class="footnote-reference"><a id="footnote-reference-1" href="#
 </div>
 </div>
 </div>
-<div id="outline-container-headline-5" class="outline-4">
-<h4 id="headline-5">
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
 Define a (sub)module for tests
-</h4>
-<div id="outline-text-headline-5" class="outline-text-4">
-<p>The first step for having tests is to create a submodule for them and we put it in the same file that contains the
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>The first step for having tests is to create a submodule for them, and we put it in the same file that contains the
 <code class="verbatim">Supervillain</code>:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></div>
@@ -297,52 +295,51 @@ attribute preceding the module declaration:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span></span></span></code></pre></div>
 </div>
-<p>This newly created submodule is where we are going to put our tests for the supervillain and we will need access from
-within it to the public interface of the module that we are testing.  We obtain access to the public methods of the
-<code class="verbatim">supervillain</code> module by importing the main code of this file into the namespace of the tests module.</p>
+<p>This newly created submodule is where we will put our tests for the supervillain, and we will need access to the tested
+module&#39;s public interface from within it.  We obtain access to the public methods of the <code class="verbatim">supervillain</code> module by
+importing the main code of this file into the tests module&#39;s namespace.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span></span></span></code></pre></div>
 </div>
 <p>Ok! The groundwork is done. But before we start writing our tests, let&#39;s add some tools to our toolbox.</p>
 </div>
 </div>
-<div id="outline-container-headline-6" class="outline-4">
-<h4 id="headline-6">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
 Snippets for VS Code
-</h4>
-<div id="outline-text-headline-6" class="outline-text-4">
-<p>If you use VS Code, I recommend you to use snippets to simplify the creation of the tests and have a scaffold that will
-help you approach their implementation using a predefined structure.  VS Code already has built-in snippets for test modules
-(<code class="verbatim">tmod</code>) and test functions (<code class="verbatim">tfn</code>).  I will show you how to create a snippet that you can customize to your taste and
-needs.</p>
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>If you use VS Code, I recommend using snippets to simplify the test creation and have a scaffold to help you approach
+their implementation using a predefined structure.  VS Code already has built-in snippets for test modules (<code class="verbatim">tmod</code>) and
+test functions (<code class="verbatim">tfn</code>).  I will show you how to create a snippet that you can customize to your taste and needs.</p>
 <p>
 Select <code class="verbatim">Help =&gt; Show all commands</code> (or Shift-Command-P in macOS) and choose &#34;Snippets: Configure user snippets&#34; and then
 &#34;rust&#34;:</p>
 <img src="vs_code_snippets.png" alt="VS Code configure user snippets" title="VS Code configure user snippets"/>
 <p>
-VS Code will open a file named <code class="verbatim">rust.json</code>, containing comments that explain how to create a snippet.  First, we will
-add a snippet for creating the test module, as we just did manually.</p>
+VS Code will open a file named <code class="verbatim">rust.json</code>, that contains comments explaining how to create a snippet.  First, we will
+add a snippet to create the test module, as we did manually.</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="p">{</span> <span class="c1">// Already exising curly brackets
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nt">&#34;Test modules&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nt">&#34;prefix&#34;</span><span class="p">:</span> <span class="s2">&#34;tmod&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">		<span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">			<span class="s2">&#34;#[cfg(test)]&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">			<span class="s2">&#34;mod tests {&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">			<span class="s2">&#34;$0&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">			<span class="s2">&#34;}&#34;</span>
-</span></span><span class="line"><span class="cl">		<span class="p">],</span>
-</span></span><span class="line"><span class="cl">		<span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Module for tests&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="p">{</span> <span class="c1">// Already existing curly brackets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Test modules&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;prefix&#34;</span><span class="p">:</span> <span class="s2">&#34;tmod&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;#[cfg(test)]&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;mod tests {&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;$0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;}&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Module for tests&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-And then one for creating new tests. In this second snippet, we will have comments to make the structure of the test
-explicit with a comment for each the three parts.  Some people like to refer to them by (1) <em>given</em>, (2) <em>when</em>, (3)
-<em>then</em>, but I feel more comfortable remembering the AAA: (1) <em>arrange</em>, (2) act, (3) assert.  Feel free to change it to
-use the one that resonates better with you.</p>
+And then one for creating new tests. In this second snippet, we will add comments to make the test’s structure explicit
+with a comment for each of the three parts.  Some people like to refer to them by (1) <em>given</em>, (2) <em>when</em>, (3) <em>then</em>,
+but I feel more comfortable remembering the AAA: (1) <em>arrange</em>, (2) act, (3) assert.  Feel free to change it to use the
+one that resonates better with you.</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="p">{</span> <span class="c1">// Already exising curly brackets
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="p">{</span> <span class="c1">// Already existing curly brackets
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nt">&#34;Test function with comments&#34;</span><span class="p">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nt">&#34;prefix&#34;</span><span class="p">:</span> <span class="s2">&#34;tfnwc&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">		<span class="nt">&#34;body&#34;</span><span class="p">:</span> <span class="p">[</span>
@@ -354,29 +351,28 @@ use the one that resonates better with you.</p>
 </span></span><span class="line"><span class="cl">			<span class="s2">&#34;// Assert&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">			<span class="s2">&#34;}&#34;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">],</span>
-</span></span><span class="line"><span class="cl">        	<span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Template for tests with comments for the different parts&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Template for tests with comments for the different parts&#34;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-7" class="outline-4">
-<h4 id="headline-7">
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
 Testing return: full name is first name space last name
-</h4>
-<div id="outline-text-headline-7" class="outline-text-4">
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
 <img src="return_test.jpg" alt="Wine tasting" title="Testing the product of the grapes"/>
 <p>
 This is where the rubber meets the road: we are going to write our first test.  We will test that the method
-<code class="verbatim">full_name()</code> <em>returns</em> a string according to our functional requirements, i.e., the full name is the result of
-concatenating the first name, a space, and the last name.</p>
+<code class="verbatim">full_name()</code> <em>returns</em> a string that meets our functional requirements, i.e., the full name is the concatenation of the
+first name, a space, and the last name.</p>
 <p>
 We use the snippet for the test and provide the test name.  Although this might seem irrelevant, it isn&#39;t.  Don&#39;t be
-fooled by Shakespeare<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup> and use a meaningful name.  We want our name to be telling about what we are testing and
-what we expect.  The reason for this is that when we run the tests, should any of them fail, we want to know what is
-wrong with the code <strong>without</strong> having to review what that test was checking.  Hence, &#34;test1&#34;, &#34;test_supervillain&#34;,
-&#34;test_full_name&#34;, or &#34;full_name_is_ok&#34; aren&#39;t good enough.  In this case, I will stay with
-<code class="verbatim">full_name_is_first_name_space_last_name</code>.</p>
+fooled by Shakespeare<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup> and use a meaningful name.  We want our name to tell about what we are testing and what we
+expect.  The reason is that when we run the tests, if any fail, we want to know what is wrong with the code <strong>without</strong>
+having to review what that test was checking.  Hence, &#34;test1&#34;, &#34;test_supervillain&#34;, &#34;test_full_name&#34;, or
+&#34;full_name_is_ok&#34; aren&#39;t good enough.  In this case, I will stay with <code class="verbatim">full_name_is_first_name_space_last_name</code>.</p>
 <p>
 If you decide to apply this rule, but still curse me for all the time wasted on figuring out good test names and the
 money spent on additional characters, please remember to also bless me for all the time you save by not having to
@@ -391,11 +387,11 @@ This is the skeleton of our first test:</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">      </span><span class="c1">// Assert
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
-<p>The <code class="verbatim">#[test]</code> attribute allows Rust test runner to identify this function as a test and run it when told to do so.</p>
+<p>The <code class="verbatim">#[test]</code> attribute allows Rust&#39;s test runner to identify this function as a test and run it when told to do so.</p>
 <p>
-Now, let&#39;s write what we need in each of the stages, starting with &#34;arrange&#34;.  In the arrange part, we set up the
-scenario for testing.  If you still remember your latest science laboratory, this where we set the controlled
-environment, defining the scenario that allows us to execute what we want and to know what to expect.</p>
+Now, let&#39;s write what we need for each stage, starting with &#34;arrange&#34;.  In the arrange section, we set up the test
+scenario.  If you still remember your latest science laboratory, this is where we set the controlled environment,
+defining the scenario that allows us to execute what we want and to know what to expect.</p>
 <p>
 In this case, we want to create an instance of the supervillain, which we will call <code class="verbatim">sut</code>.  You can choose any other
 name, but there is a long tradition of using that name to refer to the <em>System Under Test</em>.  This is all that we need to
@@ -407,7 +403,7 @@ arrange for this first test.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span></span></span></code></pre></div>
 </div>
 <p>
-In the &#34;act&#34; stage, we want to exercise the function/method that we want to test.  This is the <code class="verbatim">full_name()</code> method and
+In the &#34;act&#34; stage, we want to exercise the function/method we want to test.  This is the <code class="verbatim">full_name()</code> method, and
 we store the <em>return value</em> from that function in a(n immutable) variable.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">full_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sut</span><span class="p">.</span><span class="n">full_name</span><span class="p">();</span></span></span></code></pre></div>
@@ -437,11 +433,11 @@ Our first test is ready.  Let&#39;s try it.  We use cargo for that.</p>
 </div>
 <p>
 A test ain&#39;t good until you have seen it fail.  For the sake of completeness, let&#39;s make it fail by removing the space
-between first and last name in the <code class="verbatim">format!</code> expression of the method and run it again.</p>
+between the first and last name in the <code class="verbatim">format!</code> expression of the method and run it again.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span></span></span></code></pre></div>
 </div>
-<p>You should get a me</p>
+<p>You should get a message similar to the one below.</p>
 <pre class="example">
 running 1 test
 test supervillain::tests::full_name_is_first_name_space_last_name ... FAILED
@@ -470,7 +466,7 @@ Although the message is pretty clear in this case, we can make it more explicit 
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">full_name</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Lex Luthor&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Unexpected full name&#34;</span><span class="p">);</span></span></span></code></pre></div>
 </div>
 <p>
-Running it again produces the following output, that contains the additional information:</p>
+Running it again produces the following output, which contains the additional information:</p>
 <pre class="example">
 running 1 test
 test supervillain::tests::full_name_is_first_name_space_last_name ... FAILED
@@ -500,25 +496,24 @@ error: test failed, to rerun pass `--bin detestable-me`
 </div>
 </div>
 </div>
-<div id="outline-container-headline-8" class="outline-3">
-<h3 id="headline-8">
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
 State Test
-</h3>
-<div id="outline-text-headline-8" class="outline-text-3">
-<p>In a state test we work with some method that changes the state of an instance of the type.  We set the instance to some
-known state, use the method, and check if the state of the instance has changed as expected.</p>
-<div id="outline-container-headline-9" class="outline-4">
-<h4 id="headline-9">
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<p>In a state test, we work with a method that changes the state of an instance of the type.  We set the instance to a
+known state, call the method, and check whether the instance&#39;s state has changed as expected.</p>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
 Test state: setter sets first name and last name
-</h4>
-<div id="outline-text-headline-9" class="outline-text-4">
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
 <img src="state_test.jpg" alt="A box with some content" title="Checking the contents of the box"/>
 <p>
-We have a method that returns the full name of supervillain using the information contained in the fields of an
-instance.  We can add one that reverses the process: takes a full name and sets the values of the first and the last
-names.  We are going to start with a not very robust implementation that would not work properly unless the provided
-full name contains two words separated by one space.  It is far from perfect, but it will do for writing the
-corresponding test.</p>
+We have a method that returns a supervillain&#39;s full name from the fields of an instance.  We can add one that reverses
+the process: takes a full name and sets the values of the first and the last names.  We are going to start with a not
+very robust implementation that will not work properly unless the provided full name contains two words separated by a
+single space.  It is far from perfect, but it will do for writing the corresponding test.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">set_full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w">
@@ -527,7 +522,7 @@ corresponding test.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Let&#39;s write the test step by step again. We create the scaffold for the test using a meaningful name.</p>
+Let&#39;s write the test step by step again. We create the test scaffold with a meaningful name.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">set_full_name_sets_first_and_last_names</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -548,9 +543,9 @@ this time we make it mutable so we can change its state.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="s">&#34;Darth Vader&#34;</span><span class="p">);</span></span></span></code></pre></div>
 </div>
-<p>And then, the assert stage must state the expected value for the <strong>two</strong> fields of the instance.  While in general, it is
-a bad idea to make more than one assertion per test, there are exceptions to that.  In this case, since both assertions
-point to the same part of the code, it is ok to use more than one,</p>
+<p>And then, the assert stage must state the expected value for the <strong>two</strong> fields of the instance.  While, in general, it is
+a bad idea to make more than one assertion per test, there are exceptions.  In this case, since both assertions point to
+the same part of the code, it is ok to use more than one.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Darth&#34;</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Vader&#34;</span><span class="p">);</span></span></span></code></pre></div>
@@ -558,15 +553,15 @@ point to the same part of the code, it is ok to use more than one,</p>
 <p>If we run the tests again, we will get the two tests passing.  Hooray!</p>
 </div>
 </div>
-<div id="outline-container-headline-10" class="outline-4">
-<h4 id="headline-10">
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
 Yo hablo Rust
-</h4>
-<div id="outline-text-headline-10" class="outline-text-4">
-<p>I can hear you thinking: &#34;but this isn&#39;t the way we do things in Rust&#34;.  While it certainly works, this is ersatz.  It
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>I can hear you thinking: &#34;But this isn&#39;t the way we do things in Rust&#34;.  While it certainly works, this is ersatz.  It
 isn&#39;t very idiomatic.  A more common way to implement the same or similar functionality would be to create a constructor
 (<code>fn new(name: &amp;str) -&gt; Option&lt;Supervillain&gt;</code>) or an implementation of the <code class="verbatim">TryFrom</code> trait, but those need dealing with
-optionals or error handling and I don&#39;t want to go there yet.</p>
+optionals or error handling, and I don&#39;t want to go there yet.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">TryFrom</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">type</span> <span class="nc">Error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">anyhow</span>::<span class="n">Error</span><span class="p">;</span><span class="w">
@@ -586,7 +581,7 @@ optionals or error handling and I don&#39;t want to go there yet.</p>
 </div>
 <p>
 A middle ground option is to use an associated function without error handling or an implementation of the From trait.
-Let&#39;s implement the later, although that would be testing return instead of state:</p>
+Let&#39;s implement the latter, although that would be testing return instead of state:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="nb">From</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Supervillain</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">from</span><span class="p">(</span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Self</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -613,29 +608,29 @@ Let&#39;s implement the later, although that would be testing return instead of 
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-Notice that this new test doesn&#39;t have an arrange stage part.  There is nothing that needs to be arranged before testing
-the desired method.</p>
+Notice that this new test doesn&#39;t include an arrange stage.  And that is fine, because nothing needs to be arranged
+before testing the desired method.</p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-11" class="outline-3">
-<h3 id="headline-11">
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
 Behavior Test
-</h3>
-<div id="outline-text-headline-11" class="outline-text-3">
-<p>In a behavior test we work with a method or a function that interacts with another type instance.  We set the state of
-the instance with the method and the arguments for calling it.  That includes providing the instance that it will
-interact with.  Then, we use the method or function and check if it has interacted with the latter instance as expected.</p>
-<div id="outline-container-headline-12" class="outline-4">
-<h4 id="headline-12">
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>In a behavior test, we work with a method or function that interacts with another type instance.  We set the instance&#39;s
+state using the method and its arguments.  That includes providing the instance that it will interact with.  Then, we
+use the method or function and check if it has interacted with the latter instance as expected.</p>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
 The simplest interaction
-</h4>
-<div id="outline-text-headline-12" class="outline-text-4">
-<p>We need to have an scenario in which our supervillain interacts with another type.  Bad guys are good at
-attacking and interacting with weapons and supervillains do the same with megaweapons.</p>
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<p>We need to have a scenario in which our supervillain interacts with another type.  Bad guys are good at attacking and
+using weapons, and supervillains do the same with megaweapons.</p>
 <p>
-Let&#39;s define what a megaweapon is with a trait.  It basically is anything that can be shot, so, it contains a single
+Let&#39;s define what a megaweapon is with a trait.  It basically is anything that can be shot, so it contains a single
 method, <code>shoot()</code>, that takes no parameters and returns nothing:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Megaweapon</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -643,7 +638,8 @@ method, <code>shoot()</code>, that takes no parameters and returns nothing:</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-As for our supervillain, we add it a new method to provide them with the ability to attack.  The method takes a weapon as a parameter, and shoots the weapon:</p>
+As for our supervillain, we add it a new method to give them the ability to attack.  The method takes a weapon as a
+parameter, and shoots the weapon:</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">weapon</span>: <span class="nc">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">weapon</span><span class="p">.</span><span class="n">shoot</span><span class="p">();</span><span class="w">
@@ -651,15 +647,15 @@ As for our supervillain, we add it a new method to provide them with the ability
 </div>
 </div>
 </div>
-<div id="outline-container-headline-13" class="outline-4">
-<h4 id="headline-13">
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
 Test behavior: Supervillain attacks using weapon
-</h4>
-<div id="outline-text-headline-13" class="outline-text-4">
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
 <img src="behavior_test.jpg" alt="Mouse trap" title="Testing trap interaction"/>
 <p>
 What we want to test in this scenario is that when a supervillain attacks, they shoot the megaweapon.  As in the
-previous examples, let&#39;s start with the skeleton of the test.</p>
+previous examples, let&#39;s start with the test skeleton.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[test]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">attack_shoots_weapon</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -676,14 +672,14 @@ previous examples, let&#39;s start with the skeleton of the test.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">};</span></span></span></code></pre></div>
 </div>
 <p>The act part isn&#39;t that obvious.  Yes, we want to use the <code>attack()</code> method of the <em>sut</em>, but that method requires
-something that implements the <code class="verbatim">Megaweapon</code> trait and we haven&#39;t defined any type that does that, yet.  Does this mean
+something that implements the <code class="verbatim">Megaweapon</code> trait, and we haven&#39;t defined any type that does that, yet.  Does this mean
 that we cannot write this test?  No way!  On the contrary, we can create our own megaweapon and use it to our advantage.
 Don&#39;t worry.  We don&#39;t need to become a lord of war for that.</p>
 <img src="lord_of_war.jpg" alt="A lord of war at work" title="Acting like a lord of war"/>
 <p>
-Since this weapon is meant only for testing purposes, we are going to define the type inside of the <code class="verbatim">tests</code> module and
-call it <code class="verbatim">WeaponDouble</code><sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.  The only important thing is that it must implement the <code class="verbatim">Megaweapon</code> trait.  We will take
-care of the details later.</p>
+Since this weapon is meant only for testing, we will define the type in the <code class="verbatim">tests</code> module and call it
+<code class="verbatim">WeaponDouble</code><sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>.  The only important thing is that it must implement the <code class="verbatim">Megaweapon</code> trait.  We will take care of
+the details later.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">WeaponDouble</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -700,14 +696,14 @@ the act part for attacking.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Act
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="n">sut</span><span class="p">.</span><span class="n">attack</span><span class="p">(</span><span class="n">weapon</span><span class="p">);</span></span></span></code></pre></div>
 </div>
-<p>We are almost there.  We are only missing the assertion.  But, what should we assert?  Anything about the <em>sut</em>?
+<p>We are almost there.  We are only missing the assertion.  But what should we assert?  Anything about the <em>sut</em>?
 Clearly not!  Let&#39;s take another look at the name of our test: <code class="verbatim">attack_shoots_weapon</code>.  It says it all.  When the <em>sut</em>
 attacks, we expect the weapon to be shot.  So the assertion should be that the weapon is shot, but how do we do that?</p>
 <p>
-Forget about the code for a moment.  Imagine that you have your terrific supervillain in front of you and you want to
-ensure that when he attacks, he shoots the megaweapon.  You don&#39;t want the real thing to happen.  You don&#39;t want the
+Forget about the code for a moment.  Imagine that you have your terrific supervillain in front of you and want to ensure
+that when he attacks, he shoots the megaweapon.  You don&#39;t want the real thing to happen.  You don&#39;t want the
 supervillain to shoot a real megaweapon.  Even less so when you are around.  So you hand him a fake gun.  One that
-registers when the trigger is pushed, but does no harm.  That should be enough to know if our supervillain does what he
+registers when the trigger is pushed, but does no harm.  That should be enough to tell if our supervillain does what he
 is expected to do.</p>
 <p>
 Back to code then. We add a field to the <code class="verbatim">WeaponDouble</code> struct to keep track of when it is shot (<code class="verbatim">is_shot</code>).  For
@@ -728,7 +724,7 @@ implementation of the <code class="verbatim">shoot()</code> method, we change it
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
-<p>We can replace the creation of the weapon to use the associated function.</p>
+<p>We can replace the creation of the weapon with the associated function.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponDouble</span>::<span class="n">new</span><span class="p">();</span></span></span></code></pre></div>
 </div>
@@ -738,7 +734,7 @@ implementation of the <code class="verbatim">shoot()</code> method, we change it
 </div>
 <p>And… that would be it if we were using most other programming languages.</p>
 <p>
-But Rust doesn&#39;t like this.  We compile and run the tests with cargo and we get <strong>this</strong> output:</p>
+But Rust doesn&#39;t like this.  We compile and run the tests with cargo, and we get <strong>this</strong> output:</p>
 <pre class="example">
 warning: variable does not need to be mutable
   --&gt; src/supervillain.rs:83:13
@@ -797,16 +793,17 @@ warning: `detestable-me` (bin &#34;detestable-me&#34; test) generated 1 warning
 error: could not compile `detestable-me` (bin &#34;detestable-me&#34; test) due to 2 previous errors; 1 warning emitted
 </pre>
 <p>And while in most cases, the advice from the Rust compiler is between a useful magic crystal ball and a mind reader that
-knows your real intentions, in this occasion the suggestion to make the reference to self mutable for <code>fn shoot(&amp;mut self);</code> is not something
-we want to do.  You don&#39;t want to make parameters mutable for the sake of testing.  That is way beyond designing your
-public interface to be testable.  So much for our attempt to test behavior.  Should we call it a day?</p>
+knows your real intentions, on this occasion, the suggestion to make the reference to self mutable for <code>fn shoot(&amp;mut
+self);</code> is not something we want to do.  You don&#39;t want to make parameters mutable for the sake of testing.  That is way
+beyond designing your public interface to be testable.  So much for our attempt to test behavior.  Should we call it a
+day?</p>
 </div>
 </div>
-<div id="outline-container-headline-14" class="outline-4">
-<h4 id="headline-14">
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
 Once more with feeling
-</h4>
-<div id="outline-text-headline-14" class="outline-text-4">
+</h3>
+<div id="outline-text-headline-14" class="outline-text-3">
 <p>Our previous attempt presents two problems that wouldn&#39;t be an issue with many other programming languages:</p>
 <ul>
 <li>On the one hand, the <code class="verbatim">Megaweapon</code> trait method takes a <strong>shared reference</strong> to self, i.e., the test double.  Its state
@@ -815,7 +812,7 @@ cannot be changed.</li>
 after being moved to the function/method.</li>
 </ul>
 <p>The first problem can be solved using <a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">interior mutability</a>, i.e., references with rules checked at run-time.  We can use
-a <code class="verbatim">RefCell</code> and borrow a reference with mutable access to it in the <code class="verbatim">shoot()</code> method.</p>
+a <code class="verbatim">RefCell</code> and borrow a mutable reference to it in the <code class="verbatim">shoot()</code> method.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">struct</span> <span class="nc">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">is_shot</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
@@ -838,10 +835,10 @@ a <code class="verbatim">RefCell</code> and borrow a reference with mutable acce
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponDouble</span>::<span class="n">new</span><span class="p">();</span></span></span></code></pre></div>
 </div>
 <p>
-The second one can be solved implementing the <code>Drop</code> trait that defines what to do before the instance of our
-test double is released.  There we will check if it has been shot or panic otherwise.  Panicking might seem a little
-extreme, but this actually what an assert macro does when the assertion is not true.  It is a way to signal the test
-runner that this test didn&#39;t pass.</p>
+The second one can be solved by implementing the <code>Drop</code> trait that defines what to do before the instance of our test
+double is released.  There, we will check if it has been shot or panic otherwise.  Panicking might seem a little
+extreme, but this is actually what an assert macro does when the assertion is not true.  It signals the test runner that
+this test didn&#39;t pass.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="nb">Drop</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">WeaponDouble</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">fn</span> <span class="nf">drop</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -851,26 +848,23 @@ runner that this test didn&#39;t pass.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
-<p>By implementing the <code class="verbatim">Drop</code> trait, we can get rid of the assertion in this test, because it happens automatically when
-the weapon test double gets out of scope.
-Use <code class="verbatim">cargo test</code> and all the tests should pass.</p>
+<p>By implementing the <code class="verbatim">Drop</code> trait, we can remove the assertion in this test because is handled automatically when the
+weapon test double goes out of scope.  Use <code class="verbatim">cargo test</code>, and all the tests should pass.</p>
 <p>
 Still, if you own the design of the <code class="verbatim">Supervillain</code> interface and passing a reference instead of ownership is a valid
-option for your problem at hand, it is always easier to make the API of the object testable.  We can make <code class="verbatim">attack()</code>
-take a shared reference to something that implements <code class="verbatim">Megaweapon</code>.</p>
+option for your problem at hand, it is always easier to make the API of the type testable.  We can make <code class="verbatim">attack()</code> take
+a shared reference to something that implements <code class="verbatim">Megaweapon</code>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">weapon</span>: <span class="kp">&amp;</span><span class="nc">impl</span><span class="w"> </span><span class="n">Megaweapon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">weapon</span><span class="p">.</span><span class="n">shoot</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
 <p>
-In this way, we can remove the implementation of the <code class="verbatim">Drop</code> trait and use a regular assertion.</p>
+In this way, we can remove the <code class="verbatim">Drop</code> trait implementation and use a regular assertion.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponDouble</span>::<span class="n">new</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">sut</span><span class="p">.</span><span class="n">attack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">weapon</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">assert!</span><span class="p">(</span><span class="o">*</span><span class="n">weapon</span><span class="p">.</span><span class="n">is_shot</span><span class="p">.</span><span class="n">borrow</span><span class="p">());</span></span></span></code></pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1007,9 +1001,9 @@ Summary
 </h2>
 <div id="outline-text-headline-16" class="outline-text-2">
 <p>In this article, I have explained the three types of tests that we can use with Rust and many other programming
-languages.  I have created a piece of code from scratch and tested its functionality using unit test.  On the way, I
-have introducing some best practices for writing tests, like its structure or how to name them.  Last but not least, I
-have highlighted some nuances of Rust and how they affect to writing unit tests.</p>
+languages.  I have created code from scratch and tested its functionality using unit tests.  On the way, I have
+introduced some best practices for writing tests, such as their structure or how to name them.  Last but not least, I
+have highlighted some nuances of Rust and how they affect writing unit tests.</p>
 <p>
 Stay curious.  Hack your code.  See you next time!</p>
 </div>
@@ -1026,9 +1020,9 @@ Footnotes
 <sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
 <div class="footnote-body">
 <p>Admittedly, I have been lazy here and assumed that the full name is the result of putting the first name first
-and the last/family name later separated by a space.  Not all cultures do it like that.  At the very least, I know some
-Asian cultures do it the other way around and I was taught that Hungarians do that too.  Even in my own culture as an
-Spaniard, it doesn&#39;t work that way because we use two last names.  But this should do as an example, so please bear with
+followed by last/family name, separated by a space.  Not all cultures do it like that.  At the very least, I know some
+Asian cultures do it the other way around, and I was taught that Hungarians do that too.  Even in my own culture as a
+Spaniard, it doesn&#39;t work that way because we use two last names.  But this should serve as an example, so please bear with
 me.</p>
 </div>
 </div>
@@ -1041,7 +1035,7 @@ me.</p>
 <div class="footnote-definition">
 <sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
 <div class="footnote-body">
-<p>I have a plenty of material about test doubles.  Stay tuned!</p>
+<p>I have plenty of material about test doubles.  Stay tuned!</p>
 </div>
 </div>
 </div>

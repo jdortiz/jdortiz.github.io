@@ -12,7 +12,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-07-15T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-09-01T12:17:50+02:00">
+    <meta property="article:modified_time" content="2025-12-18T18:42:20+01:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Test">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
@@ -34,7 +34,7 @@
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/"
         },"genre": "posts","keywords": "rust, test","wordcount":  2430 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/","datePublished": "2025-07-15T00:00:00+00:00","dateModified": "2025-09-01T12:17:50+02:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_simplify_tests\/","datePublished": "2025-07-15T00:00:00+00:00","dateModified": "2025-12-18T18:42:20+01:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -124,7 +124,7 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
 <ul>
 <li><a href="#headline-1">Reorganize Testing Code</a>
-<ul>
+</li>
 <li><a href="#headline-2">Constants to the rescue</a>
 </li>
 <li><a href="#headline-3">Reuse initialization manually</a>
@@ -132,8 +132,6 @@
 <li><a href="#headline-4">Reuse initialization with a crate</a>
 </li>
 <li><a href="#headline-5">Reusing fixtures</a>
-</li>
-</ul>
 </li>
 <li><a href="#headline-6">Final code</a>
 </li>
@@ -172,11 +170,13 @@ and avoiding repetition are common goals for all of us.</p>
 <p>
 In any case, the quality of the testing code is as important as that of the production code.  We have to work with it as
 much as with the rest of the code, and we want our tests to be readable and maintainable.  Keep them clean and tidy.</p>
-<div id="outline-container-headline-2" class="outline-3">
-<h3 id="headline-2">
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
 Constants to the rescue
-</h3>
-<div id="outline-text-headline-2" class="outline-text-3">
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
 <p>Let&#39;s start with robustness.  We want to write tests that we can trust both when they pass and when they fail.  If I
 write a test and have to spend some non-trivial amount of time understanding why it ain&#39;t passing, only to find out it
 was a typo I introduced in a string of the test, that is not very productive.</p>
@@ -233,11 +233,11 @@ you have made a mistake when typing any of them, you can fix that by editing thi
 Breathe in.  Smell your code.  Don&#39;t you notice that it is much better now? Good job! 😄</p>
 </div>
 </div>
-<div id="outline-container-headline-3" class="outline-3">
-<h3 id="headline-3">
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
 Reuse initialization manually
-</h3>
-<div id="outline-text-headline-3" class="outline-text-3">
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
 <p>Throughout the tests, we created several instances of the supervillain, most of which used the exact same code.  As
 Master Yoda used to say: &#34;Repetition leads to anger, anger leads to error, error leads to broken tests&#34; (or something
 similar.)  This kind of repetition could be simplified by sharing the initialization code among all the tests before
@@ -327,11 +327,11 @@ this shared initialization.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-4" class="outline-3">
-<h3 id="headline-4">
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
 Reuse initialization with a crate
-</h3>
-<div id="outline-text-headline-4" class="outline-text-3">
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
 <p>This code is so useful that there is a crate that does that, and some more. Its name is <code class="verbatim">test-context</code>, and we can use
 it in our code to reduce boilerplate.  This change would be particularly significant if we had more than one <code class="verbatim">tests</code>
 module.</p>
@@ -369,11 +369,11 @@ that needs this data with the following macro and keep the existing <code>#[test
 Finally, delete the auxiliary function and rerun the tests. They should pass.</p>
 </div>
 </div>
-<div id="outline-container-headline-5" class="outline-3">
-<h3 id="headline-5">
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
 Reusing fixtures
-</h3>
-<div id="outline-text-headline-5" class="outline-text-3">
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
 <p>The data that we use to create tests may be used in more than one <code class="verbatim">tests</code> module.  It also happens when we define
 auxiliary functions for tests we may want to reuse.  Since we have already stated our intent to avoid repetition, it
 would be useful to have a way to share those values.  Rust&#39;s module system comes to the rescue here.</p>
@@ -406,8 +406,6 @@ We use the shared constants, qualifying their use with the module name.  For exa
 <p>
 Once we have done this for each constant, we can remove them from the <code class="verbatim">tests</code> module and stick with the shared ones.
 Running the tests again should bring you happiness and calm. 😎</p>
-</div>
-</div>
 </div>
 </div>
 <div id="outline-container-headline-6" class="outline-2">
@@ -579,8 +577,8 @@ Footnotes
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-09-01&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/3340b89c5ffd64e929a780112e5eefffe1db179a" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 3340b89c5ffd64e929a780112e5eefffe1db179a: Fix typo and formatting issues">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3340b89</a></span>
+                <span>Updated on 2025-12-18&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/5027690423dd48a9cd941e214247ec23624b893a" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 5027690423dd48a9cd941e214247ec23624b893a: Improve first two articles about Rust testing">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5027690</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>

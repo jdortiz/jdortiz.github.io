@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Using Oracle db26ai from Rust with the oracle crate - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris using the keyboard to work with data"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">
+  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+  <meta property="og:title" content="Using Oracle db26ai from Rust with the oracle crate">
+  <meta property="og:description" content="Ferris using the keyboard to work with data">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-01-16T00:00:00+00:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Db">
+    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
+  <meta name="twitter:title" content="Using Oracle db26ai from Rust with the oracle crate">
+  <meta name="twitter:description" content="Ferris using the keyboard to work with data">
+<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Using Oracle db26ai from Rust with the oracle crate",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/"
+        },"genre": "posts","keywords": "rust, db","wordcount":  2657 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/","datePublished": "2026-01-16T00:00:00+00:00","dateModified": "2026-01-16T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Jorge Ortiz-Fuentes"
+            },"description": "Ferris using the keyboard to work with data"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Using Oracle db26ai from Rust with the oracle crate</h1><h2 class="single-subtitle">Part 1: Environment setup and queries</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-01-16">2026-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2657 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/header-image.jpg"
+        data-srcset="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/header-image.jpg, /posts/rust_use_oracle_db26ai_with_oracle_crate_1/header-image.jpg 1.5x, /posts/rust_use_oracle_db26ai_with_oracle_crate_1/header-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/header-image.jpg"
+        title="Ferris using the keyboard to work with data" width="832" height="448" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Install the driver and SQLcl</a>
+<ul>
+<li><a href="#headline-2">An Oracle DB instance</a>
+</li>
+<li><a href="#headline-3">Required dynamic libraries</a>
+</li>
+<li><a href="#headline-4">Oracle DB command-line interface</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">Prepare the database</a>
+<ul>
+<li><a href="#headline-6">Set up for vector search</a>
+</li>
+<li><a href="#headline-7">Let&#39;s get some data</a>
+</li>
+<li><a href="#headline-8">Enhance user CO</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">First &#34;contact&#34; with the Oracle DB instance</a>
+</li>
+<li><a href="#headline-10">Querying data from Rust</a>
+<ul>
+<li><a href="#headline-11">Direct queries</a>
+<ul>
+<li><a href="#headline-12">Multi-row query</a>
+</li>
+<li><a href="#headline-13">Single row query</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-14">Reusing queries</a>
+<ul>
+<li><a href="#headline-15">Reusing the prepared statement</a>
+</li>
+<li><a href="#headline-16">Using  bind-by-name variables</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-17">SUMMARY</a>
+</li>
+<li><a href="#headline-18">Footnotes</a>
+</li>
+</ul>
+</nav></div>
+            </div><div class="content" id="content">
+<p>
+Over the years, we have witnessed computer programs become more ambitious in their use of data, making it more useful to
+us.  Thus, the programs of the 1950s to the 1980s were mostly focused on computing, on solving mathematical or
+algorithmic problems that were hard to solve manually due to the complexity of the calculations.  Then, from the 80s to
+the 2000s, with database software that could pull its weight, the focus shifted to storing, managing, and exploiting
+data through analytical queries.  Dealing with customers, orders, products, invoices, and any other type of structured
+data became accessible to any application.  The data could be handled reliably, ensuring integrity, consistency,
+security, and availability. And performant when used properly, without worrying about low-level details.</p>
+<p>
+There was no way back.  Companies learned the value of holding, processing, enhancing, and exploiting data for their
+own benefit and for their customers.  Databases were augmented with the concept of services, exposed internally and
+externally, and later further enhanced via mash-ups.</p>
+<p>
+At the end of the 2010s, AI became something that could be used to work with both structured and unstructured data,
+extracting knowledge from them and providing it to answer questions, rather than queries, to its users.</p>
+<p>
+In this article, I will use the <a href="https://crates.io/crates/oracle">oracle</a> crate to access and modify data from Rust code.  This crate was created by Kubo
+Takehiro in 2017 and has been maintained by him and contributors since then.  It is based on <a href="https://oracle.github.io/odpi/">ODPI-C</a>, an open-source
+library that simplifies access to the <a href="https://www.oracle.com/database/technologies/appdev/oci.html">Oracle Call Interface (OCI)</a>, which provides a lower-level, high-performance
+interface.</p>
+<p>
+Having access to structured data in your Rust code is the first step to creating useful services and writing an AI
+application, should you want to do so.  So, this is something that you want to know how to do as a Rust developer.  I
+will try to explain the most common cases and some less common ones in this article and its second part.</p>
+<p>
+I plan to make no assumptions about your development environment, so I will share how to set it up using some <em>&#34;real&#34;</em>
+data from the database we can use for the examples.</p>
+<p>
+Let&#39;s get cracking!</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Install the driver and SQLcl
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+An Oracle DB instance
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>The whole purpose of this article is to interact with an Oracle database, to query, create, update, and modify it, so we
+will need to have access to an instance.  I recommend using a container because we will add a schema and some data.  If
+you spin up an instance of the <a href="https://container-registry.oracle.com/ords/ocr/ba/database/free">Oracle AI Database 26ai Free Container</a>, it will start in a clean state, and you can
+discard the data after using all the code in this article.  I have already explained how to run Oracle AI db26ai in a
+container in <a href="/posts/running_containers_with_colima/">this other article</a>, in case you haven&#39;t done so yet.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Required dynamic libraries
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>In this article, I will use the <a href="https://crates.io/crates/oracle">oracle</a> crate, which is based on <a href="https://oracle.github.io/odpi/">ODPI-C</a>.  That means that the ODPI-C dynamic
+libraries must be installed and available in your system.  In case you don&#39;t have them yet, they are available in a
+package that can be <a href="https://www.oracle.com/database/technologies/instant-client/macos-arm64-downloads.html">downloaded</a> in two versions: <em>basic</em> and <em>basic light</em>.  They both contain all the drivers,
+but the latter only includes the English error messages and support for some character sets.  I&#39;ll use the former, but
+feel free to do otherwise if you don&#39;t need the extra data.</p>
+<p>
+Double-click on the <code class="verbatim">dmg</code> file that you have downloaded from the link above, or use the following command with the
+right version identifier.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  hdiutil mount instantclient-basic-macos.arm64-&lt;version id&gt;.dmg</span></span></code></pre></div>
+</div>
+<p>
+Then, install its contents from the command line.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nb">cd</span> /Volumes/instantclient-basic-macos.arm64-&lt;version id&gt;/
+</span></span><span class="line"><span class="cl">  sh ./install_ic.sh</span></span></code></pre></div>
+</div>
+<p>
+However, the script will fail in Tahoe (macOS 26) and show a pop-up because macOS cannot assess the safety of this code.
+Open the <code class="verbatim">System settings</code>, and select <code class="verbatim">Privacy &amp; Security</code> from the left pane.  Scroll down and allow this script to
+run.  Execute the script again, and it will create the directory <code class="verbatim">~/Downloads/instantclient_23_3</code> and copy its contents
+there.  I moved its contents to <code class="verbatim">~/bin/oracle</code> because I don&#39;t want the libraries I use to be in my downloads directory,
+and I added that directory to the dynamic linker path so they can be used by the crate.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  <span class="nb">export</span> <span class="nv">DYLD_LIBRARY_PATH</span><span class="o">=</span>~/bin/oracle</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Oracle DB command-line interface
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>It is also convenient to have a tool to talk to our Oracle DB instance.  SQL*Plus has been the traditional go-to Oracle
+client for a very long time, and you can download it from the <a href="https://www.oracle.com/database/technologies/instant-client/macos-arm64-downloads.html">same place</a> and install it using the same process that I
+used for the dynamic libraries.  But I&#39;d recommend you use SQLcl instead, which is newer, easier to use, and offers
+additional features, like code completion, which may be useful here.  I will install it using Homebrew
+(<code class="verbatim">brew install sqlcl</code>) to simplify the process, but you can refer to the <a href="https://docs.oracle.com/en/database/oracle/sql-developer-command-line/">official documentation</a> and to <a href="https://www.youtube.com/watch?v=b-iHX2EA77w">Jeff&#39;s video</a> for
+an intro to the tool.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Prepare the database
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>Now that I have our container up and running and the client and libraries installed, I&#39;d like to connect to the
+database and add some data.  Oracle provides sample schemas, but they aren&#39;t installed in the container by default.
+We will download them from this <a href="https://oaim.short.gy/oradb-samples">GitHub repo</a>, uncompress the zip file and connect to the database from there.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  unzip db-sample-schemas-23.3.zip
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> db-sample-schemas-23.3/customer_orders
+</span></span><span class="line"><span class="cl">  sql sys@localhost:1521 as sysdba</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Set up for vector search
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>Once I have connected to the database with the correct password, I can use the opportunity to alter the CDB&#39;s vector
+pool size, as I will need it for the second part of this article.</p>
+<div class="src src-sql">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">  </span><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">vector_memory_size</span><span class="o">=</span><span class="mi">512</span><span class="n">M</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+This change has been introduced to the server parameters file and requires restarting the database so it gets read and
+applied.  In this case, I had called my container <code class="verbatim">db-free</code>, and I restart it from the command line.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  docker container restart db-free</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Let&#39;s get some data
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>In order to run the script that creates the database, I will use SQLcl from the command line, connecting again to the
+database as SYS, but this time targeting the pluggable database instead of the container one.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  sql sys@localhost:1521/FREEPDB1 as sysdba @co_install.sql</span></span></code></pre></div>
+</div>
+<p>When prompted, I will use &#34;co&#34; as the password for the &#34;CO&#34; user.  Obviously, this is NOT a secure choice, but this is
+just a test in a container that will be discarded afterwards.  The tablespace for CO will be USERS (default value), and I
+have safely assumed that the schema can be overwritten because this is a new container.</p>
+<p>
+The script will create the tables, add the data, and exit from SQLcl.  I want to connect again, this time with the CO
+user.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  sql co/co@localhost:1521/FREEPDB1</span></span></code></pre></div>
+</div>
+<p>And make a query to verify that everything went well.</p>
+<div class="src src-sql">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">product_id</span><span class="p">,</span><span class="w"> </span><span class="n">product_name</span><span class="p">,</span><span class="w"> </span><span class="n">unit_price</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">product_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;Girl&#39;&#39;s Coat%&#39;</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>Which should reply with a single product.</p>
+<pre class="example">
+   PRODUCT_ID PRODUCT_NAME             UNIT_PRICE
+_____________ _____________________ _____________
+           15 Girl&#39;s Coat (Blue)            13.09
+</pre>
+<p>
+Feel free to familiarize yourself with the schema by using <code class="verbatim">desc &lt;table_name&gt;</code> or <code class="verbatim">info &lt;table_name&gt;</code> before moving on
+to writing some Rust code.</p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Enhance user CO
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>I will finish the database setup by configuring the user CO to work with vector search, because I will be using these
+changes in the second part of this article.  I need to make these changes as SYSDBA, so we can start a new session as
+the SYS user and with the SYSDBA privilege.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  sql sys@localhost:1521/FREEPDB1 as sysdba</span></span></code></pre></div>
+</div>
+<p>
+This is a good opportunity to verify that the change I made before has been applied.</p>
+<div class="src src-sql">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">  </span><span class="k">SHOW</span><span class="w"> </span><span class="k">PARAMETER</span><span class="w"> </span><span class="n">vector_memory_size</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+Then, I issue the following commands that add some capabilities to the CO user.</p>
+<div class="src src-sql">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">  </span><span class="k">GRANT</span><span class="w"> </span><span class="s2">&#34;DB_DEVELOPER_ROLE&#34;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s2">&#34;CO&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s2">&#34;CO&#34;</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="k">ALL</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s2">&#34;CO&#34;</span><span class="w"> </span><span class="n">QUOTA</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">USERS</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">EXIT</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+That&#39;s it! Let&#39;s start coding!</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+First &#34;contact&#34; with the Oracle DB instance
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<p>Before we can tell the database what to do with the data, we need to connect to it and exchange messages.  I will start
+by creating a new project.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  cargo new oracle-test
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> oracle-test</span></span></code></pre></div>
+</div>
+<p>
+I will also add the crates <code class="verbatim">oracle</code>, which we are testing, and <code class="verbatim">anyhow</code> to simplify error management.</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">   cargo add oracle
+</span></span><span class="line"><span class="cl">   cargo add anyhow</span></span></code></pre></div>
+</div>
+<p>
+I will start by establishing a connection to the database and pinging it.  <code>Connection</code> provides several methods for
+configuring its parameters.  The ping is totally unnecessary because the connection has just been established, but it
+is an easy way to issue our first command.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">oracle</span>::<span class="n">Connection</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="n">anyhow</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Oratest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Connection</span>::<span class="n">connect</span><span class="p">(</span><span class="s">&#34;co&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;co&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;localhost:1521/FREEPDB1&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="n">ping</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Connected to the database.&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>This should compile and run.  But if you get any &#34;DPI Error&#34;<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>, double-check your <code class="verbatim">DYLD_LIBRARY_PATH</code> before you
+move on.</p>
+<p>
+It would be much better to send a real statement to the database and receive a reply. Let&#39;s try that.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="n">query_row</span><span class="p">(</span><span class="s">&#34;SELECT &#39;Hello Oracle!&#39; FROM dual&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">greeting</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{greeting}</span><span class="s">&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
+<p>I don&#39;t know about you, but this makes me feel like Amy Adams in &#34;Arrival&#34;, when she can finally talk to the aliens. 🎉</p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+Querying data from Rust
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+Direct queries
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>The <code>Connection</code> instance provides simple methods for executing queries directly.  The simplest one is <code>query()</code>, which
+takes a string containing the SQL select statement and and a reference to an array with the arguments of the query, if any.
+ Let&#39;s
+go step by step.</p>
+<div id="outline-container-headline-12" class="outline-4">
+<h4 id="headline-12">
+Multi-row query
+</h4>
+<div id="outline-text-headline-12" class="outline-text-4">
+<p>I will start by using a select statement without any bind variables.  The <code>query()</code> method, if successful, returns a
+<code>ResultSet</code> containing <code>Row</code> instances.  <code>ResultSet</code> implements <code>Iterator</code>, so it can be used in a <code>for</code> expression
+to loop through the results or use its methods to restrict the number of items shown, among other things.  Then I can
+get the values of each column of a <code>Row</code> using its <code>get()</code> method.  It is important to specify the types for the
+variables that will receive the values, so the <code>get()</code> method knows what to do.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">MAX_ROWS</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">sql_customer_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SELECT * FROM co.customers&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Getting </span><span class="si">{MAX_ROWS}</span><span class="s"> customers:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">sql_customer_list</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="no">MAX_ROWS</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">id</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">email</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">fullname</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{id}</span><span class="s">: </span><span class="si">{fullname}</span><span class="s"> - </span><span class="si">{email}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>Run this version, and you should get a listing with <code>MAX_ROWS</code> customers.  Easy-peasy!</p>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-4">
+<h4 id="headline-13">
+Single row query
+</h4>
+<div id="outline-text-headline-13" class="outline-text-4">
+<p>If you have written a query that returns a single row, you can use another method of <code>Connection</code>.  That is the same
+method that I used to get a greeting from the database in the previous section.</p>
+<p>
+For example, if I want to retrieve the data of a product with a given PRODUCT_ID, I can use the simpler form shown
+below.  The query, if successful, returns a single row, and this time I preferred to use the <code>get_as()</code> method and a
+tuple-destructuring assignment to access the column values.  Notice that the type for the price value is an
+<code>Option&lt;f32&gt;</code>, because items in this column might be NULL.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">sql_product_with_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SELECT product_id, product_name, unit_price </span><span class="se">\</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">                             FROM products </span><span class="se">\</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">                             WHERE product_id = :1&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="n">query_row</span><span class="p">(</span><span class="n">sql_product_with_id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[</span><span class="o">&amp;</span><span class="mi">15</span><span class="p">])</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get_as</span>::<span class="o">&lt;</span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Product 15:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{id}</span><span class="s">: </span><span class="si">{name}</span><span class="s"> - </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mf">0.0</span><span class="p">));</span></span></span></code></pre></div>
+</div>
+<p>Execute this version and notice that we get the same product as we did with SQLcl.  Ain&#39;t this a wonderful world?</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
+Reusing queries
+</h3>
+<div id="outline-text-headline-14" class="outline-text-3">
+<p>It is quite common in an application to repeatedly perform a set of operations.  This can be achieved by either running
+direct queries or by preparing statements and reusing them to save time and effort.</p>
+<div id="outline-container-headline-15" class="outline-4">
+<h4 id="headline-15">
+Reusing the prepared statement
+</h4>
+<div id="outline-text-headline-15" class="outline-text-4">
+<p>The <code class="verbatim">oracle</code> crate uses the <code>statement()</code> method to produce a <code>StatementBuilder</code>, which starts with the provided SQL and
+can be used to tune the number of rows that can and will be fetched and to ask whether to reuse or ignore statements
+from the cache.</p>
+<p>
+Once the statement is built, I can execute it as many times as needed using the <code>query()</code> method or its variants.  And
+each time, I can use a different variant.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">AGAIN Getting </span><span class="si">{MAX_ROWS}</span><span class="s"> customers:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">statement</span><span class="p">(</span><span class="n">sql_customer_list</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">tag</span><span class="p">(</span><span class="s">&#34;customer list&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">.</span><span class="n">build</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="n">query_as</span>::<span class="o">&lt;</span><span class="p">(</span><span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="no">MAX_ROWS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">((</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">fullname</span><span class="p">))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{id}</span><span class="s">: </span><span class="si">{fullname}</span><span class="s"> - </span><span class="si">{email}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">AND AGAIN Getting </span><span class="si">{MAX_ROWS}</span><span class="s"> customers:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="no">MAX_ROWS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">fullname</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get_as</span>::<span class="o">&lt;</span><span class="p">(</span><span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{id}</span><span class="s">: </span><span class="si">{fullname}</span><span class="s"> - </span><span class="si">{email}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+In the previous snippet, I have scoped both queries using curly braces to end the lifetime of the <code>Statement</code>, because it
+is only backed in the cache when it is dropped.  I could have achieved the same result using <code>stmt.close()</code>.  The other
+important thing is to add a tag when we prepare the statement, so it can be retrieved later from the cache.  Getting the
+statement back is done with the same <code>statement()</code> method of the <code>Connection</code>, but in this case, we don&#39;t need
+to provide any SQL, as shown in the snippet below.  However, passing both the SQL and the tag works for both the first
+time the SQL is executed statement and all the subsequent executions.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">...AND AGAIN Getting </span><span class="si">{MAX_ROWS}</span><span class="s"> customers:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="n">statement</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">).</span><span class="n">tag</span><span class="p">(</span><span class="s">&#34;customer list&#34;</span><span class="p">).</span><span class="n">build</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">query_mr</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">stmt</span><span class="p">,</span><span class="w"> </span><span class="no">MAX_ROWS</span><span class="p">)</span><span class="o">?</span><span class="p">;</span></span></span></code></pre></div>
+</div>
+<p>
+As you can see, there are several options for processing the query results, but I am going to stick with the first one I
+used and put it in a function to simplify reuse.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">query_mr</span><span class="p">(</span><span class="n">stmt</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">Statement</span><span class="p">,</span><span class="w"> </span><span class="n">n_rows</span>: <span class="kt">usize</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="n">oracle</span>::<span class="n">Error</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="p">.</span><span class="n">take</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">id</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">email</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">fullname</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{id}</span><span class="s">: </span><span class="si">{fullname}</span><span class="s"> - </span><span class="si">{email}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Running the code, you will get <code>MAX_ROWS</code> customers three times using the same statement and different query methods.
+Cool!</p>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-4">
+<h4 id="headline-16">
+Using  bind-by-name variables
+</h4>
+<div id="outline-text-headline-16" class="outline-text-4">
+<p>Some of those interactions with the data that we repeat over and over are slightly different from one another.  When I
+want to fetch the product with a given PRODUCT_ID, as I did in the section about the single row query, the SQL statement
+was the same, but I could replace the binding variable with a different value.</p>
+<p>
+This is what I have to do when we want to repeat a similar interaction with different parameters.  I will reuse the
+statement and pass the values to execute the query.  But we can do better and give meaningful names to each binding
+variable.  That way, we can provide pairs (name, value) in any order, making our query code easier to read and
+understand.</p>
+<p>
+For example, I might want to retrieve information about the status of any orders processed by a given STORE_ID for a
+given CUSTOMER_ID.  I could achieve this with the following snippet.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">sql_refunded_store_customer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SELECT order_id, order_tms </span><span class="se">\</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">                                     FROM co.orders </span><span class="se">\</span><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">                                     WHERE order_status = &#39;REFUNDED&#39; AND store_id = :store AND customer_id = :customer&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Customer orders refunded in store 1 for customer 99&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">statement</span><span class="p">(</span><span class="n">sql_refunded_store_customer</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">tag</span><span class="p">(</span><span class="s">&#34;refunds&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">.</span><span class="n">build</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="n">query_named</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[(</span><span class="s">&#34;customer&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">99</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s">&#34;store&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)])</span><span class="o">?</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get_as</span>::<span class="o">&lt;</span><span class="p">(</span><span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="n">Timestamp</span><span class="p">)</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{order_id}</span><span class="s"> - </span><span class="si">{timestamp}</span><span class="s">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
+</div>
+<p>
+Run it and get a single row that matches the criteria, although there could have been more.  May the data be with you!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-2">
+<h2 id="headline-17">
+SUMMARY
+</h2>
+<div id="outline-text-headline-17" class="outline-text-2">
+<p>In this first article on using Oracle AI db26ai from Rust with the <code class="verbatim">oracle</code> crate, I have started by explaining how to
+set up an environment from scratch to test your code with an instance of the database.  I have spun up the Oracle AI
+db26ai with development data, making the examples reproducible in your development environment.</p>
+<p>
+I have also explored using actual Rust code, several ways to perform queries using the crate, extract the data from each
+row, and reuse your work even with different parameters.  You can find the code of this article and other related ones
+in this <a href="https://github.com/jdortiz/oracle-from-rust">repo</a>.</p>
+<p>
+In the second part of this article, I will cover using DML, DDL, privileged connections, and even vector search.  Don&#39;t
+miss that part!</p>
+<p>
+Stay curious. Hack your code. See you next time!</p>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-2">
+<h2 id="headline-18">
+Footnotes
+</h2>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator"/>
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p>No, it isn&#39;t complaining about the dots per inch of your monitor. 😁</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-01-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate" data-hashtags="rust,db"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/db/">Db</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/rust_unit_testing_basic_http_srvr/" class="prev" rel="prev" title="Rust unit testing: basic HTTP testing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: basic HTTP testing</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.152.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+</html>

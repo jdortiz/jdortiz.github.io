@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Db - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
+        <link>https://jorgeortiz.dev/tags/db/</link>
+        <description>Db - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Fri, 16 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/db/" rel="self" type="application/rss+xml" /><item>
+    <title>Using Oracle db26ai from Rust with the oracle crate</title>
+    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
+    <pubDate>Fri, 16 Jan 2026 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+Over the years, we have witnessed computer programs become more ambitious in their use of data, making it more useful to
+us.  Thus, the programs of the 1950s to the 1980s were mostly focused on computing, on solving mathematical or
+algorithmic problems that were hard to solve manually due to the complexity of the calculations.  Then, from the 80s to
+the 2000s, with database software that could pull its weight, the focus shifted to storing, managing, and exploiting
+data through analytical queries.  Dealing with customers, orders, products, invoices, and any other type of structured
+data became accessible to any application.  The data could be handled reliably, ensuring integrity, consistency,
+security, and availability. And performant when used properly, without worrying about low-level details.</p>]]></description>
+</item>
+</channel>
+</rss>

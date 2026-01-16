@@ -3,7 +3,24 @@
         <title>All Posts - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/posts/</link>
         <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Mon, 19 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Using Oracle db26ai from Rust with the oracle crate</title>
+    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
+    <pubDate>Fri, 16 Jan 2026 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><p>
+Over the years, we have witnessed computer programs become more ambitious in their use of data, making it more useful to
+us.  Thus, the programs of the 1950s to the 1980s were mostly focused on computing, on solving mathematical or
+algorithmic problems that were hard to solve manually due to the complexity of the calculations.  Then, from the 80s to
+the 2000s, with database software that could pull its weight, the focus shifted to storing, managing, and exploiting
+data through analytical queries.  Dealing with customers, orders, products, invoices, and any other type of structured
+data became accessible to any application.  The data could be handled reliably, ensuring integrity, consistency,
+security, and availability. And performant when used properly, without worrying about low-level details.</p>]]></description>
+</item>
+<item>
     <title>Rust unit testing: basic HTTP testing</title>
     <link>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</link>
     <pubDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</pubDate>
@@ -169,23 +186,6 @@ the checklists.</p>
 This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build
 automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
 helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing test doubles: fakes</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
-    <pubDate>Mon, 03 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we
-can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,
-and mocks.  Only one type was left: fakes.  Let&#39;s look at those now.</p>
-<p>
-Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is
-slow or complicated.  Ciphering messages is usually an expensive task, and we don&#39;t want our tests to take longer than they
-should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.</p>]]></description>
 </item>
 </channel>
 </rss>

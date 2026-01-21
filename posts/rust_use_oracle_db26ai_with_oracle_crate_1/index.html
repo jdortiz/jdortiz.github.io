@@ -22,7 +22,7 @@
   <meta name="twitter:title" content="Using Oracle db26ai from Rust with the oracle crate">
   <meta name="twitter:description" content="Ferris using the keyboard to work with data">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/"
-        },"genre": "posts","keywords": "rust, db","wordcount":  2657 ,
+        },"genre": "posts","keywords": "rust, db","wordcount":  2786 ,
         "url": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/","datePublished": "2026-01-16T00:00:00+00:00","dateModified": "2026-01-16T00:00:00+00:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -107,8 +107,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Using Oracle db26ai from Rust with the oracle crate</h1><h2 class="single-subtitle">Part 1: Environment setup and queries</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-01-16">2026-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2657 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-01-16">2026-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2786 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -144,34 +144,52 @@
 </ul>
 </li>
 <li><a href="#headline-9">First &#34;contact&#34; with the Oracle DB instance</a>
-</li>
-<li><a href="#headline-10">Querying data from Rust</a>
 <ul>
-<li><a href="#headline-11">Direct queries</a>
-<ul>
-<li><a href="#headline-12">Multi-row query</a>
+<li><a href="#headline-10">Connection</a>
 </li>
-<li><a href="#headline-13">Single row query</a>
+<li><a href="#headline-11">Ping</a>
+</li>
+<li><a href="#headline-12">Simplest statement</a>
 </li>
 </ul>
 </li>
-<li><a href="#headline-14">Reusing queries</a>
+<li><a href="#headline-13">Querying data from Rust</a>
 <ul>
-<li><a href="#headline-15">Reusing the prepared statement</a>
+<li><a href="#headline-14">Direct queries</a>
+<ul>
+<li><a href="#headline-15">Multi-row query</a>
 </li>
-<li><a href="#headline-16">Using  bind-by-name variables</a>
+<li><a href="#headline-16">Single row query</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-17">Reusing queries</a>
+<ul>
+<li><a href="#headline-18">Reusing the prepared statement</a>
+</li>
+<li><a href="#headline-19">Using  bind-by-name variables</a>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#headline-17">SUMMARY</a>
+<li><a href="#headline-20">Summary</a>
 </li>
-<li><a href="#headline-18">Footnotes</a>
+<li><a href="#headline-21">Footnotes</a>
 </li>
 </ul>
 </nav></div>
             </div><div class="content" id="content">
+<blockquote>
+<p>WARNING:</p>
+<p>
+This article shares many parts and its structure with the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, because I
+wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what
+they can offer to you.</p>
+<p>
+If you have already set up your database instance using the other article, you are good to go.  Jump straight to the
+&#34;First &#39;contact&#39; with the Oracle DB instance&#34; section.</p>
+</blockquote>
 <p>
 Over the years, we have witnessed computer programs become more ambitious in their use of data, making it more useful to
 us.  Thus, the programs of the 1950s to the 1980s were mostly focused on computing, on solving mathematical or
@@ -213,7 +231,8 @@ An Oracle DB instance
 <div id="outline-text-headline-2" class="outline-text-3">
 <p>The whole purpose of this article is to interact with an Oracle database, to query, create, update, and modify it, so we
 will need to have access to an instance.  I recommend using a container because we will add a schema and some data.  If
-you spin up an instance of the <a href="https://container-registry.oracle.com/ords/ocr/ba/database/free">Oracle AI Database 26ai Free Container</a>, it will start in a clean state, and you can
+you spin up an instance of the [[<a href="https://oaim.short.gy/db26ai-rust-drivers">https://oaim.short.gy/db26ai-rust-drivers</a>
+][Oracle AI Database 26ai Free Container]], it will start in a clean state, and you can
 discard the data after using all the code in this article.  I have already explained how to run Oracle AI db26ai in a
 container in <a href="/posts/running_containers_with_colima/">this other article</a>, in case you haven&#39;t done so yet.</p>
 </div>
@@ -303,7 +322,7 @@ Let&#39;s get some data
 </h3>
 <div id="outline-text-headline-7" class="outline-text-3">
 <p>In order to run the script that creates the database, I will use SQLcl from the command line, connecting again to the
-database as SYS, but this time targeting the pluggable database instead of the container one.</p>
+database as SYS, but this time targeting the pluggable database rather than the container one.</p>
 <div class="src src-shell">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">  sql sys@localhost:1521/FREEPDB1 as sysdba @co_install.sql</span></span></code></pre></div>
 </div>
@@ -378,8 +397,12 @@ I will also add the crates <code class="verbatim">oracle</code>, which we are te
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">   cargo add oracle
 </span></span><span class="line"><span class="cl">   cargo add anyhow</span></span></code></pre></div>
 </div>
-<p>
-I will start by establishing a connection to the database and pinging it.  <code>Connection</code> provides several methods for
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+Connection
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>I will start by establishing a connection to the database and pinging it.  <code>Connection</code> provides several methods for
 configuring its parameters.  The ping is totally unnecessary because the connection has just been established, but it
 is an easy way to issue our first command.</p>
 <div class="src src-rust">
@@ -389,16 +412,38 @@ is an easy way to issue our first command.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="kd">let</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Connection</span>::<span class="n">connect</span><span class="p">(</span><span class="s">&#34;co&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;co&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;localhost:1521/FREEPDB1&#34;</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="n">ping</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Connected to the database.&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span></span></span></code></pre></div>
 </div>
+<blockquote>
+<p>WARNING:</p>
+<p>
+The connection data is hard-coded in this example.  DO NOT do this in real software!  Instead, get those values from the
+environment.</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+Ping
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<p>And I would like to send the simplest command before closing the session: a ping.  It shouldn&#39;t fail, because the
+connection has just been established.</p>
+<div class="src src-rust">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="n">connection</span><span class="p">.</span><span class="n">ping</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Connected to the database.&#34;</span><span class="p">);</span></span></span></code></pre></div>
+</div>
 <p>This should compile and run.  But if you get any &#34;DPI Error&#34;<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>, double-check your <code class="verbatim">DYLD_LIBRARY_PATH</code> before you
 move on.</p>
-<p>
-It would be much better to send a real statement to the database and receive a reply. Let&#39;s try that.</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+Simplest statement
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<p>It would be much better to send a real statement to the database and receive a reply. Let&#39;s try that.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="n">query_row</span><span class="p">(</span><span class="s">&#34;SELECT &#39;Hello Oracle!&#39; FROM dual&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">[])</span><span class="o">?</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">greeting</span>: <span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="p">;</span><span class="w">
@@ -407,29 +452,31 @@ It would be much better to send a real statement to the database and receive a r
 <p>I don&#39;t know about you, but this makes me feel like Amy Adams in &#34;Arrival&#34;, when she can finally talk to the aliens. 🎉</p>
 </div>
 </div>
-<div id="outline-container-headline-10" class="outline-2">
-<h2 id="headline-10">
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-2">
+<h2 id="headline-13">
 Querying data from Rust
 </h2>
-<div id="outline-text-headline-10" class="outline-text-2">
-<div id="outline-container-headline-11" class="outline-3">
-<h3 id="headline-11">
+<div id="outline-text-headline-13" class="outline-text-2">
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
 Direct queries
 </h3>
-<div id="outline-text-headline-11" class="outline-text-3">
+<div id="outline-text-headline-14" class="outline-text-3">
 <p>The <code>Connection</code> instance provides simple methods for executing queries directly.  The simplest one is <code>query()</code>, which
 takes a string containing the SQL select statement and and a reference to an array with the arguments of the query, if any.
  Let&#39;s
 go step by step.</p>
-<div id="outline-container-headline-12" class="outline-4">
-<h4 id="headline-12">
+<div id="outline-container-headline-15" class="outline-4">
+<h4 id="headline-15">
 Multi-row query
 </h4>
-<div id="outline-text-headline-12" class="outline-text-4">
+<div id="outline-text-headline-15" class="outline-text-4">
 <p>I will start by using a select statement without any bind variables.  The <code>query()</code> method, if successful, returns a
 <code>ResultSet</code> containing <code>Row</code> instances.  <code>ResultSet</code> implements <code>Iterator</code>, so it can be used in a <code>for</code> expression
 to loop through the results or use its methods to restrict the number of items shown, among other things.  Then I can
-get the values of each column of a <code>Row</code> using its <code>get()</code> method.  It is important to specify the types for the
+get the values of each column of a <code>Row</code> using its <code>get()</code> method.  It is important to specify the types of the
 variables that will receive the values, so the <code>get()</code> method knows what to do.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="no">MAX_ROWS</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
@@ -451,11 +498,11 @@ variables that will receive the values, so the <code>get()</code> method knows w
 <p>Run this version, and you should get a listing with <code>MAX_ROWS</code> customers.  Easy-peasy!</p>
 </div>
 </div>
-<div id="outline-container-headline-13" class="outline-4">
-<h4 id="headline-13">
+<div id="outline-container-headline-16" class="outline-4">
+<h4 id="headline-16">
 Single row query
 </h4>
-<div id="outline-text-headline-13" class="outline-text-4">
+<div id="outline-text-headline-16" class="outline-text-4">
 <p>If you have written a query that returns a single row, you can use another method of <code>Connection</code>.  That is the same
 method that I used to get a greeting from the database in the previous section.</p>
 <p>
@@ -477,18 +524,18 @@ tuple-destructuring assignment to access the column values.  Notice that the typ
 </div>
 </div>
 </div>
-<div id="outline-container-headline-14" class="outline-3">
-<h3 id="headline-14">
+<div id="outline-container-headline-17" class="outline-3">
+<h3 id="headline-17">
 Reusing queries
 </h3>
-<div id="outline-text-headline-14" class="outline-text-3">
+<div id="outline-text-headline-17" class="outline-text-3">
 <p>It is quite common in an application to repeatedly perform a set of operations.  This can be achieved by either running
 direct queries or by preparing statements and reusing them to save time and effort.</p>
-<div id="outline-container-headline-15" class="outline-4">
-<h4 id="headline-15">
+<div id="outline-container-headline-18" class="outline-4">
+<h4 id="headline-18">
 Reusing the prepared statement
 </h4>
-<div id="outline-text-headline-15" class="outline-text-4">
+<div id="outline-text-headline-18" class="outline-text-4">
 <p>The <code class="verbatim">oracle</code> crate uses the <code>statement()</code> method to produce a <code>StatementBuilder</code>, which starts with the provided SQL and
 can be used to tune the number of rows that can and will be fetched and to ask whether to reuse or ignore statements
 from the cache.</p>
@@ -549,19 +596,18 @@ Running the code, you will get <code>MAX_ROWS</code> customers three times using
 Cool!</p>
 </div>
 </div>
-<div id="outline-container-headline-16" class="outline-4">
-<h4 id="headline-16">
+<div id="outline-container-headline-19" class="outline-4">
+<h4 id="headline-19">
 Using  bind-by-name variables
 </h4>
-<div id="outline-text-headline-16" class="outline-text-4">
+<div id="outline-text-headline-19" class="outline-text-4">
 <p>Some of those interactions with the data that we repeat over and over are slightly different from one another.  When I
 want to fetch the product with a given PRODUCT_ID, as I did in the section about the single row query, the SQL statement
 was the same, but I could replace the binding variable with a different value.</p>
 <p>
 This is what I have to do when we want to repeat a similar interaction with different parameters.  I will reuse the
-statement and pass the values to execute the query.  But we can do better and give meaningful names to each binding
-variable.  That way, we can provide pairs (name, value) in any order, making our query code easier to read and
-understand.</p>
+statement and pass the values to execute the query.  But we can do better and give each binding variable a meaningful
+name.  That way, we can provide pairs (name, value) in any order, making our query code easier to read and understand.</p>
 <p>
 For example, I might want to retrieve information about the status of any orders processed by a given STORE_ID for a
 given CUSTOMER_ID.  I could achieve this with the following snippet.</p>
@@ -588,11 +634,11 @@ Run it and get a single row that matches the criteria, although there could have
 </div>
 </div>
 </div>
-<div id="outline-container-headline-17" class="outline-2">
-<h2 id="headline-17">
-SUMMARY
+<div id="outline-container-headline-20" class="outline-2">
+<h2 id="headline-20">
+Summary
 </h2>
-<div id="outline-text-headline-17" class="outline-text-2">
+<div id="outline-text-headline-20" class="outline-text-2">
 <p>In this first article on using Oracle AI db26ai from Rust with the <code class="verbatim">oracle</code> crate, I have started by explaining how to
 set up an environment from scratch to test your code with an instance of the database.  I have spun up the Oracle AI
 db26ai with development data, making the examples reproducible in your development environment.</p>
@@ -607,8 +653,8 @@ miss that part!</p>
 Stay curious. Hack your code. See you next time!</p>
 </div>
 </div>
-<div id="outline-container-headline-18" class="outline-2">
-<h2 id="headline-18">
+<div id="outline-container-headline-21" class="outline-2">
+<h2 id="headline-21">
 Footnotes
 </h2>
 </div>
@@ -644,7 +690,8 @@ Footnotes
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/rust_unit_testing_basic_http_srvr/" class="prev" rel="prev" title="Rust unit testing: basic HTTP testing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: basic HTTP testing</a></div>
+    <div class="post-nav"><a href="/posts/rust_unit_testing_basic_http_srvr/" class="prev" rel="prev" title="Rust unit testing: basic HTTP testing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: basic HTTP testing</a>
+            <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/" class="next" rel="next" title="Using Oracle db26ai from Rust with the sibyl crate">Using Oracle db26ai from Rust with the sibyl crate<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

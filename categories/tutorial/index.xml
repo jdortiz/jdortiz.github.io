@@ -3,7 +3,27 @@
         <title>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</title>
         <link>https://jorgeortiz.dev/categories/tutorial/</link>
         <description>Tutorial - Category - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Wed, 21 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Fri, 23 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/categories/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>Using Oracle db26ai from Rust with the oracle crate</title>
+    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</link>
+    <pubDate>Fri, 23 Jan 2026 00:00:00 &#43;0000</pubDate>
+    <author>Jorge Ortiz-Fuentes</author>
+    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/header-image.jpg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>WARNING:</p>
+<p>
+This article closely mirrors the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, as both are designed to be
+self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to
+you.</p>
+</blockquote>
+<p>
+In this article, I will use the <a href="https://crates.io/crates/oracle">oracle</a> crate to modify data, create and drop new tables and indexes, and perform a vector
+search from Rust code.  I have <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">already explained how to use it to make queries in different ways</a> and how to
+easily set up an environment to work with it.  If you want to read that first, I will wait for you here.</p>]]></description>
+</item>
+<item>
     <title>Using Oracle db26ai from Rust with the sibyl crate</title>
     <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</link>
     <pubDate>Wed, 21 Jan 2026 00:00:00 &#43;0000</pubDate>
@@ -169,24 +189,6 @@ the checklists.</p>
 This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build
 automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a good and
 helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
-</item>
-<item>
-    <title>Full-stack application in Java: Quick start</title>
-    <link>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</link>
-    <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.png" referrerpolicy="no-referrer">
-            </div><p>
-In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I
-wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to
-connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify
-the checklists.</p>
-<p>
-This article is the first one describing what I am doing in Java + Spring.  I will cover project creation and structure,
-and build automation.  We won&#39;t have much of the application implemented by the end of this article, but it should be a
-good and helpful start. So buckle up and let&#39;s get cracking!</p>]]></description>
 </item>
 </channel>
 </rss>

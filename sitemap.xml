@@ -2,16 +2,17 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://jorgeortiz.dev/</loc><lastmod>2026-01-26T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2026-01-26T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/categories/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/db/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/rust/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/tags/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/categories/tutorial/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</loc><lastmod>2026-01-23T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/categories/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/db/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/rust/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/tags/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/categories/tutorial/</loc><lastmod>2026-01-27T00:00:00&#43;00:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</loc><lastmod>2026-01-23T14:35:56&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</loc><lastmod>2026-01-21T13:51:00&#43;01:00</lastmod></url><url>
-            <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</loc><lastmod>2026-01-21T12:58:47&#43;01:00</lastmod></url><url>
+            <loc>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</loc><lastmod>2026-01-23T14:35:56&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</loc><lastmod>2025-12-18T11:10:50&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/tags/test/</loc><lastmod>2025-12-19T16:34:19&#43;01:00</lastmod></url><url>
             <loc>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</loc><lastmod>2025-12-18T11:10:10&#43;01:00</lastmod></url><url>

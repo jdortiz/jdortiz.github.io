@@ -4,22 +4,22 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Using Oracle db26ai from Rust with the oracle crate - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris using the keyboard to work with data"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">
+        <title>Using Oracle db26ai from Rust with the oracle crate (1) - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris using the keyboard to work with data"><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">
   <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Using Oracle db26ai from Rust with the oracle crate">
+  <meta property="og:title" content="Using Oracle db26ai from Rust with the oracle crate (1)">
   <meta property="og:description" content="Ferris using the keyboard to work with data">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-01-16T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-01-23T14:35:56+01:00">
+    <meta property="article:modified_time" content="2026-02-05T09:39:20+01:00">
     <meta property="article:tag" content="Rust">
     <meta property="article:tag" content="Db">
     <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Using Oracle db26ai from Rust with the oracle crate">
+  <meta name="twitter:title" content="Using Oracle db26ai from Rust with the oracle crate (1)">
   <meta name="twitter:description" content="Ferris using the keyboard to work with data">
 <meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
 <meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -28,13 +28,13 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Using Oracle db26ai from Rust with the oracle crate",
+        "headline": "Using Oracle db26ai from Rust with the oracle crate (1)",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/"
-        },"genre": "posts","keywords": "rust, db","wordcount":  2785 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/","datePublished": "2026-01-16T00:00:00+00:00","dateModified": "2026-01-23T14:35:56+01:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
+        },"genre": "posts","keywords": "rust, db","wordcount":  2795 ,
+        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_use_oracle_db26ai_with_oracle_crate_1\/","datePublished": "2026-01-16T00:00:00+00:00","dateModified": "2026-02-05T09:39:20+01:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -105,9 +105,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Using Oracle db26ai from Rust with the oracle crate</h1><h2 class="single-subtitle">Part 1: Environment setup and queries</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Using Oracle db26ai from Rust with the oracle crate (1)</h1><h2 class="single-subtitle">Part 1: Environment setup and queries</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-01-16">2026-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2785 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-01-16">2026-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2795 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -217,6 +217,12 @@ will try to explain the most common cases and some less common ones in this arti
 <p>
 I plan to make no assumptions about your development environment, so I will share how to set it up using some <em>&#34;real&#34;</em>
 data from the database we can use for the examples.</p>
+<p>
+Would you prefer to watch the video? Here it is:
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/GCgvGHIEYtY?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+</p>
 <p>
 Let&#39;s get cracking!</p>
 <div id="outline-container-headline-1" class="outline-2">
@@ -672,13 +678,13 @@ Footnotes
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2026-01-23&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/58140d21690f55aea5c627294ab2e41ecc9662e0" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 58140d21690f55aea5c627294ab2e41ecc9662e0: Add second article on using Oracle from Rust with the oracle crate">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>58140d2</a></span>
+                <span>Updated on 2026-02-05&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/bb5970f6bd79bb3475f700c2fe7923b774389587" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) bb5970f6bd79bb3475f700c2fe7923b774389587: Fix link that didn&#39;t render properly">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bb5970f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate" data-hashtags="rust,db"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate (1)" data-hashtags="rust,db"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/" data-title="Using Oracle db26ai from Rust with the oracle crate (1)" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -691,7 +697,7 @@ Footnotes
     </div>
 
     <div class="post-nav"><a href="/posts/rust_unit_testing_basic_http_srvr/" class="prev" rel="prev" title="Rust unit testing: basic HTTP testing"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: basic HTTP testing</a>
-            <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/" class="next" rel="next" title="Using Oracle db26ai from Rust with the sibyl crate">Using Oracle db26ai from Rust with the sibyl crate<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+            <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/" class="next" rel="next" title="Using Oracle db26ai from Rust with the sibyl crate (1)">Using Oracle db26ai from Rust with the sibyl crate (1)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

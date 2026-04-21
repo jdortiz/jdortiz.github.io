@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jorgeortiz.dev/</loc>
+    <lastmod>2026-04-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jorgeortiz.dev/talks/</loc>
+    <lastmod>2026-04-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://jorgeortiz.dev/categories/</loc>
     <lastmod>2026-02-10T18:14:30+01:00</lastmod>
   </url><url>
     <loc>https://jorgeortiz.dev/tags/db/</loc>
-    <lastmod>2026-02-10T18:14:30+01:00</lastmod>
-  </url><url>
-    <loc>https://jorgeortiz.dev/</loc>
     <lastmod>2026-02-10T18:14:30+01:00</lastmod>
   </url><url>
     <loc>https://jorgeortiz.dev/posts/</loc>

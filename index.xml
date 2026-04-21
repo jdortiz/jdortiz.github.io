@@ -3,7 +3,7 @@
     <title>Jorge Ortiz-Fuentes&#39; DevBites</title>
     <link>https://jorgeortiz.dev/</link>
     <description>Sharing things I learned mostly about software development</description>
-    <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate>
+    <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright><lastBuildDate>Fri, 17 Apr 2026 00:00:00 &#43;0000</lastBuildDate>
     <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
     <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>

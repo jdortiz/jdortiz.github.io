@@ -1,196 +1,216 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>All Posts - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/posts/</link>
-        <description>All Posts | Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</link>
-    <pubDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article closely mirrors the one about <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">Using Oracle from Rust with <code class="verbatim">oracle</code></a>, as both are designed to be
-self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to
-you.</p>
-</blockquote>
-<p>
-In this article, I will use the <a href="https://crates.io/crates/sibyl">sibyl</a> crate to modify data, create and drop new tables and indexes, and perform a vector
-search from Rust code.  I have <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">already explained how to use it to make queries in different ways</a> and how to easily set
-up an environment to work with it.  If you want to read that first, I will wait for you here.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the oracle crate (2)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</link>
-    <pubDate>Fri, 23 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article closely mirrors the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, as both are designed to be
-self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to
-you.</p>
-</blockquote>
-<p>
-In this article, I will use the <a href="https://crates.io/crates/oracle">oracle</a> crate to modify data, create and drop new tables and indexes, and perform a vector
-search from Rust code.  I have <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">already explained how to use it to make queries in different ways</a> and how to
-easily set up an environment to work with it.  If you want to read that first, I will wait for you here.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the sibyl crate (1)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</link>
-    <pubDate>Wed, 21 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article shares many parts and its structure with the one about <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">Using Oracle from Rust with <code class="verbatim">oracle</code></a>, because I
-wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what they
-can offer to you.</p>
-<p>
-If you have already set up your database instance using the other article, you are good to go.  Jump straight to the
-&#34;First &#39;contact&#39; with the Oracle DB instance&#34; section.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the oracle crate (1)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
-    <pubDate>Fri, 16 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article shares many parts and its structure with the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, because I
-wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what
-they can offer to you.</p>
-<p>
-If you have already set up your database instance using the other article, you are good to go.  Jump straight to the
-&#34;First &#39;contact&#39; with the Oracle DB instance&#34; section.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: basic HTTP testing</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</link>
-    <pubDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In previous articles in this series, I have highlighted the importance of unit testing your code.  However, I
-must reckon that most of the examples I have used were mostly isolated.  There weren&#39;t many connections between one
-scenario and the next, and, admittedly, not a single application that integrated all the scenarios as a whole.</p>
-<p>
-I hope this has fulfilled the purpose of sharing knowledge about unit testing in Rust.  But one of the first challenges
-I had to overcome once I had learned the very basics of writing automated tests was integrating them into a real
-codebase.  But it is hard to walk this path alone, since the first (real) tests are also the hardest.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: file writing</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</link>
-    <pubDate>Thu, 11 Dec 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-This is the third and last article on file I/O testing, and yet again, the focus is on the technique for injecting a
-dependency so we can use it in the tests.  In this article, I will cover a writing scenario that requires us to access the
-test double after invoking our code to check the written contents.</p>
-<div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-Writing to a file
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>If you are just a regular villain, your henchmen are close to you.  You have recruited them personally, know what they
-can do, and call each one of them by their name…  Well, not really, because you don&#39;t care about their names.  But you
-don&#39;t have any issues letting them know what you want from them, because they are always around you.  Those times are
-long gone and deeply missed.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: buffered file reading</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</link>
-    <pubDate>Tue, 09 Dec 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In the previous article, I explained how to use a test double to replace a <code>File</code> instance and control the behavior
-required by a function that reads from it.  With the test double in place, I was able not only to return what I needed
-for the scenarios where I needed reading, but also to produce errors that allowed me <a href="/posts/rust_unit_testing_not_so_happy_path/">to test the not-so-happy path</a>.</p>
-<p>
-I got some concerned comments pointing out that the test code wasn&#39;t reading, which was an essential part of what we
-were testing.  I agree that the test code isn&#39;t actually reading.  It isn&#39;t, and that is on purpose.  On the one hand,
-reading isn&#39;t an essential part of what we are testing.  On the contrary, <code>File</code> is a dependency of the
-<code>are_there_vulnerable_locations()</code> method, and, as with any other dependency, it can be replaced by a test double.  The
-code isn&#39;t making it easy to inject the dependency, because the <code>File</code> instance is created inside of the method –and as
-you may already know, every time you create an instance inside of your code, a kitten is killed<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>.  But I applied
-what I had already explained to replace dependencies using the namespace.  On the other hand, we gain additional
-benefits by using a test double.  I mentioned that performance is much better, but you can only notice the difference
-with a large test suite.  However, it is also important that the test double can easily reproduce <code>File</code> behaviors that
-would require some work when you are actually interacting with the filesystem.  For example, opening the file for
-reading successfully and then failing to read from it right away.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: file reading</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</link>
-    <pubDate>Mon, 24 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-So far, I have covered several scenarios. Yet all the interactions in those scenarios occurred in memory: one instance
-of a type talking to another instance of another type. However, in the real world, our applications do more than just
-invoke functions or methods, and we would like to test those use cases.</p>
-<p>
-One of the most common things that applications do and that deserves testing is reading from and writing to files.
-Files are among the most frequently used input and output mechanisms in many applications, and it is key that they behave
-as expected when using files.</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: mocking library</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</link>
-    <pubDate>Mon, 17 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-In earlier articles about test doubles, I showed how to create them without using any libraries.  While I believe that
-is the best way to understand how they work, how they can help, and how to use them, it is far from being a convenient
-way of writing your tests.</p>
-<p>
-In this article, I will explain how to use a mocking library and replace all the test doubles we wrote with others that
-are produced by the library.  Prepare for a more streamlined version of the code that achieves the same goals with less
-effort!</p>]]></description>
-</item>
-<item>
-    <title>Rust unit testing: assertion libraries</title>
-    <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
-    <pubDate>Fri, 14 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and
-assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&#39;ve written in
-those tests used the <code>assert_eq!()</code> macro.  Sometimes, they were a very obvious way to state what was expected and the
-actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is
-awkward or doesn&#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.</p>]]></description>
-</item>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Jorge Ortiz-Fuentes&#39; DevBites</title>
+    <link>https://jorgeortiz.dev/posts/</link>
+    <description>Recent content in Posts on Jorge Ortiz-Fuentes&#39; DevBites</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright>
+    <lastBuildDate>Tue, 10 Feb 2026 18:14:30 +0100</lastBuildDate>
+    <atom:link href="https://jorgeortiz.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article closely mirrors the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;oracle&lt;/code&gt;&lt;/a&gt;, as both are designed to be&#xA;self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to&#xA;you.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;In this article, I will use the &lt;a href=&#34;https://crates.io/crates/sibyl&#34;&gt;sibyl&lt;/a&gt; crate to modify data, create and drop new tables and indexes, and perform a vector&#xA;search from Rust code.  I have &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;already explained how to use it to make queries in different ways&lt;/a&gt; and how to easily set&#xA;up an environment to work with it.  If you want to read that first, I will wait for you here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the oracle crate (2)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</link>
+      <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article closely mirrors the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;sibyl&lt;/code&gt;&lt;/a&gt;, as both are designed to be&#xA;self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to&#xA;you.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;In this article, I will use the &lt;a href=&#34;https://crates.io/crates/oracle&#34;&gt;oracle&lt;/a&gt; crate to modify data, create and drop new tables and indexes, and perform a vector&#xA;search from Rust code.  I have &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;already explained how to use it to make queries in different ways&lt;/a&gt; and how to&#xA;easily set up an environment to work with it.  If you want to read that first, I will wait for you here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the sibyl crate (1)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</link>
+      <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article shares many parts and its structure with the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;oracle&lt;/code&gt;&lt;/a&gt;, because I&#xA;wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what they&#xA;can offer to you.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;If you have already set up your database instance using the other article, you are good to go.  Jump straight to the&#xA;&amp;#34;First &amp;#39;contact&amp;#39; with the Oracle DB instance&amp;#34; section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the oracle crate (1)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
+      <pubDate>Fri, 16 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article shares many parts and its structure with the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;sibyl&lt;/code&gt;&lt;/a&gt;, because I&#xA;wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what&#xA;they can offer to you.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;If you have already set up your database instance using the other article, you are good to go.  Jump straight to the&#xA;&amp;#34;First &amp;#39;contact&amp;#39; with the Oracle DB instance&amp;#34; section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: basic HTTP testing</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</link>
+      <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_basic_http_srvr/</guid>
+      <description>&lt;p&gt;&#xA;In previous articles in this series, I have highlighted the importance of unit testing your code.  However, I&#xA;must reckon that most of the examples I have used were mostly isolated.  There weren&amp;#39;t many connections between one&#xA;scenario and the next, and, admittedly, not a single application that integrated all the scenarios as a whole.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;I hope this has fulfilled the purpose of sharing knowledge about unit testing in Rust.  But one of the first challenges&#xA;I had to overcome once I had learned the very basics of writing automated tests was integrating them into a real&#xA;codebase.  But it is hard to walk this path alone, since the first (real) tests are also the hardest.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: file writing</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</link>
+      <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_writing/</guid>
+      <description>&lt;p&gt;&#xA;This is the third and last article on file I/O testing, and yet again, the focus is on the technique for injecting a&#xA;dependency so we can use it in the tests.  In this article, I will cover a writing scenario that requires us to access the&#xA;test double after invoking our code to check the written contents.&lt;/p&gt;&#xA;&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;Writing to a file&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;If you are just a regular villain, your henchmen are close to you.  You have recruited them personally, know what they&#xA;can do, and call each one of them by their name…  Well, not really, because you don&amp;#39;t care about their names.  But you&#xA;don&amp;#39;t have any issues letting them know what you want from them, because they are always around you.  Those times are&#xA;long gone and deeply missed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: buffered file reading</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</link>
+      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_buf_reading/</guid>
+      <description>&lt;p&gt;&#xA;In the previous article, I explained how to use a test double to replace a &lt;code&gt;File&lt;/code&gt; instance and control the behavior&#xA;required by a function that reads from it.  With the test double in place, I was able not only to return what I needed&#xA;for the scenarios where I needed reading, but also to produce errors that allowed me &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/&#34;&gt;to test the not-so-happy path&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;I got some concerned comments pointing out that the test code wasn&amp;#39;t reading, which was an essential part of what we&#xA;were testing.  I agree that the test code isn&amp;#39;t actually reading.  It isn&amp;#39;t, and that is on purpose.  On the one hand,&#xA;reading isn&amp;#39;t an essential part of what we are testing.  On the contrary, &lt;code&gt;File&lt;/code&gt; is a dependency of the&#xA;&lt;code&gt;are_there_vulnerable_locations()&lt;/code&gt; method, and, as with any other dependency, it can be replaced by a test double.  The&#xA;code isn&amp;#39;t making it easy to inject the dependency, because the &lt;code&gt;File&lt;/code&gt; instance is created inside of the method –and as&#xA;you may already know, every time you create an instance inside of your code, a kitten is killed&lt;sup class=&#34;footnote-reference&#34;&gt;&lt;a id=&#34;footnote-reference-2&#34; href=&#34;#footnote-2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.  But I applied&#xA;what I had already explained to replace dependencies using the namespace.  On the other hand, we gain additional&#xA;benefits by using a test double.  I mentioned that performance is much better, but you can only notice the difference&#xA;with a large test suite.  However, it is also important that the test double can easily reproduce &lt;code&gt;File&lt;/code&gt; behaviors that&#xA;would require some work when you are actually interacting with the filesystem.  For example, opening the file for&#xA;reading successfully and then failing to read from it right away.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: file reading</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</link>
+      <pubDate>Mon, 24 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/</guid>
+      <description>&lt;p&gt;&#xA;So far, I have covered several scenarios. Yet all the interactions in those scenarios occurred in memory: one instance&#xA;of a type talking to another instance of another type. However, in the real world, our applications do more than just&#xA;invoke functions or methods, and we would like to test those use cases.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;One of the most common things that applications do and that deserves testing is reading from and writing to files.&#xA;Files are among the most frequently used input and output mechanisms in many applications, and it is key that they behave&#xA;as expected when using files.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: mocking library</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</link>
+      <pubDate>Mon, 17 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/</guid>
+      <description>&lt;p&gt;&#xA;In earlier articles about test doubles, I showed how to create them without using any libraries.  While I believe that&#xA;is the best way to understand how they work, how they can help, and how to use them, it is far from being a convenient&#xA;way of writing your tests.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;In this article, I will explain how to use a mocking library and replace all the test doubles we wrote with others that&#xA;are produced by the library.  Prepare for a more streamlined version of the code that achieves the same goals with less&#xA;effort!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: assertion libraries</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</link>
+      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/</guid>
+      <description>&lt;p&gt;&#xA;At the beginning of this series, I explained how to write a test by decomposing it into three parts: arrange, act, and&#xA;assert.  Since then, we have written several unit tests using that structure.  Most of the assertions we&amp;#39;ve written in&#xA;those tests used the &lt;code&gt;assert_eq!()&lt;/code&gt; macro.  Sometimes, they were a very obvious way to state what was expected and the&#xA;actual value that was produced.  It’s clear and works well for simple checks. However, in other cases, the syntax is&#xA;awkward or doesn&amp;#39;t clearly convey what we mean, requiring extra steps or missing necessary functionality.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Full-stack application in Go: Quick start</title>
+      <link>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/full_stack_go_quick_start/</guid>
+      <description>&lt;p&gt;&#xA;In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I&#xA;wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to&#xA;connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify&#xA;the checklists.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article is the first one describing what I am doing in Go.  I will cover project creation and structure, and build&#xA;automation.  We won&amp;#39;t have much of the application implemented by the end of this article, but it should be a good and&#xA;helpful start. So buckle up and let&amp;#39;s get cracking!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Full-stack application in Java: Quick start</title>
+      <link>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/full_stack_java_quick_start/</guid>
+      <description>&lt;p&gt;&#xA;In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I&#xA;wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to&#xA;connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify&#xA;the checklists.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article is the first one describing what I am doing in Java + Spring.  I will cover project creation and structure,&#xA;and build automation.  We won&amp;#39;t have much of the application implemented by the end of this article, but it should be a&#xA;good and helpful start. So buckle up and let&amp;#39;s get cracking!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Full-stack application in Rust: Quick start</title>
+      <link>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/full_stack_rust_quick_start/</guid>
+      <description>&lt;p&gt;&#xA;In the article introducing this series, I shared that I wanted to explore full-stack app development.  In particular, I&#xA;wanted to develop a full-stack application that helps people manage their checklists.  Users will use a browser to&#xA;connect to the front-end server, which, in turn, will use the API provided by the back-end server to access and modify&#xA;the checklists.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article is the first one describing what I am doing in Rust.  I will cover project creation and structure, as well as build&#xA;automation.  We won&amp;#39;t have much of the application implemented by the end of this article, but it should be a good and&#xA;helpful start. So buckle up and let&amp;#39;s get cracking!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing test doubles: fakes</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</link>
+      <pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_fake/</guid>
+      <description>&lt;p&gt;&#xA;In my previous articles, I have been writing about test doubles.  I explained what they are and the different types we&#xA;can use.  I described some scenarios and wrote the test doubles that would help us test the code: dummies, stubs, spies,&#xA;and mocks.  Only one type was left: fakes.  Let&amp;#39;s look at those now.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Fakes are tests doubles that implement a simplified version of a task or computation.  They come in handy when the real thing is&#xA;slow or complicated.  Ciphering messages is usually an expensive task, and we don&amp;#39;t want our tests to take longer than they&#xA;should.  So, instead of performing the (real) encryption, we will have a fake that makes a simpler text manipulation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: mock test doubles</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</link>
+      <pubDate>Mon, 27 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_mock/</guid>
+      <description>&lt;p&gt;&#xA;This is the third article on test doubles.  So far, I have covered stubs –that are used to control the responses to&#xA;the methods of the type they double,– dummies –that fill &amp;#34;holes&amp;#34; that are required for some tests without any&#xA;functionality,– and spies –that remember the interactions with the type they double.  It is time to talk about the&#xA;&lt;em&gt;face of the band&lt;/em&gt;: mocks.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;For the price of a mock, you get everything that was included in a stub and a spy, plus some intelligence.  And I am not&#xA;talking about AI.  Mocks are a little smarter than stubs and spies, because they include the code to verify themselves.&#xA;All those ugly asserts that used the fields in the guts of the spies will be no longer necessary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: spy and dummy test doubles</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</link>
+      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_spy/</guid>
+      <description>&lt;p&gt;&#xA;In my last article, I explained what test doubles are and why we need them.  In this one, I am going to focus on two&#xA;different types of test doubles: &lt;strong&gt;the spy&lt;/strong&gt; and &lt;strong&gt;the dummy&lt;/strong&gt;.&lt;sup class=&#34;footnote-reference&#34;&gt;&lt;a id=&#34;footnote-reference-1&#34; href=&#34;#footnote-1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;A spy is a test double that remembers if its methods have been invoked and the arguments used with each invocation.  It&#xA;&lt;em&gt;spies&lt;/em&gt; on the activity of the caller instance.  A dummy does nothing, but it is required to create or use something&#xA;else.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: test doubles &amp; stubs</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/</link>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_doubles_stub/</guid>
+      <description>&lt;p&gt;&#xA;Unit testing is about writing tests for individual units (Duh!), most frequently these units are the types that we&#xA;define in our code, i.e., structs / enums / unions, or first-class functions.  But the types that we want to test&#xA;usually have dependencies on other types and we would like to test them in isolation without having to worry about the&#xA;details of those dependencies.  That&amp;#39;s why you need test doubles.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: add-ons</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</link>
+      <pubDate>Mon, 29 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_add_ons/</guid>
+      <description>&lt;p&gt;&#xA;In my last article, I wrote about some builtin features of the tools that come with our Rust setup.  They help you to&#xA;produce better documentation, have more control of the tests you run, and debug tests/code when needed.  The Rust&#xA;ecosystem is very rich and active and people with other needs have contributed with really useful tools.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Today, I will write about two tools that might come in handy for you sooner or latter.  There are many details in the&#xA;following paragraphs, so fasten your USB-C cable and get ready!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: builtin tools</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</link>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_tools_builtin/</guid>
+      <description>&lt;p&gt;&#xA;As many other modern languages, regarding testing, Rust comes with batteries included.  As you have seen in the previous&#xA;articles of this series, you don&amp;#39;t need to take any extra steps to be able to write and run unit tests for your code.&#xA;It is clear where you have to put them, how to run them, and even cargo has a subcommand for finding and running&#xA;them, and reporting the results.  Could we ask for more?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Full-Stack Apps</title>
+      <link>https://jorgeortiz.dev/posts/full_stack_apps/</link>
+      <pubDate>Tue, 16 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/full_stack_apps/</guid>
+      <description>&lt;p&gt;&#xA;I must confess.  For many years, I have tried to avoid front-end web development by all means.  I didn&amp;#39;t want to touch&#xA;it with a ten foot pole.  And the main reason was because I have never felt comfortable with having to combine HTML, CSS&#xA;and JavaScript with the nuances of each of the browsers to get the UI I wanted to produce.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;When it came to develop user interfaces for my applications, I have preferred to use well established APIs.  I started,&#xA;looong ago, writing some small Windows applications, moved to X Window first and then to GTK, and after a while focused&#xA;on mobile development.  Even at that stage, I jumped from PalmOS to Android and iOS, almost skipping webOS&lt;sup class=&#34;footnote-reference&#34;&gt;&lt;a id=&#34;footnote-reference-1&#34; href=&#34;#footnote-1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; because&#xA;of it being based on web development.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: asynchronous code</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</link>
+      <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_async_code/</guid>
+      <description>&lt;p&gt;&#xA;So far, we have only tested synchronous code.  I could postpone talking about asynchronous code, but I don&amp;#39;t want you to&#xA;&lt;em&gt;wait&lt;/em&gt; for it. 😄&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Asynchronous code, apart from being an inexhaustible source of dad jokes, can be painful to reason about its behavior&#xA;and &lt;a href=&#34;https://corrode.dev/blog/async/&#34;&gt;not always recommended&lt;/a&gt;.  We tend to think that, in a given scope, the lines above are executed before the lines&#xA;below.  It really takes experience and discipline to realize that some parts of the code can be executed at a later time&#xA;and that we may not have yet their results available.  This is important when we write our asynchronous code, but even&#xA;more when we debug it .&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: the not so happy path</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_not_so_happy_path/</guid>
+      <description>&lt;p&gt;&#xA;So far, we have chosen to test things that matched our expectations of how the code was supposed to work and how the&#xA;user and the environment were supposed to behave.  But we should also plan for scenarios where things don&amp;#39;t go as&#xA;expected, and still have our program react properly.  We should also test for these situations, and those tests are as&#xA;important as the ones that check the successful use cases.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: simplify your tests</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</link>
+      <pubDate>Tue, 15 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_simplify_tests/</guid>
+      <description>&lt;p&gt;&#xA;Now that we understand the building blocks for writing unit tests in Rust, you probably feel the urge to apply that&#xA;knowledge and fully cover your application with tests.  Don&amp;#39;t you?  Well, I would ask you to hold your horses and apply&#xA;it gradually. We still have a lot of ground to cover, but the next sections will probably simplify your life right away.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Again, in this article, you&amp;#39;ll find the final version of the &lt;code class=&#34;verbatim&#34;&gt;supervillain.rs&lt;/code&gt; file at the bottom, and the repo with the&#xA;incremental commits is available &lt;a href=&#34;https://github.com/jdortiz/detestable-me-rs&#34;&gt;here&lt;/a&gt;.  In case of doubt, check the code or feel free to reach out to me on any of my&#xA;&lt;a href=&#34;https://jorgeortiz.dev/&#34;&gt;social media accounts&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Rust unit testing: test types</title>
+      <link>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</link>
+      <pubDate>Wed, 09 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_unit_testing_test_types/</guid>
+      <description>&lt;p&gt;&#xA;So, you have finally learned Rust and are writing cool projects with it.  Awesome!  However, as soon as your project&#xA;becomes useful and solves real use cases, you realize that code quality is important.  Not only that.  The larger and&#xA;more complex your project becomes, the harder it is to manually test every bit of functionality after a change.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Your first temptation might be: &amp;#34;Why should I test everything if my changes only affect this small part of the program?&amp;#34;&#xA;And, while in some situations that might be true, more often than not, our changes affect unexpected parts of our&#xA;program.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A note about taking notes (part 3)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</guid>
+      <description>&lt;p&gt;&#xA;This is the last article of a series on taking notes.  In the previous ones, I shared the reasons why I think taking&#xA;notes is useful as well as some of the things that I do when I take my notes.  This article contains ways of making use&#xA;of the effort that we have put into writing those notes.  Some of them are specifically geared toward digital notes and&#xA;won&amp;#39;t be very useful for handwritten notes, but there is one which applies only to notes on paper. 😉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A note about taking notes (part 2)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</guid>
+      <description>&lt;p&gt;&#xA;This is the second article of a series on taking notes.  In the previous one, I listed my reasons for taking notes as&#xA;well as a few rules of thumb for deciding when it is worth to take a note about a topic.  In this article, I will focus&#xA;on the most practical aspects of note taking and I will share how I do it.  It shouldn&amp;#39;t come as a shock that these&#xA;aren&amp;#39;t the Note Commandments, but my experience and way of doing things.  I am quite happy with most of them, but there&#xA;is always room for improvement and I will be glad to hear from you and how you tackle the scenarios that I have&#xA;described here or any others that might be relevant.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A note about taking notes (part 1)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</link>
+      <pubDate>Fri, 06 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</guid>
+      <description>&lt;p&gt;&#xA;If you are reading this, I&amp;#39;d bet dollars to donuts you already take notes frequently.  But, if this is not the case, I&#xA;am sorry.  Not just because you are missing a great opportunity to maximize the production of your brain, but rather&#xA;because of what you have missed so far.  But, don&amp;#39;t worry.  It ain&amp;#39;t late to join the club.  The sooner, the better.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;I must also acknowledge that this is not a comprehensive guide on note taking, but rather a series of tips that I&#xA;consider useful.  Although, I will not chicken out on sharing my reasons for taking notes, the focus will be on&#xA;describing how to get the most out of them.  I am sharing my experience here and would love to hear about yours.  Feel&#xA;free to ping me in any of the social media platforms, using the links on the home page, if you need, and let me know&#xA;other tips that have been useful to you.  I am looking forward to learning more on the topic!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Set up and run AI Optimizer and Toolkit</title>
+      <link>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</link>
+      <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;Intro&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play&#xA;with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use&#xA;Oracle&amp;#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of&#xA;their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and&#xA;accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Running containers with Colima</title>
+      <link>https://jorgeortiz.dev/posts/running_containers_with_colima/</link>
+      <pubDate>Tue, 08 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/running_containers_with_colima/</guid>
+      <description>&lt;p&gt;&#xA;There is no better way to learn than to dive right in.  This applies to software too.  If you have ever felt tempted to&#xA;play with any of the new features of Oracle Database 23ai or to understand the advantages of the Oracle Autonomous&#xA;Database, containers can be very helpful.&lt;/p&gt;&#xA;&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;Goals&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;By the end of this article you will:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Understand the pieces required to run containers in your ARM or Intel macOS system.&lt;/li&gt;&#xA;&lt;li&gt;Be able to run containers for both amd64 and arm64 architectures in your Apple Silicon macOS.&lt;/li&gt;&#xA;&lt;li&gt;Launch and run the Oracle Database 23ai Free Container Image or the Oracle&amp;#39;s Autonomous Database 23ai Free Container&#xA;so you can use them locally to learn, develop or try their features.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Would you prefer to watch the video? Here it is:&#xA;&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;&#xA;      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/y6QZqk4a_t4?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;&#xA;    &lt;/div&gt;&#xA;&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

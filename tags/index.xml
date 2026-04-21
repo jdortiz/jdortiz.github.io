@@ -1,87 +1,83 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Tags - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/tags/</link>
-        <description>Tags - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>Db</title>
-    <link>https://jorgeortiz.dev/tags/db/</link>
-    <pubDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/db/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Rust</title>
-    <link>https://jorgeortiz.dev/tags/rust/</link>
-    <pubDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/rust/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Test</title>
-    <link>https://jorgeortiz.dev/tags/test/</link>
-    <pubDate>Thu, 18 Dec 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/test/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Full-stack</title>
-    <link>https://jorgeortiz.dev/tags/full-stack/</link>
-    <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/full-stack/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://jorgeortiz.dev/tags/go/</link>
-    <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Java</title>
-    <link>https://jorgeortiz.dev/tags/java/</link>
-    <pubDate>Tue, 11 Nov 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/java/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Ai</title>
-    <link>https://jorgeortiz.dev/tags/ai/</link>
-    <pubDate>Thu, 12 Jun 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/ai/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Note-taking</title>
-    <link>https://jorgeortiz.dev/tags/note-taking/</link>
-    <pubDate>Thu, 12 Jun 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/note-taking/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Containers</title>
-    <link>https://jorgeortiz.dev/tags/containers/</link>
-    <pubDate>Thu, 22 May 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/containers/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Mac</title>
-    <link>https://jorgeortiz.dev/tags/mac/</link>
-    <pubDate>Thu, 22 May 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/tags/mac/</guid>
-    <description><![CDATA[]]></description>
-</item>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Jorge Ortiz-Fuentes&#39; DevBites</title>
+    <link>https://jorgeortiz.dev/tags/</link>
+    <description>Recent content in Tags on Jorge Ortiz-Fuentes&#39; DevBites</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright>
+    <lastBuildDate>Tue, 10 Feb 2026 18:14:30 +0100</lastBuildDate>
+    <atom:link href="https://jorgeortiz.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Db</title>
+      <link>https://jorgeortiz.dev/tags/db/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/db/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rust</title>
+      <link>https://jorgeortiz.dev/tags/rust/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/rust/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>https://jorgeortiz.dev/tags/test/</link>
+      <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/test/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Full-stack</title>
+      <link>https://jorgeortiz.dev/tags/full-stack/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/full-stack/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>https://jorgeortiz.dev/tags/go/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>https://jorgeortiz.dev/tags/java/</link>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ai</title>
+      <link>https://jorgeortiz.dev/tags/ai/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Note-taking</title>
+      <link>https://jorgeortiz.dev/tags/note-taking/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/note-taking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Containers</title>
+      <link>https://jorgeortiz.dev/tags/containers/</link>
+      <pubDate>Tue, 08 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/containers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mac</title>
+      <link>https://jorgeortiz.dev/tags/mac/</link>
+      <pubDate>Tue, 08 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/tags/mac/</guid>
+      <description></description>
+    </item>
+  </channel>
 </rss>

@@ -1,77 +1,41 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Ai - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/tags/ai/</link>
-        <description>Ai - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Thu, 12 Jun 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/ai/" rel="self" type="application/rss+xml" /><item>
-    <title>A note about taking notes (part 3)</title>
-    <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</link>
-    <pubDate>Thu, 12 Jun 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-This is the last article of a series on taking notes.  In the previous ones, I shared the reasons why I think taking
-notes is useful as well as some of the things that I do when I take my notes.  This article contains ways of making use
-of the effort that we have put into writing those notes.  Some of them are specifically geared toward digital notes and
-won&#39;t be very useful for handwritten notes, but there is one which applies only to notes on paper. 😉</p>]]></description>
-</item>
-<item>
-    <title>A note about taking notes (part 2)</title>
-    <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</link>
-    <pubDate>Fri, 06 Jun 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-This is the second article of a series on taking notes.  In the previous one, I listed my reasons for taking notes as
-well as a few rules of thumb for deciding when it is worth to take a note about a topic.  In this article, I will focus
-on the most practical aspects of note taking and I will share how I do it.  It shouldn&#39;t come as a shock that these
-aren&#39;t the Note Commandments, but my experience and way of doing things.  I am quite happy with most of them, but there
-is always room for improvement and I will be glad to hear from you and how you tackle the scenarios that I have
-described here or any others that might be relevant.</p>]]></description>
-</item>
-<item>
-    <title>A note about taking notes (part 1)</title>
-    <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</link>
-    <pubDate>Mon, 02 Jun 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><p>
-If you are reading this, I&#39;d bet dollars to donuts you already take notes frequently.  But, if this is not the case, I
-am sorry.  Not just because you are missing a great opportunity to maximize the production of your brain, but rather
-because of what you have missed so far.  But, don&#39;t worry.  It ain&#39;t late to join the club.  The sooner, the better.</p>
-<p>
-I must also acknowledge that this is not a comprehensive guide on note taking, but rather a series of tips that I
-consider useful.  Although, I will not chicken out on sharing my reasons for taking notes, the focus will be on
-describing how to get the most out of them.  I am sharing my experience here and would love to hear about yours.  Feel
-free to ping me in any of the social media platforms, using the links on the home page, if you need, and let me know
-other tips that have been useful to you.  I am looking forward to learning more on the topic!</p>]]></description>
-</item>
-<item>
-    <title>Set up and run AI Optimizer and Toolkit</title>
-    <link>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</link>
-    <pubDate>Mon, 26 May 2025 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-Intro
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<p>I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play
-with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.</p>
-<p>
-AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use
-Oracle&#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of
-their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and
-accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:</p>]]></description>
-</item>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ai on Jorge Ortiz-Fuentes&#39; DevBites</title>
+    <link>https://jorgeortiz.dev/tags/ai/</link>
+    <description>Recent content in Ai on Jorge Ortiz-Fuentes&#39; DevBites</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright>
+    <lastBuildDate>Mon, 07 Jul 2025 09:13:49 +0200</lastBuildDate>
+    <atom:link href="https://jorgeortiz.dev/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A note about taking notes (part 3)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</link>
+      <pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_3/</guid>
+      <description>&lt;p&gt;&#xA;This is the last article of a series on taking notes.  In the previous ones, I shared the reasons why I think taking&#xA;notes is useful as well as some of the things that I do when I take my notes.  This article contains ways of making use&#xA;of the effort that we have put into writing those notes.  Some of them are specifically geared toward digital notes and&#xA;won&amp;#39;t be very useful for handwritten notes, but there is one which applies only to notes on paper. 😉&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A note about taking notes (part 2)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_2/</guid>
+      <description>&lt;p&gt;&#xA;This is the second article of a series on taking notes.  In the previous one, I listed my reasons for taking notes as&#xA;well as a few rules of thumb for deciding when it is worth to take a note about a topic.  In this article, I will focus&#xA;on the most practical aspects of note taking and I will share how I do it.  It shouldn&amp;#39;t come as a shock that these&#xA;aren&amp;#39;t the Note Commandments, but my experience and way of doing things.  I am quite happy with most of them, but there&#xA;is always room for improvement and I will be glad to hear from you and how you tackle the scenarios that I have&#xA;described here or any others that might be relevant.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A note about taking notes (part 1)</title>
+      <link>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</link>
+      <pubDate>Fri, 06 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/a_note_about_taking_notes_1/</guid>
+      <description>&lt;p&gt;&#xA;If you are reading this, I&amp;#39;d bet dollars to donuts you already take notes frequently.  But, if this is not the case, I&#xA;am sorry.  Not just because you are missing a great opportunity to maximize the production of your brain, but rather&#xA;because of what you have missed so far.  But, don&amp;#39;t worry.  It ain&amp;#39;t late to join the club.  The sooner, the better.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;I must also acknowledge that this is not a comprehensive guide on note taking, but rather a series of tips that I&#xA;consider useful.  Although, I will not chicken out on sharing my reasons for taking notes, the focus will be on&#xA;describing how to get the most out of them.  I am sharing my experience here and would love to hear about yours.  Feel&#xA;free to ping me in any of the social media platforms, using the links on the home page, if you need, and let me know&#xA;other tips that have been useful to you.  I am looking forward to learning more on the topic!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Set up and run AI Optimizer and Toolkit</title>
+      <link>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</link>
+      <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/set_up_and_run_ai_optimizer_and_toolkit/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;Intro&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;p&gt;I have decided to create a series of pieces of content on how to use AI.  And, since there is no better tool to play&#xA;with AI than the AI Optimizer and Toolkit, I have chosen to  start by explaining how to set it up and run it.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;AI Optimizer and Toolkit is an Open Source project created by our team, the Microservices and AI Team.  You can use&#xA;Oracle&amp;#39;s AI Optimizer and Toolkit to take your generative AI projects from prototype to production, independently of&#xA;their size.  Using generative AI to match your business needs is challenging and our software helps you to simplify and&#xA;accelerate the process of developing AI-based tools.  AI Optimizer and Toolkit allows you to:&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

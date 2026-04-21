@@ -1,147 +1,114 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>Rust unit testing: mocking library - Jorge Ortiz-Fuentes&#39; DevBites</title><meta name="Description" content="Ferris scared of a black box."><meta property="og:url" content="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/">
-  <meta property="og:site_name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-  <meta property="og:title" content="Rust unit testing: mocking library">
-  <meta property="og:description" content="Ferris scared of a black box.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-17T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-11-26T17:13:37+01:00">
-    <meta property="article:tag" content="Rust">
-    <meta property="article:tag" content="Test">
-    <meta property="og:image" content="https://jorgeortiz.dev/logo.png">
+<!doctype html>
+<html lang="en-us" dir="ltr" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rust unit testing: mocking library | Jorge Ortiz-Fuentes&#39; DevBites</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://jorgeortiz.dev/logo.png">
-  <meta name="twitter:title" content="Rust unit testing: mocking library">
-  <meta name="twitter:description" content="Ferris scared of a black box.">
-<meta name="application-name" content="Jorge Ortiz-Fuentes&#39; DevBites">
-<meta name="apple-mobile-web-app-title" content="Jorge Ortiz-Fuentes&#39; DevBites"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/favicon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/" /><link rel="prev" href="https://jorgeortiz.dev/posts/rust_unit_testing_assertion_libraries/" /><link rel="next" href="https://jorgeortiz.dev/posts/rust_unit_testing_file_reading/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Rust unit testing: mocking library",
-        "inLanguage": "en-us",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_mocking_library\/"
-        },"genre": "posts","keywords": "rust, test","wordcount":  3281 ,
-        "url": "https:\/\/jorgeortiz.dev\/posts\/rust_unit_testing_mocking_library\/","datePublished": "2025-11-17T00:00:00+00:00","dateModified": "2025-11-26T17:13:37+01:00","license": "\u0026copy; 2025 Jorge D. Ortiz Fuentes","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "Jorge Ortiz-Fuentes"
-            },"description": "Ferris scared of a black box."
-    }
-    </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+      <link rel="stylesheet" href="/css/main.min.7e0daf7f23714903978bd5eefe942b0d3b3f3883e5de3a827395a2cfe628ab70.css" integrity="sha256-fg2vfyNxSQOXi9Xu/pQrDTs/OIPl3jqCc5Wiz&#43;Yoq3A=" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet" />
 
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
-        </div>
+
+        <script src="/js/main.5650315f7cbdce7bcf1d7f69ad78518dec12ea2fc497511d55435c66c8870ef0.js" integrity="sha256-VlAxX3y9znvPHX9prXhRjewS6i/El1EdVUNcZsiHDvA=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ELCV7TTK5E', {
+    'anonymize_storage': 'granted'
+  });
+</script>
+
+  </head>
+  <body>
+    <header>
+      
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow-sm" role="navigation">
+  <div class="container-xxl">
+
+    <a class="navbar-brand fw-bold" href="/">Jorge Ortiz-Fuentes&#39; DevBites</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link"
+             href="/posts/">Posts</a>
+        </li><li class="nav-item">
+          <a class="nav-link"
+             href="/tags/">Tags</a>
+        </li><li class="nav-item">
+          <a class="nav-link"
+             href="/categories/">Categories</a>
+        </li><li class="nav-item">
+          <a class="nav-link"
+             href="/about/">About</a>
+        </li><li class="nav-item py-2 py-lg-1 col-12 col-md-auto">
+          <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+          <hr class="d-md-none my-2">
+        </li>
+        <li class="nav-item dropdown">
+          <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
+                  id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                  data-bs-display="static" aria-label="Toggle theme (auto)">
+            <i class="theme-icon-active fa-solid fa-circle-half-stroke me-1"></i>
+            <span class="d-md-none ms-1" id="bd-theme-text">Toggle theme</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                      aria-pressed="false"><i class="fa-solid fa-sun"></i> Light
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                      aria-pressed="false"><i class="fa-solid fa-moon"></i> Dark
+              </button>
+            </li>
+            <li>
+              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
+                      aria-pressed="false"><i class="fa-solid fa-circle-half-stroke"></i> Auto
+              </button>
+            </li>
+          </ul>
     </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="Jorge Ortiz-Fuentes&#39; DevBites">Jorge Ortiz-Fuentes&#39; DevBites</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        Cancel
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a></div>
-    </div>
-</header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust unit testing: mocking library</h1><h2 class="single-subtitle">Using libraries for mocking</h2><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-11-17">2025-11-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3281 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/posts/rust_unit_testing_mocking_library/header-image.jpg"
-        data-srcset="/posts/rust_unit_testing_mocking_library/header-image.jpg, /posts/rust_unit_testing_mocking_library/header-image.jpg 1.5x, /posts/rust_unit_testing_mocking_library/header-image.jpg 2x"
-        data-sizes="auto"
-        alt="/posts/rust_unit_testing_mocking_library/header-image.jpg"
-        title="Ferris scared of a black box." width="832" height="448" /></div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-<ul>
-<li><a href="#headline-1">Create a Megaweapon mock with mockall</a>
-</li>
-<li><a href="#headline-2">Convert the stub</a>
-</li>
-<li><a href="#headline-3">Replace the dummy with mockall</a>
-</li>
-<li><a href="#headline-4">A spy with some non-trivial logic</a>
-</li>
-<li><a href="#headline-5">Implement custom behavior in the mock</a>
-</li>
-<li><a href="#headline-6">Final code</a>
-</li>
-<li><a href="#headline-7">Summary</a>
-</li>
-<li><a href="#headline-8">Footnotes</a>
-</li>
-</ul>
-</nav></div>
-            </div><div class="content" id="content">
+  </div>
+</nav>
+
+
+    </header>
+    <main>
+      <div class="container">
+  <h1 class="display-5">Rust unit testing: mocking library</h1><h2 class="fs-2">Using libraries for mocking</h2><div class="row">
+    <div class="col-12 col-lg-9"><span>
+  <a href="https://www.linkedin.com/in/jorgeortiz/" title="Author" target="_blank"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Jorge Ortiz-Fuentes</a>
+</span>&nbsp;<span class="text-muted">published on&nbsp;<time datetime="2025-11-17">2025-11-17</time></span>&nbsp;<span class="text-muted">Included in&nbsp;</span><a href="/categories/tutorial/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Tutorial</a></div>
+    <div class="col-12 col-lg-3"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;
+    <a class="text-body" href="/tags/rust/">Rust</a>
+    <a class="text-body" href="/tags/test/">Test</a>
+</div>
+    <div class="col-12 col-lg-6"><span class="text-muted">
+  <i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>3281&nbsp;words&nbsp;
+  <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16&nbsp;minutes
+</span>
+</div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-9"><div class="my-3">
+        <span class="ratio" style="--bs-aspect-ratio: 30%;">
+          <img class="img-fluid object-fit-cover" src="/posts/rust_unit_testing_mocking_library/header-image.jpg"/>
+        </span>
+      </div>
+      
 <p>
 In earlier articles about test doubles, I showed how to create them without using any libraries.  While I believe that
 is the best way to understand how they work, how they can help, and how to use them, it is far from being a convenient
@@ -553,7 +520,7 @@ the <code class="verbatim">supervillain.rs</code> file is provided below, but pl
 check the whole project, as always, in the corresponding commits of the <a href="https://github.com/jdortiz/detestable-me-rs">repo with all the code in this series</a>.</p>
 <div class="src src-rust">
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="w">  </span><span class="sd">//! Module for supervillains and their related stuff
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#![allow(unused)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">time</span>::<span class="n">Duration</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[cfg(test)]</span><span class="w">
@@ -568,7 +535,7 @@ check the whole project, as always, in the corresponding commits of the <a href=
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">use</span><span class="w"> </span><span class="k">crate</span>::<span class="p">{</span><span class="n">Cipher</span><span class="p">,</span><span class="w"> </span><span class="n">Gadget</span><span class="p">,</span><span class="w"> </span><span class="n">Henchman</span><span class="p">};</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="sd">/// Type that represents supervillains.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">  </span><span class="cp">#[derive(Default)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="cp">#[derive(Default)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Supervillain</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">first_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="n">last_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
@@ -583,19 +550,19 @@ check the whole project, as always, in the corresponding commits of the <a href=
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">impl</span><span class="w"> </span><span class="n">Supervillain</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// Return the value of the full name as a single string.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// Full name is produced concatenating first name, a single space, and the last name.
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// # Examples
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// ```
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///# use evil::supervillain::Supervillain;
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// let lex = Supervillain {
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///     first_name: &#34;Lex&#34;.to_string(),
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">///     last_name: &#34;Luthor&#34;.to_string(),
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// };
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// assert_eq!(lex.full_name(), &#34;Lex Luthor&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="sd">/// ```
-</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// Full name is produced concatenating first name, a single space, and the last name.
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">///
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// # Examples
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">///# use evil::supervillain::Supervillain;
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// let lex = Supervillain {
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">///     first_name: &#34;Lex&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">///     last_name: &#34;Luthor&#34;.to_string(),
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// };
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// assert_eq!(lex.full_name(), &#34;Lex Luthor&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">full_name</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -713,8 +680,8 @@ check the whole project, as always, in the corresponding commits of the <a href=
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">set_full_name</span><span class="p">(</span><span class="n">test_common</span>::<span class="no">SECONDARY_FULL_NAME</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// assert2::check!(ctx.sut.first_name == &#34;A&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="c1">// assert2::assert!(ctx.sut.last_name == &#34;B&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">          </span><span class="n">assert2</span>::<span class="fm">check!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// assert2::assert!(ctx.sut.last_name == &#34;B&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">assert2</span>::<span class="fm">check!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">first_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_FIRST_NAME</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">assert2</span>::<span class="fm">assert!</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">sut</span><span class="p">.</span><span class="n">last_name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">test_common</span>::<span class="no">SECONDARY_LAST_NAME</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -914,45 +881,77 @@ Footnotes
 </div>
 </div>
 </div>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>Updated on 2025-11-26&nbsp;<a class="git-hash" href="https://github.com/jdortiz/jdortiz.github.io/commit/3631d29d4fc30fb09494df99fcab3d2a33148ed1" target="_blank" title="commit by Jorge D. Ortiz-Fuentes(jorge.ortiz.fuentes@oracle.com) 3631d29d4fc30fb09494df99fcab3d2a33148ed1: Add article about using a mocking library in Rust">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3631d29</a></span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/" data-title="Rust unit testing: mocking library" data-hashtags="rust,test"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/" data-title="Rust unit testing: mocking library" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://jorgeortiz.dev/posts/rust_unit_testing_mocking_library/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
-            </div>
-        </div>
+
     </div>
 
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/test/">Test</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/posts/rust_unit_testing_assertion_libraries/" class="prev" rel="prev" title="Rust unit testing: assertion libraries"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust unit testing: assertion libraries</a>
-            <a href="/posts/rust_unit_testing_file_reading/" class="next" rel="next" title="Rust unit testing: file reading">Rust unit testing: file reading<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="col-lg-3 d-none d-lg-block my-3">
+      <div class="sticky-top" style="top: 5rem; max-height: calc(100vh - 6rem); overflow-y: auto;">
+        <p class="fs-4 fw-semibold mb-2">Contents</p>
+        <nav id="toc" class="small">
+          <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Create a Megaweapon mock with mockall</a>
+</li>
+<li><a href="#headline-2">Convert the stub</a>
+</li>
+<li><a href="#headline-3">Replace the dummy with mockall</a>
+</li>
+<li><a href="#headline-4">A spy with some non-trivial logic</a>
+</li>
+<li><a href="#headline-5">Implement custom behavior in the mock</a>
+</li>
+<li><a href="#headline-6">Final code</a>
+</li>
+<li><a href="#headline-7">Summary</a>
+</li>
+<li><a href="#headline-8">Footnotes</a>
+</li>
+</ul>
+</nav>
+        </nav>
+      </div>
+    </div></div>
 </div>
-</article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.152.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-        </div>
-    </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
-            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-            gtag('config', 'G-ELCV7TTK5E', { 'anonymize_ip': true });
-        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-ELCV7TTK5E" async></script></body>
+    </main>
+    <footer>
+      <div class="container-xl">
+  <div class="row">
+    <div class="col text-end"><a href="https://bsky.app/intent/compose?text=rust-unit-testing-mocking-library%20https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f" target="_blank" rel="noopener" title="Share on Bluesky">
+        <i class="fab fa-bluesky fa-fw"></i>
+    </a><a href="https://fosstodon.org/share?text=rust-unit-testing-mocking-library%20https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f" target="_blank" rel="noopener" title="Share on Mastodon">
+        <i class="fab fa-mastodon fa-fw"></i>
+    </a><a href="https://x.com/intent/tweet?url=https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f&text=rust-unit-testing-mocking-library" target="_blank" rel="noopener" title="Share on X">
+        <i class="fab fa-x-twitter fa-fw"></i>
+    </a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f" target="_blank" rel="noopener" title="Share on LinkedIn">
+        <i class="fab fa-linkedin fa-fw"></i>
+    </a><a href="https://www.reddit.com/submit?url=https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f&title=rust-unit-testing-mocking-library" target="_blank" rel="noopener" title="Share on Reddit">
+        <i class="fab fa-reddit fa-fw"></i>
+    </a><a href="https://wa.me/?text=rust-unit-testing-mocking-library%20https%2f%2fjorgeortiz.dev%2fposts%2frust_unit_testing_mocking_library%2f" target="_blank" rel="noopener" title="Share on WhatsApp">
+        <i class="fab fa-whatsapp fa-fw"></i>
+    </a></div>
+  </div>
+
+  <div class="row border-top">
+    <div class="col border-top text-center">
+      <i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2025 - 2026</span><span>&nbsp;All rights reserved.</span>
+      <span class="author" itemprop="copyrightHolder">&nbsp;
+        <a href="https://www.linkedin.com/in/jorgeortiz/" target="_blank">Jorge Ortiz-Fuentes</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+      
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+
+
+    </footer>
+  </body>
 </html>

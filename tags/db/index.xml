@@ -1,83 +1,41 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Db - Tag - Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/tags/db/</link>
-        <description>Db - Tag - Jorge Ortiz-Fuentes&#39; DevBites</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://jorgeortiz.dev/tags/db/" rel="self" type="application/rss+xml" /><item>
-    <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</link>
-    <pubDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article closely mirrors the one about <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">Using Oracle from Rust with <code class="verbatim">oracle</code></a>, as both are designed to be
-self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to
-you.</p>
-</blockquote>
-<p>
-In this article, I will use the <a href="https://crates.io/crates/sibyl">sibyl</a> crate to modify data, create and drop new tables and indexes, and perform a vector
-search from Rust code.  I have <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">already explained how to use it to make queries in different ways</a> and how to easily set
-up an environment to work with it.  If you want to read that first, I will wait for you here.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the oracle crate (2)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</link>
-    <pubDate>Fri, 23 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article closely mirrors the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, as both are designed to be
-self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to
-you.</p>
-</blockquote>
-<p>
-In this article, I will use the <a href="https://crates.io/crates/oracle">oracle</a> crate to modify data, create and drop new tables and indexes, and perform a vector
-search from Rust code.  I have <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">already explained how to use it to make queries in different ways</a> and how to
-easily set up an environment to work with it.  If you want to read that first, I will wait for you here.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the sibyl crate (1)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</link>
-    <pubDate>Wed, 21 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article shares many parts and its structure with the one about <a href="/posts/rust_use_oracle_db26ai_with_oracle_crate_1/">Using Oracle from Rust with <code class="verbatim">oracle</code></a>, because I
-wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what they
-can offer to you.</p>
-<p>
-If you have already set up your database instance using the other article, you are good to go.  Jump straight to the
-&#34;First &#39;contact&#39; with the Oracle DB instance&#34; section.</p>]]></description>
-</item>
-<item>
-    <title>Using Oracle db26ai from Rust with the oracle crate (1)</title>
-    <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
-    <pubDate>Fri, 16 Jan 2026 00:00:00 &#43;0000</pubDate>
-    <author>Jorge Ortiz-Fuentes</author>
-    <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/header-image.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>WARNING:</p>
-<p>
-This article shares many parts and its structure with the one about <a href="/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/">Using Oracle from Rust with <code class="verbatim">sibyl</code></a>, because I
-wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what
-they can offer to you.</p>
-<p>
-If you have already set up your database instance using the other article, you are good to go.  Jump straight to the
-&#34;First &#39;contact&#39; with the Oracle DB instance&#34; section.</p>]]></description>
-</item>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Db on Jorge Ortiz-Fuentes&#39; DevBites</title>
+    <link>https://jorgeortiz.dev/tags/db/</link>
+    <description>Recent content in Db on Jorge Ortiz-Fuentes&#39; DevBites</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright>
+    <lastBuildDate>Tue, 10 Feb 2026 18:14:30 +0100</lastBuildDate>
+    <atom:link href="https://jorgeortiz.dev/tags/db/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article closely mirrors the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;oracle&lt;/code&gt;&lt;/a&gt;, as both are designed to be&#xA;self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to&#xA;you.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;In this article, I will use the &lt;a href=&#34;https://crates.io/crates/sibyl&#34;&gt;sibyl&lt;/a&gt; crate to modify data, create and drop new tables and indexes, and perform a vector&#xA;search from Rust code.  I have &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;already explained how to use it to make queries in different ways&lt;/a&gt; and how to easily set&#xA;up an environment to work with it.  If you want to read that first, I will wait for you here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the oracle crate (2)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</link>
+      <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_2/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article closely mirrors the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;sibyl&lt;/code&gt;&lt;/a&gt;, as both are designed to be&#xA;self-contained.  You can read them either independently, sequentially, or use them to compare what they can offer to&#xA;you.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;In this article, I will use the &lt;a href=&#34;https://crates.io/crates/oracle&#34;&gt;oracle&lt;/a&gt; crate to modify data, create and drop new tables and indexes, and perform a vector&#xA;search from Rust code.  I have &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;already explained how to use it to make queries in different ways&lt;/a&gt; and how to&#xA;easily set up an environment to work with it.  If you want to read that first, I will wait for you here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the sibyl crate (1)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</link>
+      <pubDate>Wed, 21 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article shares many parts and its structure with the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;oracle&lt;/code&gt;&lt;/a&gt;, because I&#xA;wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what they&#xA;can offer to you.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;If you have already set up your database instance using the other article, you are good to go.  Jump straight to the&#xA;&amp;#34;First &amp;#39;contact&amp;#39; with the Oracle DB instance&amp;#34; section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Oracle db26ai from Rust with the oracle crate (1)</title>
+      <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</link>
+      <pubDate>Fri, 16 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_oracle_crate_1/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;WARNING:&lt;/p&gt;&#xA;&lt;p&gt;&#xA;This article shares many parts and its structure with the one about &lt;a href=&#34;https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_1/&#34;&gt;Using Oracle from Rust with &lt;code class=&#34;verbatim&#34;&gt;sibyl&lt;/code&gt;&lt;/a&gt;, because I&#xA;wanted both to be self-contained.  You can read them independently, one after the other or use them to compare what&#xA;they can offer to you.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;If you have already set up your database instance using the other article, you are good to go.  Jump straight to the&#xA;&amp;#34;First &amp;#39;contact&amp;#39; with the Oracle DB instance&amp;#34; section.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

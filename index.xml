@@ -1,11 +1,11 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Jorge Ortiz-Fuentes&#39; DevBites</title>
-        <link>https://jorgeortiz.dev/</link>
-        <description>Sharing things I learned mostly about software development</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2025 Jorge D. Ortiz Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate>
-            <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+  <channel>
+    <title>Jorge Ortiz-Fuentes&#39; DevBites</title>
+    <link>https://jorgeortiz.dev/</link>
+    <description>Sharing things I learned mostly about software development</description>
+    <generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>&amp;copy; 2026 Jorge D. Ortiz-Fuentes</copyright><lastBuildDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="https://jorgeortiz.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
     <title>Using Oracle db26ai from Rust with the sibyl crate (2)</title>
     <link>https://jorgeortiz.dev/posts/rust_use_oracle_db26ai_with_sibyl_crate_2/</link>
     <pubDate>Tue, 27 Jan 2026 00:00:00 &#43;0000</pubDate>
